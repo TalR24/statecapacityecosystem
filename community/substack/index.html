@@ -115,6 +115,17 @@
     }
     .info-link:hover { background:var(--blue); color:#fff; }
 
+    /* FULL POST LIST */
+    .posts-list { margin-top:8px; }
+    .post-row { display:grid; grid-template-columns:110px 1fr auto; gap:clamp(14px,3vw,30px); align-items:baseline; padding:16px 0; border-top:1px solid var(--border); text-decoration:none; color:inherit; }
+    .post-row:last-child { border-bottom:1px solid var(--border); }
+    @media (max-width:640px) { .post-row { grid-template-columns:1fr; gap:4px; } }
+    .post-date { font-family:'Roboto Mono',monospace; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-faint); }
+    .post-title { display:block; font-family:'Roboto Mono',monospace; font-size:0.98rem; font-weight:700; color:var(--text); line-height:1.4; margin-bottom:4px; transition:color 0.15s; }
+    .post-row:hover .post-title { color:var(--blue); }
+    .post-sub { display:block; font-size:0.88rem; color:var(--text-muted); line-height:1.55; }
+    .post-cta { font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:700; color:var(--blue); white-space:nowrap; }
+    .posts-note { font-size:0.8rem; color:var(--text-faint); margin-top:10px; }
     footer { background:var(--surface); border-top:1px solid var(--border); padding:18px clamp(16px,4vw,48px); }
     .footer-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
     .footer-copy { font-size:0.78rem; color:var(--text-faint); }
@@ -137,6 +148,21 @@
 .ribbon-drop a{display:block;padding:8px 16px;font-size:0.82rem;color:var(--text-mid);text-decoration:none;transition:background .1s,color .1s;}
 .ribbon-drop a:hover{background:var(--blue-light);color:var(--blue);}
 @media (max-width:720px){.ribbon-inner{overflow-x:auto;}.ribbon-drop{display:none !important;}}
+.ribbon-actions{margin-left:auto;display:flex;align-items:center;gap:8px;padding:7px 0 7px 14px;flex-shrink:0;}
+.ribbon-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.74rem;font-weight:700;text-decoration:none;padding:7px 13px;border-radius:7px;white-space:nowrap;border:1px solid #DFCEA1;background:#F5EDDA;color:#8A5F1E;transition:background .15s,color .15s;}
+.ribbon-btn:hover{background:#8A5F1E;color:#fff;}
+.ribbon-btn.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
+.ribbon-btn.primary:hover{background:#B08430;border-color:#B08430;color:#fff;}
+.sce-footer{background:#1A1918;color:#F4EFE4;padding:26px clamp(16px,4vw,48px);margin-top:auto;}
+.sce-footer-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.sce-footer-brand{display:flex;align-items:center;gap:10px;font-family:'Roboto Mono',monospace;font-size:0.84rem;font-weight:700;color:#D4A853;text-decoration:none;}
+.sce-footer-brand img{width:22px;height:22px;object-fit:contain;}
+.sce-footer-brand small{font-weight:400;color:#9C968A;font-size:0.72rem;margin-left:4px;}
+.sce-footer-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.sce-footer-actions a{font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;text-decoration:none;padding:8px 14px;border-radius:7px;border:1px solid rgba(244,239,228,0.3);color:#F4EFE4;transition:border-color .15s,background .15s;}
+.sce-footer-actions a:hover{border-color:#D4A853;background:rgba(212,168,83,0.12);}
+.sce-footer-actions a.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
+.sce-footer-actions a.primary:hover{background:#E3C170;}
 </style>
 </head>
 <body>
@@ -172,6 +198,10 @@
       </div>
     </div>
     <div class="ribbon-item"><a class="ribbon-link" href="/about/">About Us</a></div>
+    <div class="ribbon-actions">
+      <a class="ribbon-btn" href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">Substack ↗</a>
+      <a class="ribbon-btn primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join our Slack ↗</a>
+    </div>
   </div>
 </nav>
 
@@ -188,7 +218,7 @@
 <div class="hero">
   <div class="hero-inner">
     <h1><span>Substack</span></h1>
-    <p>The State Capacity Ecosystem team writes at <a href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">statecapacityecosystem.substack.com</a>: analysis of how government builds capacity, what this community is working on, and what we learn from our events. Some posts come with a working tool attached. This page collects those companion prototypes so you can read the argument and then use the thing it produced.</p>
+    <p>The State Capacity Ecosystem team writes at <a href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">statecapacityecosystem.substack.com</a>: analysis of how government builds capacity, what this community is working on, and what we learn from our events. Some posts come with a working tool attached. This page holds the full archive of posts and the companion prototypes that ship with some of them, so you can read the argument and then use the thing it produced.</p>
   </div>
 </div>
 
@@ -230,6 +260,10 @@
 
     </div>
 
+    <div class="section-label" style="margin-top:36px;">Every post, newest first</div>
+    <div class="posts-list" id="posts-list"><p class="posts-note">Loading the archive…</p></div>
+    <p class="posts-note">This list refreshes daily from the Substack archive. Prototypes that ship with a post appear in the cards above.</p>
+
     <div class="text-panel">
       <p><strong>The writing lives on Substack.</strong> Posts, event recaps, and the thinking behind these tools are published by the State Capacity Ecosystem team. Subscribe to get each post, and check back here for the prototypes that ship with them.</p>
       <a href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener" class="info-link" style="background:var(--orange-light);border-color:#DFCEA1;color:var(--orange);" onmouseover="this.style.background='var(--orange)';this.style.color='#fff';" onmouseout="this.style.background='var(--orange-light)';this.style.color='var(--orange)';">Read the Substack ↗</a>
@@ -238,17 +272,36 @@
   </div>
 </div>
 
-<!-- STAY CONNECTED -->
-<div style="background:var(--surface); border-top:1px solid var(--border);">
-  <div style="max-width:1300px; margin:0 auto; padding:18px clamp(16px,4vw,48px); display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
-    <span style="font-family:'Roboto Mono',monospace; font-size:0.82rem; font-weight:600; color:var(--text);">Stay in the loop on state capacity events and tools.</span>
-    <div style="display:flex; gap:10px; flex-wrap:wrap;">
-      <a href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener" style="font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:600; text-decoration:none; padding:7px 14px; border-radius:7px; border:1px solid #DFCEA1; background:#F5EDDA; color:#8A5F1E;">Subscribe to our Substack ↗</a>
-      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener" style="font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:600; text-decoration:none; padding:7px 14px; border-radius:7px; border:1px solid #DFCEA1; background:#F5EDDA; color:#8A5F1E;">Join our Slack →</a>
-      <a href="/databases/" style="font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:600; text-decoration:none; padding:7px 14px; border-radius:7px; border:1px solid var(--blue-mid); background:var(--blue-light); color:var(--blue);">Explore the Databases →</a>
+<!-- FOOTER -->
+<footer class="sce-footer">
+  <div class="sce-footer-inner">
+    <a class="sce-footer-brand" href="/"><img src="/assets/sce_logo.png" alt="">State Capacity Ecosystem<small>· statecapacityecosystem.com</small></a>
+    <div class="sce-footer-actions">
+      <a href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">Subscribe to the Substack ↗</a>
+      <a class="primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join our Slack ↗</a>
+      <a href="/databases/">Explore the Databases →</a>
     </div>
   </div>
-</div>
+</footer>
+
+<script>
+(function () {
+  var el = document.getElementById('posts-list');
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fmt(d) { var p = d.split('-'); return months[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0]; }
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  fetch('/data/substack_posts.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (posts) {
+    el.innerHTML = posts.map(function (p) {
+      return '<a class="post-row" href="' + esc(p.url) + '" target="_blank" rel="noopener">' +
+        '<span class="post-date">' + fmt(p.date) + '</span>' +
+        '<span><span class="post-title">' + esc(p.title) + '</span>' + (p.subtitle ? '<span class="post-sub">' + esc(p.subtitle) + '</span>' : '') + '</span>' +
+        '<span class="post-cta">Read ↗</span></a>';
+    }).join('');
+  }).catch(function () {
+    el.innerHTML = '<p class="posts-note">The archive could not be loaded. <a href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">Read every post on Substack ↗</a></p>';
+  });
+})();
+</script>
 
 </body>
 </html>

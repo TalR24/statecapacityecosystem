@@ -76,10 +76,22 @@ jobs:
         if: steps.check.outputs.connect_changed == 'true'
         run: python3 data/build_people.py
 
+      # ── Substack archive (post list on the Substack page) ──
+
+      - name: Refresh Substack post list
+        id: substack
+        run: |
+          python3 data/build_substack.py || echo "archive fetch failed; keeping previous list"
+          if git diff --quiet -- data/substack_posts.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
       # ── Commit and push whatever changed ──
 
       - name: Commit and push
-        if: steps.check.outputs.org_changed == 'true' || steps.check.outputs.connect_changed == 'true'
+        if: steps.check.outputs.org_changed == 'true' || steps.check.outputs.connect_changed == 'true' || steps.substack.outputs.changed == 'true'
         env:
           ORG_CHANGED: ${{ steps.check.outputs.org_changed }}
           CON_CHANGED: ${{ steps.check.outputs.connect_changed }}
@@ -102,6 +114,8 @@ jobs:
             git add data/connect.json
           fi
 
+          git add data/substack_posts.json
+
           if git diff --staged --quiet; then
             echo "Nothing staged — skipping commit."
             exit 0
@@ -123,8 +137,10 @@ jobs:
             SUMMARY="${ORG_STAT}, ${CON_STAT}"
           elif [ -n "$ORG_STAT" ]; then
             SUMMARY="$ORG_STAT"
-          else
+          elif [ -n "$CON_STAT" ]; then
             SUMMARY="$CON_STAT"
+          else
+            SUMMARY="Substack post list"
           fi
 
           git commit -m "Data: auto-refresh — ${SUMMARY} [$(date -u '+%Y-%m-%d')]"

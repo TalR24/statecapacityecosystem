@@ -163,6 +163,21 @@
 .ribbon-drop a{display:block;padding:8px 16px;font-size:0.82rem;color:var(--text-mid);text-decoration:none;transition:background .1s,color .1s;}
 .ribbon-drop a:hover{background:var(--blue-light);color:var(--blue);}
 @media (max-width:720px){.ribbon-inner{overflow-x:auto;}.ribbon-drop{display:none !important;}}
+.ribbon-actions{margin-left:auto;display:flex;align-items:center;gap:8px;padding:7px 0 7px 14px;flex-shrink:0;}
+.ribbon-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.74rem;font-weight:700;text-decoration:none;padding:7px 13px;border-radius:7px;white-space:nowrap;border:1px solid #DFCEA1;background:#F5EDDA;color:#8A5F1E;transition:background .15s,color .15s;}
+.ribbon-btn:hover{background:#8A5F1E;color:#fff;}
+.ribbon-btn.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
+.ribbon-btn.primary:hover{background:#B08430;border-color:#B08430;color:#fff;}
+.sce-footer{background:#1A1918;color:#F4EFE4;padding:26px clamp(16px,4vw,48px);margin-top:auto;}
+.sce-footer-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.sce-footer-brand{display:flex;align-items:center;gap:10px;font-family:'Roboto Mono',monospace;font-size:0.84rem;font-weight:700;color:#D4A853;text-decoration:none;}
+.sce-footer-brand img{width:22px;height:22px;object-fit:contain;}
+.sce-footer-brand small{font-weight:400;color:#9C968A;font-size:0.72rem;margin-left:4px;}
+.sce-footer-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.sce-footer-actions a{font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;text-decoration:none;padding:8px 14px;border-radius:7px;border:1px solid rgba(244,239,228,0.3);color:#F4EFE4;transition:border-color .15s,background .15s;}
+.sce-footer-actions a:hover{border-color:#D4A853;background:rgba(212,168,83,0.12);}
+.sce-footer-actions a.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
+.sce-footer-actions a.primary:hover{background:#E3C170;}
 </style>
 </head>
 <body>
@@ -198,6 +213,10 @@
       </div>
     </div>
     <div class="ribbon-item"><a class="ribbon-link" href="/about/">About Us</a></div>
+    <div class="ribbon-actions">
+      <a class="ribbon-btn" href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">Substack ↗</a>
+      <a class="ribbon-btn primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join our Slack ↗</a>
+    </div>
   </div>
 </nav>
 
@@ -413,17 +432,17 @@
 })();
 </script>
 
-<!-- STAY CONNECTED -->
-<div style="background:var(--surface); border-top:1px solid var(--border);">
-  <div style="max-width:1300px; margin:0 auto; padding:18px clamp(16px,4vw,48px); display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
-    <span style="font-family:'Roboto Mono',monospace; font-size:0.82rem; font-weight:600; color:var(--text);">Stay in the loop on state capacity events and tools.</span>
-    <div style="display:flex; gap:10px; flex-wrap:wrap;">
-      <a href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener" style="font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:600; text-decoration:none; padding:7px 14px; border-radius:7px; border:1px solid #DFCEA1; background:#F5EDDA; color:#8A5F1E;">Subscribe to our Substack ↗</a>
-      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener" style="font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:600; text-decoration:none; padding:7px 14px; border-radius:7px; border:1px solid #DFCEA1; background:#F5EDDA; color:#8A5F1E;">Join our Slack →</a>
-      <a href="./databases/" style="font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:600; text-decoration:none; padding:7px 14px; border-radius:7px; border:1px solid var(--blue-mid); background:var(--blue-light); color:var(--blue);">Explore the Databases →</a>
+<!-- FOOTER -->
+<footer class="sce-footer">
+  <div class="sce-footer-inner">
+    <a class="sce-footer-brand" href="/"><img src="/assets/sce_logo.png" alt="">State Capacity Ecosystem<small>· statecapacityecosystem.com</small></a>
+    <div class="sce-footer-actions">
+      <a href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">Subscribe to the Substack ↗</a>
+      <a class="primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join our Slack ↗</a>
+      <a href="/databases/">Explore the Databases →</a>
     </div>
   </div>
-</div>
+</footer>
 
 </body>
 </html>
