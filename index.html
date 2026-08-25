@@ -60,13 +60,13 @@
 
     /* HOME 2026 — narrative bands */
     .band { padding: clamp(52px,7vw,88px) clamp(16px,4vw,48px); }
-    .band-inner { max-width: 1020px; margin: 0 auto; }
+    .band-inner { max-width: 1100px; margin: 0 auto; }
     .band-dark { background:#1A1918; color:#F4EFE4; }
     .band-white { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
     .kicker { font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--orange); margin-bottom:14px; }
     .band-dark .kicker { color:#D4A853; }
-    .band h2 { font-family:'Roboto Mono',monospace; font-size:clamp(1.35rem,3vw,1.95rem); font-weight:700; letter-spacing:-0.02em; line-height:1.25; margin-bottom:16px; max-width:22ch; }
-    .band-copy { font-size:1.02rem; line-height:1.75; color:var(--text-mid); max-width:66ch; }
+    .band h2 { font-family:'Roboto Mono',monospace; font-size:clamp(1.35rem,3vw,1.95rem); font-weight:700; letter-spacing:-0.02em; line-height:1.25; margin-bottom:16px; max-width:34ch; }
+    .band-copy { font-size:1.02rem; line-height:1.75; color:var(--text-mid); max-width:76ch; }
     .band-dark .band-copy { color:#C9C1AF; }
 
     /* hero */
@@ -75,9 +75,9 @@
     .hero-logo-row { display:flex; align-items:center; gap:14px; margin-bottom:26px; }
     .hero-logo-row img { width:46px; height:46px; object-fit:contain; }
     .hero-logo-row span { font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:#D4A853; }
-    .home-hero h1 { font-family:'Roboto Mono',monospace; font-size:clamp(1.9rem,4.8vw,3.2rem); font-weight:700; letter-spacing:-0.03em; line-height:1.18; max-width:20ch; margin-bottom:22px; }
+    .home-hero h1 { font-family:'Roboto Mono',monospace; font-size:clamp(1.9rem,4.8vw,3.2rem); font-weight:700; letter-spacing:-0.03em; line-height:1.18; max-width:22ch; margin-bottom:22px; }
     .home-hero h1 em { font-style:normal; color:#D4A853; }
-    .hero-sub { font-size:clamp(1rem,1.6vw,1.15rem); line-height:1.7; color:#C9C1AF; max-width:62ch; margin-bottom:38px; }
+    .hero-sub { font-size:clamp(1rem,1.6vw,1.15rem); line-height:1.7; color:#C9C1AF; max-width:70ch; margin-bottom:38px; }
     .scroll-cue { font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:600; color:#D4A853; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
     .scroll-cue .arr { display:inline-block; animation:cue 1.8s ease-in-out infinite; }
     @keyframes cue { 0%,100% { transform:translateY(0); } 50% { transform:translateY(6px); } }
@@ -105,8 +105,9 @@
     .row-link:hover { gap:10px; }
 
     /* stats band */
-    .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap: clamp(18px,3vw,36px); margin-top:34px; }
-    @media (max-width:760px) { .stats-grid { grid-template-columns:1fr 1fr; } }
+    .stats-grid { display:grid; grid-template-columns:repeat(5,1fr); gap: clamp(18px,3vw,36px); margin-top:34px; }
+    @media (max-width:900px) { .stats-grid { grid-template-columns:repeat(3,1fr); } }
+    @media (max-width:560px) { .stats-grid { grid-template-columns:1fr 1fr; } }
     .stat-big b { display:block; font-family:'Roboto Mono',monospace; font-size:clamp(1.7rem,3.6vw,2.6rem); font-weight:700; color:#D4A853; letter-spacing:-0.02em; font-variant-numeric:tabular-nums; }
     .stat-big span { display:block; font-size:0.86rem; color:#C9C1AF; line-height:1.5; margin-top:6px; max-width:22ch; }
 
@@ -190,6 +191,8 @@
       <a class="ribbon-link" href="/events/">Events <span class="ribbon-caret">▾</span></a>
       <div class="ribbon-drop">
         <a href="/events/hackathons/">Hackathons</a>
+        <a href="/events/demo-nights/">Demo Nights</a>
+        <a href="/events/salons/">Salons &amp; Meet-ups</a>
         <a href="/events/sponsors-checklist/">Sponsors Checklist</a>
       </div>
     </div>
@@ -224,8 +227,8 @@
 <section class="home-hero">
   <div class="band-inner">
     <div class="hero-logo-row"><img src="./assets/sce_logo.png" alt="State Capacity Ecosystem logo"><span>State Capacity Ecosystem</span></div>
-    <h1>The people making government <em>deliver</em> are finding each other here.</h1>
-    <p class="hero-sub">The State Capacity Ecosystem maps the field's 300+ organizations, puts its builders in one room, and ships proof of what they can do together. Everything on this site exists to turn shared intent into working government.</p>
+    <h1>The people helping government <em>deliver</em> find each other here.</h1>
+    <p class="hero-sub">The State Capacity Ecosystem maps the field's organizations, opportunities, and contributors, puts its stakeholders in one room to show what they can build together, and advocates to put technology in the hands of practitioners. Everything here exists to turn shared intent into working government.</p>
     <a class="scroll-cue" href="#problem">Scroll to see the work <span class="arr">↓</span></a>
   </div>
 </section>
@@ -301,7 +304,10 @@
           <div class="kicker">Map</div>
           <h3>The field is big. Now you can see all of it.</h3>
           <p>Our databases cover 300+ organizations working on state capacity: who does what, which orgs share problems and funders, and the people behind the work. Start with a question and the search points you to the orgs and people closest to it.</p>
-          <a class="row-link" href="./databases/">Explore the Ecosystem Databases →</a>
+          <div style="display:flex; gap:18px; flex-wrap:wrap;">
+            <a class="row-link" href="./databases/">Explore the Ecosystem Databases →</a>
+            <a class="row-link" href="./databases/opportunities-connections/">Browse Opportunities &amp; Connections →</a>
+          </div>
         </div>
       </div>
 
@@ -374,12 +380,13 @@
 <section class="band band-dark">
   <div class="band-inner reveal">
     <div class="kicker">The record so far</div>
-    <h2>The field stopped being invisible. Then it started building.</h2>
+    <h2>The field was invisible. Now it's together and building in plain sight.</h2>
     <div class="stats-grid">
       <div class="stat-big"><b>300+</b><span>organizations mapped, refreshed daily</span></div>
       <div class="stat-big"><b>80+</b><span>builders at the first flagship build night</span></div>
       <div class="stat-big"><b>20</b><span>working tools built in under two hours</span></div>
       <div class="stat-big"><b>4</b><span>prototypes live in the browser today</span></div>
+      <div class="stat-big"><b id="stat-posts">8</b><span>posts making the case for the field</span></div>
     </div>
   </div>
 </section>
@@ -387,7 +394,7 @@
 <section class="band">
   <div class="band-inner reveal">
     <div class="kicker">Momentum</div>
-    <h2>The field is moving. Here is the latest.</h2>
+    <h2>The field is accelerating. Here is the latest.</h2>
     <div class="mo-list">
       <a class="mo-item" href="https://henrygrunzweig.substack.com/p/where-are-governments-ai-engineers" target="_blank" rel="noopener">
         <span class="mo-date">Aug 2026</span>
@@ -429,6 +436,9 @@
     entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
   }, { threshold: 0.15 });
   els.forEach(function (el) { io.observe(el); });
+  fetch('/data/substack_posts.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (posts) {
+    var el = document.getElementById('stat-posts'); if (el && posts.length) el.textContent = posts.length;
+  }).catch(function () {});
 })();
 </script>
 
