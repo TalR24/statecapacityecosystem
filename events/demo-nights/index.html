@@ -161,10 +161,28 @@
 .sce-footer-actions a.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
 .sce-footer-actions a.primary:hover{background:#E3C170;}
 </style>
+<style id="event-banner-css">
+.evt-banner{background:#D4A853;color:#1A1918;padding:0 clamp(16px,4vw,48px);position:relative;z-index:100;}
+.evt-banner-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:9px 0;font-family:'Roboto Mono',monospace;font-size:0.8rem;font-weight:600;}
+.evt-banner strong{font-weight:700;}
+.evt-banner .evt-when{color:#6E4A15;}
+.evt-banner a{display:inline-flex;align-items:center;gap:6px;background:#1A1918;color:#F4EFE4;text-decoration:none;padding:6px 14px;border-radius:6px;font-size:0.76rem;font-weight:700;white-space:nowrap;transition:background .15s;}
+.evt-banner a:hover{background:#3E3931;}
+@media (max-width:620px){.evt-banner-inner{font-size:0.74rem;gap:9px;}.evt-banner .evt-when{width:100%;text-align:center;}}
+@media print{.evt-banner{display:none !important;}}
+</style>
 </head>
 <body>
 
 <!-- PILLAR RIBBON -->
+<!-- EVENT BANNER -->
+<div class="evt-banner">
+  <div class="evt-banner-inner">
+    <span><strong>Public Engagement Hackathon</strong> <span class="evt-when">· Sept 30 · CUNY Graduate Center</span></span>
+    <a href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sign up free ↗</a>
+  </div>
+</div>
+
 <nav class="ribbon" aria-label="State Capacity Ecosystem sections">
   <div class="ribbon-inner">
     <div class="ribbon-item"><a class="ribbon-link" href="/"><img src="/assets/sce_logo.png" alt="" style="width:16px;height:16px;object-fit:contain;">Home</a></div>
