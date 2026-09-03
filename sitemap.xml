@@ -2,92 +2,88 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://statecapacityecosystem.com/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-09-02</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/about/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-09-02</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/community/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-09-02</lastmod>
   </url>
   <url>
-    <loc>https://statecapacityecosystem.com/databases/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://statecapacityecosystem.com/ecosystem/</loc>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/events/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-09-02</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/community/playbooks/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-09-02</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/community/proof-points/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-09-02</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/community/slack/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-09-02</lastmod>
   </url>
   <url>
-    <loc>https://statecapacityecosystem.com/databases/affinity-map/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://statecapacityecosystem.com/ecosystem/affinity-map/</loc>
   </url>
   <url>
-    <loc>https://statecapacityecosystem.com/databases/methodology/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://statecapacityecosystem.com/ecosystem/connect/</loc>
   </url>
   <url>
-    <loc>https://statecapacityecosystem.com/databases/opportunities-connections/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://statecapacityecosystem.com/ecosystem/methodology/</loc>
   </url>
   <url>
-    <loc>https://statecapacityecosystem.com/databases/organization-directory/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://statecapacityecosystem.com/ecosystem/organizations/</loc>
   </url>
   <url>
-    <loc>https://statecapacityecosystem.com/events/hackathons/</loc>
-    <lastmod>2026-08-23</lastmod>
-  </url>
-  <url>
-    <loc>https://statecapacityecosystem.com/events/sponsors-checklist/</loc>
-    <lastmod>2026-08-23</lastmod>
-  </url>
-  <url>
-    <loc>https://statecapacityecosystem.com/community/substack/mamdani-ai-priorities/</loc>
-    <lastmod>2026-08-23</lastmod>
-  </url>
-  <url>
-    <loc>https://statecapacityecosystem.com/community/substack/nyc-grocery-access-site-prototype/</loc>
-    <lastmod>2026-08-23</lastmod>
-  </url>
-  <url>
-    <loc>https://statecapacityecosystem.com/events/hackathons/civic-tech-build-night/</loc>
-    <lastmod>2026-08-23</lastmod>
-  </url>
-  <url>
-    <loc>https://statecapacityecosystem.com/community/substack/mamdani-ai-priorities/housing-approval-pathway/</loc>
-    <lastmod>2026-08-23</lastmod>
-  </url>
-  <url>
-    <loc>https://statecapacityecosystem.com/community/substack/mamdani-ai-priorities/summons-navigator/</loc>
-    <lastmod>2026-08-23</lastmod>
-  </url>
-  <url>
-    <loc>https://statecapacityecosystem.com/events/hackathons/civic-tech-build-night/tideline/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <loc>https://statecapacityecosystem.com/ecosystem/search/</loc>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/events/demo-nights/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/events/hackathons/</loc>
+    <lastmod>2026-09-02</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/events/salons/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/events/sponsors-checklist/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/community/substack/mamdani-ai-priorities/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/community/substack/nyc-grocery-access-site-prototype/</loc>
+    <lastmod>2026-08-24</lastmod>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/events/hackathons/civic-tech-build-night/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/community/substack/mamdani-ai-priorities/housing-approval-pathway/</loc>
+    <lastmod>2026-08-24</lastmod>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/community/substack/mamdani-ai-priorities/summons-navigator/</loc>
+    <lastmod>2026-08-24</lastmod>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/events/hackathons/civic-tech-build-night/tideline/</loc>
+    <lastmod>2026-08-24</lastmod>
   </url>
 </urlset>
