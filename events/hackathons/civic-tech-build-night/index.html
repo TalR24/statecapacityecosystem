@@ -97,6 +97,7 @@
     .goal-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
     .goal-list li { position:relative; padding-left:26px; font-size:0.93rem; color:var(--text-mid); line-height:1.6; }
     .goal-list li::before { content:""; position:absolute; left:0; top:4px; width:14px; height:14px; border-radius:4px; background:var(--orange-light); border:1.5px solid var(--orange); }
+    .goal-list li::after { content:""; position:absolute; left:3.5px; top:7px; width:8px; height:4px; border-left:2px solid var(--orange); border-bottom:2px solid var(--orange); transform:rotate(-45deg); }
     .goal-list li strong { color:var(--text); font-weight:600; }
 
     /* TRACKS */
@@ -216,26 +217,25 @@
         <a href="/ecosystem/search/">Search<span class="ribbon-sub">Say who you are and what you need, and we find the match.</span></a>
         <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
         <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
-        <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">Which organizations share problems and funders.</span></a>
+        <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
       </div>
     </div>
     <div class="ribbon-item">
       <a class="ribbon-link active" href="/events/">Events <span class="ribbon-caret">▾</span></a>
-      <div class="ribbon-drop">
-        <a href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">State Capacity Hackathon: Public Engagement · Sept 30 ↗</a>
-        <a href="/events/hackathons/">Hackathons</a>
-        <a href="/events/demo-nights/">Demo Nights</a>
-        <a href="/events/salons/">Salons &amp; Meet-ups</a>
-        <a href="/events/sponsors-checklist/">Host or Sponsor an Event</a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/events/hackathons/">Hackathons<span class="ribbon-sub">Build nights that end in working software.</span></a>
+        <a href="/events/demo-nights/">Demo Nights<span class="ribbon-sub">What got built, in front of who can adopt it.</span></a>
+        <a href="/events/salons/">Salons &amp; Meet-ups<span class="ribbon-sub">Speaker nights and monthly office hours.</span></a>
+        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<span class="ribbon-sub">What hosts and sponsors own, on one page.</span></a>
       </div>
     </div>
     <div class="ribbon-item">
       <a class="ribbon-link" href="/community/">Community <span class="ribbon-caret">▾</span></a>
-      <div class="ribbon-drop">
-        <a href="/community/slack/">Slack</a>
-        <a href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">Substack ↗</a>
-        <a href="/community/playbooks/">Playbooks</a>
-        <a href="/community/proof-points/">Proof Points</a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/community/slack/">Slack<span class="ribbon-sub">The conversation between events.</span></a>
+        <a href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">Substack ↗<span class="ribbon-sub">The team's writing on state capacity.</span></a>
+        <a href="/community/playbooks/">Playbooks<span class="ribbon-sub">Run our formats without us in the room.</span></a>
+        <a href="/community/proof-points/">Proof Points<span class="ribbon-sub">Every tool built through SCE.</span></a>
       </div>
     </div>
     <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
@@ -287,25 +287,6 @@
       </div>
     </div>
 
-    <!-- ============================ PROJECTS PRODUCED ============================
-         One .proj-card per project. Swap the href on each .proj-link for the
-         project's real URL; add a second .proj-link for projects with two links.
-    -->
-    <div class="section-label">Projects produced</div>
-    <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.7; max-width:720px; margin-bottom:16px;">Twenty tools came out of the night. <a href="/community/proof-points/?source=civic-tech-build-night" style="color:var(--blue);">See everything built that night →</a></p>
-    <div class="proj-grid">
-
-      <div class="proj-card">
-        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5s6.5 6.8 6.5 11.3a6.5 6.5 0 0 1-13 0C5.5 9.3 12 2.5 12 2.5z"/><path d="M8.5 14.5c1 .9 2.2.9 3.5 0s2.5-.9 3.5 0"/></svg></div>
-        <div class="proj-badge">Hosted on this site</div>
-        <div class="proj-title">TIDELINE: Flood-Resilience Capital Tracker</div>
-        <div class="proj-desc">An interactive dashboard connecting where New York floods to where the city spends its flood-resilience capital dollars, down to the community-district level, plus a time-animated playback of the May 20 flash flood across the subway and bus network.</div>
-        <div style="font-size:0.72rem; color:var(--text-faint); line-height:1.5; margin-bottom:12px;">By David A. Lee, Dean Berkowitz &amp; Lyndsey Kaplan. Republished with permission.</div>
-        <a class="proj-link" href="./tideline/#map">Open dashboard →</a>
-      </div>
-
-    </div>
-
     <!-- ============================ OVERVIEW ============================ -->
     <div class="section-label">Overview</div>
     <div class="panel">
@@ -323,6 +304,75 @@
         <li><strong>Show that AI is a tool for inclusive rapid prototyping.</strong> A roomful of people from different backgrounds, not only career engineers, can turn an idea into working software in a single evening.</li>
         <li>Have teams build against real problem statements from our expert judges, each grounded in a concrete government need, so the night produced working prototypes rather than talk.</li>
       </ul>
+    </div>
+
+    <!-- ============================ PROJECTS PRODUCED ============================
+         One .proj-card per project; the Proof Points gallery renders the same list
+         from /data/proof_points.json and stays the canonical, filterable view.
+    -->
+    <div class="section-label">Projects produced</div>
+    <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.7; max-width:720px; margin-bottom:16px;">Twenty tools came out of the night. A few highlights below; every tool still live is in the <a href="/community/proof-points/?source=civic-tech-build-night" style="color:var(--blue);">Proof Points gallery</a>.</p>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg></div>
+        <div class="proj-title">311 Learning Game</div>
+        <div class="proj-desc">A video game that teaches New Yorkers how to use 311, turning the city's main service request line into something residents can actually navigate.</div>
+        <a class="proj-link" href="https://mamdanistan-rpg.vercel.app/" target="_blank" rel="noopener">Play it ↗</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <div class="proj-title">Procurement Record Search</div>
+        <div class="proj-desc">A tool for searching and reviewing city procurement records, making contracting data legible to anyone who needs to follow where public money goes.</div>
+        <a class="proj-link" href="https://crol-list.jimdc.com/" target="_blank" rel="noopener">View project ↗</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="18" r="2"/><circle cx="19" cy="6" r="2"/><path d="M7 18h6a4 4 0 0 0 4-4V8"/></svg></div>
+        <div class="proj-badge">1K+ downloads</div>
+        <div class="proj-title">Transit Reliability MCP</div>
+        <div class="proj-desc">A Model Context Protocol (MCP) server enabling live investigation of transit reliability. Already past 1,000 downloads since the event.</div>
+        <a class="proj-link" href="https://www.npmjs.com/package/clearlane-mcp" target="_blank" rel="noopener">View on npm ↗</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+        <div class="proj-title">Civic Data Index</div>
+        <div class="proj-desc">A website that indexes NYC's civic data, giving residents and builders one place to find the datasets the city publishes.</div>
+        <a class="proj-link" href="https://nycgov101.com/" target="_blank" rel="noopener">View project ↗</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="proj-title">NYC Business Health Map</div>
+        <div class="proj-desc">A map of the health of NYC businesses, surfacing where the local economy is thriving or under stress across the city.</div>
+        <a class="proj-link" href="https://brink-land-77338304.figma.site/" target="_blank" rel="noopener">View project ↗</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 8.4 12 3 3.4 8.4M4 10v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8"/><path d="m8.5 13 2.5 2 4-4.5"/></svg></div>
+        <div class="proj-title">Bid Finder NYC</div>
+        <div class="proj-desc">A tool for finding and tracking open NYC government bid and procurement opportunities, helping vendors see where they can compete for city work.</div>
+        <a class="proj-link" href="https://civic-bidnyc.vercel.app/" target="_blank" rel="noopener">View project ↗</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4M8 21h8"/></svg></div>
+        <div class="proj-title">FormSpeak</div>
+        <div class="proj-desc">A voice assistant that lets New Yorkers fill out their benefits forms by talking through them, instead of navigating the application themselves.</div>
+        <a class="proj-link" href="https://formspeak.pages.dev/" target="_blank" rel="noopener">Try it ↗</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5s6.5 6.8 6.5 11.3a6.5 6.5 0 0 1-13 0C5.5 9.3 12 2.5 12 2.5z"/><path d="M8.5 14.5c1 .9 2.2.9 3.5 0s2.5-.9 3.5 0"/></svg></div>
+        <div class="proj-badge">Hosted on this site</div>
+        <div class="proj-title">TIDELINE: Flood-Resilience Capital Tracker</div>
+        <div class="proj-desc">An interactive dashboard connecting where New York floods to where the city spends its flood-resilience capital dollars, down to the community-district level, plus a time-animated playback of the May 20 flash flood across the subway and bus network.</div>
+        <div style="font-size:0.72rem; color:var(--text-faint); line-height:1.5; margin-bottom:12px;">By David A. Lee, Dean Berkowitz &amp; Lyndsey Kaplan. Republished with permission.</div>
+        <a class="proj-link" href="./tideline/#map">Open dashboard →</a>
+      </div>
+
     </div>
 
     <!-- ============================ TRACKS ============================ -->

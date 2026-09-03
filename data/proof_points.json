@@ -6,7 +6,7 @@
     "url": "/community/substack/nyc-grocery-access-site-prototype/",
     "source": "sce-team",
     "hosted": true,
-    "problem_area": "Domains",
+    "problem_area": "Service Delivery",
     "builders": "",
     "date": "2026-07-30"
   },
@@ -39,7 +39,7 @@
     "url": "/events/hackathons/civic-tech-build-night/tideline/",
     "source": "civic-tech-build-night",
     "hosted": true,
-    "problem_area": "Domains",
+    "problem_area": "Technology & Data",
     "builders": "David A. Lee, Dean Berkowitz & Lyndsey Kaplan",
     "date": "2026-06-24"
   },
