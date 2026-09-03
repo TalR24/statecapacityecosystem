@@ -440,11 +440,24 @@
 .ribbon-drop-desc{min-width:270px;}
 .ribbon-drop-desc a{white-space:normal;}
 .ribbon-sub{display:block;font-family:Inter,sans-serif;font-size:0.7rem;font-weight:400;color:#9C968A;line-height:1.4;margin-top:2px;}
-.sce-footer-tag{font-family:Inter,sans-serif;font-size:0.78rem;color:#9C968A;margin:8px 0 0;max-width:420px;line-height:1.5;}
+.sce-footer-inner{align-items:flex-start;row-gap:18px;}
+.sce-footer-inner > div:first-child{flex:1 1 340px;min-width:240px;}
+.sce-footer-actions{align-items:center;}
+.sce-footer-tag{font-family:Inter,sans-serif;font-size:0.78rem;color:#9C968A;margin:9px 0 0;max-width:460px;line-height:1.55;}
+@media (max-width:640px){.sce-footer-inner{flex-direction:column;}.sce-footer-actions{width:100%;}}
 </style>
 <nav class="ribbon" aria-label="State Capacity Ecosystem sections">
   <div class="ribbon-inner">
     <div class="ribbon-item"><a class="ribbon-link" href="/"><img src="/assets/sce_logo.png" alt="" style="width:16px;height:16px;object-fit:contain;">Home</a></div>
+    <div class="ribbon-item">
+      <a class="ribbon-link active" href="/ecosystem/">Ecosystem <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Say who you are and what you need, and we find the match.</span></a>
+        <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
+        <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
+        <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">Which organizations share problems and funders.</span></a>
+      </div>
+    </div>
     <div class="ribbon-item">
       <a class="ribbon-link" href="/events/">Events <span class="ribbon-caret">▾</span></a>
       <div class="ribbon-drop">
@@ -453,15 +466,6 @@
         <a href="/events/demo-nights/">Demo Nights</a>
         <a href="/events/salons/">Salons &amp; Meet-ups</a>
         <a href="/events/sponsors-checklist/">Host or Sponsor an Event</a>
-      </div>
-    </div>
-    <div class="ribbon-item">
-      <a class="ribbon-link active" href="/ecosystem/">Ecosystem <span class="ribbon-caret">▾</span></a>
-      <div class="ribbon-drop ribbon-drop-desc">
-        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Say who you are and what you need, and we find the match.</span></a>
-        <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
-        <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
-        <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">Which organizations share problems and funders.</span></a>
       </div>
     </div>
     <div class="ribbon-item">
