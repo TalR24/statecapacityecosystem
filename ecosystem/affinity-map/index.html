@@ -392,6 +392,10 @@
 .ribbon-drop-desc{min-width:270px;}
 .ribbon-drop-desc a{white-space:normal;}
 .ribbon-sub{display:block;font-family:Inter,sans-serif;font-size:0.7rem;font-weight:400;color:#9C968A;line-height:1.4;margin-top:2px;}
+@media (max-width:720px){
+  .ribbon-item.open .ribbon-drop{display:block !important;position:fixed;left:10px;right:10px;min-width:0;border-radius:10px;border:1px solid var(--border-mid,#C9C1AF);box-shadow:0 18px 40px rgba(26,25,24,0.25);max-height:60vh;overflow-y:auto;z-index:120;}
+  .ribbon-item.open .ribbon-link{color:#8A5F1E;}
+}
 .sce-footer-inner{align-items:flex-start;row-gap:18px;}
 .sce-footer-inner > div:first-child{flex:1 1 340px;min-width:240px;}
 .sce-footer-actions{align-items:center;}
@@ -434,6 +438,30 @@
     </div>
   </div>
 </nav>
+<script id="ribbon-touch-js">
+(function () {
+  var mq = window.matchMedia("(max-width:720px)");
+  document.querySelectorAll(".ribbon-item").forEach(function (item) {
+    var link = item.querySelector(".ribbon-link");
+    var drop = item.querySelector(".ribbon-drop");
+    if (!link || !drop) return;
+    link.addEventListener("click", function (e) {
+      if (!mq.matches) return;
+      if (!item.classList.contains("open")) {
+        e.preventDefault();
+        document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
+        item.classList.add("open");
+        drop.style.top = (link.getBoundingClientRect().bottom + 6) + "px";
+      }
+    });
+  });
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".ribbon-item")) {
+      document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
+    }
+  });
+})();
+</script>
 
 <div class="breadcrumb">
   <div class="breadcrumb-inner">
