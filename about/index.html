@@ -65,6 +65,19 @@
     .hero h1 span { color:var(--blue); }
     .hero-lede { font-size:1rem; color:var(--text-mid); line-height:1.65; max-width:820px; margin-bottom:16px; }
 
+    /* mission / vision (same markup as the homepage) */
+    .mv-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:4px; }
+    @media (max-width:720px) { .mv-grid { grid-template-columns:1fr; } }
+    .mv-block { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--blue); border-radius:8px; padding:18px 22px; }
+    .mv-block h3 { font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--blue); margin-bottom:8px; }
+    .mv-block p { font-size:0.95rem; color:var(--text-mid); line-height:1.65; }
+    .mv-block.vision { border-left-color:#D4A853; }
+    .wr-row { display:flex; gap:16px; align-items:baseline; padding:10px 0; border-bottom:1px solid var(--border); }
+    .wr-row:last-child { border-bottom:none; padding-bottom:0; }
+    .wr-row a { font-family:'Roboto Mono',monospace; font-weight:700; font-size:0.9rem; color:var(--blue); text-decoration:none; min-width:110px; }
+    .wr-row a:hover { text-decoration:underline; }
+    .wr-row span { color:var(--text-mid); font-size:0.95rem; }
+
     /* MAIN */
     .main { flex:1; padding:clamp(6px,1vw,12px) clamp(16px,4vw,48px) clamp(40px,6vw,64px); }
     .main-inner { max-width:1300px; margin:0 auto; }
@@ -225,15 +238,39 @@
 
 <div class="hero">
   <div class="hero-inner">
-    <h1>About <span>Us</span></h1>
-    <p class="hero-lede">The State Capacity Ecosystem is built and run by a four-person team: Henry Grunzweig, Tal Roded, Jeremie Ponak, and Sourabh Chakraborty. We map the field, connect its people, and run the events where they build together.</p>
+    <h1><span>About</span></h1>
+    <p class="hero-lede">We make the people working to help government deliver visible to each other, put them in the same room, and turn what they build into something government can use.</p>
   </div>
 </div>
 
 <div class="main">
   <div class="main-inner">
 
-    <div class="section-label" style="margin-top:4px;">The team</div>
+    <div class="mv-grid" style="margin-top:4px;">
+      <div class="mv-block">
+        <h3>Our mission</h3>
+        <p>Get government the best technology and the talent to run it. Put technologists and practitioners in one room, again and again, and turn what they build into something government can use.</p>
+      </div>
+      <div class="mv-block vision">
+        <h3>Our vision</h3>
+        <p>A government with the talent, tools, and operating capacity to deliver for the people it serves.</p>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:24px;">What we run</div>
+    <div class="text-panel" style="border-left-color:var(--blue);">
+      <div class="wr-row"><a href="/events/">Events</a><span>Where proof gets made.</span></div>
+      <div class="wr-row"><a href="/databases/">Ecosystem</a><span>Who does what, in one place.</span></div>
+      <div class="wr-row"><a href="/community/">Community</a><span>What we learn, anyone can use and build on.</span></div>
+    </div>
+
+    <div class="section-label" style="margin-top:24px;">What we don't do</div>
+    <div class="text-panel" style="border-left-color:#D4A853;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <p style="margin-bottom:0;max-width:720px;">We don't do government's work for it, and we don't run campaigns. We include organizations that build government's capacity and leave out those that replace it.</p>
+      <a href="/databases/methodology/" class="info-link" style="flex-shrink:0;white-space:nowrap;">How we decide what's in →</a>
+    </div>
+
+    <div class="section-label" style="margin-top:24px;">The team</div>
     <div class="text-panel" style="border-left-color:var(--blue);">
       <div class="sit-row" style="padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid var(--border);">
         <span class="sit-name">State Capacity Ecosystem Substack</span>

@@ -14,32 +14,28 @@ This file is the single source of truth for the State Capacity Ecosystem tool. I
 
 A visualization layer (homepage + four pillar landing pages + seven view/content pages) over Henry Grunzweig's **State Capacity Ecosystem Database** (an external Airtable curated by Henry, not Tal) plus a separate **Connect** directory (people and orgs) that Tal curates and grows via user self-submission. NYCuriosity does not curate the underlying org data — we only build views on top of Henry's CSV export. The Connect directory has a different source (`connect_submissions.csv` in `data/`) and grows via an in-page 13-field form modal.
 
-**Site architecture (Aug 2026 revamp):** the site is organized around four pillars — Ecosystem Hub, Community, Platform, Policy & Programs. The homepage is a hero (name + mission + vision) followed by one banner strip per pillar. A pillar ribbon nav (Home + the four pillars, each with a hover dropdown to its subpages) sits directly below the dark site header on **every chrome page** — it replaced the old pill nav (`chart-nav`) entirely. The legacy subpages physically moved under their pillars: `directory/`, `network/`, `connect/`, `methodology/` → `ecosystem/…`; `events/…`, `substack/…` → `policy-programs/…`. All 13 old URLs serve meta-refresh redirect stubs that preserve query/hash.
+**Site architecture (Sept 2026 rewrite):** the site is organized around three pillars — **Events** (`/events/`: hackathons, demo nights, salons, the Host or Sponsor an Event checklist), **Ecosystem** (`/ecosystem/` after the Sept 2026 renames: the search page, Organization Directory at `/ecosystem/organizations/`, Connect at `/ecosystem/connect/`, Affinity Map, Methodology), and **Community** (`/community/`: Slack, Substack, Playbooks, Proof Points), plus About at `/about/`. The homepage tells the story in bands: hero, the problem (with mission and vision cards), who's in the room, the three-pillar loop graphic with one row per pillar, why it works, the record, partners, latest, build with us. Every vacated URL (the old `/databases/…` tree included) serves a meta-refresh redirect stub that preserves query and hash.
 
 The public pages:
 
 | Page | URL | Purpose |
 |---|---|---|
-| **Home** | `/` | Hero (name, mission, vision) + four pillar banner strips (Ecosystem Hub · Community · Platform · Policy & Programs), each with a blurb and key links. Static, no JS. |
-| **Ecosystem Hub** | `…/ecosystem/` | Pillar landing: the old hub content. Search-the-Ecosystem Mad Libs modal (auto-opens via `?search=1`), Add to Directory / Add to Connect CTAs, 3 explore bubbles (Directory · Connect · Affinity), Methodology panel, feedback panel |
-| **Community** | `…/community/` | Pillar landing: get-involved action cards (add to Connect, browse Connect, events), Slack interest panel (mailto; no Slack URL exists yet), feedback panel. (The organizers list moved to About Us, Aug 2026.) |
-| **Platform** | `…/platform/` | Pillar landing: playbooks (Sponsor Checklist live, Event Playbook pending card) + prototypes & tools cards (grocery siting, summons navigator, housing approvals navigator, TIDELINE with builder credit) |
-| **Policy & Programs** | `…/policy-programs/` | Pillar landing: Substack + Events explore bubbles (moved from the old hub) + subscribe panel |
-| **About Us** | `…/about/` | Team page: SCE Substack row + the four team members (Henry Grunzweig, Tal Roded, Jeremie Ponak, Sourabh Chakraborty) with Substack/LinkedIn buttons, and a Get in Touch mailto panel (statecapacityecosystem@gmail.com) |
-| **Directory** | `…/databases/organization-directory/` | (see below) |
-| **Affinity Network** | `…/databases/affinity-map/` | (see below) |
-| **Connect** | `…/databases/opportunities-connections/` | (see below) |
-| **Methodology** | `…/databases/methodology/` | (see below) |
-| **Events** | `…/events/` | (see below; incl. `civic-tech-build-night/`, its `tideline/`, and `sponsor-checklist/`) |
-| **Substack** | `…/community/substack/` | (see below; incl. `mamdani-ai-priorities/` + nested prototypes and `nyc-grocery-access-site-prototype/`) |
-| **Directory** | `…/directory/` | Filterable, searchable table of every org. Semantic search via TF-IDF |
-| **Connect** | `…/connect/` | Directory of people and orgs indexed by problem, role, and help-type. 13-field self-submission form modal (mailto + clipboard). Intro request modal for facilitated contacts. Separate dataset from the org pages. |
-| **Affinity Network** | `…/network/` | D3 force-directed graph + natural-language semantic search with geographic boosting |
-| **Methodology** | `…/methodology/` | Long-form explainer: taxonomy, inclusion criteria, scoring formula |
-| **Events** | `…/events/` | Events hub listing state capacity hackathons as cards. Each event links to its own subpage (`…/events/<event-slug>/`) with overview, logistics, tracks, projects produced, Substack writeups, and Luma archive. |
-| **Substack** | `…/substack/` | Posts hub for the SCE Substack: card grid, one card per post, plus a subscribe CTA. A single-tool post links its card straight to the tool at `…/substack/<post-slug>/`. A multi-prototype post links to a chromed post page at `…/substack/<post-slug>/` that groups prototype cards by theme (live tools link out, unbuilt ones are dashed `.pending` slots). First post page: `substack/mamdani-ai-priorities/` (4 mayoral priorities, 9 prototype slots, the NYC Grocery Access siting tool live at its original `substack/nyc-grocery-access-site-prototype/` URL). |
+| **Home** | `/` | Narrative bands: hero, problem + mission/vision, who's in the room, three-pillar loop + one row per pillar, why it works, record stats, partners, latest, build with us |
+| **Events** | `/events/` | Events hub: next-event strip, hackathons, demo nights, salons, Host or Sponsor an Event |
+| **Hackathons** | `/events/hackathons/` | All hackathons; `civic-tech-build-night/` (with `tideline/`) is the June 2026 recap |
+| **Host or Sponsor an Event** | `/events/sponsors-checklist/` | Printable owner checklist for hosts and sponsors |
+| **Ecosystem** | `/ecosystem/` | Landing: full-width search button, Organizations / Connect / Affinity Map cards, Methodology panel |
+| **Search** | `/ecosystem/search/` | Same chrome, the Mad Libs search modal opened by default |
+| **Organization Directory** | `/ecosystem/organizations/` | Filterable table of 300+ orgs, semantic search |
+| **Connect** | `/ecosystem/connect/` | People, problems and opportunities; self-submission (`?add=1`) and intro requests |
+| **Affinity Map** | `/ecosystem/affinity-map/` | D3 force graph of shared problems and funders, semantic search |
+| **Methodology** | `/ecosystem/methodology/` | Inclusion criteria, taxonomy, scoring formula |
+| **Community** | `/community/` | Slack, Substack, Playbooks, Proof Points |
+| **Proof Points** | `/community/proof-points/` | Gallery of every tool built through SCE, rendered from `data/proof_points.json`, filterable by source and problem area (`?source=`, `?area=`) |
+| **Substack** | `/community/substack/` | Posts hub + companion tools (`mamdani-ai-priorities/` and nested prototypes, `nyc-grocery-access-site-prototype/`) |
+| **About** | `/about/` | Mission/vision cards, what we run, what we don't do, the team, get in touch |
 
-**Nav on all chrome pages:** the pillar ribbon (Home · Ecosystem Hub ▾ · Community ▾ · Policy & Programs ▾ · Platform ▾ · About Us). Policy & Programs sits before Platform (Tal, Aug 2026). The pill nav (`chart-nav`) was removed Aug 2026.
+**Nav on all chrome pages:** the ribbon (Home · Events ▾ · Ecosystem ▾ · Community ▾ · About) plus one primary **Sept 30 Hackathon ↗** button. The Events dropdown leads with the next event's Luma link; the Ecosystem dropdown items carry one-line descriptors (`.ribbon-sub`); Methodology left the dropdown and lives in the footer (Substack · Slack · Methodology · About, under a one-line descriptor of the site).
 
 ---
 
@@ -570,6 +566,7 @@ These are concrete, half-done tasks, not parking-lot ideas. Pick them up when th
 
 | Date | Commit | Summary |
 |---|---|---|
+| 2026-09-02 | site-rewrite PR | **Site rewrite: pillars, homepage, naming.** Three-pillar nav (Events · Ecosystem · Community · About) with a single Sept 30 CTA; homepage reordered (who's in the room, pillar loop graphic, why it works, partners); Ecosystem landing rewritten; Proof Points became a JSON-driven gallery of all 11 tools (`data/proof_points.json`, `?source=`/`?area=` filters); About restructured (mission/vision, what we run, what we don't do); methodology copy trimmed; `/databases/…` renamed to `/ecosystem/…` with redirect stubs (`organization-directory`→`organizations`, `opportunities-connections`→`connect`, new `search/` page). |
 | 2026-08-24 | — | **Homepage feedback pass + two coming-soon event pages** (Tal). Hero reworded ("The people helping government deliver find each other here" + organizations/opportunities/contributors lede); wider measure across the bands (band-inner 1100px, headings 34ch, copy 76ch) so the Problem and What We Do sections stop reading crunched; the Map row now surfaces **Opportunities & Connections** next to the databases link (Connect judged too thin at 44 entries for its own row); Record band retitled "The field was invisible. Now it's together and building in plain sight." with a fifth stat, posts published, read live from `data/substack_posts.json` (`#stat-posts`) so it climbs without edits; Momentum now "The field is accelerating." New `events/demo-nights/` and `events/salons/` coming-soon pages (Slack CTA + what-to-expect cards + host CTA), wired into the Events ribbon dropdown on all 18 pages, the events landing grid, the homepage strip, and the sitemap. Community & Platform's Substack card links straight to the Substack. Events-hosted stat deliberately omitted until there are 2+ events. |
 | 2026-08-24 | — | **Substack archive on the Substack page + site-wide CTA buttons.** `data/build_substack.py` pulls the full SCE Substack archive (henrygrunzweig.substack.com API) into `data/substack_posts.json`; `community/substack/` renders it as an "Every post, newest first" list under the companion-tool cards; the daily workflow refreshes the JSON and commits on change. The ribbon gained right-aligned **Substack ↗** and **Join our Slack ↗** (Airtable signup form) buttons on all 17 chrome pages, and the Stay-connected strip was replaced by a dark SCE `<footer class="sce-footer">` (brand + Subscribe / Join our Slack / Explore the Databases; the Databases landing swaps the third button for Add Yourself to Connect). The sponsors checklist hides both in print CSS. |
 | 2026-08-23 | — | **Standalone branding.** Removed the NYCuriosity header (brand + About/Substack/Support) and footer from all chrome pages; the SCE ribbon is the top bar. |
