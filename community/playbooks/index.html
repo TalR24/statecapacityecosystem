@@ -70,6 +70,12 @@
     .main { flex:1; padding:clamp(6px,1vw,12px) clamp(16px,4vw,48px) clamp(40px,6vw,64px); }
     .main-inner { max-width:1300px; margin:0 auto; }
 
+    .pb-filters { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 16px; }
+    .pb-chip { font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:600; padding:5px 12px; border-radius:999px; border:1px solid var(--border-mid); background:var(--surface); color:var(--text-mid); cursor:pointer; transition:background .15s,color .15s; }
+    .pb-chip:hover { border-color:var(--blue); color:var(--blue); }
+    .pb-chip.active { background:var(--blue); border-color:var(--blue); color:#fff; }
+    .tool-format { font-family:'Roboto Mono',monospace; font-size:0.66rem; color:var(--text-faint); margin:-4px 0 10px; }
+
     .section-label {
       font-family:'Roboto Mono',monospace;
       font-size:0.72rem; font-weight:700; text-transform:uppercase;
@@ -224,31 +230,90 @@
 <div class="hero">
   <div class="hero-inner">
     <h1>The <span>Playbooks</span></h1>
-    <p class="hero-lede">Everything we learn running events ships as something you can pick up and run without us in the room. One playbook is live and the next is being written from build night feedback.</p>
+    <p class="hero-lede">Everything we learn ships as something you can pick up and run without us in the room. Playbooks cover the formats; pitch materials make the case.</p>
   </div>
 </div>
 
 <div class="main">
   <div class="main-inner">
 
-    <div class="section-label" style="margin-top:4px;">Playbooks</div>
-    <p class="section-note">Our events generate methods. We document them so any organizer, sponsor, or agency can reuse them without us in the room.</p>
-    <div class="tool-grid">
+    <div class="section-label" style="margin-top:4px;">The library</div>
+    <p class="section-note">Our events generate methods and our story makes the case. Both ship here so any organizer, sponsor, or agency can reuse them.</p>
 
-      <a class="tool-card" href="/events/sponsors-checklist/">
-        <div class="tool-kicker">Playbook · Live</div>
+    <div class="pb-filters" id="pb-filters">
+      <button type="button" class="pb-chip active" data-cat="">All</button>
+      <button type="button" class="pb-chip" data-cat="playbook">Playbooks</button>
+      <button type="button" class="pb-chip" data-cat="pitch">Pitch materials</button>
+    </div>
+
+    <div class="tool-grid" id="pb-grid">
+
+      <a class="tool-card" data-cat="playbook" href="/community/playbooks/SCE_Hackathon_Playbook.docx" download>
+        <div class="tool-kicker">Playbook</div>
+        <div class="tool-title">Hackathon Playbook</div>
+        <div class="tool-format">.docx · 1 MB</div>
+        <div class="tool-desc">The full State Capacity Hackathon format, from first outreach to the tool going up on the website, with a checklist at every stage. Written so the next organizer can run it without us in the room.</div>
+        <div class="tool-cta">Download the playbook ↓</div>
+      </a>
+
+      <a class="tool-card" data-cat="playbook" href="/community/playbooks/SCE_Chapter_Launch_Bible.docx" download>
+        <div class="tool-kicker">Playbook</div>
+        <div class="tool-title">Chapter Launch Bible</div>
+        <div class="tool-format">.docx · 1 MB</div>
+        <div class="tool-desc">The founding reference: why SCE exists, how we think, how the pieces fit, and how to stand up a chapter in a new city or vertical.</div>
+        <div class="tool-cta">Download the bible ↓</div>
+      </a>
+
+      <a class="tool-card" data-cat="playbook" href="/community/playbooks/SCE_Field_Building_Guide.docx" download>
+        <div class="tool-kicker">Playbook</div>
+        <div class="tool-title">Field Building Guide</div>
+        <div class="tool-format">.docx · 1 MB</div>
+        <div class="tool-desc">How to build enough credibility and reach in a new city or vertical that your first event draws real practitioners and a government person with real authority.</div>
+        <div class="tool-cta">Download the guide ↓</div>
+      </a>
+
+      <a class="tool-card" data-cat="playbook" href="/events/sponsors-checklist/">
+        <div class="tool-kicker">Playbook</div>
         <div class="tool-title">Sponsors Checklist</div>
-        <div class="tool-desc">Who owns what when you sponsor or cosponsor a state capacity hackathon: responsibilities for the Lead Sponsor, Cosponsors, and our team, plus what sponsors get out of it. Printable and ready to hand to a funder.</div>
+        <div class="tool-format">Web page · printable</div>
+        <div class="tool-desc">Who owns what when you sponsor or cosponsor a state capacity hackathon: responsibilities for the Lead Sponsor, Cosponsors, and our team, plus what sponsors get out of it. Ready to hand to a funder.</div>
         <div class="tool-cta">Open the checklist →</div>
       </a>
 
-      <div class="tool-card pending">
-        <div class="tool-kicker">Playbook · In progress</div>
-        <div class="tool-title">Event Playbook</div>
-        <div class="tool-desc">A run-anywhere guide to hosting a civic tech build night, built from what we learned running our own: run of show, space and judging logistics, partners, and problem statement design. We are collating build night feedback into the first draft now.</div>
-      </div>
+      <a class="tool-card" data-cat="pitch" href="/community/playbooks/SCE_Pitch_Deck.pptx" download>
+        <div class="tool-kicker">Pitch materials</div>
+        <div class="tool-title">SCE Pitch Deck</div>
+        <div class="tool-format">.pptx · 2 MB</div>
+        <div class="tool-desc">Thirteen slides that make the case: the problem, the flywheel, the record so far, and how to get involved.</div>
+        <div class="tool-cta">Download the deck ↓</div>
+      </a>
+
+      <a class="tool-card" data-cat="pitch" href="/community/playbooks/SCE_Team_One_Pager.pptx" download>
+        <div class="tool-kicker">Pitch materials</div>
+        <div class="tool-title">SCE Team One Pager</div>
+        <div class="tool-format">.pptx · 2 MB</div>
+        <div class="tool-desc">The whole story on one slide: mission, vision, what we run, and how to reach us.</div>
+        <div class="tool-cta">Download the one pager ↓</div>
+      </a>
 
     </div>
+
+    <script>
+    (function () {
+      var chips = document.querySelectorAll("#pb-filters .pb-chip");
+      var cards = document.querySelectorAll("#pb-grid .tool-card");
+      chips.forEach(function (chip) {
+        chip.addEventListener("click", function () {
+          chips.forEach(function (c) { c.classList.remove("active"); });
+          chip.classList.add("active");
+          var cat = chip.getAttribute("data-cat");
+          cards.forEach(function (card) {
+            card.style.display = (!cat || card.getAttribute("data-cat") === cat) ? "" : "none";
+          });
+        });
+      });
+    })();
+    </script>
 
   </div>
 </div>
