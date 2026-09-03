@@ -106,7 +106,7 @@ jobs:
               data/affinity.json \
               data/directory.json \
               data/affinity_search.json \
-              databases/methodology/index.html \
+              ecosystem/methodology/index.html \
               README.md
           fi
 
