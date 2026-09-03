@@ -200,7 +200,12 @@
 .why-name{font-family:'Roboto Mono',monospace;font-weight:700;margin-bottom:6px;}
 .why-copy{color:var(--text-mid);font-size:0.95rem;line-height:1.6;}
 @media (max-width:560px){.who-row{flex-direction:column;gap:2px;}.who-role{min-width:0;}}
-.pillars-cap{font-family:'Roboto Mono',monospace;font-size:0.78rem;color:#DDD8CC;text-align:center;line-height:1.6;margin:14px auto 2px;max-width:60ch;}
+.who-grid{display:grid;grid-template-columns:minmax(0,620px) minmax(260px,1fr);gap:clamp(28px,5vw,72px);align-items:center;margin-top:26px;}
+@media (max-width:860px){.who-grid{grid-template-columns:1fr;}}
+.who-grid .who-rows{margin:0;}
+.who-cta-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 30px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:16px;max-width:420px;}
+.who-cta-card p{font-size:0.95rem;color:var(--text-mid);line-height:1.6;margin:0;}
+.pillars-cap{font-family:'Roboto Mono',monospace;font-size:0.78rem;color:#DDD8CC;text-align:center;line-height:1.6;margin:14px auto 2px;max-width:78ch;}
 a.row-visual{display:block;transition:transform .15s;}
 a.row-visual:hover{transform:translateY(-2px);}
 .partner-marks{display:flex;gap:48px;flex-wrap:wrap;margin-top:20px;align-items:flex-start;}
@@ -303,7 +308,7 @@ a.row-visual:hover{transform:translateY(-2px);}
       </div>
       <div class="mv-block vision">
         <h3>Our vision</h3>
-        <p>A visible, connected ecosystem serving a government with the talent, tools, and operating capacity to deliver for the people it serves.</p>
+        <p>A visible, connected ecosystem enabling a government with the talent, tools, and operating capacity to deliver for the people it serves.</p>
       </div>
     </div>
   </div>
@@ -314,18 +319,21 @@ a.row-visual:hover{transform:translateY(-2px);}
     <div class="kicker">Who's in the room</div>
     <h2>Everyone helping government deliver belongs here.</h2>
     <p class="band-copy">Many contributors, one room. The work moves when they work together.</p>
-    <div class="who-rows">
-      <div class="who-row"><span class="who-role">Practitioners</span><span class="who-what">bring the problems and the authority to act.</span></div>
-      <div class="who-row"><span class="who-role">Technologists</span><span class="who-what">bring working software.</span></div>
-      <div class="who-row"><span class="who-role">Researchers</span><span class="who-what">bring the evidence.</span></div>
-      <div class="who-row"><span class="who-role">Funders</span><span class="who-what">bring capital to the gaps.</span></div>
-      <div class="who-row"><span class="who-role">Advocates</span><span class="who-what">bring the public case for change.</span></div>
-      <div class="who-row"><span class="who-role">Capacity builders</span><span class="who-what">bring the training and the playbooks.</span></div>
-      <div class="who-row"><span class="who-role">And you</span><span class="who-what">bring whatever the work needs next.</span></div>
-    </div>
-    <div class="who-actions">
-      <a class="row-link" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack →</a>
-      <a class="row-link" href="./ecosystem/connect/?add=1">Add yourself or a problem to Connect →</a>
+    <div class="who-grid">
+      <div class="who-rows">
+        <div class="who-row"><span class="who-role">Practitioners</span><span class="who-what">bring the problems and the authority to act.</span></div>
+        <div class="who-row"><span class="who-role">Technologists</span><span class="who-what">bring working software.</span></div>
+        <div class="who-row"><span class="who-role">Researchers</span><span class="who-what">bring the evidence.</span></div>
+        <div class="who-row"><span class="who-role">Funders</span><span class="who-what">bring capital to the gaps.</span></div>
+        <div class="who-row"><span class="who-role">Advocates</span><span class="who-what">bring the public case for change.</span></div>
+        <div class="who-row"><span class="who-role">Capacity builders</span><span class="who-what">bring the training and the playbooks.</span></div>
+        <div class="who-row"><span class="who-role">And you</span><span class="who-what">bring whatever the work needs next.</span></div>
+      </div>
+      <div class="who-cta-card">
+        <p>Take a seat in the room.</p>
+        <a class="row-link" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack →</a>
+        <a class="row-link" href="./ecosystem/connect/?add=1">Add yourself or a problem to Connect →</a>
+      </div>
     </div>
   </div>
 </section>
