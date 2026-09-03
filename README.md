@@ -1,8 +1,8 @@
 # State Capacity Ecosystem — Project Handoff & Reference
 
-> **This repo is the site.** Since Aug 2026 the State Capacity Ecosystem lives at **https://statecapacityecosystem.com/** (GitHub Pages from `TalR24/statecapacityecosystem`, main branch, root; `CNAME` pins the domain). It moved out of `TalR24/nycur-data-website`, which now serves path-preserving redirect stubs at the old data.nycuriosity.com URLs. The daily refresh workflow lives HERE (`.github/workflows/refresh_state_capacity.yml`; secrets `GMAIL_USER` + `GMAIL_APP_PASSWORD`). The private work repo `TalR24/state-capacity-ecosystem` (CRM + archives) is unchanged and still never deploys.
+> **This repo is the site.** Since Aug 2026 the State Capacity Ecosystem lives at **https://statecapacityecosystem.com/** (GitHub Pages from `TalR24/statecapacityecosystem`, main branch, root; `CNAME` pins the domain). It moved out of `TalR24/nycur-data-website`, which now serves path-preserving redirect stubs at the old data.nycuriosity.com URLs. The daily refresh workflow lives HERE (`.github/workflows/refresh_state_capacity.yml`; secrets `GMAIL_USER` + `GMAIL_APP_PASSWORD`). The private work repo `TalR24/state-capacity-ecosystem` (CRM + archives) is unchanged and still never deploys. The SCE Substack lives at **https://substack.statecapacityecosystem.com/** (custom domain since Sept 3 2026; the old henrygrunzweig subdomain 404s).
 
-**Last updated:** 2026-06-07
+**Last updated:** 2026-09-03
 **Maintainer:** Tal Roded (visualization layer) · Henry Grunzweig (curates the underlying database)
 **Live:** https://statecapacityecosystem.com/
 
@@ -43,7 +43,7 @@ The public pages:
 
 1. **Read this README first.** Don't guess at file structure or weights — they've been deliberately set.
 2. **Check the live site** before making changes — `https://statecapacityecosystem.com/`. The deployed state may differ from your local working copy.
-3. **Identify which file you need to edit** from the file map below. The five subpages are independent HTML files; changes to shared concepts (colors, taxonomy, copy) must be made in **all** of them.
+3. **Identify which file you need to edit** from the file map below. Every page is an independent HTML file; changes to shared concepts (chrome, colors, taxonomy, copy) must be made in **all** of them.
 4. **For data refreshes:** drop the new CSV in `data/directory.csv` and run `python3 data/build_affinity.py`. Don't hand-edit `affinity.json`, `directory.json`, or `affinity_search.json` — they're regenerated from the CSV.
 5. **Push to GitHub** when done. Live in ~1 min via GitHub Pages.
 
@@ -52,81 +52,59 @@ The public pages:
 ## File layout
 
 ```
-data_website/
+statecapacityecosystem/              ← repo root = the site (GitHub Pages from main, CNAME)
 ├── README.md                        ← THIS FILE
-├── index.html                       ← Home: hero (mission/vision) + 3 section strips + ribbon nav. No JS.
-├── databases/
-│   └── index.html                   ← Ecosystem Databases landing (old hub content: Mad Libs
-│                                      search modal with ?search=1 auto-open, CTAs, 3 explore
-│                                      bubbles, methodology + feedback panels)
+├── index.html                       ← Home: narrative bands (hero, problem + mission/vision,
+│                                      who's in the room + CTA card, flywheel graphic + one row
+│                                      per pillar, why it works, record, who we work with,
+│                                      latest, build with us)
+├── ecosystem/
+│   ├── index.html                   ← Ecosystem landing: full-width search button, Organizations /
+│   │                                  Connect / Affinity Map cards, methodology + feedback panels;
+│   │                                  ?search=1 auto-opens the Mad Libs modal
+│   ├── search/index.html            ← Standalone search page (the same modal rendered inline)
+│   ├── organizations/index.html     ← Organization Directory: filterable table, TF-IDF search,
+│   │                                  suggest-an-org form (?add=1, POSTs to a Google Form)
+│   ├── connect/index.html           ← Connect board: people and opportunities, self-submission
+│   │                                  modal (?add=1, POSTs to Airtable), intro-request modal
+│   ├── affinity-map/index.html      ← D3 force graph + NL search; supports ?id=N deep links
+│   └── methodology/index.html       ← Inclusion criteria, taxonomy, scoring write-up
 ├── events/
-│   └── index.html                   ← Events landing (Hackathons + Sponsors Checklist cards,
-│                                      kinds-of-events, host/sponsor panel)
-├── events/hackathons/
-│   └── index.html                   ← Hackathons hub: one card per hackathon
+│   ├── index.html                   ← Events hub: NEXT strip, category cards, host/sponsor panel
+│   ├── hackathons/index.html        ← Hackathons hub: Sept 30 card (Luma) + build-night card
+│   ├── hackathons/civic-tech-build-night/
+│   │   ├── index.html               ← June 24 2026 recap: overview, checked goals, 8 project
+│   │   │                              cards (mirrors data/proof_points.json), tracks, judges
+│   │   └── tideline/                ← TIDELINE rehosted with permission, builders credited
+│   ├── demo-nights/index.html       ← Coming soon (first follows the Sept 30 hackathon)
+│   ├── salons/index.html            ← Coming soon
+│   └── sponsors-checklist/index.html ← Printable owners checklist ("Host or Sponsor an Event")
 ├── community/
-│   └── index.html                   ← Community & Platform landing (Slack/Substack/Playbooks/
-│                                      Proof Points cards + get-involved row + feedback)
-├── community/slack/
-│   └── index.html                   ← Slack page: live join CTA (invite link) + plug-in cards
-├── community/playbooks/
-│   └── index.html                   ← Playbooks hub (Sponsors Checklist card + pending Event Playbook)
-├── community/proof-points/
-│   └── index.html                   ← Proof Points hub: cards linking the 4 prototypes at their
-│                                      canonical URLs (grocery, summons, housing, TIDELINE)
-├── ecosystem/ platform/ policy-programs/
-│                                    ← redirect stubs at the Aug-3-pillar-era URLs (whole trees)
+│   ├── index.html                   ← Community landing: Slack / Substack / Playbooks /
+│   │                                  Proof Points cards
+│   ├── slack/index.html             ← Slack page (join via the Airtable signup form)
+│   ├── playbooks/                   ← Playbooks library page + the .docx/.pptx files it serves
+│   │                                  (Hackathon Playbook, Chapter Launch Bible, Field Building
+│   │                                  Guide, SCE Pitch Deck, SCE Team One Pager)
+│   ├── proof-points/index.html      ← Gallery rendered from data/proof_points.json
+│   │                                  (filters + ?source= / ?area= deep links)
+│   └── substack/                    ← redirect stub to proof-points + nested post pages and
+│                                      as-is prototypes (mamdani-ai-priorities/…, grocery tool)
+├── about/index.html                 ← Mission/vision cards, what we run, what we don't do,
+│                                      the team, Get in Touch (interest form)
+├── databases/                       ← meta-refresh redirect stubs at every pre-Sept-2026 URL
 ├── data/
 │   ├── directory.csv                ← Canonical org source (replace to refresh)
 │   ├── build_affinity.py            ← CSV → affinity.json + directory.json + affinity_search.json
-│   ├── affinity.json                ← Nodes + scored edges + stats (incl. last_updated)
-│   ├── directory.json               ← Flat node bundle for the directory page
-│   ├── affinity_search.json         ← Vocab + IDF + per-org sparse TF-IDF for NL search
-│   ├── connect_submissions.csv      ← Connect directory seed data (separate dataset)
-│   ├── build_people.py              ← CSV → connect.json (simple transform; no scoring)
-│   ├── update_stats.py              ← Patches hardcoded stat strings in HTML/MD after org rebuild
-│   ├── notify_new_connect.py        ← Emails new Connect entries whose contact field has an @
-│   └── connect.json                 ← Flat people bundle for the /connect/ page
-├── about/
-│   └── index.html                   ← About Us: team rows + Get in Touch mailto panel
-├── databases/organization-directory/
-│   └── index.html                   ← Filterable table. Reads /data/ JSON
-├── databases/affinity-map/
-│   └── index.html                   ← D3 force-directed graph + NL search bar.
-│                                     Reads /data/ JSON.
-│                                     Supports ?id=N deep-link from directory.
-├── databases/opportunities-connections/
-│   └── index.html                   ← Connect directory + 9-column table + 12-field self-submission
-│                                     form modal + intro request modal. Reads connect.json.
-│                                     Submissions post to Airtable via REST API.
-├── databases/methodology/
-│   └── index.html                   ← Long-form scoring + taxonomy write-up
-├── directory/ connect/ network/ methodology/ substack/ …
-│                                    ← meta-refresh redirect stubs at all pre-restructure URLs
-│                                      (also nested: events/civic-tech-build-night{,/tideline},
-│                                      events/sponsor-checklist, substack/mamdani-ai-priorities
-│                                      {,/summons-navigator,/housing-approval-pathway},
-│                                      substack/nyc-grocery-access-site-prototype)
-└── events/
-    ├── index.html                   ← Events hub: one card per event
-    ├── sponsor-checklist/
-    │   └── index.html               ← Hackathon sponsor responsibility checklist
-    │                                  (content by Henry, Aug 2026): who owns what
-    │                                  (Lead Sponsor / Cosponsor / SCE) + benefits.
-    │                                  Static, no JS beyond window.print(). Linked
-    │                                  from the events-hub host/sponsor text panel.
-    └── civic-tech-build-night/
-        ├── index.html               ← Event detail page. Template for new events
-        │                             (copy the folder; HTML comments at top mark
-        │                             every section to edit). No JS, no data file.
-        │                             Section order: Read about it → Projects produced
-        │                             → Overview → Goal → Tracks → Expert judges →
-        │                             Event archive. Date shown in the hero.
-        └── tideline/                ← Rehosted project (decision #20). TIDELINE flood
-            ├── index.html            tracker by D. Lee, D. Berkowitz & L. Kaplan,
-            └── *.json                republished WITH PERMISSION + credit. 5 JSON data
-                                      files (~6.5 MB). Source repo's build scripts/
-                                      notebooks NOT copied. Relative fetch() + CDN libs.
+│   ├── build_people.py              ← connect_submissions.csv → connect.json
+│   ├── build_substack.py            ← Substack archive API → substack_posts.json
+│   ├── update_stats.py              ← Patches stat strings (methodology page + this README)
+│   ├── notify_new_connect.py        ← Emails new Connect entries with a contact address
+│   ├── proof_points.json            ← Hand-maintained: every tool built through SCE
+│   └── *.json                       ← Generated bundles (never hand-edit)
+├── assets/sce_logo.png              ← Logo (favicon, ribbon, hero, og:image)
+├── 404.html · CNAME · robots.txt · sitemap.xml
+└── .github/workflows/refresh_state_capacity.yml   ← daily data refresh + stat patch
 ```
 
 ---
@@ -228,16 +206,12 @@ Total cost is one ~190 KB JSON fetch + O(query_terms × num_orgs) per query. No 
 
 ## Pages — what each does
 
-### Hub (`index.html`)
-- Hero with explainer paragraph
-- **4 stat pills:** Organizations · Primary segments · Problem topics · Data last updated
-- **"Add to Directory" hero CTA** deep-links to `./directory/?add=1`, which auto-opens the directory's in-page **Suggest-an-organization** form modal (`openOF()`). This mirrors the "Add to Connect" CTA's `./connect/?add=1` pattern. The directory's org form POSTs to a Google Form (`OF_ACTION` = a `…/formResponse` endpoint) via `fetch(..., {mode:"no-cors"})`. **It no longer links to the old `forms.gle/GSNh2ZqUfFG4EAzF6` short link** (changed June 2026). The org intake is distinct from the people-directory (Connect) submission.
-- **3 view cards under "Explore the ecosystem":** Directory · Affinity Network · Connect.
-- **1 methodology card under "How this works":** the hub-level entry point to the methodology page. Card preview is a static rendering of the scoring formula and thresholds. (Methodology is also reachable from every subpage's pill nav.)
-- **2 text panels at bottom:** "How we built this" (links to Methodology page) · "Submit feedback" (mailto:statecapacityecosystem@gmail.com)
-- Loads `data/affinity.json` to dynamically fill the pills (org count, segment count, problem-topic count, last_updated date)
+### Ecosystem landing (`ecosystem/index.html`) and Search (`ecosystem/search/index.html`)
+- Hero: H1 "Ecosystem", one-line lede, a full-width **Search the ecosystem (Beta)** button (opens the Mad Libs modal), a helper line, and two text links: **Add an organization →** (`./organizations/?add=1`, auto-opens the directory's suggest-an-org modal, which POSTs to a Google Form via `fetch(..., {mode:"no-cors"})`) and **Add yourself or an opportunity →** (`./connect/?add=1`).
+- **3 explore cards:** Organizations · Connect · Affinity Map, then **Methodology** and **Submit feedback** panels (feedback is a mailto).
+- `?search=1` auto-opens the search modal (deferred to DOMContentLoaded — the modal markup sits after the script). `/ecosystem/search/` is the standalone version: same chrome, the modal rendered inline on the page, data fetches root-absolute.
 
-### Directory (`directory/index.html`)
+### Organization Directory (`ecosystem/organizations/index.html`)
 - **Visible table columns:** Organization · Segment · Secondary Segments · Description (truncated to 180 chars) · Problem Area (orange chips) · Problem Topic (blue chips). Every other field (focus, funding model, funding detail, named funders, website) lives in the row-click detail panel.
 - Filters: search box · Primary segment · Geography · Problem area · Problem topic
 - **No Funding Model filter** (removed May 2026 per user request)
@@ -251,7 +225,7 @@ Total cost is one ~190 KB JSON fetch + O(query_terms × num_orgs) per query. No 
 - Click any row to expand a detail panel showing: description, Problem areas (orange chips), Problem topics (blue chips), segments, focus, funding model, funding detail, named funders, website, "See in network" deep link
 - Loads `data/directory.json` + `data/affinity_search.json`
 
-### Connect (`connect/index.html`)
+### Connect (`ecosystem/connect/index.html`)
 - Separate dataset from the org pages — sourced from `data/connect_submissions.csv`, a Tal-curated seed list. Entries can be people OR organizations. Grows via a 12-field in-page form modal that POSTs directly to Airtable.
 - **Self-submission form modal** (`openSF()` / `closeSF()`): opened by the "Add yourself or a challenge" pill button in the hero. Full-page overlay with fields: Name, Organization (optional), Role (single, 9 options), Offering (multi, 9 options), Problem Area (multi, 9 options), Problem Topic (multi, conditional — shown only after a mappable area is selected), Geography (multi, 4 options), Due By (date, optional), Details (280-char textarea), Contact preference (Direct / Facilitated). Email always shown and required. For Facilitated: a privacy note is shown (email kept private) and a Connection Parameters textarea appears. On submit, POSTs to Airtable REST API. **CSS critical:** `.sf-body` requires `flex:1; min-height:0` — without `min-height:0` the flex child defaults to `min-height:auto` and can't scroll, so lower chip rows clip out of view.
 - **Airtable backend:** `AIRTABLE_ENDPOINT` points to base `appFIPqXkeQMQ3n94`, table `tbl2ArzY6c0CdNVsh` ("State Capacity Ecosystem Connect Submissions"). Token is a write-only PAT in client-side JS (intentional — scoped to this table only; readers can submit but cannot read/edit/delete). Table columns: Name, Organization, Role, Offering, Problem Areas, Problem Topics, Geography, Due By, Details, Contact Type, Email, Connection Parameters.
@@ -263,7 +237,7 @@ Total cost is one ~190 KB JSON fetch + O(query_terms × num_orgs) per query. No 
 - **Neutral language throughout:** "entry" / "entries" / "Name" — the directory contains both people and organizations.
 - Loads `data/connect.json` (regenerated by `python3 data/build_people.py`). Don't hand-edit `connect.json` — edit the CSV and rebuild.
 
-### Affinity Network (`network/index.html`)
+### Affinity Map (`ecosystem/affinity-map/index.html`)
 - D3 force-directed graph; nodes colored by primary segment; edge width scales with composite score
 - **No inline methodology blurb** (removed May 2026 per user request). The Methodology pill in the nav (restored May 2026 after a brief removal) is the in-page link to the full methodology page.
 - **Controls row 1** (in order): Search by name or question · Show edges at or above (threshold slider) · Segment filter chips · Reset
@@ -280,7 +254,7 @@ Total cost is one ~190 KB JSON fetch + O(query_terms × num_orgs) per query. No 
 - Supports `?id=N` deep link from directory
 - Loads `data/affinity.json` + `data/affinity_search.json` + `data/connect.json`
 
-### Methodology (`methodology/index.html`)
+### Methodology (`ecosystem/methodology/index.html`)
 - Long-form explainer organized as: data source → inclusion criteria → problem statements → directory filters → semantic search → affinity score (formula + per-signal explanation + thresholding) → score range table → what the graph does/doesn't show → color palette → credits
 - **No "Refreshing the data" section** (removed May 2026 — was internal-workflow only)
 - **No links to Claude conversations** (removed May 2026)
@@ -349,13 +323,13 @@ Required GitHub secrets: `GMAIL_USER`, `GMAIL_APP_PASSWORD`. Requires repo Workf
 ### Manual push (for HTML/code changes)
 
 ```bash
-cd /Users/troded/nycur/data_website
+cd statecapacityecosystem
 git add <explicit file paths>
 git commit -m "..."
 git push
 ```
 
-**Important — the remote URL has the PAT baked in.** It was set up via `git remote set-url origin https://TalR24:{PAT}@github.com/TalR24/nycur-data-website.git`. The PAT lives in the local-only memory file `~/.claude/projects/.../memory/reference_github.md`. If the remote ever gets reset, re-add the PAT-baked URL.
+Pushes authenticate with a personal access token configured in the local clone's remote. If the remote ever resets, restore the token locally; never commit it or document its location here.
 
 **Don't stage unrelated files.** Always stage explicit paths — never `git add .` or `git add -A`. The repo has long-standing untracked files (`.DS_Store`s, dated backup CSVs) that must not be committed accidentally.
 
@@ -394,7 +368,7 @@ These were arrived at via user feedback over multiple sessions. Don't reintroduc
 24. **The database is attributed to "the SCE team", never to Henry Grunzweig personally** (Tal, Aug 2026). Public copy must not say "Henry Grunzweig's database"; the methodology credits line reads "built and curated by the State Capacity Ecosystem (SCE) team" (Tal keeps the visualization-layer credit). Henry's name still appears as a team member on About Us and in event judge/partner contexts.
 25. **SCE brand palette + logo (Aug 2026, from the team's decks).** Chrome pages use the deck palette (cream `#F4EFE4` / charcoal `#1A1918` / gold `#D4A853` / bronze `#8A5F1E` / warm grays), the `assets/sce_logo.png` network glyph as favicon + ribbon + hero logo, and warm-toned strip/bubble SVGs. The decks' body font is Calibri (an Office default), so the site keeps Inter/Roboto Mono. SCE pages deliberately deviate from the NYCuriosity site-wide `#FF6319` breadcrumb/accent convention. Do not retheme data-encoding colors (see the token section).
 26. **No "Buy Me a Coffee" / Support button in the HEADER of the subpages.** Removed July 2026 at user request from the header (`.header-actions`) of every subpage: directory, connect, events, methodology, network. Do NOT re-add it to these subpage headers — even though the shared site-chrome convention (and the `reference_website_chrome.md` memory) puts a Support button in the header elsewhere, this tool's subpages are a deliberate exception. The **footer** support link (`.footer-support`) stays. The hub `index.html` was left untouched.
-27. **Section architecture (Aug 19 2026, supersedes #23's pillar layout and the path references in #19/#22).** The site's four sections are **Events** (`events/`: `hackathons/` hub with `civic-tech-build-night/` nested, `sponsors-checklist/`), **Ecosystem Databases** (`databases/`: `organization-directory/`, `opportunities-connections/`, `affinity-map/`, `methodology/`; the landing keeps the Mad Libs search modal + `?search=1`), **Community & Platform** (`community/`: `slack/` (live invite link), `substack/` (hub + post pages + as-is prototypes), `playbooks/`, `proof-points/` card hub), and **About Us** (`about/`). Display names match URLs and are used identically in nav, breadcrumbs, cards, and heroes: "Organization Directory", "Opportunities & Connections" (the form/feature keeps the proper noun "Connect": "Add Yourself to Connect"), "Affinity Map", "Sponsors Checklist", "Proof Points". Demo Nights and Salons/Meet-ups are deliberately absent from nav until one is actually scheduled (Tal, Aug 19 2026). Prototypes stay at their canonical URLs under their post/event pages; Proof Points links to them, never copies. Redirect stubs cover every vacated URL (pillar-era `ecosystem/`, `platform/`, `policy-programs/` trees) and all older stubs were retargeted so nothing chains. The ribbon dropdowns list exactly the sub-items above; add new pages to the ribbon block on every chrome page (copy-paste identical, root-absolute).
+27. **Section architecture (Aug 19 2026, supersedes #23's pillar layout and the path references in #19/#22).** The site's four sections are **Events** (`events/`: `hackathons/` hub with `civic-tech-build-night/` nested, `sponsors-checklist/`), **Ecosystem Databases** (`databases/`: `organization-directory/`, `opportunities-connections/`, `affinity-map/`, `methodology/`; the landing keeps the Mad Libs search modal + `?search=1`), **Community & Platform** (`community/`: `slack/` (live invite link), `substack/` (hub + post pages + as-is prototypes), `playbooks/`, `proof-points/` card hub), and **About Us** (`about/`). Display names match URLs and are used identically in nav, breadcrumbs, cards, and heroes: "Organization Directory", "Opportunities & Connections" (the form/feature keeps the proper noun "Connect": "Add Yourself to Connect"), "Affinity Map", "Sponsors Checklist", "Proof Points". Demo Nights and Salons/Meet-ups are deliberately absent from nav until one is actually scheduled (Tal, Aug 19 2026). Prototypes stay at their canonical URLs under their post/event pages; Proof Points links to them, never copies. Redirect stubs cover every vacated URL (pillar-era `ecosystem/`, `platform/`, `policy-programs/` trees) and all older stubs were retargeted so nothing chains. The ribbon dropdowns list exactly the sub-items above; add new pages to the ribbon block on every chrome page (copy-paste identical, root-absolute). **Superseded Sept 2–3 2026** by the three-pillar rewrite: Ecosystem · Events · Community · About, `/databases/…` → `/ecosystem/…`, dropdown descriptors, mobile tap menus — see the Site architecture paragraph up top and the change log.
 
 ---
 
@@ -474,13 +448,13 @@ scripts.forEach((s, i) => {
 
 `build_affinity.py` regenerates `affinity.json` / `directory.json` / `affinity_search.json` automatically, and `build_people.py` regenerates `connect.json`. But many user-facing strings have stats baked in. When either CSV is updated, run the appropriate build script first, then update **all** of the locations below in lockstep or the UI will lie to readers.
 
-Stat-pills in the hub hero ARE dynamic (read from `affinity.json` at load). **Items 1–5 below are patched automatically by `data/update_stats.py`** (run via GitHub Actions, or manually after `build_affinity.py`). Items 6–7 still require manual edits.
+Stat-pills in the hub hero ARE dynamic (read from `affinity.json` at load). **Items 4–5 below are patched automatically by `data/update_stats.py`** (items 1–2 no longer exist since the Aug 2026 domain move; item 3 is manual) (run via GitHub Actions, or manually after `build_affinity.py`). Items 6–7 still require manual edits.
 
 **After updating `directory.csv` (org data) — run `build_affinity.py` first, then update:**
 
-1. **`data_website/index.html`** (data website homepage) — `card-stat` span inside the State Capacity Ecosystem card: `"N orgs · 11 segments · N problem topics"`
-2. **`data_website/README.md`** — file tree entry: `directory.csv → Canonical org source (N rows)`
-3. **`index.html`** (homepage) and **`databases/index.html`** (Ecosystem Databases landing) — hardcoded "300+" mentions in strip/bubble copy; only update if the org count crosses a round-number threshold
+1. ~~data-website homepage card~~ — gone since the Aug 20 2026 domain move (`update_stats.py` no longer patches the old repo)
+2. ~~data-website README~~ — same
+3. **`index.html`** (homepage) and **`ecosystem/index.html`** (Ecosystem landing) — hardcoded "300+" mentions; only update if the org count crosses a round-number threshold
 4. **`ecosystem/methodology/index.html`** — three locations:
    - Data Fields bullet: `"N specific issues nested under the Problem Areas"`
    - Funder limitation callout: `"Approximately N of N orgs have at least one named funder detected"`
@@ -552,20 +526,21 @@ For changes where placement/labeling/UX is ambiguous (e.g., "add a new section t
 
 ---
 
-## Open items (as of 2026-06-29 — waiting on user input)
+## Open items (as of 2026-09-03 — waiting on user input)
 
 These are concrete, half-done tasks, not parking-lot ideas. Pick them up when the user supplies what's missing.
 
-1. **Claude artifact project not yet added to the build-night page.** The user wants a project hosted at a `claude.ai/public/artifacts/...` link added as a build-night `.proj-card`, but Claude artifacts render client-side, so WebFetch returns only an empty shell (no title/description). **Need from user:** a title + one-line description (or the artifact source to rehost like TIDELINE). It would also be the only `claude.ai` outbound link in the tool — a published artifact is fine (it's a hosted mini-app, not a Claude *conversation*, which decision #6 bans).
+1. **Claude artifact project not yet added to the build-night page.** The user wants a project hosted at a `claude.ai/public/artifacts/...` link added as a build-night `.proj-card`, but Claude artifacts render client-side, so WebFetch returns only an empty shell (no title/description). **Need from user:** a title + one-line description (or the artifact source to rehost like TIDELINE). It would also be the only `claude.ai` outbound link in the tool — a published artifact is fine (it's a hosted mini-app, not a Claude *conversation*, which decision #6 bans). *Possibly obsolete: a Henry artifact delivered Aug 3 became the sponsors checklist; confirm and drop.*
 2. ~~Build-night "Read about it" placeholder~~ — RESOLVED 2026-07-30: now links the recap "AI should be a tool for inclusive building" (https://substack.statecapacityecosystem.com/p/ai-is-a-tool-for-inclusive-building) as "Read the recap ↗".
-3. **No "Community" link in the cross-promo loop** (see decision #21). Add a "Join our Community" CTA to the "Stay connected" strip + Connect success nudge once the user has a URL. Don't invent one. (Partially superseded Aug 2026: the `community/` pillar page now exists and the ribbon links it — but the Slack URL itself is still pending, and the per-subpage "Stay connected" strips still have no Community CTA.)
-5. ~~Aug 2026 pillar revamp pending review~~ — RESOLVED 2026-08-03: Tal approved and the revamp published same day, including the full move of legacy subpages under their pillars and ribbon rollout. Still open from it: swap the homepage mission/vision draft for the team's final language when confirmed (CRM "mission-vision" project).
+3. ~~No "Community" link in the cross-promo loop~~ — RESOLVED: the Slack launched Aug 19 2026 (join via the Airtable signup form) and "Join the Slack" CTAs run through the ribbon-era footer, the homepage, and the Connect nudge.
+5. ~~Aug 2026 pillar revamp pending review~~ — RESOLVED 2026-08-03: Tal approved and the revamp published same day, including the full move of legacy subpages under their pillars and ribbon rollout. The mission/vision language was finalized in the Sept 3 2026 feedback rounds (homepage + About now carry the team's wording), closing the leftover.
 4. ~~Mamdani AI priorities post URL placeholder~~ — RESOLVED 2026-07-30. The post published as **"The PIT Crew is the tip of the iceberg"** (https://substack.statecapacityecosystem.com/p/the-pit-crew-is-the-tip-of-the-iceberg); the post page hero, title metas, "Read the post ↗" link, and hub card were updated to match. Prototype set stays final at 3.
 
 ## Recent change log
 
 | Date | Commit | Summary |
 |---|---|---|
+| 2026-09-03 | — | **Feedback rounds + Substack custom domain + playbooks library.** Substack moved to substack.statecapacityecosystem.com (publication subdomain renamed from henrygrunzweig, which now 404s; every site link, `build_substack.py`, and `substack_posts.json` repointed). Homepage: flywheel reordered Ecosystem → Events → Community across the ribbon, graphic, and rows; pillar cards clickable; who's-in-the-room grew to 7 rows with a CTA card in the right column; new problem/mission/vision copy ("Inspired by Jennifer Pahlka"); "Who we work with"; Sept 30 is a Wednesday. Events: 9/30 card on the hackathons hub, build-night page reordered (overview → checked goals → restored 8 project cards), sponsor panels shortened, demo/salons/Slack hero copy. `/ecosystem/search/` became a standalone inline-search page and the `?search=1` null-deref auto-open bug was fixed. Playbooks library: 3 .docx playbooks + 2 .pptx pitch files as filterable download cards. About + footer "Get in Touch" now open the interest form (Methodology moved out of the footer, still linked from About and the Ecosystem landing). Mobile: ribbon tabs open tap menus (hover-only dropdowns ate the first tap). Proof Points problem areas tightened (Domains removed). |
 | 2026-09-02 | site-rewrite PR | **Site rewrite: pillars, homepage, naming.** Three-pillar nav (Events · Ecosystem · Community · About) with a single Sept 30 CTA; homepage reordered (who's in the room, pillar loop graphic, why it works, partners); Ecosystem landing rewritten; Proof Points became a JSON-driven gallery of all 11 tools (`data/proof_points.json`, `?source=`/`?area=` filters); About restructured (mission/vision, what we run, what we don't do); methodology copy trimmed; `/databases/…` renamed to `/ecosystem/…` with redirect stubs (`organization-directory`→`organizations`, `opportunities-connections`→`connect`, new `search/` page). |
 | 2026-08-24 | — | **Homepage feedback pass + two coming-soon event pages** (Tal). Hero reworded ("The people helping government deliver find each other here" + organizations/opportunities/contributors lede); wider measure across the bands (band-inner 1100px, headings 34ch, copy 76ch) so the Problem and What We Do sections stop reading crunched; the Map row now surfaces **Opportunities & Connections** next to the databases link (Connect judged too thin at 44 entries for its own row); Record band retitled "The field was invisible. Now it's together and building in plain sight." with a fifth stat, posts published, read live from `data/substack_posts.json` (`#stat-posts`) so it climbs without edits; Momentum now "The field is accelerating." New `events/demo-nights/` and `events/salons/` coming-soon pages (Slack CTA + what-to-expect cards + host CTA), wired into the Events ribbon dropdown on all 18 pages, the events landing grid, the homepage strip, and the sitemap. Community & Platform's Substack card links straight to the Substack. Events-hosted stat deliberately omitted until there are 2+ events. |
 | 2026-08-24 | — | **Substack archive on the Substack page + site-wide CTA buttons.** `data/build_substack.py` pulls the full SCE Substack archive (substack.statecapacityecosystem.com API) into `data/substack_posts.json`; `community/substack/` renders it as an "Every post, newest first" list under the companion-tool cards; the daily workflow refreshes the JSON and commits on change. The ribbon gained right-aligned **Substack ↗** and **Join our Slack ↗** (Airtable signup form) buttons on all 17 chrome pages, and the Stay-connected strip was replaced by a dark SCE `<footer class="sce-footer">` (brand + Subscribe / Join our Slack / Explore the Databases; the Databases landing swaps the third button for Add Yourself to Connect). The sponsors checklist hides both in print CSS. |
