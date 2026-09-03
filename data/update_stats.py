@@ -29,20 +29,20 @@ def sub(text, pattern, replacement, label, flags=re.DOTALL):
 
 
 # ── 1. methodology/index.html ──
-p = Path("databases/methodology/index.html")
+p = Path("ecosystem/methodology/index.html")
 html = p.read_text()
 html = sub(
     html,
     r"Approximately \d+ of \d+ orgs have at least one named funder detected",
     f"Approximately {funded} of {org_count} orgs have at least one named funder detected",
-    "methodology/index.html (funder callout)",
+    "ecosystem/methodology/index.html (funder callout)",
 )
 html = sub(
     html,
     r"<strong>\d+ nodes and [\d,]+ edges</strong>, with a maximum edge score of \d+\.\d+ and a median of \d+\.\d+",
     f"<strong>{org_count} nodes and {edge_count:,} edges</strong>, "
     f"with a maximum edge score of {max_w:.2f} and a median of {median_w:.2f}",
-    "methodology/index.html (dataset stats line)",
+    "ecosystem/methodology/index.html (dataset stats line)",
 )
 p.write_text(html)
 

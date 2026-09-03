@@ -5,13 +5,13 @@
   <link rel="icon" type="image/png" href="/assets/sce_logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>State Capacity Ecosystem</title>
-  <meta name="description" content="The shared infrastructure for the state capacity field: a map of 300+ organizations, a community of builders, reusable playbooks, and the writing and events that carry them.">
+  <meta name="description" content="We map who works on state capacity, bring them into one room, and build the ecosystem that turns their work into tools government can use.">
   <link rel="canonical" href="https://statecapacityecosystem.com/">
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://statecapacityecosystem.com/">
   <meta property="og:title"       content="State Capacity Ecosystem">
-  <meta property="og:description" content="The shared infrastructure for the state capacity field: a map of 300+ organizations, a community of builders, reusable playbooks, and the writing and events that carry them.">
+  <meta property="og:description" content="We map who works on state capacity, bring them into one room, and build the ecosystem that turns their work into tools government can use.">
   <meta property="og:image"       content="https://statecapacityecosystem.com/assets/sce_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -185,6 +185,24 @@
 .sce-footer-actions a.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
 .sce-footer-actions a.primary:hover{background:#E3C170;}
 </style>
+<style id="rewrite-css">
+.credit-line{font-size:0.8rem;color:var(--text-muted);margin-top:10px;}
+.who-rows{display:flex;flex-direction:column;gap:12px;margin:26px 0;max-width:660px;}
+.who-row{display:flex;gap:18px;align-items:baseline;border-bottom:1px solid var(--border);padding-bottom:11px;}
+.who-role{font-family:'Roboto Mono',monospace;font-weight:700;font-size:0.92rem;min-width:150px;color:var(--text);}
+.who-what{color:var(--text-mid);font-size:0.98rem;}
+.who-actions{display:flex;gap:22px;flex-wrap:wrap;}
+.pillars-fig{background:#1A1918;border-radius:10px;padding:18px clamp(10px,3vw,28px);margin:26px 0 10px;}
+.pillars-fig svg{display:block;width:100%;max-width:680px;height:auto;margin:0 auto;}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:30px;}
+@media (max-width:760px){.why-grid{grid-template-columns:1fr;}}
+.why-num{width:34px;height:34px;border-radius:50%;background:#D4A853;color:#1A1918;font-family:'Roboto Mono',monospace;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.why-name{font-family:'Roboto Mono',monospace;font-weight:700;margin-bottom:6px;}
+.why-copy{color:var(--text-mid);font-size:0.95rem;line-height:1.6;}
+.partner-marks{display:flex;gap:48px;flex-wrap:wrap;margin-top:20px;align-items:flex-start;}
+.partner-mark{font-family:'Roboto Mono',monospace;font-weight:700;font-size:1.05rem;color:var(--text);}
+.partner-mark small{display:block;font-weight:400;font-size:0.72rem;color:var(--text-muted);margin-top:3px;}
+</style>
 <style id="event-banner-css">
 .evt-banner{background:#D4A853;color:#1A1918;padding:0 clamp(16px,4vw,48px);position:relative;z-index:100;}
 .evt-banner-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:9px 0;font-family:'Roboto Mono',monospace;font-size:0.8rem;font-weight:600;}
@@ -202,35 +220,41 @@
 <!-- EVENT BANNER -->
 <div class="evt-banner">
   <div class="evt-banner-inner">
-    <span><strong>Public Engagement Hackathon</strong> <span class="evt-when">· Sept 30</span></span>
-    <a href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sign up now ↗</a>
+    <span><strong>State Capacity Hackathon: Public Engagement</strong> <span class="evt-when">· Sept 30</span></span>
+    <a href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sign up ↗</a>
   </div>
 </div>
 
+<style id="ribbon-sub-css">
+.ribbon-drop-desc{min-width:270px;}
+.ribbon-drop-desc a{white-space:normal;}
+.ribbon-sub{display:block;font-family:Inter,sans-serif;font-size:0.7rem;font-weight:400;color:#9C968A;line-height:1.4;margin-top:2px;}
+.sce-footer-tag{font-family:Inter,sans-serif;font-size:0.78rem;color:#9C968A;margin:8px 0 0;max-width:420px;line-height:1.5;}
+</style>
 <nav class="ribbon" aria-label="State Capacity Ecosystem sections">
   <div class="ribbon-inner">
     <div class="ribbon-item"><a class="ribbon-link" href="/"><img src="/assets/sce_logo.png" alt="" style="width:16px;height:16px;object-fit:contain;">Home</a></div>
     <div class="ribbon-item">
       <a class="ribbon-link" href="/events/">Events <span class="ribbon-caret">▾</span></a>
       <div class="ribbon-drop">
+        <a href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">State Capacity Hackathon: Public Engagement · Sept 30 ↗</a>
         <a href="/events/hackathons/">Hackathons</a>
         <a href="/events/demo-nights/">Demo Nights</a>
         <a href="/events/salons/">Salons &amp; Meet-ups</a>
-        <a href="/events/sponsors-checklist/">Sponsors Checklist</a>
+        <a href="/events/sponsors-checklist/">Host or Sponsor an Event</a>
       </div>
     </div>
     <div class="ribbon-item">
-      <a class="ribbon-link" href="/databases/">Ecosystem Databases <span class="ribbon-caret">▾</span></a>
-      <div class="ribbon-drop">
-        <a href="/databases/?search=1">Search the Ecosystem</a>
-        <a href="/databases/organization-directory/">Organization Directory</a>
-        <a href="/databases/opportunities-connections/">Opportunities &amp; Connections</a>
-        <a href="/databases/affinity-map/">Affinity Map</a>
-        <a href="/databases/methodology/">Methodology</a>
+      <a class="ribbon-link" href="/ecosystem/">Ecosystem <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Say who you are and what you need, and we find the match.</span></a>
+        <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
+        <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
+        <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">Which organizations share problems and funders.</span></a>
       </div>
     </div>
     <div class="ribbon-item">
-      <a class="ribbon-link" href="/community/">Community &amp; Platform <span class="ribbon-caret">▾</span></a>
+      <a class="ribbon-link" href="/community/">Community <span class="ribbon-caret">▾</span></a>
       <div class="ribbon-drop">
         <a href="/community/slack/">Slack</a>
         <a href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">Substack ↗</a>
@@ -238,10 +262,9 @@
         <a href="/community/proof-points/">Proof Points</a>
       </div>
     </div>
-    <div class="ribbon-item"><a class="ribbon-link" href="/about/">About Us</a></div>
+    <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
     <div class="ribbon-actions">
-      <a class="ribbon-btn" href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">Substack ↗</a>
-      <a class="ribbon-btn primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join our Slack ↗</a>
+      <a class="ribbon-btn primary" href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sept 30 Hackathon ↗</a>
     </div>
   </div>
 </nav>
@@ -251,12 +274,12 @@
   <div class="band-inner">
     <div class="hero-logo-row"><img src="./assets/sce_logo.png" alt="State Capacity Ecosystem logo"><span>State Capacity Ecosystem</span></div>
     <h1>The people helping government <em>deliver</em> find each other here.</h1>
-    <p class="hero-sub">The State Capacity Ecosystem maps the field's organizations, opportunities, and contributors, puts its stakeholders in one room to show what they can build together, and advocates to put technology in the hands of practitioners. Everything here exists to turn shared intent into working government.</p>
+    <p class="hero-sub">We map who works on state capacity, bring them into one room, and build the ecosystem that turns their work into tools government can use. The aim: a government with the best technology and the talent to run it.</p>
     <div class="hero-cta">
-      <a class="hero-cta-btn" href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sign up for the Public Engagement Hackathon ↗</a>
-      <span class="hero-cta-note"><b>Tuesday, September 30</b><br>CUNY Graduate Center · free · dinner provided</span>
+      <a class="hero-cta-btn" href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sign up for the Sept 30 hackathon ↗</a>
+      <span class="hero-cta-note"><b>Tuesday, September 30</b><br>NYC · free · dinner provided</span>
     </div>
-    <a class="scroll-cue" href="#problem">Scroll to see the work <span class="arr">↓</span></a>
+    <a class="scroll-cue" href="#problem">See the work <span class="arr">↓</span></a>
   </div>
 </section>
 
@@ -264,11 +287,12 @@
   <div class="band-inner reveal">
     <div class="kicker">The problem</div>
     <h2>Good policy fails when the people fixing government work in silos.</h2>
-    <p class="band-copy">Practitioners, technologists, researchers, and funders are each rebuilding government's ability to deliver from their own corner, without a clear view of each other and with few ways to collaborate. We are inspired by the ideas of Jennifer Pahlka: the work is real, the field is fragmented, and the fix starts with making the field visible to itself.</p>
+    <p class="band-copy">State capacity is government's ability to do what it sets out to do: issue the permit, deliver the benefit, keep the trains running. The people building it work in separate corners and can't see each other. Make them visible to each other and the work starts to move.</p>
+    <p class="credit-line">After Jennifer Pahlka, Recoding America.</p>
     <div class="mv-grid">
       <div class="mv-block">
         <h3>Our mission</h3>
-        <p>Connect the people working to make government deliver, and prove what they can build together.</p>
+        <p>Get government the best technology and the talent to run it. Put technologists and practitioners in one room, again and again, and turn what they build into something government can use.</p>
       </div>
       <div class="mv-block vision">
         <h3>Our vision</h3>
@@ -278,11 +302,45 @@
   </div>
 </section>
 
+<section class="band band-white" id="who">
+  <div class="band-inner reveal">
+    <div class="kicker">Who's in the room</div>
+    <h2>Everyone fixing government belongs here.</h2>
+    <p class="band-copy">Many contributors, one room. The work moves when they work together.</p>
+    <div class="who-rows">
+      <div class="who-row"><span class="who-role">Practitioners</span><span class="who-what">bring the problems and the authority to act.</span></div>
+      <div class="who-row"><span class="who-role">Technologists</span><span class="who-what">bring working software.</span></div>
+      <div class="who-row"><span class="who-role">Researchers</span><span class="who-what">bring the evidence.</span></div>
+      <div class="who-row"><span class="who-role">Funders</span><span class="who-what">bring capital to the gaps.</span></div>
+    </div>
+    <div class="who-actions">
+      <a class="row-link" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack →</a>
+      <a class="row-link" href="./ecosystem/connect/?add=1">Add yourself or a problem to Connect →</a>
+    </div>
+  </div>
+</section>
+
 <section class="band band-white">
   <div class="band-inner">
     <div class="reveal">
-      <div class="kicker">What we do</div>
-      <h2>We map the field, get it in one room, and prove what it can build.</h2>
+      <div class="kicker">Three pillars</div>
+      <h2>What we run.</h2>
+      <div class="pillars-fig">
+        <svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three pillars in a loop">
+  <defs><marker id="p-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#D4A853" stroke-width="1.5"/></marker></defs>
+  <g fill="none" stroke="#D4A853" stroke-width="1">
+    <rect x="40" y="60" width="170" height="56" rx="8"/><rect x="255" y="60" width="170" height="56" rx="8"/><rect x="470" y="60" width="170" height="56" rx="8"/>
+    <line x1="210" y1="88" x2="250" y2="88" marker-end="url(#p-arrow)"/><line x1="425" y1="88" x2="465" y2="88" marker-end="url(#p-arrow)"/>
+    <path d="M555 116 L555 160 L125 160 L125 122" marker-end="url(#p-arrow)"/>
+  </g>
+  <g font-family="Roboto Mono, monospace" text-anchor="middle">
+    <text x="125" y="82" fill="#F4EFE4" font-size="14" font-weight="600">Events</text><text x="125" y="102" fill="#DDD8CC" font-size="11">We run events</text>
+    <text x="340" y="82" fill="#F4EFE4" font-size="14" font-weight="600">Community</text><text x="340" y="102" fill="#DDD8CC" font-size="11">We keep people connected</text>
+    <text x="555" y="82" fill="#F4EFE4" font-size="14" font-weight="600">Ecosystem</text><text x="555" y="102" fill="#DDD8CC" font-size="11">We map who does what</text>
+    <text x="340" y="182" fill="#DDD8CC" font-size="11">Problems and partners found in the ecosystem feed the next event.</text>
+  </g>
+</svg>
+      </div>
     </div>
     <div class="rows">
 
@@ -290,7 +348,38 @@
         <div class="row-visual">
           <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="200" fill="#1A1918"/>
-            <text x="16" y="22" font-family="'Roboto Mono',monospace" font-size="9" font-weight="700" letter-spacing="0.6" fill="#D4A853">THE FIELD · 300+ ORGS MAPPED</text>
+            <text x="16" y="22" font-family="'Roboto Mono',monospace" font-size="9" font-weight="700" letter-spacing="0.6" fill="#D4A853">ONE NIGHT · 80+ BUILDERS · 20 PROTOTYPES</text>
+            <rect x="16" y="32" width="288" height="46" rx="4" fill="#2A2723" stroke="#3E3931"/>
+            <rect x="16" y="32" width="4" height="46" rx="2" fill="#D4A853"/>
+            <text x="30" y="49" font-family="Inter,sans-serif" font-size="9.5" font-weight="600" fill="#EDE7DA">A Civic Tech Build Night</text>
+            <text x="30" y="61" font-family="'Roboto Mono',monospace" font-size="7" fill="#B3AC9D">AI for inclusive rapid prototyping in government</text>
+            <text x="30" y="72" font-family="'Roboto Mono',monospace" font-size="7" fill="#D4A853">NYC · June 24, 2026</text>
+            <text x="16" y="96" font-family="'Roboto Mono',monospace" font-size="7" font-weight="700" fill="#B3AC9D">PROJECTS PRODUCED</text>
+            <rect x="16" y="102" width="288" height="14" rx="3" fill="#2A2723"/>
+            <text x="22" y="112" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">A game that teaches 311</text>
+            <rect x="16" y="120" width="288" height="14" rx="3" fill="#2A2723"/>
+            <text x="22" y="130" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Procurement record search</text>
+            <rect x="16" y="138" width="288" height="14" rx="3" fill="#2A2723"/>
+            <text x="22" y="148" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Live transit data for AI tools (1K+ downloads)</text>
+            <rect x="16" y="156" width="288" height="14" rx="3" fill="#2A2723"/>
+            <text x="22" y="166" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Index of NYC's public datasets</text>
+            <rect x="16" y="178" width="288" height="16" rx="8" fill="#D4A853"/>
+            <text x="160" y="189" font-family="'Roboto Mono',monospace" font-size="7.5" font-weight="700" fill="#1A1918" text-anchor="middle">READ THE POSTS · JOIN AN EVENT →</text>
+          </svg>
+        </div>
+        <div>
+          <div class="kicker">Run events</div>
+          <h3>Where proof gets made.</h3>
+          <p>Practitioners and technologists in one room, ending with running software judged against real agency problems. Demo nights put it in front of the people who can adopt it.</p>
+          <a class="row-link" href="./events/">See events →</a>
+        </div>
+      </div>
+
+      <div class="row flip reveal">
+        <div class="row-visual">
+          <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#1A1918"/>
+            <text x="16" y="22" font-family="'Roboto Mono',monospace" font-size="9" font-weight="700" letter-spacing="0.6" fill="#D4A853">300+ ORGANIZATIONS · 11 SEGMENTS</text>
             <g stroke="#3E3931" stroke-width="1" fill="none" opacity="0.7">
               <line x1="80"  y1="75"  x2="120" y2="95"/>
               <line x1="120" y1="95"  x2="160" y2="75"/>
@@ -328,44 +417,13 @@
           </svg>
         </div>
         <div>
-          <div class="kicker">Map</div>
-          <h3>The field is big. Now you can see all of it.</h3>
-          <p>Our databases cover 300+ organizations working on state capacity: who does what, which orgs share problems and funders, and the people behind the work. Start with a question and the search points you to the orgs and people closest to it.</p>
+          <div class="kicker">Map the ecosystem</div>
+          <h3>Who does what, in one place.</h3>
+          <p>300+ organizations, a Connect board of people and problems, and a map of who shares what. Start with a question.</p>
           <div style="display:flex; gap:18px; flex-wrap:wrap;">
-            <a class="row-link" href="./databases/">Explore the Ecosystem Databases →</a>
-            <a class="row-link" href="./databases/opportunities-connections/">Browse Opportunities &amp; Connections →</a>
+            <a class="row-link" href="/ecosystem/search/">Search the ecosystem →</a>
+            <a class="row-link" href="./ecosystem/organizations/">Browse organizations →</a>
           </div>
-        </div>
-      </div>
-
-      <div class="row flip reveal">
-        <div class="row-visual">
-          <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-            <rect width="320" height="200" fill="#1A1918"/>
-            <text x="16" y="22" font-family="'Roboto Mono',monospace" font-size="9" font-weight="700" letter-spacing="0.6" fill="#D4A853">ONE NIGHT · 20 WORKING TOOLS</text>
-            <rect x="16" y="34" width="288" height="48" rx="4" fill="#2A2723" stroke="#3E3931"/>
-            <rect x="16" y="34" width="4" height="48" rx="2" fill="#D4A853"/>
-            <text x="30" y="52" font-family="Inter,sans-serif" font-size="9.5" font-weight="600" fill="#EDE7DA">A Civic Tech Build Night</text>
-            <text x="30" y="65" font-family="'Roboto Mono',monospace" font-size="7" fill="#B3AC9D">Agentic solutions for government service delivery</text>
-            <text x="30" y="76" font-family="'Roboto Mono',monospace" font-size="7" fill="#D4A853">NYC · June 24, 2026</text>
-            <text x="16" y="102" font-family="'Roboto Mono',monospace" font-size="7" font-weight="700" fill="#B3AC9D">PROJECTS PRODUCED</text>
-            <rect x="16" y="110"  width="138" height="15" rx="3" fill="#2A2723"/>
-            <text x="22" y="120" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">311 video game</text>
-            <rect x="160" y="110" width="144" height="15" rx="3" fill="#2A2723"/>
-            <text x="166" y="120" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Procurement record search</text>
-            <rect x="16" y="130" width="138" height="15" rx="3" fill="#2A2723"/>
-            <text x="22" y="140" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Transit reliability MCP</text>
-            <rect x="160" y="130" width="144" height="15" rx="3" fill="#2A2723"/>
-            <text x="166" y="140" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Civic data index</text>
-            <rect x="16" y="168" width="288" height="16" rx="8" fill="#D4A853"/>
-            <text x="160" y="179" font-family="'Roboto Mono',monospace" font-size="7.5" font-weight="700" fill="#1A1918" text-anchor="middle">READ THE POSTS · JOIN AN EVENT →</text>
-          </svg>
-        </div>
-        <div>
-          <div class="kicker">Convene</div>
-          <h3>One build night produced 20 working tools in under two hours.</h3>
-          <p>Our hackathons put practitioners, researchers, and advocates in one room with technologists and leave with running software. The first flagship drew 80+ builders in 20 teams, and the calendar is widening to demo nights and salons.</p>
-          <a class="row-link" href="./events/">See Events →</a>
         </div>
       </div>
 
@@ -373,7 +431,7 @@
         <div class="row-visual">
           <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="200" fill="#1A1918"/>
-            <text x="16" y="22" font-family="'Roboto Mono',monospace" font-size="9" font-weight="700" letter-spacing="0.6" fill="#D4A853">PROOF · PLAYBOOKS + PROTOTYPES</text>
+            <text x="16" y="22" font-family="'Roboto Mono',monospace" font-size="9" font-weight="700" letter-spacing="0.6" fill="#D4A853">PLAYBOOKS · PROTOTYPES · POSTS</text>
             <rect x="16" y="36" width="288" height="44" rx="4" fill="#2A2723" stroke="#3E3931"/>
             <rect x="16" y="36" width="4" height="44" rx="2" fill="#D4A853"/>
             <text x="30" y="54" font-family="Inter,sans-serif" font-size="9.5" font-weight="600" fill="#EDE7DA">Sponsors Checklist</text>
@@ -389,14 +447,14 @@
             <circle cx="278" cy="134" r="5"   fill="#D4A853" opacity="0.9"/>
             <circle cx="262" cy="144" r="4"   fill="#6B6760" opacity="0.8"/>
             <circle cx="290" cy="116" r="3.5" fill="#E5D9BC" opacity="0.8"/>
-            <text x="16" y="176" font-family="'Roboto Mono',monospace" font-size="7.5" font-weight="700" fill="#D4A853">4 TOOLS LIVE · FREE TO REUSE</text>
+            <text x="16" y="176" font-family="'Roboto Mono',monospace" font-size="7.5" font-weight="700" fill="#D4A853">4 TOOLS LIVE · 1 PLAYBOOK · 8 POSTS</text>
           </svg>
         </div>
         <div>
-          <div class="kicker">Prove &amp; reuse</div>
-          <h3>Everything we learn becomes something anyone can run.</h3>
-          <p>The proof points are live: four working prototypes anyone can open in a browser. The methods ship as playbooks, starting with the Sponsors Checklist, so any organizer, sponsor, or agency can run our event formats without us in the room.</p>
-          <a class="row-link" href="./community/proof-points/">See the Proof Points →</a>
+          <div class="kicker">Build community</div>
+          <h3>What we learn, anyone can use and build on.</h3>
+          <p>A Slack for practitioners and builders, a Substack that makes the case, and playbooks so the next organizer can run the format without us in the room.</p>
+          <a class="row-link" href="./community/">Join the community →</a>
         </div>
       </div>
 
@@ -404,28 +462,49 @@
   </div>
 </section>
 
+<section class="band">
+  <div class="band-inner reveal">
+    <div class="kicker">Why it works</div>
+    <h2>Three things move government.</h2>
+    <div class="why-grid">
+      <div><div class="why-num">1</div><div class="why-name">Proof</div><p class="why-copy">Working software, built by technologists and practitioners together.</p></div>
+      <div><div class="why-num">2</div><div class="why-name">Method</div><p class="why-copy">A playbook, so the next room doesn't need us in it.</p></div>
+      <div><div class="why-num">3</div><div class="why-name">Network</div><p class="why-copy">A standing group of people that keeps producing both.</p></div>
+    </div>
+  </div>
+</section>
+
 <section class="band band-dark">
   <div class="band-inner reveal">
     <div class="kicker">The record so far</div>
-    <h2>The field was invisible. Now it's together and building in plain sight.</h2>
+    <h2>What's been built so far.</h2>
     <div class="stats-grid">
-      <div class="stat-big"><b>300+</b><span>organizations mapped, refreshed daily</span></div>
-      <div class="stat-big"><b>80+</b><span>builders at the first flagship build night</span></div>
-      <div class="stat-big"><b>20</b><span>working tools built in under two hours</span></div>
-      <div class="stat-big"><b>4</b><span>prototypes live in the browser today</span></div>
-      <div class="stat-big"><b id="stat-posts">8</b><span>posts making the case for the field</span></div>
+      <div class="stat-big"><b>300+</b><span>organizations, refreshed periodically</span></div>
+      <div class="stat-big"><b>80+</b><span>builders at the first hackathon</span></div>
+      <div class="stat-big"><b>20</b><span>prototypes in one evening, 4 still live</span></div>
+      <div class="stat-big"><b>1,000+</b><span>downloads of one build-night tool</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-white">
+  <div class="band-inner reveal">
+    <div class="kicker">Among our partners</div>
+    <div class="partner-marks">
+      <div class="partner-mark">CUNY PIT Lab<small>Anchor partner</small></div>
+      <div class="partner-mark">Civic Roundtable</div>
     </div>
   </div>
 </section>
 
 <section class="band">
   <div class="band-inner reveal">
-    <div class="kicker">Momentum</div>
-    <h2>The field is accelerating. Here is the latest.</h2>
+    <div class="kicker">Latest</div>
+    <h2>Recent writing and events.</h2>
     <div class="mo-list">
       <a class="mo-item" href="https://henrygrunzweig.substack.com/p/where-are-governments-ai-engineers" target="_blank" rel="noopener">
         <span class="mo-date">Aug 2026</span>
-        <span><span class="mo-title">Where are government's AI engineers?</span><span class="mo-desc">Our newest essay argues agencies need AI engineers on their own payroll before vendors build that layer for them.</span></span>
+        <span><span class="mo-title">Where are government's AI engineers?</span><span class="mo-desc">Agencies need AI engineers on their own payroll before vendors build that layer for them.</span></span>
         <span class="mo-cta">Read ↗</span>
       </a>
       <a class="mo-item" href="./community/substack/mamdani-ai-priorities/">
@@ -449,8 +528,7 @@
     <p class="band-copy">Join the conversation, make yourself findable, and be in the room next time we build.</p>
     <div class="cta-row">
       <a class="cta-primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack →</a>
-      <a class="cta-ghost" href="./databases/opportunities-connections/?add=1">Add Yourself to Connect →</a>
-      <a class="cta-ghost" href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">Subscribe to the Substack ↗</a>
+      <a class="cta-ghost" href="./ecosystem/connect/?add=1">Add yourself or a problem to Connect →</a>
     </div>
   </div>
 </section>
@@ -463,20 +541,21 @@
     entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
   }, { threshold: 0.15 });
   els.forEach(function (el) { io.observe(el); });
-  fetch('/data/substack_posts.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (posts) {
-    var el = document.getElementById('stat-posts'); if (el && posts.length) el.textContent = posts.length;
-  }).catch(function () {});
 })();
 </script>
 
 <!-- FOOTER -->
 <footer class="sce-footer">
   <div class="sce-footer-inner">
-    <a class="sce-footer-brand" href="/"><img src="/assets/sce_logo.png" alt="">State Capacity Ecosystem<small>· statecapacityecosystem.com</small></a>
+    <div>
+      <a class="sce-footer-brand" href="/"><img src="/assets/sce_logo.png" alt="">State Capacity Ecosystem<small>· statecapacityecosystem.com</small></a>
+      <p class="sce-footer-tag">Where the people making government deliver find each other and build.</p>
+    </div>
     <div class="sce-footer-actions">
-      <a href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">Subscribe to the Substack ↗</a>
-      <a class="primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join our Slack ↗</a>
-      <a href="/databases/">Explore the Databases →</a>
+      <a href="https://statecapacityecosystem.substack.com/" target="_blank" rel="noopener">Substack ↗</a>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Slack ↗</a>
+      <a href="/ecosystem/methodology/">Methodology →</a>
+      <a href="/about/">About →</a>
     </div>
   </div>
 </footer>
