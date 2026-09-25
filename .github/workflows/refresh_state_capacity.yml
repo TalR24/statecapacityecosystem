@@ -5,6 +5,11 @@ on:
     # 6 AM EST (11:00 UTC) / 7 AM EDT (11:00 UTC) — UTC doesn't shift with DST
     - cron: "0 11 * * *"
   workflow_dispatch:  # allow manual trigger from the Actions tab
+    inputs:
+      force_rebuild:
+        description: "Rebuild the org and Connect JSON even if the CSVs did not change"
+        type: boolean
+        default: false
 
 jobs:
   refresh:
@@ -44,15 +49,17 @@ jobs:
           echo "directory.csv: $DIR_CSV_TIME  |  affinity.json: $AFF_JSON_TIME"
           echo "connect_submissions.csv: $CON_CSV_TIME  |  connect.json: $CON_JSON_TIME"
 
-          if [ -z "$DIR_CSV_TIME" ] || [ -z "$AFF_JSON_TIME" ] || [ "$DIR_CSV_TIME" -gt "$AFF_JSON_TIME" ]; then
+          FORCE="${{ github.event.inputs.force_rebuild }}"
+
+          if [ "$FORCE" = "true" ] || [ -z "$DIR_CSV_TIME" ] || [ -z "$AFF_JSON_TIME" ] || [ "$DIR_CSV_TIME" -gt "$AFF_JSON_TIME" ]; then
             echo "org_changed=true" >> "$GITHUB_OUTPUT"
-            echo "directory.csv changed — rebuilding org JSON + stat strings."
+            echo "directory.csv changed (or force_rebuild) — rebuilding org JSON + stat strings."
           else
             echo "org_changed=false" >> "$GITHUB_OUTPUT"
             echo "directory.csv unchanged — skipping org rebuild."
           fi
 
-          if [ -z "$CON_CSV_TIME" ] || [ -z "$CON_JSON_TIME" ] || [ "$CON_CSV_TIME" -gt "$CON_JSON_TIME" ]; then
+          if [ "$FORCE" = "true" ] || [ -z "$CON_CSV_TIME" ] || [ -z "$CON_JSON_TIME" ] || [ "$CON_CSV_TIME" -gt "$CON_JSON_TIME" ]; then
             echo "connect_changed=true" >> "$GITHUB_OUTPUT"
             echo "connect_submissions.csv changed — rebuilding connect.json."
           else

@@ -212,56 +212,44 @@ Total cost is one ~190 KB JSON fetch + O(query_terms × num_orgs) per query. No 
 
 ### Ecosystem landing (`ecosystem/index.html`) and Search (`ecosystem/search/index.html`)
 - Hero: H1 "Ecosystem", one-line lede, a full-width **Search the ecosystem (Beta)** button (opens the Mad Libs modal), a helper line, and two text links: **Add an organization →** (`./organizations/?add=1`, auto-opens the directory's suggest-an-org modal, which POSTs to a Google Form via `fetch(..., {mode:"no-cors"})`) and **Add yourself or an opportunity →** (`./connect/?add=1`).
-- **3 explore cards:** Organizations · Connect · Affinity Map, then **Methodology** and **Submit feedback** panels (feedback is a mailto).
-- `?search=1` auto-opens the search modal (deferred to DOMContentLoaded — the modal markup sits after the script). `/ecosystem/search/` is the standalone version: same chrome, the modal rendered inline on the page, data fetches root-absolute.
+- **4 explore cards:** Organizations · Connect · Affinity Map · Problem topics, then **Methodology** and **Submit feedback** panels (feedback is a mailto).
+- **Change feed band** (`#changes`): fetches `data/changes.json` and renders the latest 3 refresh diffs (added, removed, updated; added names as chips linking to the directory search); empty state "No changes recorded yet. The directory refreshes daily." on no entries or fetch failure.
+- `?search=1` auto-opens the search modal (deferred to DOMContentLoaded). `/ecosystem/search/` is the standalone version: same chrome, the modal rendered inline on the page, data fetches root-absolute.
+
+### Problem topics (`ecosystem/topics/`, generated)
+- `data/build_topics.py` writes the index plus one page per topic from `taxonomy.json`, `directory.json`, `connect.json`, `proof_points.json`. Chrome (ribbon, breadcrumb pattern, footer) is copied from `ecosystem/methodology/index.html` at build time: after any ribbon change, rebuild. Each page: kicker (area), H1, definition, lead sentence with counts (singular-aware), org cards (link `?org=`, segment chip, Sunset chip), Connect entries (link `?entry=`), proof points from the same area, related topics, CTA band. Full SEO head. All 37 URLs are in the sitemap.
 
 ### Organization Directory (`ecosystem/organizations/index.html`)
-- **Visible table columns:** Organization · Segment · Secondary Segments · Description (truncated to 180 chars) · Problem Area (orange chips) · Problem Topic (blue chips). Every other field (focus, funding model, funding detail, named funders, website) lives in the row-click detail panel.
-- Filters: search box · Primary segment · Geography · Problem area · Problem topic
-- **No Funding Model filter** (removed May 2026 per user request)
-- **No Named Funder filter** (removed May 2026; substring search still matches funder text)
-- **Problem topic filter is case-insensitive** (May 2026): dropdown deduplicates by lowercase key (first-seen canonical form wins), and filter matching is also case-insensitive. Prevents duplicates like "AI in government" / "Ai in government" from appearing as separate options.
-- Search behavior:
-  - Empty: sorted by current column header (default: name)
-  - Non-empty: ranked by TF-IDF cosine, with name-substring (+0.5) and funder-substring (+0.15) boosts
-  - Falls back to plain substring filter if no TF-IDF hits (handles short fragments)
-- Multi-select dropdowns: opening one closes any other open dropdown. Clicking outside closes all.
-- Click any row to expand a detail panel showing: description, Problem areas (orange chips), Problem topics (blue chips), segments, focus, funding model, funding detail, named funders, website, "See in network" deep link
-- Loads `data/directory.json` + `data/affinity_search.json`
+- **Visible table columns:** Organization · Segment · Secondary Segments · Description (truncated to 180 chars) · Problem Area (orange chips) · Problem Topic (blue chips). Everything else lives in the row-click detail panel.
+- Filters: search box · Primary segment · Geography · Problem area · Problem topic · **Hide sunset orgs** checkbox. Sunset rows show a muted name and a `Sunset` chip.
+- Search behavior: empty → sorted by column header (default name); non-empty → TF-IDF cosine with a name-substring boost; falls back to plain substring filter when there are no TF-IDF hits.
+- Multi-select dropdowns: opening one closes the others; clicking outside closes all.
+- **Detail row:** full record, `Sunset: <note>` when applicable, **Closest peers** (3 links that expand the target row), **People and opportunities on Connect** (org-name match, else shared topics, max 5; `connect.json` fetched lazily on first expand; sunset orgs skip the topic fallback), **Suggest an edit** (opens the suggest-an-org modal prefilled; focus "City" maps to the form's "Local"; values the form has no option for go to the field's Other input or into a `[Current values not offered by this form: …]` note in the description), and the "See in network" link (`../affinity-map/?id=N`).
+- **URL state:** `q, seg, geo, area, topic, hidesunset, page, org, add` via `history.replaceState`; applied on load; `?org=N` expands and scrolls; stale ids leave filters alone. **Copy link** next to Reset.
+- Loads `data/directory.json` + `data/affinity_search.json` (+ `data/connect.json` lazily).
 
 ### Connect (`ecosystem/connect/index.html`)
-- Separate dataset from the org pages — sourced from `data/connect_submissions.csv`, a Tal-curated seed list. Entries can be people OR organizations. Grows via a 12-field in-page form modal that POSTs directly to Airtable.
-- **Self-submission form modal** (`openSF()` / `closeSF()`): opened by the "Add yourself or a challenge" pill button in the hero. Full-page overlay with fields: Name, Organization (optional), Role (single, 9 options), Offering (multi, 9 options), Problem Area (multi, 9 options), Problem Topic (multi, conditional — shown only after a mappable area is selected), Geography (multi, 4 options), Due By (date, optional), Details (280-char textarea), Contact preference (Direct / Facilitated). Email always shown and required. For Facilitated: a privacy note is shown (email kept private) and a Connection Parameters textarea appears. On submit, POSTs to Airtable REST API. **CSS critical:** `.sf-body` requires `flex:1; min-height:0` — without `min-height:0` the flex child defaults to `min-height:auto` and can't scroll, so lower chip rows clip out of view.
-- **Airtable backend:** `AIRTABLE_ENDPOINT` points to base `appFIPqXkeQMQ3n94`, table `tbl2ArzY6c0CdNVsh` ("State Capacity Ecosystem Connect Submissions"). Token is a write-only PAT in client-side JS (intentional — scoped to this table only; readers can submit but cannot read/edit/delete). Table columns: Name, Organization, Role, Offering, Problem Areas, Problem Topics, Geography, Due By, Details, Contact Type, Email, Connection Parameters.
-- **Intro request modal** (`openIR(id)` / `closeIR()`): triggered by "Request intro →" links in the Contact column for Facilitated entries. 3-field overlay (name, email, why). Submits via `mailto:statecapacityecosystem@gmail.com` + clipboard copy.
-- **9-column table:** Name · Role · Offering · Problem Area · Problem Topic · Geography · Due By · Contact · expand chevron. Click any row to expand a detail panel.
-- **Contact column rendering:** Facilitated → "Request intro →" link (opens IR modal); Direct → `mailto:` link on email field. Entries without a contact field show an em-dash.
-- **`AREA_TOPICS` constant** maps each of the 7 mappable problem areas to its topic list. "Ecosystem & Capacity" and "Open to Any" have no topics — topic section stays hidden if only those are selected. `sfUpdateTopics()` rebuilds topic chips on area change, preserving prior selections.
-- **Backward compatibility:** existing `connect.json` entries use old field names (`help_source`, `jurisdictions`, `problem_area`, `problem_topic`). New Airtable submissions use new names (`offering`, `geography`, `problem_areas`, `problem_topics`). Helper functions `_pGeos()`, `_pAreas()`, `_pTopics()`, `_pOfferings()` handle both schemas throughout the page JS.
-- **Neutral language throughout:** "entry" / "entries" / "Name" — the directory contains both people and organizations.
-- Loads `data/connect.json` (regenerated by `python3 data/build_people.py`). Don't hand-edit `connect.json` — edit the CSV and rebuild.
+- Separate dataset from the org pages, sourced from `data/connect_submissions.csv` (10 columns, Henry's schema). Entries can be people or opportunities. Grows via the in-page form modal that POSTs to Airtable.
+- **Self-submission form modal** (`openSF()` / `closeSF()`): Name, Organization (optional), Role, Offering, Problem Area, Problem Topic (conditional), Geography, Due By, Details (280 chars), Contact preference (Direct / Facilitated), Contact info, Preferences for introduction. **CSS critical:** `.sf-body` needs `flex:1; min-height:0` or lower chip rows cannot scroll.
+- **Airtable backend:** base `appFIPqXkeQMQ3n94`, table `tbl2ArzY6c0CdNVsh`; write-only PAT in client JS (intentional, scoped to this table).
+- **Contact column:** `contact_preference` comes from `build_people.py`: "Facilitated" when the Contact cell is empty (the person asked for privacy) → `Request intro →` link opening the intro modal (`openIR(id)`, mailto + clipboard); otherwise the contact renders as a mailto or https link (bare domains get `https://`; keep the cell a bare URL or email, no parenthetical labels).
+- **Organization column** links to `/ecosystem/organizations/?org=N` when the name matches a directory org (case-insensitive, `directory.json` fetched on first render).
+- **URL state:** `q, role, area, topic, offering, page, entry, add`; `?entry=N` expands and scrolls. **Copy link** next to Reset.
+- Loads `data/connect.json` (regenerated by `python3 data/build_people.py`). Don't hand-edit `connect.json`.
 
 ### Affinity Map (`ecosystem/affinity-map/index.html`)
-- D3 force-directed graph; nodes colored by primary segment; edge width scales with composite score
-- **No inline methodology blurb** (removed May 2026 per user request). The Methodology pill in the nav (restored May 2026 after a brief removal) is the in-page link to the full methodology page.
-- **Controls row 1** (in order): Search by name or question · Show edges at or above (threshold slider) · Segment filter chips · Reset
-- **Controls row 2** (added May 2026): Geography · Problem area · Problem topic — multi-select dropdowns, mirroring the directory's `MS` component. A node passes only if every active filter accepts it. The dropdowns share the same registry as each other (opening one closes any sibling), and clicking outside closes them all.
-- **Search behavior:**
-  - Empty: graph in normal state
-  - Non-empty: computes relevance scores; top-10 matches get `.hi` (highlighted), everything else gets `.dim`; results panel below the controls lists top matches as clickable chips with scores; selecting a chip pans and centers on that org
-  - Top-N is restricted to currently visible nodes — toggling a filter while a search is active re-runs the search so the top panel doesn't show orgs that have been filtered out.
-- **Threshold slider** (0.10–0.40, default 0.18): changes which edges are visible. "More edges (weaker matches)" ↔ "Fewer edges (stronger matches)"
-- **Org labels only:** every visible node has a small label below the circle (9.5px, weight 600, white halo). DOM-ordered by ascending degree so high-degree orgs paint on top. **No segment labels in the map** (removed May 2026 — they cluttered the view; segment identity is conveyed by node color + filter chips).
-- **Geographic search boost** (added May 2026): `detectGeoFocus()` parses the query for geographic terms (nyc, new york, city, local, state, albany, federal, dc, etc.) and adds a +0.25 score bonus to orgs whose `focus` field matches the implied level. Handles the mismatch between natural-language queries ("procurement in NYC") and the `focus` field's controlled values ("City", "State", "Federal") — none of those city names appear in the TF-IDF corpus.
-- Side panel: clicking a node shows full description, Problem statement chips, funding info, closest peers, **and a "People working on these problem topics" section listing entries from `/connect/` whose `problem_topic` is in this org's `problem_statements` list** (added May 2026). At current coverage ~97% of orgs surface at least one matching entry. Up to 8 inline cards + "more →" link to the Connect page.
-- **Connect matchmaking sidebar:** when Problem area or Problem topic filters are active, an orange-accented panel appears below the controls listing up to 6 matching entries + total count + "Open Connect ↗" deep link. Hidden otherwise. Mirrors the existing `search-results` pattern.
-- Supports `?id=N` deep link from directory
-- Loads `data/affinity.json` + `data/affinity_search.json` + `data/connect.json`
+- D3 force graph; nodes colored by primary segment; **mutual edges solid, one-way edges at 45% opacity**; sunset nodes hollow with a "(sunset)" label suffix. `build()` clears and redraws all layers on every change.
+- **Controls:** Search by name or question · Show edges at or above (slider; min/max from the kept edges, default `stats.weight_percentiles.p25`) · Segment filter chips · Reset · **Copy link**; then Geography · Problem area · Problem topic dropdowns; toggles **Cross-segment only** and **Hide sunset orgs**; view switch **Organizations / Funders**; **Find a path** (two name inputs with datalist).
+- **Detail panel:** description, chips, funding, `Sunset: <note>`, closest peers each with a "why connected" line (shared topics · Funders: … · Terms: …, or "Description similarity only"), **Show neighborhood / Show 2 hops / Show everything**, and the Connect people section. Clicking an edge (wide invisible hit target) opens the pair panel: heading "A and B", weight, the four normalized component scores as percentages, the explanation line.
+- **Funders view:** square nodes (`var(--orange)`) for every funder in `funders`, joined to the orgs they back; org-org edges hidden; the overlay reads "Showing N orgs · M edges · K funders".
+- **Search:** TF-IDF cosine + name-substring bonus; place names detected against the union of `geo_terms` with whole-word matching and alias groups (NYC / New York City / New York; Washington DC / D.C.) → ×1.5; level words (state, federal, local) → ×1.25 only for orgs with no geo_terms or a matching place; funding-intent words → ×1.5 for Philanthropy and Investor orgs. A restored `q` re-runs the search on load.
+- **URL state:** `q, w, seg, geo, area, topic, cross, hidesunset, view, ego, hops, sel` (legacy `?id=N` still selects). Params are read before the first build; every selection path calls `syncURL()`.
+- Loads `data/affinity.json` + `data/affinity_search.json` + `data/connect.json`.
 
 ### Methodology (`ecosystem/methodology/index.html`)
-- Long-form explainer organized as: data source → inclusion criteria → problem statements → directory filters → semantic search → affinity score (formula + per-signal explanation + thresholding) → score range table → what the graph does/doesn't show → color palette → credits
-- **No "Refreshing the data" section** (removed May 2026 — was internal-workflow only)
-- **No links to Claude conversations** (removed May 2026)
+- Describes only the current method: purpose → what state capacity means → data fields (incl. Status) → segment taxonomy → problems taxonomy → the directory → Connect → problem topic pages → change feed → semantic search (with the multiplicative boosts) → the affinity score (percentile scaling, the four signals, which edges are kept, live mutual and cross-segment counts fetched from `affinity.json`) → score table → the map's tools → what the graph does and does not show → color palette → credits.
+- `update_stats.py` patches two sentences here (the funder callout "Approximately N of M orgs…" and "<strong>N nodes and M edges</strong>, with a maximum edge score of X and a median of Y"); keep their shape when editing.
+- **No links to Claude conversations.**
 
 ---
 
