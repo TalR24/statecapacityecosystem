@@ -396,7 +396,7 @@
 .ribbon-item:hover .ribbon-drop,.ribbon-item:focus-within .ribbon-drop{display:block;}
 .ribbon-drop a{display:block;padding:8px 16px;font-size:0.82rem;color:var(--text-mid);text-decoration:none;transition:background .1s,color .1s;}
 .ribbon-drop a:hover{background:#F5EDDA;color:#8A5F1E;}
-@media (max-width:720px){.ribbon-inner{overflow-x:auto;}.ribbon-drop{display:none !important;}}
+@media (max-width:720px){.ribbon-inner{flex-wrap:wrap;}.ribbon-link{padding:11px 7px 9px;font-size:0.7rem;}.ribbon-actions{flex-basis:100%;margin-left:0;padding:0 0 8px 7px;}.ribbon-drop{display:none !important;}}
 .ribbon-actions{margin-left:auto;display:flex;align-items:center;gap:8px;padding:7px 0 7px 14px;flex-shrink:0;}
 .ribbon-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.74rem;font-weight:700;text-decoration:none;padding:7px 13px;border-radius:7px;white-space:nowrap;border:1px solid #DFCEA1;background:#F5EDDA;color:#8A5F1E;transition:background .15s,color .15s;}
 .ribbon-btn:hover{background:#8A5F1E;color:#fff;}
@@ -1037,7 +1037,7 @@ document.getElementById("btn-reset").addEventListener("click", () => {
       <div class="sf-success-check">✓</div>
       <div class="sf-success-title">Submitted!</div>
       <div class="sf-success-text">
-        Thanks — your suggestion has been recorded for review. Once approved, the organization will appear in the directory.
+        Thanks, your suggestion has been recorded for review. Once approved, the organization will appear in the directory.
         You can copy your responses below for your records.
       </div>
       <div>
@@ -1204,7 +1204,7 @@ async function ofSubmit() {
     console.error("Suggest-an-org submit error:", e);
     btn.disabled = false;
     btn.innerHTML = origHtml;
-    alert("Submission failed — please try again, or copy your responses and send them directly.");
+    alert("Submission failed. Please try again, or copy your responses and send them directly.");
   }
 }
 

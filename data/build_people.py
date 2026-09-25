@@ -51,6 +51,10 @@ for r in rows:
         "due_by":  norm(r.get("Due by")),
         "details": norm(r.get("Details")),
         "contact": norm(r.get("Contact")),
+        # The Connect page shows "Request intro" instead of a contact when this is
+        # "Facilitated". An empty Contact cell means the person asked to keep
+        # their details private, so introductions go through the SCE team.
+        "contact_preference": "Direct" if norm(r.get("Contact")) else "Facilitated",
     })
 
 OUT.write_text(json.dumps(people, indent=None, separators=(",", ":")))

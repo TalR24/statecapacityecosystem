@@ -204,7 +204,7 @@
 .ribbon-item:hover .ribbon-drop,.ribbon-item:focus-within .ribbon-drop{display:block;}
 .ribbon-drop a{display:block;padding:8px 16px;font-size:0.82rem;color:var(--text-mid);text-decoration:none;transition:background .1s,color .1s;}
 .ribbon-drop a:hover{background:var(--blue-light);color:var(--blue);}
-@media (max-width:720px){.ribbon-inner{overflow-x:auto;}.ribbon-drop{display:none !important;}}
+@media (max-width:720px){.ribbon-inner{flex-wrap:wrap;}.ribbon-link{padding:11px 7px 9px;font-size:0.7rem;}.ribbon-actions{flex-basis:100%;margin-left:0;padding:0 0 8px 7px;}.ribbon-drop{display:none !important;}}
 .ribbon-actions{margin-left:auto;display:flex;align-items:center;gap:8px;padding:7px 0 7px 14px;flex-shrink:0;}
 .ribbon-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.74rem;font-weight:700;text-decoration:none;padding:7px 13px;border-radius:7px;white-space:nowrap;border:1px solid #DFCEA1;background:#F5EDDA;color:#8A5F1E;transition:background .15s,color .15s;}
 .ribbon-btn:hover{background:#8A5F1E;color:#fff;}
@@ -344,10 +344,10 @@
       <p>The Directory, Connect and the Affinity Map make the people and organizations working on state capacity visible to each other. They are the map layer of the State Capacity Ecosystem. The mission and vision are on the <a href="/about/">About page</a>.</p>
 
 
-      <h2>What "State Capacity" Means Here</h2>
+      <h2>What state capacity means here</h2>
       <p>Organizations that help government become more capable, not organizations that do government's work for it. An org is added if it helps government in the United States expand its own effectiveness or operating capacity.</p>
 
-      <h2>Data Fields</h2>
+      <h2>Data fields</h2>
       <ul>
         <li><strong>Org Name</strong> — the name of the organization.</li>
         <li><strong>Primary Segment</strong> — primary categorization based on the org's focus.</li>
@@ -361,7 +361,7 @@
         <li><strong>Problem Topic</strong> — 36 specific issues nested under the Problem Areas.</li>
       </ul>
 
-      <h2>Segment Taxonomy</h2>
+      <h2>Segment taxonomy</h2>
       <p>An organization's segment describes its primary operating model.</p>
       <ul>
         <li><strong>Advocacy</strong> — Organizations pushing for policy and structural changes that enable better government.</li>
@@ -377,8 +377,9 @@
         <li><strong>Research</strong> — Organizations studying what works and building the evidence base.</li>
       </ul>
 
-      <h2>Problems Taxonomy</h2>
+      <h2>Problems taxonomy</h2>
       <p>An org earns a tag if it directly solves the problem for government customers, funds or builds the infrastructure that moves the needle on it, or sets the standards that govern it. The problem needs to be a focus for the org; not addressed by ancillary work or with one-time funding, truly part of the mission and vision.</p>
+      <div style="overflow-x:auto">
       <table class="signals">
         <thead>
           <tr><th>Problem Area</th><th>Problem Topic</th><th>Definition</th></tr>
@@ -387,7 +388,7 @@
           <tr><td class="area" rowspan="3">Participatory Democracy</td><td>Civic Engagement</td><td>Connecting residents to government and strengthening democratic participation.</td></tr>
           <tr><td>Democracy Infrastructure</td><td>Strengthening the structural foundations of democratic governance and institutions.</td></tr>
           <tr><td>Transparency &amp; Accountability</td><td>Transparency, open data, FOIA, and public accountability infrastructure.</td></tr>
-          <tr><td class="area" rowspan="4">Procurement &amp; Operations</td><td>Operational Excellence</td><td>Improving how government operates internally — processes, systems, and workforce efficiency.</td></tr>
+          <tr><td class="area" rowspan="4">Procurement &amp; Operations</td><td>Operational Excellence</td><td>Improving how government operates internally: processes, systems, and workforce efficiency.</td></tr>
           <tr><td>Procurement Reform</td><td>Modernizing how government buys, evaluates vendors, and manages technology and service contracts.</td></tr>
           <tr><td>Reaction Time</td><td>Improving the speed at which government can respond to problems and opportunities.</td></tr>
           <tr><td>Regulatory &amp; Administrative Burden</td><td>Reducing unnecessary complexity in government rules, forms, procedures, and compliance requirements.</td></tr>
@@ -414,7 +415,7 @@
           <tr><td>Crisis Response</td><td>Government capacity for emergency management, disaster response, and 911 systems.</td></tr>
           <tr><td>Economic Mobility</td><td>Government programs and systems that improve economic opportunity for residents.</td></tr>
           <tr><td>Education Delivery</td><td>Technology capacity for government education agencies to deliver and improve learning.</td></tr>
-          <tr><td>Healthcare Access</td><td>Technology capacity for government health programs — Medicaid, Medicare, public health delivery.</td></tr>
+          <tr><td>Healthcare Access</td><td>Technology capacity for government health programs: Medicaid, Medicare, public health delivery.</td></tr>
           <tr><td>Housing &amp; Land Use</td><td>Government capacity for housing policy, permitting, zoning, and affordable housing delivery.</td></tr>
           <tr><td>Permitting &amp; Licensing</td><td>Modernizing government permitting, licensing, and code enforcement processes.</td></tr>
           <tr><td>Physical Infrastructure</td><td>Technology capacity for managing roads, utilities, transit, and built environment.</td></tr>
@@ -422,6 +423,7 @@
           <tr><td>Tax &amp; Revenue</td><td>Technology capacity for government finance, tax collection, and fiscal management.</td></tr>
         </tbody>
       </table>
+      </div>
 
       <h2>The directory</h2>
       <p>The directory is a straight rendering of the underlying data. It supports faceted filters and a semantic search box:</p>
@@ -433,11 +435,11 @@
       </ul>
 
       <h2>Connect</h2>
-      <p>The Connect page is a directory of individuals and open opportunities — practitioners, researchers, funders, and others who have opted in to be findable, alongside open calls (grants, fellowships, jobs, collaborative projects) indexed by problem and offering type. It is separate from the org Directory: orgs belong in the Directory; people and opportunities belong in Connect.</p>
+      <p>The Connect page is a directory of individuals and open opportunities: practitioners, researchers, funders, and others who have opted in to be findable, alongside open calls (grants, fellowships, jobs, collaborative projects) indexed by problem and offering type. It is separate from the org Directory: orgs belong in the Directory; people and opportunities belong in Connect.</p>
       <p>Each entry carries: name, organization affiliation, role, offering, problem area(s), problem topic(s), geography, due-by date, details, and a contact preference (direct contact info, or a facilitated introduction through the curator). Entries are submitted through the on-page form and reviewed before going live.</p>
 
       <h2>Semantic search</h2>
-      <p>The directory's search box and the affinity network share a precomputed search index. (The Search page uses structured token-chip filters rather than free text — described in the section above.) At build time, every org's description, problem-statement tags, segments, and funding-detail text are tokenized into a unified bag and a TF-IDF vector is stored. At query time, the browser tokenizes your query the same way, builds an IDF-weighted query vector, and computes cosine similarity against every org. Exact substring matches in the org name receive a 0.5 boost so typing an exact name returns it first. The full index ships as a static JSON file (~190 KB) — no server, no embedding API, no per-query cost.</p>
+      <p>The directory's search box and the affinity network share a precomputed search index. (The Search page builds a structured query from four dropdowns instead of free text.) At build time, every org's description, problem-statement tags, segments, and funding-detail text are tokenized into a unified bag and a TF-IDF vector is stored. At query time, the browser tokenizes your query the same way, builds an IDF-weighted query vector, and computes cosine similarity against every org. Exact substring matches in the org name receive a 0.5 boost so typing an exact name returns it first. The full index ships as a static JSON file (~190 KB) — no server, no embedding API, no per-query cost.</p>
       <p>This is significantly more than keyword matching: a query like "where should I work on procurement in NYC?" surfaces orgs tagged with Procurement Reform plus orgs operating in NYC plus orgs whose descriptions emphasize vendor evaluation, even when no single word matches everywhere. It is also significantly less than a true semantic embedding — it can't infer that "permits" and "licensing" refer to the same concept unless those words co-occur frequently in the corpus. For the size and vocabulary of this dataset, TF-IDF is the right cost/quality trade-off.</p>
 
       <h2>The affinity score</h2>
@@ -475,20 +477,20 @@
 
       <p>The framing behind these weights: every signal points at the same underlying question, which is <em>what is this org trying to accomplish, and who else is trying to accomplish the same thing?</em> Problem statements tell you what they're working on. Descriptions tell you the substance. Funders tell you the theory of change. Segments tell you the mechanism.</p>
 
-      <p><strong>Segment overlap is intentionally the smallest signal.</strong> An earlier version of the score gave segments 35% weight plus a primary-segment match boost — but that made the network show mostly the obvious thing (Research orgs cluster with Research orgs). The current weighting surfaces cross-segment surprises: a Research shop and a GovTech vendor that turn out to be working on the same problem with overlapping funders are now plausibly connected even though they live in different segment clusters.</p>
+      <p><strong>Segment overlap is intentionally the smallest signal.</strong> An earlier version of the score gave segments 35% weight plus a primary-segment match boost, but that made the network show mostly the obvious thing (Research orgs cluster with Research orgs). The current weighting surfaces cross-segment surprises: a Research shop and a GovTech vendor that turn out to be working on the same problem with overlapping funders are now plausibly connected even though they live in different segment clusters.</p>
 
       <h3>Description similarity (40%)</h3>
       <p>The strongest signal, because the description text is where org-specific language lives: phrases like "permitting reform," "legislative capacity," "procurement modernization," or "AI policy." We compute a TF-IDF representation of each org's description, funding-detail text, segment names, problem-topic tags, and problem-area tags combined, then take the cosine similarity between every pair of vectors. Folding problem areas into this bag lets a free-text query like "procurement" match orgs whose description never uses the word but whose tags do.</p>
       <p><strong>TF-IDF</strong> (term frequency–inverse document frequency) downweights words that appear everywhere ("government," "technology," "policy") and upweights words that are distinctive. Two orgs that both talk about "procurement" will score higher than two orgs that both talk about "policy." Common words and short tokens are dropped before vectorizing.</p>
 
       <h3>Shared problem statements (30%)</h3>
-      <p>The Jaccard similarity of the two orgs' problem-topic tag sets. Every org carries one or more tags from a curated list of 36; an org tagged with both <em>Procurement Reform</em> and <em>Service Design</em> shares a 50% Jaccard with one tagged with only <em>Procurement Reform</em>. Because the tags are curator-assigned, this is the highest-confidence signal in the dataset — when two orgs share problem topics, they really are working on the same thing. (The coarser <em>Problem Area</em> bucket is folded into the description-similarity signal but not into this Jaccard, since orgs share an Area too easily to be a high-confidence match.)</p>
+      <p>The Jaccard similarity of the two orgs' problem-topic tag sets. Every org carries one or more tags from a curated list of 36; an org tagged with both <em>Procurement Reform</em> and <em>Service Design</em> shares a 50% Jaccard with one tagged with only <em>Procurement Reform</em>. Because the tags are curator-assigned, this is the highest-confidence signal in the dataset: when two orgs share problem topics, they really are working on the same thing. (The coarser <em>Problem Area</em> bucket is folded into the description-similarity signal but not into this Jaccard, since orgs share an Area too easily to be a high-confidence match.)</p>
 
       <h3>Shared funders (15%)</h3>
       <p>Funders are pulled from the free-text Funding Detail by string-matching against a curated list of ~50 well-known philanthropies, foundations, and venture funds (Schmidt Futures, Open Philanthropy, Omidyar Network, Ford, MacArthur, Knight, Bloomberg, Arnold Ventures, 8VC, a16z, etc.). For two orgs with at least one named funder each, we compute the Jaccard similarity of their funder sets. If neither has an extractable named funder, we fall back to a small bonus when their funding-model field matches exactly.</p>
 
       <div class="callout">
-        <strong>Limitation worth flagging.</strong> Approximately 66 of 334 orgs have at least one named funder detected. The curated list is not exhaustive, and many smaller foundations, family offices, and government grants are missed. Orgs that share an unlisted funder will not light up on this signal — the description and problem-statement scores carry them.
+        <strong>Limitation worth flagging.</strong> Approximately 66 of 334 orgs have at least one named funder detected. The curated list is not exhaustive, and many smaller foundations, family offices, and government grants are missed. Orgs that share an unlisted funder will not light up on this signal. The description and problem-statement scores carry them.
       </div>
 
       <h3>Shared segments (15%)</h3>
@@ -504,20 +506,22 @@
 
       <h2>Inside the score table</h2>
       <p>For reference, here is what each signal can range over:</p>
+      <div style="overflow-x:auto">
       <table class="signals">
         <thead>
           <tr><th>Signal</th><th>Weight</th><th>Range</th><th>Notes</th></tr>
         </thead>
         <tbody>
           <tr><td>TF-IDF cosine (descriptions, problem topics + areas, segments, funding text)</td><td class="weight">0.40</td><td>0 to ~0.6 in practice</td><td>Rarely exceeds 0.5 because descriptions are short.</td></tr>
-          <tr><td>Problem-statement Jaccard</td><td class="weight">0.30</td><td>0 to 1.0</td><td>Highest-confidence signal — curator-assigned tags.</td></tr>
+          <tr><td>Problem-statement Jaccard</td><td class="weight">0.30</td><td>0 to 1.0</td><td>Highest-confidence signal: curator-assigned tags.</td></tr>
           <tr><td>Named-funder Jaccard</td><td class="weight">0.15</td><td>0 to 1.0</td><td>Falls back to 0.15 if funding models match and no funders are detected.</td></tr>
           <tr><td>Segment Jaccard (no primary boost)</td><td class="weight">0.15</td><td>0 to 1.0</td><td>Intentionally a tiebreaker, not a dominant signal.</td></tr>
         </tbody>
       </table>
+      </div>
 
       <h2>What the graph does and does not show</h2>
-      <p><strong>It shows</strong> structural affinity: which orgs are working on the same underlying problems, talk about them in similar ways, and often share funders. The strongest edges in the dataset are between orgs that any expert in the field would intuitively put in the same cluster — but the value of the graph is in the edges that <em>aren't</em> obvious: a Research shop and a GovTech vendor working on the same problem statement, or a Fellowship program and a Capacity Building org sharing the same set of funders.</p>
+      <p><strong>It shows</strong> structural affinity: which orgs are working on the same underlying problems, talk about them in similar ways, and often share funders. The strongest edges in the dataset are between orgs that any expert in the field would intuitively put in the same cluster, but the value of the graph is in the edges that <em>aren't</em> obvious: a Research shop and a GovTech vendor working on the same problem statement, or a Fellowship program and a Capacity Building org sharing the same set of funders.</p>
       <p><strong>It does not show</strong> documented relationships. The data does not encode partnerships, joint programs, alumni flows, board interlocks, or co-investments. An edge in this graph is an inference about likely affinity from public-facing descriptions and tags, not an assertion that two orgs are working together.</p>
 
       <h2>Color palette</h2>
