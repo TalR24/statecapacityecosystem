@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/assets/sce_logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Civic Engagement — Ecosystem · State Capacity Ecosystem</title>
+  <meta name="description" content="Civic Engagement: Connecting residents to government and strengthening democratic participation.…">
+  <link rel="canonical" href="https://statecapacityecosystem.com/ecosystem/topics/civic-engagement/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://statecapacityecosystem.com/ecosystem/topics/civic-engagement/">
+  <meta property="og:title" content="Civic Engagement — Ecosystem · State Capacity Ecosystem">
+  <meta property="og:description" content="Civic Engagement: Connecting residents to government and strengthening democratic participation.…">
+  <meta property="og:image" content="https://statecapacityecosystem.com/assets/sce_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    :root {
+      --blue:#8A5F1E; --blue-hover:#6E4A15; --blue-light:#F5EDDA; --blue-mid:#DFCEA1;
+      --orange:#8A5F1E; --orange-light:#F5EDDA;
+      --text:#1A1918; --text-mid:#444039; --text-muted:#6B6760; --text-faint:#9C968A;
+      --bg:#F4EFE4; --surface:#ffffff; --border:#DDD8CC; --border-mid:#C9C1AF;
+      --shadow-sm:0 1px 3px rgba(26,25,24,0.08);
+      --radius:10px;
+    }
+    body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+
+    header { background:#1A1918; border-bottom:1px solid #2E2B27; padding:0 clamp(16px,4vw,48px); }
+    .header-inner { max-width:1300px; margin:0 auto; height:60px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { display:flex; align-items:center; gap:9px; text-decoration:none; }
+    .brand-name { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:700; color:#D4A853; letter-spacing:-0.02em; }
+    .brand-slash { font-family:'Roboto Mono',monospace; font-size:0.95rem; color:#4b5563; }
+    .brand-section { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:600; color:#DDD8CC; }
+    .header-link { font-size:0.78rem; font-weight:500; color:#9C968A; text-decoration:none; display:flex; align-items:center; gap:5px; transition:color 0.15s; }
+    .header-link:hover { color:#D4A853; }
+
+    .breadcrumb { padding:14px clamp(16px,4vw,48px) 0; }
+    .breadcrumb-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; gap:6px; font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:500; color:var(--text-faint); }
+    .breadcrumb a { color:var(--text-faint); text-decoration:none; transition:color 0.15s; }
+    .breadcrumb a:hover { color:var(--blue); }
+    .breadcrumb .current { color:var(--orange); }
+    .breadcrumb-sep { color:var(--border-mid); }
+
+    .hero { padding:14px clamp(16px,4vw,48px) 0; }
+    .hero-inner { max-width:1300px; margin:0 auto; padding-bottom:14px; }
+    .hero h1 { font-family:'Roboto Mono',monospace; font-size:clamp(1.2rem,3vw,1.7rem); font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.2; margin-bottom:6px; }
+    .hero h1 span { color:var(--blue); }
+    .hero p { font-size:0.88rem; color:var(--text-muted); max-width:780px; line-height:1.6; }
+
+
+    .main { flex:1; padding:clamp(20px,3vw,32px) clamp(16px,4vw,48px) clamp(40px,6vw,64px); }
+    .main-inner { max-width:780px; margin:0 auto; }
+
+    .article {
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-sm);
+      padding:clamp(24px,4vw,42px);
+    }
+    .article h2 {
+      font-family:'Roboto Mono',monospace;
+      font-size:1.05rem; font-weight:700; color:var(--text);
+      letter-spacing:-0.02em;
+      margin:32px 0 12px;
+      padding-top:18px;
+      border-top:1px solid var(--border);
+    }
+    .article h2:first-child { margin-top:0; padding-top:0; border-top:none; }
+    .article h3 {
+      font-family:'Roboto Mono',monospace;
+      font-size:0.78rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.08em;
+      color:var(--orange);
+      margin:22px 0 8px;
+    }
+    .article p {
+      font-size:0.95rem; color:var(--text-mid);
+      line-height:1.75; margin-bottom:14px;
+    }
+    .article p strong { color:var(--text); font-weight:600; }
+    .article a { color:var(--blue); text-decoration:none; border-bottom:1px solid var(--blue-mid); }
+    .article a:hover { background:var(--blue-light); }
+    .article ul { padding-left:1.2rem; margin-bottom:16px; }
+    .article ul li { font-size:0.93rem; color:var(--text-mid); line-height:1.7; margin-bottom:6px; }
+    .article code, .article pre {
+      font-family:'Roboto Mono',monospace;
+      font-size:0.86rem;
+      background:var(--bg);
+      color:var(--text);
+      border-radius:4px;
+    }
+    .article code { padding:2px 7px; }
+    .article pre {
+      padding:14px 18px;
+      border:1px solid var(--border);
+      overflow-x:auto;
+      margin:8px 0 18px;
+      line-height:1.55;
+    }
+
+    .formula-block {
+      background:var(--blue-light);
+      border:1px solid var(--blue-mid);
+      border-radius:8px;
+      padding:18px 22px;
+      margin:14px 0 22px;
+      font-family:'Roboto Mono',monospace;
+      font-size:0.95rem;
+      color:var(--text);
+      line-height:1.7;
+      text-align:center;
+    }
+    .formula-block .coef { color:var(--blue); font-weight:700; }
+
+    .weight-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+      gap:10px;
+      margin:14px 0 22px;
+    }
+    .weight-card {
+      background:var(--bg);
+      border:1px solid var(--border);
+      border-left:3px solid var(--blue);
+      border-radius:6px;
+      padding:12px 14px;
+    }
+    .weight-card .pct {
+      font-family:'Roboto Mono',monospace;
+      font-size:1.15rem; font-weight:700;
+      color:var(--blue);
+      display:block;
+      margin-bottom:2px;
+    }
+    .weight-card .lbl {
+      font-family:'Roboto Mono',monospace;
+      font-size:0.7rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.06em;
+      color:var(--text-muted);
+      margin-bottom:5px;
+    }
+    .weight-card .body {
+      font-size:0.82rem; color:var(--text-mid);
+      line-height:1.5;
+    }
+
+    .callout {
+      background:var(--orange-light);
+      border:1px solid #DFCEA1;
+      border-left:3px solid var(--orange);
+      border-radius:6px;
+      padding:14px 18px;
+      margin:14px 0 22px;
+      font-size:0.9rem;
+      color:#9a3412;
+      line-height:1.7;
+    }
+    .callout strong { color:#7c2d12; }
+
+    table.signals {
+      width:100%;
+      border-collapse:collapse;
+      margin:8px 0 22px;
+      font-size:0.86rem;
+    }
+    table.signals th, table.signals td {
+      text-align:left;
+      padding:9px 12px;
+      border-bottom:1px solid var(--border);
+    }
+    table.signals th {
+      background:#f9fafb;
+      font-family:'Roboto Mono',monospace;
+      font-size:0.65rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.07em;
+      color:var(--text-muted);
+    }
+    table.signals tr:last-child td { border-bottom:none; }
+    table.signals td.weight { font-family:'Roboto Mono',monospace; color:var(--blue); font-weight:700; white-space:nowrap; }
+    table.signals td.area { font-weight:600; color:var(--text); vertical-align:top; white-space:nowrap; }
+
+    footer { background:var(--surface); border-top:1px solid var(--border); padding:18px clamp(16px,4vw,48px); margin-top:32px; }
+    .footer-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+    .footer-copy { font-size:0.78rem; color:var(--text-faint); }
+    .footer-links { display:flex; gap:18px; }
+    .footer-links a { font-size:0.78rem; color:var(--text-muted); text-decoration:none; transition:color 0.15s; }
+    .footer-links a:hover { color:var(--blue); }
+
+    @media (max-width: 540px) { .brand-slash, .brand-section { display:none; } }
+  </style>
+<style id="ribbon-css">
+.ribbon{background:var(--surface);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);position:relative;z-index:80;}
+.ribbon-inner{max-width:1300px;margin:0 auto;display:flex;align-items:stretch;}
+.ribbon-item{position:relative;flex-shrink:0;}
+.ribbon-link{display:flex;align-items:center;gap:6px;padding:13px 14px 11px;font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;color:var(--text-mid);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;}
+.ribbon-item:hover .ribbon-link,.ribbon-link:focus{color:var(--blue);}
+.ribbon-link.active{color:var(--orange);border-bottom-color:var(--orange);}
+.ribbon-caret{font-size:0.55rem;color:var(--text-faint);transform:translateY(1px);}
+.ribbon-drop{display:none;position:absolute;top:100%;left:0;min-width:235px;background:var(--surface);border:1px solid var(--border-mid);border-radius:0 0 8px 8px;box-shadow:0 14px 34px rgba(26,25,24,0.16);z-index:90;padding:6px 0;}
+.ribbon-item:hover .ribbon-drop,.ribbon-item:focus-within .ribbon-drop{display:block;}
+.ribbon-drop a{display:block;padding:8px 16px;font-size:0.82rem;color:var(--text-mid);text-decoration:none;transition:background .1s,color .1s;}
+.ribbon-drop a:hover{background:var(--blue-light);color:var(--blue);}
+@media (max-width:720px){.ribbon-inner{flex-wrap:wrap;}.ribbon-link{padding:11px 7px 9px;font-size:0.7rem;}.ribbon-actions{flex-basis:100%;margin-left:0;padding:0 0 8px 7px;}.ribbon-drop{display:none !important;}}
+.ribbon-actions{margin-left:auto;display:flex;align-items:center;gap:8px;padding:7px 0 7px 14px;flex-shrink:0;}
+.ribbon-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.74rem;font-weight:700;text-decoration:none;padding:7px 13px;border-radius:7px;white-space:nowrap;border:1px solid #DFCEA1;background:#F5EDDA;color:#8A5F1E;transition:background .15s,color .15s;}
+.ribbon-btn:hover{background:#8A5F1E;color:#fff;}
+.ribbon-btn.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
+.ribbon-btn.primary:hover{background:#B08430;border-color:#B08430;color:#fff;}
+.sce-footer{background:#1A1918;color:#F4EFE4;padding:26px clamp(16px,4vw,48px);margin-top:auto;}
+.sce-footer-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.sce-footer-brand{display:flex;align-items:center;gap:10px;font-family:'Roboto Mono',monospace;font-size:0.84rem;font-weight:700;color:#D4A853;text-decoration:none;}
+.sce-footer-brand img{width:22px;height:22px;object-fit:contain;}
+.sce-footer-brand small{font-weight:400;color:#9C968A;font-size:0.72rem;margin-left:4px;}
+.sce-footer-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.sce-footer-actions a{font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;text-decoration:none;padding:8px 14px;border-radius:7px;border:1px solid rgba(244,239,228,0.3);color:#F4EFE4;transition:border-color .15s,background .15s;}
+.sce-footer-actions a:hover{border-color:#D4A853;background:rgba(212,168,83,0.12);}
+.sce-footer-actions a.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
+.sce-footer-actions a.primary:hover{background:#E3C170;}
+</style>
+<style id="event-banner-css">
+.evt-banner{background:#D4A853;color:#1A1918;padding:0 clamp(16px,4vw,48px);position:relative;z-index:100;}
+.evt-banner-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:9px 0;font-family:'Roboto Mono',monospace;font-size:0.8rem;font-weight:600;}
+.evt-banner strong{font-weight:700;}
+.evt-banner .evt-when{color:#6E4A15;}
+.evt-banner a{display:inline-flex;align-items:center;gap:6px;background:#1A1918;color:#F4EFE4;text-decoration:none;padding:6px 14px;border-radius:6px;font-size:0.76rem;font-weight:700;white-space:nowrap;transition:background .15s;}
+.evt-banner a:hover{background:#3E3931;}
+@media (max-width:620px){.evt-banner-inner{font-size:0.74rem;gap:9px;}.evt-banner .evt-when{width:100%;text-align:center;}}
+@media print{.evt-banner{display:none !important;}}
+</style>
+
+<style id="topics-css">
+  .t-main { flex:1; padding:clamp(6px,1vw,12px) clamp(16px,4vw,48px) clamp(40px,6vw,64px); }
+  .t-main-inner { max-width:1300px; margin:0 auto; }
+  .t-kicker { font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--orange); margin:8px 0 10px; }
+  .t-h1 { font-family:'Roboto Mono',monospace; font-size:clamp(1.3rem,3.4vw,2rem); font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.2; margin-bottom:10px; }
+  .t-deck { font-size:0.95rem; color:var(--text-muted); max-width:780px; line-height:1.6; margin-bottom:8px; }
+  .t-lead { font-size:0.92rem; color:var(--text-mid); max-width:900px; line-height:1.7; margin-bottom:28px; }
+  .t-section { margin:28px 0; max-width:100%; }
+  .t-section h2 { font-family:'Roboto Mono',monospace; font-size:1.02rem; font-weight:700; color:var(--text); letter-spacing:-0.02em; margin-bottom:14px; }
+  .t-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; max-width:100%; }
+  .t-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow-sm); padding:16px 18px; max-width:100%; }
+  .t-card-top { display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+  .t-card-name { font-size:0.95rem; font-weight:600; color:var(--text); text-decoration:none; }
+  .t-card-name:hover { color:var(--blue); }
+  .t-chip { font-family:'Roboto Mono',monospace; font-size:0.66rem; font-weight:700; padding:2px 8px; border-radius:10px; white-space:nowrap; }
+  .t-chip-sunset { font-family:'Roboto Mono',monospace; font-size:0.66rem; font-weight:700; padding:2px 8px; border-radius:10px; white-space:nowrap; background:#f3f4f6; color:#6b7280; border:1px solid #d1d5db; }
+  .t-card-desc { font-size:0.84rem; color:var(--text-mid); line-height:1.55; margin-bottom:8px; }
+  .t-card-link { font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:600; color:var(--blue); text-decoration:none; }
+  .t-card-link:hover { text-decoration:underline; }
+  .t-empty { font-size:0.9rem; color:var(--text-muted); margin-bottom:12px; }
+  .t-btn { display:inline-flex; align-items:center; gap:6px; font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:700; text-decoration:none; padding:9px 16px; border-radius:7px; white-space:nowrap; border:1px solid #DFCEA1; background:#F5EDDA; color:#8A5F1E; transition:background .15s, color .15s; }
+  .t-btn:hover { background:#8A5F1E; color:#fff; }
+  .t-related { display:flex; flex-wrap:wrap; gap:8px; max-width:100%; }
+  .t-related a { font-family:'Roboto Mono',monospace; font-size:0.8rem; font-weight:600; color:var(--blue); text-decoration:none; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:7px 12px; }
+  .t-related a:hover { border-color:var(--blue); }
+  .t-cta-band { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--orange); border-radius:8px; padding:20px 22px; margin-top:32px; display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; max-width:100%; }
+  .t-cta-band p { font-size:0.92rem; color:var(--text-mid); margin:0; }
+  .t-cta-actions { display:flex; gap:10px; flex-wrap:wrap; }
+  .t-area-block { margin-bottom:32px; max-width:100%; }
+  .t-area-block h2 { font-family:'Roboto Mono',monospace; font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:12px; }
+  .t-topic-cols { columns:2; column-gap:28px; }
+  .t-topic-row { break-inside:avoid; margin-bottom:14px; }
+  .t-topic-row a { font-size:0.92rem; font-weight:600; color:var(--text); text-decoration:none; }
+  .t-topic-row a:hover { color:var(--blue); }
+  .t-topic-meta { display:block; font-family:'Roboto Mono',monospace; font-size:0.72rem; color:var(--text-faint); margin-top:2px; }
+  html, body { max-width:100%; overflow-x:hidden; }
+  * { max-width:100%; }
+  @media (max-width:720px) {
+    .t-grid { grid-template-columns:1fr; }
+    .t-topic-cols { columns:1; }
+  }
+</style>
+
+
+</head>
+<body>
+
+<!-- PILLAR RIBBON -->
+<!-- EVENT BANNER -->
+<div class="evt-banner">
+  <div class="evt-banner-inner">
+    <span><strong>State Capacity Hackathon: Public Engagement</strong> <span class="evt-when">· Sept 30</span></span>
+    <a href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sign up ↗</a>
+  </div>
+</div>
+
+<style id="ribbon-sub-css">
+.ribbon-drop-desc{min-width:270px;}
+.ribbon-drop-desc a{white-space:normal;}
+.ribbon-sub{display:block;font-family:Inter,sans-serif;font-size:0.7rem;font-weight:400;color:#9C968A;line-height:1.4;margin-top:2px;}
+@media (max-width:720px){
+  .ribbon-item.open .ribbon-drop{display:block !important;position:fixed;left:10px;right:10px;min-width:0;border-radius:10px;border:1px solid var(--border-mid,#C9C1AF);box-shadow:0 18px 40px rgba(26,25,24,0.25);max-height:60vh;overflow-y:auto;z-index:120;}
+  .ribbon-item.open .ribbon-link{color:#8A5F1E;}
+}
+.sce-footer-inner{align-items:flex-start;row-gap:18px;}
+.sce-footer-inner > div:first-child{flex:1 1 340px;min-width:240px;}
+.sce-footer-actions{align-items:center;}
+.sce-footer-tag{font-family:Inter,sans-serif;font-size:0.78rem;color:#9C968A;margin:9px 0 0;max-width:460px;line-height:1.55;}
+@media (max-width:640px){.sce-footer-inner{flex-direction:column;}.sce-footer-actions{width:100%;}}
+</style>
+<nav class="ribbon" aria-label="State Capacity Ecosystem sections">
+  <div class="ribbon-inner">
+    <div class="ribbon-item"><a class="ribbon-link" href="/"><img src="/assets/sce_logo.png" alt="" style="width:16px;height:16px;object-fit:contain;">Home</a></div>
+    <div class="ribbon-item">
+      <a class="ribbon-link active" href="/ecosystem/">Ecosystem <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Say who you are and what you need, and we find the match.</span></a>
+        <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
+        <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
+        <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
+        <a href="/ecosystem/topics/">Problem topics<span class="ribbon-sub">Every problem we track, and who works on it.</span></a>
+      </div>
+    </div>
+    <div class="ribbon-item">
+      <a class="ribbon-link" href="/events/">Events <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/events/hackathons/">Hackathons<span class="ribbon-sub">Build nights that end in working software.</span></a>
+        <a href="/events/demo-nights/">Demo Nights<span class="ribbon-sub">What got built, in front of who can adopt it.</span></a>
+        <a href="/events/salons/">Salons &amp; Meet-ups<span class="ribbon-sub">Speaker nights and monthly office hours.</span></a>
+        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<span class="ribbon-sub">What hosts and sponsors own, on one page.</span></a>
+      </div>
+    </div>
+    <div class="ribbon-item">
+      <a class="ribbon-link" href="/community/">Community <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/community/slack/">Slack<span class="ribbon-sub">The conversation between events.</span></a>
+        <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗<span class="ribbon-sub">The team's writing on state capacity.</span></a>
+        <a href="/community/playbooks/">Playbooks<span class="ribbon-sub">Run our formats without us in the room.</span></a>
+        <a href="/community/proof-points/">Proof Points<span class="ribbon-sub">Every tool built through SCE.</span></a>
+      </div>
+    </div>
+    <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
+    <div class="ribbon-actions">
+      <a class="ribbon-btn primary" href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sept 30 Hackathon ↗</a>
+    </div>
+  </div>
+</nav>
+<script id="ribbon-touch-js">
+(function () {
+  var mq = window.matchMedia("(max-width:720px)");
+  document.querySelectorAll(".ribbon-item").forEach(function (item) {
+    var link = item.querySelector(".ribbon-link");
+    var drop = item.querySelector(".ribbon-drop");
+    if (!link || !drop) return;
+    link.addEventListener("click", function (e) {
+      if (!mq.matches) return;
+      if (!item.classList.contains("open")) {
+        e.preventDefault();
+        document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
+        item.classList.add("open");
+        drop.style.top = (link.getBoundingClientRect().bottom + 6) + "px";
+      }
+    });
+  });
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".ribbon-item")) {
+      document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
+    }
+  });
+})();
+</script>
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="/">State Capacity Ecosystem</a><span class="breadcrumb-sep">/</span><a href="/ecosystem/">Ecosystem</a><span class="breadcrumb-sep">/</span><a href="/ecosystem/topics/">Problem topics</a><span class="breadcrumb-sep">/</span><span class="current">Civic Engagement</span>
+  </div>
+</div>
+<div class="t-main"><div class="t-main-inner">
+<div class="t-kicker">Participatory Democracy</div>
+<h1 class="t-h1">Civic Engagement</h1>
+<p class="t-deck">Connecting residents to government and strengthening democratic participation.</p>
+<p class="t-lead">41 organizations work on Civic Engagement, and 7 people or opportunities on Connect carry it.</p>
+<div class="t-section"><h2>Who works on it</h2>
+<div class="t-grid">
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=0">#BlackTechFutures Research Institute</a>
+          <span class="t-chip" style="background:#db27771a;color:#db2777;border:1px solid #db277755;">Advocacy</span>
+          
+        </div>
+        <p class="t-card-desc">Builds national network of HBCUs, city-based researchers, and community institutions focused on local Black tech ecosystems and tech talent. Received PIT Fund support to bolster Black civic tech…</p>
+        <a class="t-card-link" href="https://blacktechfutures.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=75">All Tech Is Human</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">Responsible tech ecosystems org. Slack community, job board, and mentorship program connecting people to careers in public interest technology. Focuses on diversifying the pipeline into tech policy…</p>
+        <a class="t-card-link" href="https://alltechishuman.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=2">Alliance of Civic Technologists (ACT)</a>
+          <span class="t-chip" style="background:#db27771a;color:#db2777;border:1px solid #db277755;">Advocacy</span>
+          
+        </div>
+        <p class="t-card-desc">National umbrella connecting 18+ volunteer civic tech groups. Organizes CityCamp unconferences and Civic Spark convenings. 500+ Discord members.</p>
+        <a class="t-card-link" href="https://civictechnologists.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=28">BetaNYC</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">NYC civic tech, open data, and open government nonprofit (est. 2013). Co-produces NYC Open Data Week with OTI (6,000+ participants in 2026, its tenth year), hosts the NYC School of Data conference,…</p>
+        <a class="t-card-link" href="https://beta.nyc" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=77">Bloomberg Cities Network</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">JHU-hosted peer network for city leaders and innovators, created in partnership with Bloomberg Philanthropies. Provides peer networking, idea exchange, training resources, and city solution…</p>
+        <a class="t-card-link" href="https://bloombergcities.jhu.edu" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=207">BV Investment Partners</a>
+          <span class="t-chip" style="background:#9333ea1a;color:#9333ea;border:1px solid #9333ea55;">Investor</span>
+          
+        </div>
+        <p class="t-card-desc">Boston-based middle-market PE firm with government technology as a named sector. Made a minority investment in CivicPlus in 2019 and scaled it before a $290M exit to Insight Partners in 2021.</p>
+        <a class="t-card-link" href="https://bvlp.com" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=29">Chi Hack Night</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Chicago civic tech meetup (est. 2012; 690+ events) meeting monthly in person and three times a month online, with speakers from government, nonprofits, and tech. Spawned projects including mRelief.…</p>
+        <a class="t-card-link" href="https://chihacknight.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=30">Civic Tech Atlanta</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Atlanta civic tech group (fmr. Code for Atlanta) that hosted hack nights at Tech Square ATL and provided data support to community organizations. Last documented activity (2024). ACT founding member.</p>
+        <a class="t-card-link" href="https://civictechatlanta.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=31">Civic Tech DC</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Washington DC volunteer civic tech group (est. 2012) meeting about twice a month to build tools with community organizations and government agencies. Hosted Civic Hack DC 2025 on Regulations.gov…</p>
+        <a class="t-card-link" href="https://civictechdc.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=3">Civic Tech Field Guide</a>
+          <span class="t-chip" style="background:#db27771a;color:#db2777;border:1px solid #db277755;">Advocacy</span>
+          
+        </div>
+        <p class="t-card-desc">Largest open catalog of civic tech projects and organizations worldwide, with the Field Guide Friday newsletter (4,300+ subscribers). Serves as a discovery tool for technologists entering the field.</p>
+        <a class="t-card-link" href="https://civictech.guide" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=32">Code for Boston</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Boston-area civic tech group running hybrid hack nights at Cambridge Innovation Center. Builds MAPLE (Massachusetts Platform for Legislative Engagement) for submitting legislative testimony. ACT…</p>
+        <a class="t-card-link" href="https://codeforboston.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=33">Code for BTV</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Burlington, VT civic tech group working as a pro bono digital agency for civic and social justice organizations, with biweekly virtual Action Nights. ACT founding member.</p>
+        <a class="t-card-link" href="https://codeforbtv.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=34">Code for Charlottesville</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Charlottesville, VA civic tech group doing pro bono projects with local nonprofits and government agencies, with UVA and PVCC student involvement. GitHub activity through 2025 includes a Virginia…</p>
+        <a class="t-card-link" href="https://codeforcville.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=35">Code for Dayton</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Dayton civic tech group with monthly meetings. Projects include Florence Nightingale Museum website and demolition permit monitoring for Preservation Dayton. ACT founding member.</p>
+        <a class="t-card-link" href="https://codefordayton.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=36">Code for Philly</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Philadelphia civic tech community. Projects include Clean &amp; Green Philly (vacant lot greening to reduce gun violence), Phlask (map of free water, food, and bathrooms), and a Benefit Decision Toolkit.…</p>
+        <a class="t-card-link" href="https://codeforphilly.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=37">Code with the Carolinas</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Carolinas civic tech community, independent of the Code for America Brigade Network since 2023 and fiscally sponsored through Open Collective. Joined ACT in spring 2025; projects include Open…</p>
+        <a class="t-card-link" href="https://codewiththecarolinas.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=103">Coro Fellows Program in Public Affairs</a>
+          <span class="t-chip" style="background:#d977061a;color:#d97706;border:1px solid #d9770655;">Fellowships</span>
+          
+        </div>
+        <p class="t-card-desc">7-9 month full-time leadership fellowship rotating fellows through government, nonprofit, business, and labor placements. 80+ year track record and 15,000+ alumni; programs in LA, SF, NYC,…</p>
+        <a class="t-card-link" href="https://corofellowship.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=186">Democracy Works</a>
+          <span class="t-chip" style="background:#16a34a1a;color:#16a34a;border:1px solid #16a34a55;">GovTech</span>
+          
+        </div>
+        <p class="t-card-desc">Nonprofit building voting technology for election officials and voters. Voting Information Project (VIP) gives election offices a free platform to share official voting location and ballot data with…</p>
+        <a class="t-card-link" href="https://democracy.works" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=39">Florida Community Innovation (FCI)</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Florida civic tech organization running the Florida Resource Map project and an AI Fellow program. Published an organizational handbook (2025). ACT member.</p>
+        <a class="t-card-link" href="https://floridainnovation.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=140">Gilbert, AZ Office of Digital Government</a>
+          <span class="t-chip" style="background:#0891b21a;color:#0891b2;border:1px solid #0891b255;">Government</span>
+          
+        </div>
+        <p class="t-card-desc">City digital government office delivering social media strategy, open data, civic engagement, and digital innovation. Nationally recognized.</p>
+        <a class="t-card-link" href="https://gilbertaz.gov" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=41">Hack for LA</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Los Angeles network of civic-minded technologists building digital products with community partners and local government. Global volunteer base (designers, developers, PMs). Maintains Civic Tech…</p>
+        <a class="t-card-link" href="https://hackforla.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=108">Harvard Ash Center Democracy Fellowships</a>
+          <span class="t-chip" style="background:#d977061a;color:#d97706;border:1px solid #d9770655;">Fellowships</span>
+          
+        </div>
+        <p class="t-card-desc">Financial support for doctoral and postdoctoral researchers studying democratic governance, innovation in government, and civic technology. Part of the Ash Center&#x27;s Program on Democratic Governance.</p>
+        <a class="t-card-link" href="https://ash.harvard.edu" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=275">Harvard Ash Center for Democratic Governance and Innovation</a>
+          <span class="t-chip" style="background:#2563eb1a;color:#2563eb;border:1px solid #2563eb55;">Research</span>
+          
+        </div>
+        <p class="t-card-desc">Harvard Kennedy School center for government innovation and democratic governance, supported by a $50M Ford Foundation endowment. Runs the Innovations in American Government Awards (since 1985),…</p>
+        <a class="t-card-link" href="https://ash.harvard.edu" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=8">Institute for Responsive Government (IRG)</a>
+          <span class="t-chip" style="background:#db27771a;color:#db2777;border:1px solid #db277755;">Advocacy</span>
+          
+        </div>
+        <p class="t-card-desc">Designs policy solutions for government service delivery and election administration, including automatic voter registration, cross-agency data sharing, and UX reform for DMVs, tax departments, and…</p>
+        <a class="t-card-link" href="https://responsivegov.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=238">Irvine Foundation (James Irvine Foundation)</a>
+          <span class="t-chip" style="background:#dc26261a;color:#dc2626;border:1px solid #dc262655;">Philanthropy</span>
+          
+        </div>
+        <p class="t-card-desc">California-focused funder. Supports FUSE Corps. Focus on economic and political inclusion in California; funds orgs that strengthen civic participation and government responsiveness at state and…</p>
+        <a class="t-card-link" href="https://irvine.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=85">KC Digital Drive</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">Kansas City-based nonprofit founded in 2012 to make the region a digital leader. Runs Code for KC, convenes the KC Coalition for Digital Inclusion, and hosts civic tech and smart city programs.…</p>
+        <a class="t-card-link" href="https://kcdigitaldrive.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=239">Knight Foundation</a>
+          <span class="t-chip" style="background:#dc26261a;color:#dc2626;border:1px solid #dc262655;">Philanthropy</span>
+          
+        </div>
+        <p class="t-card-desc">Funds civic engagement, data-driven governance, and smart city strategies, with a focus on mid-size US cities. Grantees include Harvard Data-Smart City Solutions, GovEx/JHU, and San Jose AI…</p>
+        <a class="t-card-link" href="https://knightfoundation.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=111">Lead for America</a>
+          <span class="t-chip" style="background:#d977061a;color:#d97706;border:1px solid #d9770655;">Fellowships</span>
+          
+        </div>
+        <p class="t-card-desc">AmeriCorps-backed fellowship placing young leaders in local governments and nonprofits in their hometowns, focused on rural and underserved communities. Runs the American Connection Corps digital…</p>
+        <a class="t-card-link" href="https://leadforamerica.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=240">Luminate (Omidyar Group)</a>
+          <span class="t-chip" style="background:#dc26261a;color:#dc2626;border:1px solid #dc262655;">Philanthropy</span>
+          
+        </div>
+        <p class="t-card-desc">Global foundation spun out of Omidyar Network in 2018, funding civic empowerment, data and digital rights, financial transparency, and independent media. Exited its domestic US grantmaking by the end…</p>
+        <a class="t-card-link" href="https://luminategroup.com" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=112">Media Democracy Fund Fellowships</a>
+          <span class="t-chip" style="background:#d977061a;color:#d97706;border:1px solid #d9770655;">Fellowships</span>
+          
+        </div>
+        <p class="t-card-desc">Technology Exchange (12+ months at civil society orgs) and PhDX Fellowship (PhD students at DC policy orgs). Focused on public interest technology and media policy.</p>
+        <a class="t-card-link" href="https://mediademocracyfund.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=286">National Civic League</a>
+          <span class="t-chip" style="background:#2563eb1a;color:#2563eb;border:1px solid #2563eb55;">Research</span>
+          
+        </div>
+        <p class="t-card-desc">Nonpartisan nonprofit (est. 1894) promoting civic engagement and government innovation. All-America City Award (oldest community recognition in US). Research on collaborative governance, civic…</p>
+        <a class="t-card-link" href="https://nationalcivicleague.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=9">National Conference on Citizenship (NCoC) / Project Redesign</a>
+          <span class="t-chip" style="background:#db27771a;color:#db2777;border:1px solid #db277755;">Advocacy</span>
+          
+        </div>
+        <p class="t-card-desc">Civic health research. Project Redesign focuses on redesigning public services. Co-created TELI program.</p>
+        <a class="t-card-link" href="https://ncoc.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=42">Open Austin</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Central Texas civic tech nonprofit (est. 2009; 501(c)(3) since 2018) that has trained 1,500+ members. Its Civic Digital Lab builds data and web tools for local agencies and advocacy groups, and it…</p>
+        <a class="t-card-link" href="https://open-austin.odoo.com" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=43">Open Sacramento</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Sacramento civic tech group (recently rebranded with new website). Virtual community action nights. ACT member.</p>
+        <a class="t-card-link" href="https://opensacramento.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=44">Open Source San Jose</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">San Jose civic tech collective running monthly hack nights (ACT member since 2025). Building Tally Up, a meal distribution tracking app for the CA Department of Education.</p>
+        <a class="t-card-link" href="https://opensourcesanjose.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=45">OpenOakland</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">Oakland civic tech group building tools for government transparency and community access. ACT member.</p>
+        <a class="t-card-link" href="https://openoakland.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=13">Partnership for Public Service</a>
+          <span class="t-chip" style="background:#db27771a;color:#db2777;border:1px solid #db277755;">Advocacy</span>
+          
+        </div>
+        <p class="t-card-desc">Nonpartisan organization working for better government and a stronger civil service. Advocates for reform through its Government for a New Era initiative and trains public servants at the federal,…</p>
+        <a class="t-card-link" href="https://ourpublicservice.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=193">Polco</a>
+          <span class="t-chip" style="background:#16a34a1a;color:#16a34a;border:1px solid #16a34a55;">GovTech</span>
+          
+        </div>
+        <p class="t-card-desc">Civic engagement and performance analytics platform for local government, including the National Community Survey (via its NRC acquisition), resident polling, and Balancing Act budget simulations.…</p>
+        <a class="t-card-link" href="https://polco.us" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=46">SF Civic Tech</a>
+          <span class="t-chip" style="background:#7c3aed1a;color:#7c3aed;border:1px solid #7c3aed55;">Community</span>
+          
+        </div>
+        <p class="t-card-desc">San Francisco civic tech community (fmr. Code for San Francisco, est. 2013), independent 501(c)(3) since 2024. Runs weekly virtual hack nights and is building the SafeHome earthquake risk dashboard.…</p>
+        <a class="t-card-link" href="https://sfcivictech.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=302">The GovLab (NYU Tandon + Burnes Center at Northeastern)</a>
+          <span class="t-chip" style="background:#2563eb1a;color:#2563eb;border:1px solid #2563eb55;">Research</span>
+          
+        </div>
+        <p class="t-card-desc">Research lab studying how technology and data improve governance. Open data, data collaboratives, collective intelligence, and citizen engagement.</p>
+        <a class="t-card-link" href="https://thegovlab.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=200">Zencity</a>
+          <span class="t-chip" style="background:#16a34a1a;color:#16a34a;border:1px solid #16a34a55;">GovTech</span>
+          
+        </div>
+        <p class="t-card-desc">AI community insights platform helping local governments understand resident sentiment, measure service satisfaction, and run public engagement. Serves 400+ governments, including NYC, Dallas, and…</p>
+        <a class="t-card-link" href="https://zencity.io" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+</div>
+</div>
+<div class="t-section"><h2>People and opportunities on Connect</h2>
+<div class="t-grid">
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/connect/?entry=0">Bradley Tusk</a>
+        </div>
+        <p class="t-card-desc">Mobile Voting Project &middot; Advocate</p>
+        <p class="t-card-desc">Tool / Product, Collaboration Opportunity</p>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/connect/?entry=8">Voting Information Project (VIP)</a>
+        </div>
+        <p class="t-card-desc">Democracy Works &middot; Capacity Builder</p>
+        <p class="t-card-desc">Tool / Product, Expertise</p>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/connect/?entry=28">Dev Doshi</a>
+        </div>
+        <p class="t-card-desc"> &middot; Technologist</p>
+        <p class="t-card-desc">Collaboration Opportunity, Expertise, Interesting Conversation, Tool / Product</p>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/connect/?entry=31">Mirilla Zhu</a>
+        </div>
+        <p class="t-card-desc">Legislative Information Access in Prisons and Jails &middot; Technologist</p>
+        <p class="t-card-desc">Collaboration Opportunity, Tool / Product</p>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/connect/?entry=44">Jess Lowry</a>
+        </div>
+        <p class="t-card-desc"> &middot; Capacity Builder</p>
+        <p class="t-card-desc">Collaboration Opportunity, Expertise</p>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/connect/?entry=49">Community-Centered PITathon RFP (Y5 2026-2027)</a>
+        </div>
+        <p class="t-card-desc">Public Interest Technology University Network (PIT-UN) &middot; Funder</p>
+        <p class="t-card-desc">Grant / Challenge</p>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/connect/?entry=54">NYC Open Data Week 2027: Event Organizers</a>
+        </div>
+        <p class="t-card-desc">NYC Office of Technology and Innovation / BetaNYC / Data Through Design &middot; Government Practitioner</p>
+        <p class="t-card-desc">Collaboration Opportunity</p>
+      </div>
+</div>
+</div>
+<div class="t-section"><h2>Related topics</h2>
+<div class="t-related">
+<a href="/ecosystem/topics/democracy-infrastructure/">Democracy Infrastructure (24)</a>
+<a href="/ecosystem/topics/transparency-accountability/">Transparency &amp; Accountability (51)</a>
+</div></div>
+<div class="t-cta-band">
+      <p>Work on Civic Engagement? Add yourself so the people here can find you.</p>
+      <div class="t-cta-actions">
+        <a class="t-btn" href="/ecosystem/connect/?add=1">Add yourself to Connect →</a>
+        <a class="t-btn" href="/ecosystem/organizations/?add=1">Suggest an organization →</a>
+      </div>
+    </div>
+</div></div>
+<footer class="sce-footer">
+  <div class="sce-footer-inner">
+    <div>
+      <a class="sce-footer-brand" href="/"><img src="/assets/sce_logo.png" alt="">State Capacity Ecosystem<small>· statecapacityecosystem.com</small></a>
+      <p class="sce-footer-tag">Where the people making government deliver find each other and build.</p>
+    </div>
+    <div class="sce-footer-actions">
+      <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗</a>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Slack ↗</a>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in Touch ↗</a>
+      <a href="/about/">About →</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

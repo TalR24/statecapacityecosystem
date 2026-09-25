@@ -267,6 +267,7 @@
         <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
         <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
         <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
+        <a href="/ecosystem/topics/">Problem topics<span class="ribbon-sub">Every problem we track, and who works on it.</span></a>
       </div>
     </div>
     <div class="ribbon-item">
@@ -359,6 +360,7 @@
         <li><strong>Website</strong> — the org's homepage.</li>
         <li><strong>Problem Area</strong> — problem topics classified into 7 buckets: Participatory Democracy, Procurement &amp; Operations, Service Delivery, Talent &amp; Hiring, Technology &amp; Data, Test &amp; Learn, Domains.</li>
         <li><strong>Problem Topic</strong> — 36 specific issues nested under the Problem Areas.</li>
+        <li><strong>Status</strong> — active, or sunset when the description says the organization has closed. Inferred from the description text until the sheet carries its own column.</li>
       </ul>
 
       <h2>Segment taxonomy</h2>
@@ -426,28 +428,36 @@
       </div>
 
       <h2>The directory</h2>
-      <p>The directory is a straight rendering of the underlying data. It supports faceted filters and a semantic search box:</p>
+      <p>The directory is a straight rendering of the underlying data, with filters, a search box, and a detail row for every organization:</p>
       <ul>
-        <li><strong>Search</strong> accepts either an org name or a natural-language phrase ("procurement reform in NYC", "AI in benefits delivery"). The query is tokenized, scored against a precomputed TF-IDF index of every org's description and tags, and results are returned ranked by relevance.</li>
-        <li><strong>Primary segment</strong> is a multi-select on the org's main category.</li>
-        <li><strong>Geography</strong> is a multi-select; an org matches if it operates at <em>any</em> of the selected levels.</li>
-        <li><strong>Problem area</strong> and <strong>Problem topic</strong> are multi-selects on the curated taxonomy; an org matches if it carries <em>any</em> of the selected tags.</li>
+        <li><strong>Search</strong> accepts an org name or a natural-language phrase ("procurement reform in NYC", "AI in benefits delivery"). The query is tokenized, scored against a precomputed TF-IDF index of every org's description and tags, and ranked by relevance. See Semantic search below for the boosts.</li>
+        <li><strong>Primary segment</strong>, <strong>Geography</strong>, <strong>Problem area</strong> and <strong>Problem topic</strong> are multi-selects; an org matches if it carries any of the selected values.</li>
+        <li><strong>Hide sunset orgs</strong> removes organizations whose description says they have closed. They stay in the directory as history, marked with a Sunset chip.</li>
+        <li>The <strong>detail row</strong> shows the full record, the org's three closest peers from the affinity score, the people and opportunities on Connect from the same organization (or, failing that, on the same problem topics), and a <strong>Suggest an edit</strong> button that opens the submission form prefilled with the current values.</li>
+        <li>Every filter, the search text, the page and the open row live in the URL, so <strong>Copy link</strong> gives you a view you can send to someone else.</li>
       </ul>
 
       <h2>Connect</h2>
       <p>The Connect page is a directory of individuals and open opportunities: practitioners, researchers, funders, and others who have opted in to be findable, alongside open calls (grants, fellowships, jobs, collaborative projects) indexed by problem and offering type. It is separate from the org Directory: orgs belong in the Directory; people and opportunities belong in Connect.</p>
-      <p>Each entry carries: name, organization affiliation, role, offering, problem area(s), problem topic(s), geography, due-by date, details, and a contact preference (direct contact info, or a facilitated introduction through the curator). Entries are submitted through the on-page form and reviewed before going live.</p>
+      <p>Each entry carries: name, organization affiliation, role, offering, problem area(s), problem topic(s), geography, due-by date, details, and a contact. When a person asks to keep their contact private, the entry shows <strong>Request intro</strong> instead and the SCE team forwards the request. Entries are submitted through the on-page form and reviewed before going live. An organization name that matches a directory org links to that org's row, and filters, page and the open entry live in the URL for sharing.</p>
+
+      <h2>Problem topic pages</h2>
+      <p>Each of the 36 problem topics has its own page under <a href="/ecosystem/topics/">Problem topics</a>: the definition, the organizations tagged with it, the people and opportunities on Connect that carry it, the tools in Proof Points from the same problem area, and the related topics in its area. The pages are regenerated from the data on every refresh, so they are the fastest route from a problem to the people working on it.</p>
+
+      <h2>Change feed</h2>
+      <p>The directory refreshes daily. Each run compares the new spreadsheet to the last one and records which organizations were added, removed, or edited. The latest changes appear on the <a href="/ecosystem/#changes">Ecosystem page</a> and, when there is a recent update, at the top of the homepage's Latest band.</p>
 
       <h2>Semantic search</h2>
-      <p>The directory's search box and the affinity network share a precomputed search index. (The Search page builds a structured query from four dropdowns instead of free text.) At build time, every org's description, problem-statement tags, segments, and funding-detail text are tokenized into a unified bag and a TF-IDF vector is stored. At query time, the browser tokenizes your query the same way, builds an IDF-weighted query vector, and computes cosine similarity against every org. Exact substring matches in the org name receive a 0.5 boost so typing an exact name returns it first. The full index ships as a static JSON file (~190 KB) — no server, no embedding API, no per-query cost.</p>
-      <p>This is significantly more than keyword matching: a query like "where should I work on procurement in NYC?" surfaces orgs tagged with Procurement Reform plus orgs operating in NYC plus orgs whose descriptions emphasize vendor evaluation, even when no single word matches everywhere. It is also significantly less than a true semantic embedding — it can't infer that "permits" and "licensing" refer to the same concept unless those words co-occur frequently in the corpus. For the size and vocabulary of this dataset, TF-IDF is the right cost/quality trade-off.</p>
+      <p>The directory's search box and the affinity map share a precomputed search index. (The Search page builds a structured query from four dropdowns instead of free text.) At build time, every org's description, problem-topic tags, segments, and funding-detail text are tokenized into one bag and a TF-IDF vector is stored. At query time, the browser tokenizes your query the same way, builds an IDF-weighted query vector, and computes cosine similarity against every org. An exact substring match in the org name gets a 0.5 boost so typing a name returns it first. The index ships as a static JSON file of about 190 KB: no server, no embedding API, no per-query cost.</p>
+      <p>Two boosts sharpen the ranking on the map. If the query names a place that appears in an org's name or description (a state, a major city, NYC), that org's score is multiplied by 1.5; if the query uses a level word (state, federal, local), orgs at that level are multiplied by 1.25. If the query asks about money (fund, funder, foundation, philanthropy, investor), Philanthropy and Investor orgs are multiplied by 1.5. Multiplying rather than adding keeps an irrelevant org from outranking a relevant one on geography alone.</p>
+      <p>Search is keyword-based: it cannot know that "permits" and "licensing" are the same concept unless the words co-occur in the corpus. The affinity score below uses sentence embeddings for exactly that reason; search stays on TF-IDF because the index has to run in the browser with nothing to download.</p>
 
       <h2>The affinity score</h2>
-      <p>The network view draws an edge between two organizations when they appear to be working on the same underlying problems. The score is a weighted composite of four signals:</p>
+      <p>The map draws an edge between two organizations when they appear to be working on the same underlying problems. Four signals are computed for every pair, each is converted to a percentile so the signals are on the same scale, and the percentiles are combined with these weights:</p>
 
       <div class="formula-block">
         score = <span class="coef">0.40</span> × description similarity<br>
-        + <span class="coef">0.30</span> × shared problem statements<br>
+        + <span class="coef">0.30</span> × shared problem topics<br>
         + <span class="coef">0.15</span> × shared named funders<br>
         + <span class="coef">0.15</span> × shared segments
       </div>
@@ -456,73 +466,75 @@
         <div class="weight-card">
           <span class="lbl">Description</span>
           <span class="pct">40%</span>
-          <div class="body">The substance of what the org does (TF-IDF cosine).</div>
+          <div class="body">What the org says it does, compared with sentence embeddings.</div>
         </div>
         <div class="weight-card" style="border-left-color:var(--orange)">
           <span class="lbl">Problems</span>
           <span class="pct" style="color:var(--orange)">30%</span>
-          <div class="body">The specific issues each org is trying to fix.</div>
+          <div class="body">The curated topic tags, with rare topics counting more than common ones.</div>
         </div>
         <div class="weight-card" style="border-left-color:#9333ea">
           <span class="lbl">Funders</span>
           <span class="pct" style="color:#9333ea">15%</span>
-          <div class="body">Theory of change: who believes in this approach.</div>
+          <div class="body">Who backs the work, from named funders in the funding text.</div>
         </div>
         <div class="weight-card" style="border-left-color:#0d9488">
           <span class="lbl">Segments</span>
           <span class="pct" style="color:#0d9488">15%</span>
-          <div class="body">The mechanism: how the org operates.</div>
+          <div class="body">How the org operates. A tiebreaker, not a driver.</div>
         </div>
       </div>
 
-      <p>The framing behind these weights: every signal points at the same underlying question, which is <em>what is this org trying to accomplish, and who else is trying to accomplish the same thing?</em> Problem statements tell you what they're working on. Descriptions tell you the substance. Funders tell you the theory of change. Segments tell you the mechanism.</p>
-
-      <p><strong>Segment overlap is intentionally the smallest signal.</strong> An earlier version of the score gave segments 35% weight plus a primary-segment match boost, but that made the network show mostly the obvious thing (Research orgs cluster with Research orgs). The current weighting surfaces cross-segment surprises: a Research shop and a GovTech vendor that turn out to be working on the same problem with overlapping funders are now plausibly connected even though they live in different segment clusters.</p>
+      <p>Every signal points at one question: what is this org trying to accomplish, and who else is trying to accomplish the same thing? Topics say what they work on, descriptions say the substance, funders say who believes in the approach, and segments say the mechanism. Percentile scaling matters because the raw signals live on different scales: two orgs that share one of two tags score 0.5 on topics while two 30-word descriptions rarely score above 0.5 on cosine, so without scaling the tag signals would decide nearly every edge regardless of the weights.</p>
 
       <h3>Description similarity (40%)</h3>
-      <p>The strongest signal, because the description text is where org-specific language lives: phrases like "permitting reform," "legislative capacity," "procurement modernization," or "AI policy." We compute a TF-IDF representation of each org's description, funding-detail text, segment names, problem-topic tags, and problem-area tags combined, then take the cosine similarity between every pair of vectors. Folding problem areas into this bag lets a free-text query like "procurement" match orgs whose description never uses the word but whose tags do.</p>
-      <p><strong>TF-IDF</strong> (term frequency–inverse document frequency) downweights words that appear everywhere ("government," "technology," "policy") and upweights words that are distinctive. Two orgs that both talk about "procurement" will score higher than two orgs that both talk about "policy." Common words and short tokens are dropped before vectorizing.</p>
+      <p>Each org's name, description and topic list are embedded with the open sentence-embedding model all-MiniLM-L6-v2 at build time, and the signal is the cosine similarity between the two vectors. Embeddings recognize that "permitting reform" and "faster approvals for builders" describe the same work even when no word overlaps. The build records which text signal was used in the data file; if the model is unavailable the build falls back to TF-IDF cosine and says so.</p>
 
-      <h3>Shared problem statements (30%)</h3>
-      <p>The Jaccard similarity of the two orgs' problem-topic tag sets. Every org carries one or more tags from a curated list of 36; an org tagged with both <em>Procurement Reform</em> and <em>Service Design</em> shares a 50% Jaccard with one tagged with only <em>Procurement Reform</em>. Because the tags are curator-assigned, this is the highest-confidence signal in the dataset: when two orgs share problem topics, they really are working on the same thing. (The coarser <em>Problem Area</em> bucket is folded into the description-similarity signal but not into this Jaccard, since orgs share an Area too easily to be a high-confidence match.)</p>
+      <h3>Shared problem topics (30%)</h3>
+      <p>A weighted Jaccard over the two orgs' topic tags. Each of the 36 topics is weighted by how rare it is (the log of orgs in the directory over orgs carrying that topic), so sharing Child Welfare, which a handful of orgs carry, counts for more than sharing AI in Government, which many do. Because the tags are curator-assigned, this is the highest-confidence signal in the dataset. The coarser Problem Area bucket is not used here; it is too broad to separate anyone.</p>
 
       <h3>Shared funders (15%)</h3>
-      <p>Funders are pulled from the free-text Funding Detail by string-matching against a curated list of ~50 well-known philanthropies, foundations, and venture funds (Schmidt Futures, Open Philanthropy, Omidyar Network, Ford, MacArthur, Knight, Bloomberg, Arnold Ventures, 8VC, a16z, etc.). For two orgs with at least one named funder each, we compute the Jaccard similarity of their funder sets. If neither has an extractable named funder, we fall back to a small bonus when their funding-model field matches exactly.</p>
-
+      <p>Funders are pulled from the free-text Funding Detail two ways: a curated list of well-known philanthropies, foundations, and venture funds (Schmidt Futures, Open Philanthropy, Omidyar Network, Ford, MacArthur, Knight, Bloomberg, Arnold Ventures, and others), and a pattern that catches any capitalized name ending in Foundation, Fund, Ventures, Philanthropies, Trust, or Initiative. The signal is the Jaccard similarity of the two funder sets, and it is zero when either org has no detected funder.</p>
       <div class="callout">
-        <strong>Limitation worth flagging.</strong> Approximately 66 of 334 orgs have at least one named funder detected. The curated list is not exhaustive, and many smaller foundations, family offices, and government grants are missed. Orgs that share an unlisted funder will not light up on this signal. The description and problem-statement scores carry them.
+        <strong>Limitation worth flagging.</strong> Approximately 77 of 334 orgs have at least one named funder detected. Smaller foundations, family offices, and government grants are still missed, and a Funding Detail that says "philanthropic grants" names nobody. Orgs that share an unlisted funder will not light up on this signal. The description and topic scores carry them.
       </div>
 
       <h3>Shared segments (15%)</h3>
-      <p>Plain Jaccard over the union of each org's primary and secondary segment tags. <strong>No primary-segment boost.</strong> Earlier versions added a +0.5 boost for matching primary segments, which made the graph collapse into same-segment cliques. Removing the boost and reducing the overall weight means segment overlap acts as a tiebreaker, not a dominant signal.</p>
+      <p>Plain Jaccard over the union of each org's primary and secondary segment tags, with no boost for a matching primary segment. The weight is small on purpose: segment overlap is the obvious thing (research shops look like research shops), and the map exists to surface the cross-segment connections.</p>
 
-      <h3>What gets dropped, what gets kept</h3>
-      <p>Pairs with a composite score below <strong>0.05</strong> are discarded entirely. From the remaining pairs we apply two further filters:</p>
-      <ul>
-        <li><strong>Absolute floor:</strong> edges below 0.10 are not included in the dataset.</li>
-        <li><strong>Per-node degree cap:</strong> we walk through the remaining edges in descending score order and keep an edge only if at least one of its two endpoints currently has fewer than 8 kept neighbors. This prevents central hubs from collecting hundreds of weak edges that produce a hairball, while still letting them be the most connected nodes.</li>
-      </ul>
-      <p>The published dataset has <strong>334 nodes and 1,798 edges</strong>, with a maximum edge score of 0.82 and a median of 0.10. The network view starts at a visual threshold of 0.18 for legibility; the slider exposes the full 0.10–0.40 range. A thicker, more saturated edge is a higher composite score (stronger affinity); a thin faint edge is a weaker match.</p>
+      <h3>Which edges are kept</h3>
+      <p>Every org keeps its six strongest pairs, and the map's edge set is the union of those lists. An edge is <strong>mutual</strong> when each org is in the other's top six; the map draws mutual edges solid and one-way edges faint. There is no minimum score and no cap on how many lists an org can appear in, so a fellowship program that many orgs resemble can hold twenty edges while a niche vendor holds six. Organizations whose description says they have closed are marked sunset, drawn hollow, and can be hidden.</p>
+      <p>The published dataset has <strong>334 nodes and 1,376 edges</strong>, with a maximum edge score of 0.97 and a median of 0.74. <span data-stat-line>Of those edges, <span data-stat="mutual_count">…</span> are mutual and <span data-stat="cross_pct">…</span> connect organizations in different primary segments.</span> The map opens at the 25th-percentile score so the weakest quarter of edges is hidden until you lower the slider.</p>
 
       <h2>Inside the score table</h2>
-      <p>For reference, here is what each signal can range over:</p>
+      <p>For reference, here is what each signal ranges over before percentile scaling:</p>
       <div style="overflow-x:auto">
       <table class="signals">
         <thead>
-          <tr><th>Signal</th><th>Weight</th><th>Range</th><th>Notes</th></tr>
+          <tr><th>Signal</th><th>Weight</th><th>Raw range</th><th>Notes</th></tr>
         </thead>
         <tbody>
-          <tr><td>TF-IDF cosine (descriptions, problem topics + areas, segments, funding text)</td><td class="weight">0.40</td><td>0 to ~0.6 in practice</td><td>Rarely exceeds 0.5 because descriptions are short.</td></tr>
-          <tr><td>Problem-statement Jaccard</td><td class="weight">0.30</td><td>0 to 1.0</td><td>Highest-confidence signal: curator-assigned tags.</td></tr>
-          <tr><td>Named-funder Jaccard</td><td class="weight">0.15</td><td>0 to 1.0</td><td>Falls back to 0.15 if funding models match and no funders are detected.</td></tr>
+          <tr><td>Sentence-embedding cosine (name, description, topics)</td><td class="weight">0.40</td><td>0 to 1.0</td><td>Most pairs land between 0.2 and 0.6; scaling spreads them out.</td></tr>
+          <tr><td>Rarity-weighted topic Jaccard</td><td class="weight">0.30</td><td>0 to 1.0</td><td>Highest-confidence signal: curator-assigned tags.</td></tr>
+          <tr><td>Named-funder Jaccard</td><td class="weight">0.15</td><td>0 to 1.0</td><td>Zero when either org has no detected funder.</td></tr>
           <tr><td>Segment Jaccard (no primary boost)</td><td class="weight">0.15</td><td>0 to 1.0</td><td>Intentionally a tiebreaker, not a dominant signal.</td></tr>
         </tbody>
       </table>
       </div>
 
+      <h2>The map's tools</h2>
+      <ul>
+        <li><strong>Why connected.</strong> Click an edge, or a peer in an org's panel, to see the shared topics, shared funders, and shared terms behind it, with the four component scores.</li>
+        <li><strong>Cross-segment only.</strong> Hides every edge whose two ends share a primary segment, leaving the connections the score was built to find.</li>
+        <li><strong>Neighborhood and two hops.</strong> Restricts the map to one org and the orgs around it.</li>
+        <li><strong>Find a path.</strong> Names two orgs and shows the shortest chain between them, with each hop explained. This is how an introduction route gets found.</li>
+        <li><strong>Funders view.</strong> Redraws the graph with funders as nodes joined to the orgs they back. It is only as complete as the funder detection above.</li>
+        <li><strong>Copy link.</strong> Every filter, the threshold, the view and the selected org live in the URL.</li>
+      </ul>
+
       <h2>What the graph does and does not show</h2>
-      <p><strong>It shows</strong> structural affinity: which orgs are working on the same underlying problems, talk about them in similar ways, and often share funders. The strongest edges in the dataset are between orgs that any expert in the field would intuitively put in the same cluster, but the value of the graph is in the edges that <em>aren't</em> obvious: a Research shop and a GovTech vendor working on the same problem statement, or a Fellowship program and a Capacity Building org sharing the same set of funders.</p>
-      <p><strong>It does not show</strong> documented relationships. The data does not encode partnerships, joint programs, alumni flows, board interlocks, or co-investments. An edge in this graph is an inference about likely affinity from public-facing descriptions and tags, not an assertion that two orgs are working together.</p>
+      <p><strong>It shows</strong> structural affinity: which orgs work on the same underlying problems, describe them in similar ways, and often share funders. The strongest edges are between orgs that anyone in the field would put in the same cluster, but the value of the graph is in the edges that are not obvious: a research shop and a GovTech vendor on the same problem, or a fellowship program and a capacity-building org sharing a set of funders.</p>
+      <p><strong>It does not show</strong> documented relationships. The data does not encode partnerships, joint programs, alumni flows, board interlocks, or co-investments. An edge is an inference about likely affinity from public-facing descriptions and tags, not an assertion that two orgs are working together.</p>
 
       <h2>Color palette</h2>
       <p>Primary segments are color-coded consistently across the directory's segment tag column and the network's nodes. The mapping:</p>
@@ -543,6 +555,15 @@
       <h2>Credits</h2>
       <p>The State Capacity Ecosystem Database is built and curated by the <strong>State Capacity Ecosystem (SCE) team</strong>. The visualization and interaction layer is maintained by <strong>Tal Roded</strong>.</p>
 
+      <script>
+      fetch('/data/affinity.json').then(r => r.json()).then(d => {
+        const s = d.stats || {};
+        const m = document.querySelector('[data-stat="mutual_count"]');
+        const c = document.querySelector('[data-stat="cross_pct"]');
+        if (m && s.mutual_count != null) m.textContent = s.mutual_count.toLocaleString();
+        if (c && s.cross_share != null) c.textContent = Math.round(s.cross_share * 100) + '%';
+      }).catch(() => { const l = document.querySelector('[data-stat-line]'); if (l) l.remove(); });
+      </script>
     </article>
   </div>
 </div>

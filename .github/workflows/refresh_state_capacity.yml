@@ -24,8 +24,14 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Cache embedding model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: minilm-l6-v2
+
       - name: Install dependencies
-        run: pip install numpy
+        run: pip install -r data/requirements-build.txt
 
       - name: Check for CSV changes
         id: check
@@ -58,11 +64,15 @@ jobs:
 
       - name: Rebuild org JSON files
         if: steps.check.outputs.org_changed == 'true'
-        run: python3 data/build_affinity.py
+        run: python3 data/build_affinity.py --require-embeddings
 
       - name: Update hardcoded stat strings
         if: steps.check.outputs.org_changed == 'true'
         run: python3 data/update_stats.py
+
+      - name: Record directory changes (change feed)
+        if: steps.check.outputs.org_changed == 'true'
+        run: python3 data/build_changes.py
 
       # ── Connect pipeline (connect_submissions.csv → connect.json + email notifications) ──
 
@@ -75,6 +85,12 @@ jobs:
       - name: Rebuild Connect JSON
         if: steps.check.outputs.connect_changed == 'true'
         run: python3 data/build_people.py
+
+      # ── Problem topic pages (directory + Connect + proof points → ecosystem/topics/) ──
+
+      - name: Rebuild problem topic pages
+        if: steps.check.outputs.org_changed == 'true' || steps.check.outputs.connect_changed == 'true'
+        run: python3 data/build_topics.py
 
       # ── Substack archive (post list on the Substack page) ──
 
@@ -107,11 +123,13 @@ jobs:
               data/directory.json \
               data/affinity_search.json \
               ecosystem/methodology/index.html \
-              README.md
+              README.md \
+              data/changes.json \
+              ecosystem/topics
           fi
 
           if [ "$CON_CHANGED" = "true" ]; then
-            git add data/connect.json
+            git add data/connect.json ecosystem/topics
           fi
 
           git add data/substack_posts.json

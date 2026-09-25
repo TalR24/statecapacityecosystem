@@ -460,6 +460,7 @@
         <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
         <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
         <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
+        <a href="/ecosystem/topics/">Problem topics<span class="ribbon-sub">Every problem we track, and who works on it.</span></a>
       </div>
     </div>
     <div class="ribbon-item">
@@ -561,7 +562,12 @@
           <label class="filter-label">Problem topic</label>
           <div id="ms-problem"></div>
         </div>
+        <div class="filter-group" style="min-width:auto;flex-direction:row;align-items:center;gap:6px;padding-bottom:6px;">
+          <input type="checkbox" id="f-hidesunset" style="width:14px;height:14px;accent-color:var(--blue);cursor:pointer;">
+          <label class="filter-label" for="f-hidesunset" style="text-transform:none;letter-spacing:normal;font-weight:500;cursor:pointer;">Hide sunset orgs</label>
+        </div>
         <button class="btn-reset" id="btn-reset">Reset</button>
+        <button class="btn-reset" id="btn-copy-link">Copy link</button>
       </div>
     </div>
 
@@ -627,6 +633,7 @@ let sortDir = 1;
 let page = 1;
 const PAGE_SIZE = 25;
 let expandedId = null;
+let addParamActive = false;
 
 // MultiSelect — opening one closes the others; clicking outside closes any open dropdown.
 class MS {
@@ -680,6 +687,10 @@ class MS {
   }
   get() { return (this.selected.size === 0 || this.selected.size === this.opts.length) ? new Set() : new Set(this.selected); }
   reset() { this._clear(); }
+  setSelectedSilent(values) {
+    this.selected = new Set(values.filter(v => this.opts.some(o => o.v === v)));
+    this._sync(); this._upd();
+  }
 }
 
 const onChange = () => { expandedId = null; applyFilters(); };
@@ -690,16 +701,95 @@ const msProblem = new MS("ms-problem", "Topics", onChange);
 
 function normArea(a) { return a === "Verticals" ? "Domains" : a; }
 
+let connectData = null;
+let connectFetchPromise = null;
+function ensureConnectData() {
+  if (connectData) return Promise.resolve(connectData);
+  if (!connectFetchPromise) {
+    connectFetchPromise = fetch("/data/connect.json").then(r => r.json()).then(d => { connectData = d; return d; }).catch(() => { connectData = []; return connectData; });
+  }
+  return connectFetchPromise;
+}
+function maybeLoadConnectFor(id) {
+  if (connectData) return;
+  ensureConnectData().then(() => { if (expandedId === id) renderTable(); });
+}
+
 fetch("/data/directory.json")
   .then(r => r.json())
   .then(orgs => {
     allOrgs = orgs;
     populateFilters();
+    const params = new URLSearchParams(window.location.search);
+    applyURLStateFromParams(params);
     applyFilters();
+    const orgParam = params.get("org");
+    const pageParam = parseInt(params.get("page"), 10);
+    if (orgParam) {
+      expandOrgById(parseInt(orgParam, 10));
+    } else if (pageParam > 1) {
+      goPage(pageParam);
+    }
   }).catch(err => {
     document.getElementById("table-body").innerHTML =
       `<tr><td colspan="6"><div class="state-msg"><h3>Could not load data</h3><p>${err.message}</p></div></td></tr>`;
   });
+
+function applyURLStateFromParams(params) {
+  const q = params.get("q"); if (q) document.getElementById("f-search").value = q;
+  const seg = params.get("seg"); if (seg) msSeg.setSelectedSilent(seg.split("|"));
+  const geo = params.get("geo"); if (geo) msFocus.setSelectedSilent(geo.split("|"));
+  const area = params.get("area"); if (area) msArea.setSelectedSilent(area.split("|"));
+  const topic = params.get("topic"); if (topic) msProblem.setSelectedSilent(topic.split("|"));
+  if (params.get("hidesunset") === "1") document.getElementById("f-hidesunset").checked = true;
+}
+
+function currentParams() {
+  const p = new URLSearchParams();
+  const q = document.getElementById("f-search").value.trim();
+  if (q) p.set("q", q);
+  if (msSeg.selected.size) p.set("seg", [...msSeg.selected].join("|"));
+  if (msFocus.selected.size) p.set("geo", [...msFocus.selected].join("|"));
+  if (msArea.selected.size) p.set("area", [...msArea.selected].join("|"));
+  if (msProblem.selected.size) p.set("topic", [...msProblem.selected].join("|"));
+  if (document.getElementById("f-hidesunset").checked) p.set("hidesunset", "1");
+  if (page > 1) p.set("page", String(page));
+  if (expandedId !== null) p.set("org", String(expandedId));
+  if (addParamActive) p.set("add", "1");
+  return p;
+}
+function syncURL() {
+  const qs = currentParams().toString();
+  history.replaceState(null, "", window.location.pathname + (qs ? "?" + qs : ""));
+}
+
+function scrollToOrgRow(id) {
+  requestAnimationFrame(() => {
+    const tr = document.querySelector(`tr.data-row[data-id="${id}"]`);
+    if (tr) tr.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+}
+
+function expandOrgById(id) {
+  if (!allOrgs.some(o => o.id === id)) return; // unknown id: leave filters/page untouched, skip expansion
+  let idx = filtered.findIndex(o => o.id === id);
+  if (idx === -1) {
+    [msSeg, msFocus, msArea, msProblem].forEach(m => m.reset());
+    document.getElementById("f-search").value = "";
+    document.getElementById("f-hidesunset").checked = false;
+    applyFilters();
+    idx = filtered.findIndex(o => o.id === id);
+  }
+  if (idx === -1) return;
+  page = Math.floor(idx / PAGE_SIZE) + 1;
+  expandedId = id;
+  maybeLoadConnectFor(id);
+  renderTable();
+  renderPagination();
+  syncURL();
+  scrollToOrgRow(id);
+}
+window.expandOrgById = expandOrgById;
 
 function populateFilters() {
   const segs = new Set(), focuses = new Set(), areas = new Set();
@@ -723,9 +813,11 @@ function applyFilters() {
   const rawQ = document.getElementById("f-search").value.trim();
   const segF = msSeg.get(), focF = msFocus.get(), areaF = msArea.get(), probF = msProblem.get();
   const probFLower = probF.size ? new Set([...probF].map(f => f.toLowerCase())) : new Set();
+  const hideSunset = document.getElementById("f-hidesunset").checked;
 
   // Pre-filter by faceted filters
   let pool = allOrgs.filter(o => {
+    if (hideSunset && o.status === "sunset") return false;
     if (segF.size && !segF.has(o.primary_segment)) return false;
     if (focF.size && !(o.focus || []).some(f => focF.has(f))) return false;
     if (areaF.size && !(o.problem_areas || []).some(a => areaF.has(normArea(a)))) return false;
@@ -751,6 +843,7 @@ function applyFilters() {
   updateResultsBar();
   renderTable();
   renderPagination();
+  syncURL();
 }
 
 function updateResultsBar() {
@@ -774,6 +867,7 @@ function renderTable() {
 
 function renderRow(o) {
   const expanded = expandedId === o.id;
+  const isSunset = o.status === "sunset";
   const segColor = SEGMENT_COLORS[o.primary_segment] || "#6b7280";
   const otherSegs = (o.segments || []).filter(s => s !== o.primary_segment);
   const otherSegHtml = otherSegs.slice(0,3).map(s => `<span class="seg-tag secondary">${esc(s)}</span>`).join(" ") +
@@ -798,8 +892,8 @@ function renderRow(o) {
     : `<span class="funder-mini" style="color:var(--text-faint)">—</span>`;
 
   return `<tr class="data-row${expanded ? " expanded" : ""}" data-id="${o.id}">
-    <td class="name-cell"><div class="org-name">${esc(o.name)}</div></td>
-    <td><span class="seg-tag" style="background:${segColor}">${esc(o.primary_segment)}</span></td>
+    <td class="name-cell"><div class="org-name"${isSunset ? ' style="color:var(--text-faint)"' : ""}>${esc(o.name)}</div></td>
+    <td><span class="seg-tag" style="background:${segColor}">${esc(o.primary_segment)}</span>${isSunset ? ' <span class="seg-tag secondary" style="background:#f3f4f6;color:var(--text-faint)">Sunset</span>' : ""}</td>
     <td class="desc-cell">${descHtml}</td>
     <td class="tag-cell">${areaHtml}</td>
     <td class="tag-cell">${problemHtml}</td>
@@ -808,7 +902,54 @@ function renderRow(o) {
   ${expanded ? renderDetailRow(o) : ""}`;
 }
 
+function renderPeersBlock(o) {
+  const peers = o.peers || [];
+  if (!peers.length) return "";
+  return `<div class="detail-section" style="margin-top:14px">
+    <h4>Closest peers</h4>
+    ${peers.slice(0,3).map(p => `<a href="#" class="detail-field-value" style="display:block;color:var(--blue);text-decoration:none;margin-bottom:4px" onclick="event.stopPropagation();expandOrgById(${p.id});return false;">${esc(p.name)}</a>`).join("")}
+  </div>`;
+}
+
+function connectMatchesForOrg(o) {
+  if (!connectData) return null;
+  const nameLower = (o.name || "").toLowerCase();
+  let matches = connectData.filter(c => (c.organization || "").toLowerCase() === nameLower);
+  if (matches.length === 0 && o.status !== "sunset") {
+    const orgTopics = new Set((o.problem_statements || []).map(t => t.toLowerCase()));
+    if (orgTopics.size) {
+      const scored = connectData
+        .map(c => {
+          const topics = c.problem_topics || (c.problem_topic ? [c.problem_topic] : []);
+          const shared = topics.filter(t => orgTopics.has((t || "").toLowerCase())).length;
+          return { c, shared };
+        })
+        .filter(x => x.shared > 0);
+      scored.sort((a, b) => b.shared - a.shared);
+      matches = scored.map(x => x.c);
+    }
+  }
+  return matches.slice(0, 5);
+}
+
+function renderConnectBlock(o) {
+  const matches = connectMatchesForOrg(o);
+  if (matches === null) {
+    return `<span class="detail-field-value" style="color:var(--text-faint)">Loading…</span>`;
+  }
+  if (!matches.length) {
+    return `<span class="detail-field-value" style="color:var(--text-faint)">No Connect entries yet for this org's topics.</span>`;
+  }
+  return matches.map(c => {
+    const offerings = Array.isArray(c.offering) ? c.offering.join(", ") : (c.offering || "");
+    return `<div class="detail-field" style="margin-bottom:8px">
+      <a href="/ecosystem/connect/?entry=${c.id}" style="color:var(--blue);text-decoration:none;font-weight:600;font-size:0.85rem" onclick="event.stopPropagation()">${esc(c.name)}</a><span class="detail-field-value" style="color:var(--text-muted)">, ${esc(c.role || "")}${offerings ? ", " + esc(offerings) : ""}</span>
+    </div>`;
+  }).join("");
+}
+
 function renderDetailRow(o) {
+  const isSunset = o.status === "sunset";
   const linkHtml = o.website
     ? `<a href="${esc(httpify(o.website))}" target="_blank" rel="noopener" class="detail-link" onclick="event.stopPropagation()">
          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -837,6 +978,7 @@ function renderDetailRow(o) {
   return `<tr class="detail-row">
     <td colspan="6">
       <div class="detail-panel">
+        ${isSunset ? `<p class="detail-narrative" style="margin-bottom:14px;color:var(--text-faint)">Sunset: ${esc(o.status_note || "")}</p>` : ""}
         <div class="detail-grid">
           <div class="detail-section">
             <h4>What they do</h4>
@@ -848,6 +990,11 @@ function renderDetailRow(o) {
             <div class="detail-field" style="margin-top:10px">
               <span class="detail-field-label">Problem topics</span>
               ${problemHtml}
+            </div>
+            ${renderPeersBlock(o)}
+            <div class="detail-section" style="margin-top:14px">
+              <h4>People and opportunities on Connect</h4>
+              ${renderConnectBlock(o)}
             </div>
           </div>
           <div class="detail-section">
@@ -879,6 +1026,7 @@ function renderDetailRow(o) {
           </div>
         </div>
         ${linkHtml}${networkLink}
+        <button type="button" class="detail-link" style="cursor:pointer" onclick="event.stopPropagation();openOFForOrg(${o.id});">Suggest an edit</button>
       </div>
     </td>
   </tr>`;
@@ -886,7 +1034,9 @@ function renderDetailRow(o) {
 
 function toggleDetail(id) {
   expandedId = (expandedId === id) ? null : id;
+  if (expandedId !== null) maybeLoadConnectFor(expandedId);
   renderTable();
+  syncURL();
 }
 
 function httpify(u) {
@@ -930,17 +1080,27 @@ function goPage(p) {
   page = Math.max(1, Math.min(p, total));
   expandedId = null;
   renderTable(); renderPagination();
+  syncURL();
   window.scrollTo({top: document.querySelector(".table-wrap").offsetTop - 20, behavior:"smooth"});
 }
 window.goPage = goPage;
 
 // Wiring
 document.getElementById("f-search").addEventListener("input", () => { expandedId = null; applyFilters(); });
+document.getElementById("f-hidesunset").addEventListener("change", () => { expandedId = null; applyFilters(); });
 document.getElementById("btn-reset").addEventListener("click", () => {
   [msSeg, msFocus, msArea, msProblem].forEach(m => m.reset());
   document.getElementById("f-search").value = "";
+  document.getElementById("f-hidesunset").checked = false;
   expandedId = null;
   applyFilters();
+});
+document.getElementById("btn-copy-link").addEventListener("click", async () => {
+  const btn = document.getElementById("btn-copy-link");
+  const orig = btn.textContent;
+  try { await navigator.clipboard.writeText(location.href); } catch (e) { /* clipboard unavailable */ }
+  btn.textContent = "Link copied";
+  setTimeout(() => { btn.textContent = orig; }, 1600);
 });
 </script>
 
@@ -954,7 +1114,7 @@ document.getElementById("btn-reset").addEventListener("click", () => {
 
     <!-- Form body -->
     <div class="sf-body" id="of-form-body">
-      <p class="sf-intro">
+      <p class="sf-intro" id="of-intro">
         Add an organization working on state capacity to the directory. Submissions are reviewed before going live.
         Fields marked <span style="color:var(--orange)">*</span> are required.
       </p>
@@ -1104,6 +1264,32 @@ function ofGetSingle(containerId) {
   const on = document.querySelector(`#${containerId} .sf-schip.on`);
   return on ? on.dataset.val : "";
 }
+// Turns on the chip matching each value (after an optional map()). Values with no
+// matching chip go into the field's Other text input if it has one (comma-joined);
+// otherwise they are returned so the caller can carry them elsewhere (e.g. a note).
+function ofApplyMultiValues(containerId, values, opts) {
+  opts = opts || {};
+  const mapValue = opts.map || (v => v);
+  const leftovers = [];
+  const otherValues = [];
+  (values || []).forEach(raw => {
+    const v = mapValue(raw);
+    const chip = document.querySelector(`#${containerId} [data-val="${CSS.escape(v)}"]`);
+    if (chip) {
+      chip.classList.add("on");
+    } else if (opts.otherInputId) {
+      otherValues.push(raw);
+    } else {
+      leftovers.push(raw);
+    }
+  });
+  if (opts.otherInputId && otherValues.length) {
+    document.querySelector(`#${containerId} [data-val="Other"]`)?.classList.add("on");
+    if (opts.otherCondId) document.getElementById(opts.otherCondId).classList.add("show");
+    document.getElementById(opts.otherInputId).value = otherValues.join(", ");
+  }
+  return leftovers;
+}
 function ofPrimaryOtherSwitch() {
   document.getElementById("of-primary-other-cond").classList.toggle("show", ofGetSingle("of-primary-chips") === "Other");
 }
@@ -1226,7 +1412,7 @@ async function ofCopy() {
   }
 }
 
-function openOF() {
+function openOF(org) {
   document.getElementById("of-form-body").style.display = "";
   document.getElementById("of-form-footer").style.display = "";
   document.getElementById("of-success").style.display = "none";
@@ -1240,15 +1426,72 @@ function openOF() {
   const ct = document.getElementById("of-desc-ct"); if (ct) { ct.textContent = "2000 left"; ct.classList.remove("warn","over"); }
   const btn = document.getElementById("of-submit-btn");
   if (btn) { btn.disabled = false; btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Submit'; }
+
+  if (org) {
+    document.getElementById("of-title").textContent = `Suggest an edit to ${org.name}`;
+    document.getElementById("of-intro").textContent = "Change what needs changing and submit. We review edits before they go live.";
+    document.getElementById("of-name").value = org.name || "";
+    const primaryChip = document.querySelector(`#of-primary-chips [data-val="${CSS.escape(org.primary_segment || "")}"]`);
+    if (primaryChip) {
+      primaryChip.classList.add("on");
+    } else if (org.primary_segment) {
+      document.querySelector('#of-primary-chips [data-val="Other"]')?.classList.add("on");
+      document.getElementById("of-primary-other-cond").classList.add("show");
+      document.getElementById("of-primary-other").value = org.primary_segment;
+    }
+
+    const leftoverNotes = [];
+
+    const secLeftovers = ofApplyMultiValues(
+      "of-secondary-chips",
+      (org.segments || []).filter(s => s !== org.primary_segment),
+      { otherInputId: "of-secondary-other", otherCondId: "of-secondary-other-cond" }
+    );
+    if (secLeftovers.length) leftoverNotes.push(`Secondary segments: ${secLeftovers.join(", ")}`);
+
+    const focusLeftovers = ofApplyMultiValues(
+      "of-focus-chips",
+      org.focus || [],
+      { map: f => (f === "City" ? "Local" : f) }
+    );
+    if (focusLeftovers.length) leftoverNotes.push(`Focus: ${focusLeftovers.join(", ")}`);
+
+    const fundingValues = (org.funding_model || "").split(/,\s*/).filter(Boolean);
+    const fundingLeftovers = ofApplyMultiValues("of-funding-chips", fundingValues, {});
+    if (fundingLeftovers.length) leftoverNotes.push(`Funding model: ${fundingLeftovers.join(", ")}`);
+
+    const notePrefix = leftoverNotes.length
+      ? `[Current values not offered by this form: ${leftoverNotes.join("; ")}] `
+      : "";
+    document.getElementById("of-desc").value = `[Edit suggestion for ${org.name}] ${notePrefix}${org.description || ""}`;
+    ofCharCount("of-desc", "of-desc-ct", 2000);
+    document.getElementById("of-funding-detail").value = org.funding_detail || "";
+    document.getElementById("of-url").value = org.website || "";
+  } else {
+    document.getElementById("of-title").textContent = "Suggest an organization";
+    document.getElementById("of-intro").innerHTML =
+      'Add an organization working on state capacity to the directory. Submissions are reviewed before going live.\n        Fields marked <span style="color:var(--orange)">*</span> are required.';
+  }
+
   document.getElementById("of-form-body").scrollTop = 0;
   document.getElementById("of-overlay").classList.add("open");
   document.body.style.overflow = "hidden";
+  addParamActive = !org;
+  syncURL();
   requestAnimationFrame(() => document.getElementById("of-name").focus());
 }
+
+function openOFForOrg(id) {
+  const org = allOrgs.find(x => x.id === id);
+  if (org) openOF(org);
+}
+window.openOFForOrg = openOFForOrg;
 
 function closeOF() {
   document.getElementById("of-overlay").classList.remove("open");
   document.body.style.overflow = "";
+  addParamActive = false;
+  syncURL();
 }
 
 document.getElementById("of-overlay").addEventListener("click", e => {

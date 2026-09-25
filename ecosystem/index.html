@@ -354,6 +354,17 @@
       padding-left:12px; border-left:2px solid var(--border-mid);
     }
     .seg-list li strong { color:var(--text); font-weight:600; display:block; margin-bottom:2px; }
+
+    /* CHANGE FEED */
+    .cf-h2 { font-family:'Roboto Mono',monospace; font-size:1.1rem; font-weight:700; color:var(--text); letter-spacing:-0.02em; margin-bottom:14px; }
+    .cf-row { display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); }
+    .cf-row:last-child { border-bottom:none; }
+    .cf-date { font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:700; color:var(--orange); min-width:80px; }
+    .cf-summary { font-size:0.88rem; color:var(--text-mid); }
+    .cf-chips { display:flex; flex-wrap:wrap; gap:6px; }
+    .cf-chip { font-size:0.72rem; padding:2px 9px; border-radius:10px; background:var(--blue-light); color:var(--blue); border:1px solid var(--blue-mid); text-decoration:none; }
+    .cf-chip:hover { background:var(--blue); color:#fff; }
+    .cf-empty { font-size:0.88rem; color:var(--text-faint); }
   </style>
 <style id="ribbon-css">
 .ribbon{background:var(--surface);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);position:relative;z-index:80;}
@@ -430,6 +441,7 @@
         <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
         <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
         <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
+        <a href="/ecosystem/topics/">Problem topics<span class="ribbon-sub">Every problem we track, and who works on it.</span></a>
       </div>
     </div>
     <div class="ribbon-item">
@@ -650,7 +662,47 @@
         </div>
       </a>
 
+      <a class="explore-bubble" href="./topics/">
+        <div class="bubble-preview">
+          <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="160" fill="#1A1918"/>
+            <text x="16" y="20" font-family="'Roboto Mono',monospace" font-size="8" font-weight="700" letter-spacing="0.6" fill="#D4A853">PROBLEM TOPICS · 36</text>
+            <rect x="16" y="34" width="140" height="52" rx="3" fill="#2A2723" stroke="#3E3931"/>
+            <text x="24" y="48" font-family="'Roboto Mono',monospace" font-size="6.5" font-weight="700" fill="#D4A853">PARTICIPATORY DEMOCRACY</text>
+            <text x="24" y="60" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Civic Engagement</text>
+            <text x="24" y="72" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Transparency &amp; Accountability</text>
+            <rect x="164" y="34" width="140" height="52" rx="3" fill="#2A2723" stroke="#3E3931"/>
+            <text x="172" y="48" font-family="'Roboto Mono',monospace" font-size="6.5" font-weight="700" fill="#D4A853">PROCUREMENT &amp; OPERATIONS</text>
+            <text x="172" y="60" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Procurement Reform</text>
+            <text x="172" y="72" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Reaction Time</text>
+            <rect x="16" y="94" width="140" height="52" rx="3" fill="#2A2723" stroke="#3E3931"/>
+            <text x="24" y="108" font-family="'Roboto Mono',monospace" font-size="6.5" font-weight="700" fill="#D4A853">TECHNOLOGY &amp; DATA</text>
+            <text x="24" y="120" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Legacy Systems</text>
+            <text x="24" y="132" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Shared Platforms</text>
+            <rect x="164" y="94" width="140" height="52" rx="3" fill="#2A2723" stroke="#3E3931"/>
+            <text x="172" y="108" font-family="'Roboto Mono',monospace" font-size="6.5" font-weight="700" fill="#D4A853">TALENT &amp; HIRING</text>
+            <text x="172" y="120" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Talent Pipeline</text>
+            <text x="172" y="132" font-family="Inter,sans-serif" font-size="7" fill="#EDE7DA">Hiring Process</text>
+          </svg>
+        </div>
+        <div class="bubble-body">
+          <div class="bubble-cat">Problem topics · 36</div>
+          <div class="bubble-title">Problem topics</div>
+          <div class="bubble-desc">Every problem the ecosystem works on, with the organizations, people, and tools on each.</div>
+          <div class="bubble-cta">Browse topics →</div>
+        </div>
+      </a>
+
     </div>
+
+    <section id="changes" style="margin-top:24px;">
+      <div class="section-label" style="margin-top:0;">Change feed</div>
+      <h2 class="cf-h2">What changed in the directory.</h2>
+      <div id="change-feed" class="text-panel" style="border-left-color:var(--blue);">
+        <div id="change-feed-rows"></div>
+        <a href="/ecosystem/topics/" class="info-link" style="margin-top:10px;display:inline-block;">Browse by problem topic →</a>
+      </div>
+    </section>
 
     <div class="section-label" style="margin-top:24px;">Methodology</div>
     <div class="text-panel" style="border-left-color:var(--blue);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
@@ -937,6 +989,45 @@ function _mlRender(ppl, orgs) {
     list.innerHTML += `<div class="ml-more">Showing top 16 of ${total}. <a href="./connect/">Connect</a> and the <a href="./organizations/">Organization Directory</a> have full search.</div>`;
   }
 }
+</script>
+
+<script>
+(function () {
+  const cf2 = s => (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+  function renderChangeFeed(data) {
+    const rowsEl = document.getElementById('change-feed-rows');
+    if (!rowsEl) return;
+    const entries = (data && data.entries) || [];
+    if (!entries.length) {
+      rowsEl.innerHTML = '<div class="cf-row"><span class="cf-empty">No changes recorded yet. The directory refreshes daily.</span></div>';
+      return;
+    }
+    const rows = entries.slice(0, 3).map(e => {
+      const parts = [];
+      if (e.counts.added) parts.push(`${e.counts.added} added`);
+      if (e.counts.removed) parts.push(`${e.counts.removed} removed`);
+      if (e.counts.edited) parts.push(`${e.counts.edited} updated`);
+      const summary = parts.join(', ');
+      const names = e.added || [];
+      const shown = names.slice(0, 6);
+      const chips = shown.map(n => `<a class="cf-chip" href="/ecosystem/organizations/?q=${encodeURIComponent(n)}">${cf2(n)}</a>`).join('');
+      const more = names.length > 6 ? `<span class="cf-chip" style="background:transparent;border-style:dashed;">+${names.length - 6} more</span>` : '';
+      return `<div class="cf-row">
+        <span class="cf-date">${cf2(e.date)}</span>
+        <span class="cf-summary">${cf2(summary)}</span>
+        <span class="cf-chips">${chips}${more}</span>
+      </div>`;
+    }).join('');
+    rowsEl.innerHTML = rows;
+  }
+
+  fetch('/data/changes.json').then(r => r.ok ? r.json() : null).then(data => {
+    renderChangeFeed(data);
+  }).catch(() => {
+    renderChangeFeed(null);
+  });
+})();
 </script>
 
 <!-- MAD LIBS OVERLAY -->

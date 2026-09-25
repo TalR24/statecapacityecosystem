@@ -2,88 +2,205 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://statecapacityecosystem.com/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/about/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/community/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/ecosystem/</loc>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/events/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/community/playbooks/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/community/proof-points/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/community/slack/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/ecosystem/affinity-map/</loc>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/ecosystem/connect/</loc>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/ecosystem/methodology/</loc>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/ecosystem/organizations/</loc>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/ecosystem/search/</loc>
+    <lastmod>2026-09-25</lastmod>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/</loc>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/events/demo-nights/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/events/hackathons/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/events/salons/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/events/sponsors-checklist/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/community/substack/mamdani-ai-priorities/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/community/substack/nyc-grocery-access-site-prototype/</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-25</lastmod>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/ai-in-government/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/benefits-access/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/broadband-internet-connectivity/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/child-welfare/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/civic-engagement/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/criminal-justice/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/crisis-response/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/data-integration/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/data-security/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/democracy-infrastructure/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/economic-mobility/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/education-delivery/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/evidence-use/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/expert-contribution/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/feedback-loops/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/healthcare-access/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/hiring-architecture/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/hiring-process/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/housing-land-use/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/iterative-learning/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/legacy-systems/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/operational-excellence/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/outcomes-measurement/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/permitting-licensing/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/physical-infrastructure/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/procurement-reform/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/public-health/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/reaction-time/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/regulatory-administrative-burden/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/scaling-what-works/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/service-design/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/shared-platforms/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/talent-pipeline/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/tax-revenue/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/transparency-accountability/</loc>
+  </url>
+  <url>
+    <loc>https://statecapacityecosystem.com/ecosystem/topics/workforce-development/</loc>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/events/hackathons/civic-tech-build-night/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/community/substack/mamdani-ai-priorities/housing-approval-pathway/</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/community/substack/mamdani-ai-priorities/summons-navigator/</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
   <url>
     <loc>https://statecapacityecosystem.com/events/hackathons/civic-tech-build-night/tideline/</loc>
-    <lastmod>2026-08-24</lastmod>
+    <lastmod>2026-09-25</lastmod>
   </url>
 </urlset>

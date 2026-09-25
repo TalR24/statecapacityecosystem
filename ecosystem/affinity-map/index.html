@@ -321,6 +321,43 @@
     }
     .neighbor-chip:hover { border-color:var(--blue); color:var(--blue); background:var(--blue-light); }
     .neighbor-chip .w { font-family:'Roboto Mono',monospace; color:var(--text-faint); margin-left:5px; font-size:0.68rem; }
+    .neighbor-chip { display:flex; flex-direction:column; align-items:flex-start; gap:1px; }
+    .neighbor-chip .nc-top { display:flex; align-items:center; }
+    .explain-line { font-size:0.68rem; color:var(--text-faint); line-height:1.3; max-width:220px; }
+
+    .toggle-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
+    .toggle-item { display:flex; align-items:center; gap:5px; font-size:0.76rem; color:var(--text-mid); cursor:pointer; user-select:none; }
+    .toggle-item input { accent-color:var(--blue); cursor:pointer; }
+
+    .view-toggle { display:flex; border:1px solid var(--border-mid); border-radius:6px; overflow:hidden; width:fit-content; }
+    .view-toggle-btn { height:32px; padding:0 14px; background:var(--surface); border:none; border-right:1px solid var(--border-mid); font-size:0.78rem; font-family:'Roboto Mono',monospace; color:var(--text-muted); cursor:pointer; }
+    .view-toggle-btn:last-child { border-right:none; }
+    .view-toggle-btn.active { background:var(--blue); color:#fff; }
+    .view-toggle-note { font-size:0.68rem; color:var(--text-faint); margin-top:4px; max-width:260px; line-height:1.4; }
+
+    .path-finder-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .path-finder-row input { height:32px; border:1px solid var(--border-mid); border-radius:6px; padding:0 10px; font-size:0.82rem; font-family:'Inter',sans-serif; color:var(--text); background:var(--bg); outline:none; width:190px; }
+    .path-finder-row input:focus { border-color:var(--blue); }
+    .path-chain { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .path-hop { margin-bottom:8px; }
+    .path-hop .explain-line { max-width:none; }
+
+    .graph-legend { font-size:0.72rem; color:var(--text-faint); padding:8px 4px 2px; }
+
+    #graph .link-hit { stroke:transparent; fill:none; cursor:pointer; }
+    #graph .link.oneway { stroke-opacity:0.45; }
+    #graph .link.mutual { stroke-opacity:1.0; }
+    #graph .node.dim, #graph .link.dim2 { opacity:0.15; }
+
+    .ego-btn-row { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+    .detail-btn { font-family:'Roboto Mono',monospace; font-size:0.7rem; font-weight:600; padding:5px 10px; border-radius:6px; border:1px solid var(--border-mid); background:var(--bg); color:var(--text-mid); cursor:pointer; }
+    .detail-btn:hover { border-color:var(--blue); color:var(--blue); }
+    .link-copied-msg { font-size:0.72rem; color:var(--blue); margin-left:8px; }
+
+    .edge-table { border-collapse:collapse; margin-top:6px; }
+    .edge-table td { padding:3px 10px 3px 0; font-size:0.82rem; }
+    .edge-table td.lbl { color:var(--text-faint); font-family:'Roboto Mono',monospace; font-size:0.68rem; text-transform:uppercase; }
+    .funder-org-chip { display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; padding:3px 9px; border:1px solid var(--border-mid); border-radius:12px; background:var(--bg); margin:2px; }
 
     /* FOOTER */
     footer { background:var(--surface); border-top:1px solid var(--border); padding:18px clamp(16px,4vw,48px); }
@@ -412,6 +449,7 @@
         <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
         <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
         <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
+        <a href="/ecosystem/topics/">Problem topics<span class="ribbon-sub">Every problem we track, and who works on it.</span></a>
       </div>
     </div>
     <div class="ribbon-item">
@@ -499,8 +537,13 @@
         <div class="control-group" style="flex:1; min-width:240px;">
           <label class="control-label">Segment filter</label>
           <div class="seg-chips" id="seg-chips"></div>
+          <div class="toggle-row">
+            <label class="toggle-item"><input type="checkbox" id="ctl-cross"> Cross-segment only</label>
+            <label class="toggle-item"><input type="checkbox" id="ctl-hidesunset"> Hide sunset orgs</label>
+          </div>
         </div>
         <button class="btn-reset" id="btn-reset">Reset</button>
+        <button class="btn-reset" id="btn-copylink">Copy link<span class="link-copied-msg" id="link-copied-msg" style="display:none;">Link copied</span></button>
       </div>
       <div class="controls-row" style="margin-top:12px; padding-top:12px; border-top:1px solid var(--border);">
         <div class="control-group" style="min-width:180px;">
@@ -516,6 +559,26 @@
           <div id="ms-topic"></div>
         </div>
       </div>
+      <div class="controls-row" style="margin-top:12px; padding-top:12px; border-top:1px solid var(--border);">
+        <div class="control-group">
+          <label class="control-label">View</label>
+          <div class="view-toggle">
+            <button class="view-toggle-btn active" id="view-orgs" type="button">Organizations</button>
+            <button class="view-toggle-btn" id="view-funders" type="button">Funders</button>
+          </div>
+          <div class="view-toggle-note">Funders are detected from the Funding Detail text, so this view is partial.</div>
+        </div>
+        <div class="control-group" style="flex:1; min-width:320px;">
+          <label class="control-label">Find a path</label>
+          <div class="path-finder-row">
+            <input type="text" id="path-a" list="org-names" placeholder="Org A" autocomplete="off">
+            <span style="color:var(--text-faint)">&rarr;</span>
+            <input type="text" id="path-b" list="org-names" placeholder="Org B" autocomplete="off">
+            <button class="btn-reset" id="btn-findpath" type="button">Find</button>
+          </div>
+          <datalist id="org-names"></datalist>
+        </div>
+      </div>
       <div id="search-results" class="search-results" style="display:none;"></div>
       <div id="people-results" class="people-results" style="display:none;"></div>
     </div>
@@ -524,7 +587,7 @@
     <div class="graph-wrap">
       <svg id="graph"></svg>
       <div class="graph-overlay" id="graph-overlay">
-        Showing <strong id="ovr-nodes">—</strong> orgs · <strong id="ovr-edges">—</strong> edges<br>
+        Showing <strong id="ovr-nodes">—</strong> orgs · <strong id="ovr-edges">—</strong> edges<span id="ovr-funders-wrap" style="display:none;"> · <strong id="ovr-funders">—</strong> funders</span><br>
         <span style="color:var(--text-faint)">Drag a node · scroll to zoom · click for details</span>
       </div>
       <div class="graph-zoom">
@@ -533,6 +596,7 @@
         <button class="zoom-btn" id="zoom-fit" title="Reset view" style="font-size:0.7rem">FIT</button>
       </div>
     </div>
+    <div class="graph-legend">Solid edges are mutual matches; faint edges are one-way.</div>
 
     <!-- DETAIL -->
     <div class="detail-panel" id="detail-panel">
@@ -646,21 +710,49 @@ function tokenize(s) {
     .filter(t => t.length > 2 && !STOPWORDS.has(t));
 }
 // Geographic terms in a query → the focus value they imply.
-// We give a score bonus to orgs whose focus matches, so "procurement in NYC"
-// surfaces City-focused orgs before Federal ones even when the TF-IDF corpus
-// doesn't contain the word "NYC".
 const GEO_FOCUS_MAP = [
   { terms: ["nyc","new york city","new york","city","local","municipal","county"], focus: "City" },
   { terms: ["state","albany","statewide"], focus: "State" },
   { terms: ["federal","national","dc","washington","capitol"], focus: "Federal" },
 ];
-const GEO_BOOST = 0.25;
+const FUND_INTENT_WORDS = ["fund","funds","funder","funders","funding","foundation","philanthropy","investor","invest"];
 
-function detectGeoFocus(q) {
+// Alias groups: any term in a group is treated as the same place when
+// matching a detected query term against an org's geo_terms.
+const PLACE_ALIAS_GROUPS = [
+  ["nyc", "new york city", "new york"],
+  ["washington dc", "washington d.c.", "dc", "d.c."],
+];
+const PLACE_ALIAS_MAP = (() => {
+  const m = new Map();
+  PLACE_ALIAS_GROUPS.forEach((group, i) => group.forEach(t => m.set(t, "group:" + i)));
+  return m;
+})();
+function canonicalPlace(term) { return PLACE_ALIAS_MAP.get(term) || term; }
+
+// Whole-word/phrase match: boundaries are "not alphanumeric" on both sides,
+// so "capacity building" never matches the term "city" and "fundamental"
+// never matches the term "fund".
+function termMatches(lq, term) {
+  const esc = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const re = new RegExp("(^|[^a-z0-9])" + esc + "($|[^a-z0-9])", "i");
+  return re.test(lq);
+}
+
+let geoTermUniverse = null; // sorted array of lowercase terms, longest first
+
+function buildGeoTermUniverse() {
+  const terms = new Set();
+  for (const n of allNodes) (n.geo_terms || []).forEach(t => terms.add(String(t).toLowerCase()));
+  GEO_FOCUS_MAP.forEach(g => g.terms.forEach(t => terms.add(t)));
+  geoTermUniverse = [...terms].sort((a, b) => b.length - a.length);
+}
+
+// Detect the longest matching place/level term in a query (whole-word match).
+function detectPlaceTerm(q) {
+  if (!geoTermUniverse) buildGeoTermUniverse();
   const lq = q.toLowerCase();
-  for (const { terms, focus } of GEO_FOCUS_MAP) {
-    if (terms.some(t => lq.includes(t))) return focus;
-  }
+  for (const t of geoTermUniverse) if (termMatches(lq, t)) return t;
   return null;
 }
 
@@ -677,14 +769,28 @@ function rankByQuery(rawQ) {
   qnorm = Math.sqrt(qnorm) || 1;
   for (const k in qv) qv[k] /= qnorm;
   const lq = rawQ.toLowerCase().trim();
-  const geoFocus = detectGeoFocus(rawQ);
+  const place = detectPlaceTerm(rawQ);
+  const placeCanon = place ? canonicalPlace(place) : null;
+  const levelEntry = place ? GEO_FOCUS_MAP.find(g => g.terms.includes(place)) : null;
+  const hasFundIntent = FUND_INTENT_WORDS.some(w => termMatches(lq, w));
   const scored = new Map();
   for (const o of allNodes) {
     const ov = searchIndex.vectors[o.id];
     let s = 0;
     for (const k in qv) s += qv[k] * (ov[k] || 0);
     if (o.name.toLowerCase().includes(lq)) s += 0.5;
-    if (geoFocus && (o.focus || []).includes(geoFocus)) s += GEO_BOOST;
+    if (place) {
+      const rawGeo = o.geo_terms || [];
+      const geoTermsCanon = rawGeo.map(x => canonicalPlace(String(x).toLowerCase()));
+      if (geoTermsCanon.includes(placeCanon)) {
+        s *= 1.5;
+      } else if (rawGeo.length === 0 && levelEntry && (o.focus || []).includes(levelEntry.focus)) {
+        // Only orgs with no geo_terms at all get the level boost — orgs
+        // pinned to a different place get no boost.
+        s *= 1.25;
+      }
+    }
+    if (hasFundIntent && (o.primary_segment === "Philanthropy" || o.primary_segment === "Investor")) s *= 1.5;
     if (s > 0.01) scored.set(o.id, s);
   }
   return scored;
@@ -709,13 +815,25 @@ document.getElementById("zoom-out").onclick = () => svg.transition().duration(20
 document.getElementById("zoom-fit").onclick = () => svg.transition().duration(300).call(zoom.transform, d3.zoomIdentity);
 
 let allNodes = [], allEdges = [];
+let allFunders = [];
+let statsData = {};
 let allPeople = [];   // From data/connect.json — used for cross-page matchmaking.
 let visibleNodes = [], visibleEdges = [];
 let segmentsOn = new Set();
 let threshold = 0.18;
-let selected = null;
+let selected = null;      // selected org node
+let selectedFunder = null; // selected funder node (Funders view)
+let selectedEdge = null;  // {edge, a, b} when an edge was clicked
+let pathResult = null;    // {ids:[...], edges:[...]} from Find a path
 let hovered  = null;
 let simulation;
+let crossOnly = false;
+let hideSunset = false;
+let viewMode = "orgs"; // "orgs" | "funders"
+let egoNode = null;
+let egoHops = 1;
+let suppressURLSync = false;
+let pendingSelId = null; // explicit ?sel=/?id= from the URL, applied after search restore
 
 const nodeById = new Map();
 
@@ -736,6 +854,8 @@ Promise.all([
 ]).then(([g, idx, people]) => {
   allNodes = g.nodes.map(n => ({...n}));
   allEdges = g.edges.map(e => ({...e}));
+  allFunders = Array.isArray(g.funders) ? g.funders.map(f => ({...f})) : [];
+  statsData = g.stats || {};
   allPeople = Array.isArray(people) ? people : [];
   for (const n of allNodes) nodeById.set(n.id, n);
 
@@ -762,27 +882,55 @@ Promise.all([
   msArea.setOptions([...areas].sort());
   msTopic.setOptions([...topics].sort());
 
+  // Org names for the path-finder datalist
+  const dl = document.getElementById("org-names");
+  dl.innerHTML = allNodes.map(n => `<option value="${esc(n.name)}">`).join("");
+
+  // ── Feature 1: edge slider recalibration ──────────────────────────────
+  const weights = allEdges.map(e => e.weight).filter(w => typeof w === "number");
+  const sliderMin = weights.length ? Math.floor(Math.min(...weights) * 100) / 100 : 0.10;
+  const sliderMax = weights.length ? Math.ceil(Math.max(...weights) * 100) / 100 : 0.40;
+  const thrEl = document.getElementById("ctl-threshold");
+  thrEl.min = sliderMin; thrEl.max = sliderMax;
+  const defaultThreshold = (statsData.weight_percentiles && statsData.weight_percentiles.p25 != null)
+    ? statsData.weight_percentiles.p25 : 0.18;
+  threshold = Math.min(sliderMax, Math.max(sliderMin, defaultThreshold));
+
+  // Read every URL param — including the selected node (`sel`, or the legacy
+  // `id` used by the directory's "view on the map" links) and the search
+  // query `q` — BEFORE the first build()/syncURL() so a deep link reproduces
+  // its full state on load and the URL doesn't lose `sel` on first render.
+  applyURLStateFromParams(sliderMin, sliderMax);
+
+  thrEl.value = threshold;
+  document.getElementById("threshold-val").textContent = (+threshold).toFixed(2);
+
   build();
   renderPeopleSidebar();
 
-  // Deep-link: ?id=N selects an org on load
-  const params = new URLSearchParams(location.search);
-  const idParam = params.get("id");
-  if (idParam !== null) {
-    const target = nodeById.get(+idParam);
-    if (target) {
-      // Wait one tick for the simulation to assign positions
-      setTimeout(() => {
-        selected = target;
-        renderDetail();
-        updateHover();
-        if (target.x != null) {
-          const t = d3.zoomIdentity.translate(W()/2 - target.x*1.2, H()/2 - target.y*1.2).scale(1.2);
-          svg.transition().duration(600).call(zoom.transform, t);
-        }
-      }, 800);
-    }
+  // A restored `q` re-runs the search so results and highlighting come back.
+  // applySearch() auto-selects its own top match, so if the URL also named
+  // an explicit `sel`/`id` node, that explicit selection wins afterward.
+  const restoredQ = document.getElementById("ctl-search").value.trim();
+  if (restoredQ) applySearch(restoredQ);
+  if (pendingSelId != null) {
+    const target = nodeById.get(pendingSelId);
+    if (target) selected = target;
   }
+
+  if (selected) {
+    renderDetail();
+    updateHover();
+    // Node positions only exist once the simulation has run a few ticks —
+    // pan/zoom onto the restored selection once it has a position.
+    setTimeout(() => {
+      if (selected && selected.x != null) {
+        const t = d3.zoomIdentity.translate(W()/2 - selected.x*1.2, H()/2 - selected.y*1.2).scale(1.2);
+        svg.transition().duration(600).call(zoom.transform, t);
+      }
+    }, 800);
+  }
+  syncURL();
 });
 
 function buildSegChips(segs) {
@@ -791,7 +939,8 @@ function buildSegChips(segs) {
   const wrap = document.getElementById("seg-chips");
   wrap.innerHTML = segs.map(s => {
     const c = SEGMENT_COLORS[s] || "#6b7280";
-    return `<div class="seg-chip" data-seg="${s}" style="border-color:${c}; color:${c}">
+    const off = !segmentsOn.has(s) ? " off" : "";
+    return `<div class="seg-chip${off}" data-seg="${s}" style="border-color:${c}; color:${c}">
       <span class="swatch" style="background:${c}"></span>${s} <span style="opacity:0.55;font-weight:500">${ct[s]}</span>
     </div>`;
   }).join("");
@@ -805,7 +954,38 @@ function buildSegChips(segs) {
   });
 }
 
+// ── Ego-set helper (BFS over a pool of edges) ───────────────────────────────
+function computeEgoSet(centerId, hops, edgesPool) {
+  let frontier = new Set([centerId]);
+  const visited = new Set([centerId]);
+  for (let h = 0; h < hops; h++) {
+    const next = new Set();
+    for (const e of edgesPool) {
+      const s = typeof e.source === "object" ? e.source.id : e.source;
+      const t = typeof e.target === "object" ? e.target.id : e.target;
+      if (frontier.has(s) && !visited.has(t)) next.add(t);
+      if (frontier.has(t) && !visited.has(s)) next.add(s);
+    }
+    if (!next.size) break;
+    next.forEach(id => visited.add(id));
+    frontier = next;
+  }
+  return visited;
+}
+
 function build() {
+  linkLayer.selectAll("*").remove();
+  nodeLayer.selectAll("*").remove();
+  labelLayer.selectAll("*").remove();
+  if (viewMode === "funders") {
+    buildFundersView();
+  } else {
+    buildOrgsView();
+  }
+  syncURL();
+}
+
+function buildOrgsView() {
   // Filter — segment chips + the three multi-select dropdowns (focus / area /
   // topic) all narrow which nodes appear. A node passes only if every active
   // filter accepts it.
@@ -815,16 +995,45 @@ function build() {
     if (focF.size   && !(n.focus || []).some(f => focF.has(f))) return false;
     if (areaF.size  && !(n.problem_areas || []).some(a => areaF.has(a))) return false;
     if (topicF.size && !(n.problem_statements || []).some(t => topicF.has(t))) return false;
+    if (hideSunset && n.status === "sunset") return false;
     return true;
   });
-  const visIds = new Set(visibleNodes.map(n => n.id));
+  let visIds = new Set(visibleNodes.map(n => n.id));
   visibleEdges = allEdges.filter(e =>
     e.weight >= threshold && visIds.has(typeof e.source === "object" ? e.source.id : e.source) && visIds.has(typeof e.target === "object" ? e.target.id : e.target)
   );
 
+  // Feature 2: cross-segment lens — hide edges whose `cross` is false, then
+  // hide nodes left with no visible edges.
+  if (crossOnly) {
+    visibleEdges = visibleEdges.filter(e => e.cross === true);
+    const withEdge = new Set();
+    for (const e of visibleEdges) {
+      withEdge.add(typeof e.source === "object" ? e.source.id : e.source);
+      withEdge.add(typeof e.target === "object" ? e.target.id : e.target);
+    }
+    visibleNodes = visibleNodes.filter(n => withEdge.has(n.id));
+    visIds = new Set(visibleNodes.map(n => n.id));
+  }
+
+  // Feature 6: ego view — restrict to the selected node plus its 1/2-hop
+  // neighborhood (computed over the currently-visible edges) and edges among
+  // just that set.
+  if (egoNode != null) {
+    const egoIds = computeEgoSet(egoNode, egoHops, visibleEdges);
+    visibleNodes = visibleNodes.filter(n => egoIds.has(n.id));
+    visIds = new Set(visibleNodes.map(n => n.id));
+    visibleEdges = visibleEdges.filter(e => {
+      const s = typeof e.source === "object" ? e.source.id : e.source;
+      const t = typeof e.target === "object" ? e.target.id : e.target;
+      return visIds.has(s) && visIds.has(t);
+    });
+  }
+
   // Update overlay
   document.getElementById("ovr-nodes").textContent = visibleNodes.length;
   document.getElementById("ovr-edges").textContent = visibleEdges.length;
+  document.getElementById("ovr-funders-wrap").style.display = "none";
 
   // Recompute degree (within visible set)
   const deg = {};
@@ -842,6 +1051,8 @@ function build() {
     source: typeof e.source === "object" ? e.source.id : e.source,
     target: typeof e.target === "object" ? e.target.id : e.target,
     weight: e.weight,
+    mutual: e.mutual,
+    _edge: e,
   }));
 
   simulation = d3.forceSimulation(visibleNodes)
@@ -851,55 +1062,170 @@ function build() {
     .force("collide", d3.forceCollide(d => 6 + Math.sqrt(d.deg||1)*3))
     .alpha(0.9).alphaDecay(0.04);
 
-  // Render edges
-  const link = linkLayer.selectAll("line").data(linksForSim, d =>
-    (typeof d.source === "object" ? d.source.id : d.source) + "-" + (typeof d.target === "object" ? d.target.id : d.target));
-  link.exit().remove();
-  link.enter().append("line").attr("class","link")
-    .merge(link)
+  // Render edges — visible thin line (mutual = full opacity, one-way = 45%)
+  // plus a wide invisible hit line so edges are easy to click.
+  const linkKey = d => (typeof d.source === "object" ? d.source.id : d.source) + "-" + (typeof d.target === "object" ? d.target.id : d.target);
+
+  linkLayer.selectAll("line.link")
+    .data(linksForSim, linkKey)
+    .enter().append("line")
+    .attr("class", d => "link " + (d.mutual === true ? "mutual" : "oneway"))
     .attr("stroke-width", d => 0.4 + d.weight*4);
 
+  const hitLines = linkLayer.selectAll("line.link-hit")
+    .data(linksForSim, linkKey)
+    .enter().append("line")
+    .attr("class", "link-hit")
+    .attr("stroke-width", 14)
+    .on("click", (e, d) => {
+      e.stopPropagation();
+      const s = typeof d.source === "object" ? d.source.id : d.source;
+      const t = typeof d.target === "object" ? d.target.id : d.target;
+      selectedEdge = { edge: d._edge, a: nodeById.get(s), b: nodeById.get(t) };
+      selected = null; selectedFunder = null; pathResult = null;
+      renderDetail(); updateHover();
+    })
+    .on("mouseover", (e,d) => { hovered = null; })
+    .on("mouseout",  () => {});
+
   // Render nodes
-  const node = nodeLayer.selectAll("circle").data(visibleNodes, d => d.id);
-  node.exit().remove();
-  const nodeEnter = node.enter().append("circle").attr("class","node")
+  const nodeSel = nodeLayer.selectAll("circle")
+    .data(visibleNodes, d => d.id)
+    .enter().append("circle")
+    .attr("class", d => "node" + (d.status === "sunset" ? " sunset" : ""))
     .call(d3.drag()
       .on("start", (e,d) => { if (!e.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
       .on("drag",  (e,d) => { d.fx = e.x; d.fy = e.y; })
       .on("end",   (e,d) => { if (!e.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; }))
     .on("mouseover", (e,d) => { hovered = d; updateHover(); })
     .on("mouseout",  () => { hovered = null; updateHover(); })
-    .on("click", (e,d) => { selected = d; renderDetail(); updateHover(); e.stopPropagation(); });
+    .on("click", (e,d) => { selected = d; selectedFunder = null; selectedEdge = null; pathResult = null; renderDetail(); updateHover(); syncURL(); e.stopPropagation(); });
 
-  nodeEnter.append("title").text(d => d.name);
+  nodeSel.append("title").text(d => d.name);
 
   nodeLayer.selectAll("circle")
     .attr("r", d => 4 + Math.sqrt(d.deg||1)*2.2)
-    .attr("fill", d => SEGMENT_COLORS[d.primary_segment] || "#6b7280");
+    .attr("fill", d => d.status === "sunset" ? "#ffffff" : (SEGMENT_COLORS[d.primary_segment] || "#6b7280"))
+    .attr("stroke", d => d.status === "sunset" ? (SEGMENT_COLORS[d.primary_segment] || "#6b7280") : "#fff")
+    .attr("stroke-width", d => d.status === "sunset" ? 2 : 1.5);
 
   // Labels under every visible node. DOM order = paint order in SVG, so we sort
   // by ascending degree: low-degree labels paint first, high-degree labels paint last
   // (on top) and stay readable when labels overlap in dense clusters.
   const sortedForLabels = [...visibleNodes].sort((a, b) => (a.deg||0) - (b.deg||0));
-  const labels = labelLayer.selectAll("text").data(sortedForLabels, d => d.id);
-  labels.exit().remove();
-  labels.enter().append("text")
+  labelLayer.selectAll("text")
+    .data(sortedForLabels, d => d.id)
+    .enter().append("text")
     .attr("class","label")
     .attr("text-anchor","middle")
-    .merge(labels)
-    .text(d => shortName(d.name));
-  labelLayer.selectAll("text").sort((a, b) => (a.deg||0) - (b.deg||0));
+    .text(d => shortName(d.name) + (d.status === "sunset" ? " (sunset)" : ""));
 
-  svg.on("click", () => { selected = null; renderDetail(); updateHover(); });
+  svg.on("click", () => { selected = null; selectedFunder = null; selectedEdge = null; pathResult = null; renderDetail(); updateHover(); });
 
   simulation.on("tick", () => {
-    linkLayer.selectAll("line")
+    linkLayer.selectAll("line.link")
+      .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+    linkLayer.selectAll("line.link-hit")
       .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
       .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
     nodeLayer.selectAll("circle").attr("cx", d => d.x).attr("cy", d => d.y);
     // Labels appear BELOW each node circle
     labelLayer.selectAll("text")
       .attr("x", d => d.x).attr("y", d => d.y + 4 + Math.sqrt(d.deg||1)*2.2 + 8);
+  });
+
+  updateHover();
+}
+
+// ── Feature 8: Funder lens ───────────────────────────────────────────────
+function buildFundersView() {
+  const orgNodes = allNodes.filter(n => segmentsOn.has(n.primary_segment));
+  const orgIds = new Set(orgNodes.map(n => n.id));
+
+  const funderNodes = [];
+  const funderEdges = [];
+  for (const f of allFunders) {
+    const orgs = (f.org_ids || []).filter(id => orgIds.has(id));
+    if (!orgs.length) continue;
+    const fid = "f:" + f.name;
+    funderNodes.push({ id: fid, kind: "funder", name: f.name, org_ids: orgs });
+    orgs.forEach(oid => funderEdges.push({ source: fid, target: oid }));
+  }
+
+  const shownOrgNodes = orgNodes.filter(n => funderEdges.some(e => e.target === n.id));
+  visibleNodes = [...shownOrgNodes, ...funderNodes];
+  visibleEdges = funderEdges;
+
+  // "Showing N orgs" counts org circles only; funder squares get their own count.
+  document.getElementById("ovr-nodes").textContent = shownOrgNodes.length;
+  document.getElementById("ovr-edges").textContent = visibleEdges.length;
+  document.getElementById("ovr-funders-wrap").style.display = "inline";
+  document.getElementById("ovr-funders").textContent = funderNodes.length;
+
+  if (simulation) simulation.stop();
+  const simNodes = visibleNodes.map(n => ({...n}));
+  const byId = new Map(simNodes.map(n => [n.id, n]));
+
+  simulation = d3.forceSimulation(simNodes)
+    .force("link", d3.forceLink(funderEdges.map(e => ({source:e.source, target:e.target}))).id(d => d.id).distance(90).strength(0.5))
+    .force("charge", d3.forceManyBody().strength(-220))
+    .force("center", d3.forceCenter(W()/2, H()/2))
+    .force("collide", d3.forceCollide(14))
+    .alpha(0.9).alphaDecay(0.04);
+
+  const linkKey = d => (typeof d.source === "object" ? d.source.id : d.source) + "-" + (typeof d.target === "object" ? d.target.id : d.target);
+  linkLayer.selectAll("line.link")
+    .data(simulation.force("link").links(), linkKey)
+    .enter().append("line")
+    .attr("class","link mutual")
+    .attr("stroke-width", 1.2);
+
+  const orgSel = nodeLayer.selectAll("circle")
+    .data(simNodes.filter(d => d.kind !== "funder"), d => d.id)
+    .enter().append("circle")
+    .attr("class","node")
+    .attr("r", 6)
+    .attr("fill", d => SEGMENT_COLORS[d.primary_segment] || "#6b7280")
+    .call(d3.drag()
+      .on("start", (e,d) => { if (!e.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on("drag",  (e,d) => { d.fx = e.x; d.fy = e.y; })
+      .on("end",   (e,d) => { if (!e.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; }))
+    .on("click", (e,d) => { selected = nodeById.get(d.id); selectedFunder = null; selectedEdge = null; pathResult = null; renderDetail(); syncURL(); e.stopPropagation(); });
+  orgSel.append("title").text(d => d.name);
+
+  const funderSize = d => 10 + Math.sqrt((d.org_ids||[]).length) * 3;
+  const funderSel = nodeLayer.selectAll("rect")
+    .data(simNodes.filter(d => d.kind === "funder"), d => d.id)
+    .enter().append("rect")
+    .attr("class","node")
+    .attr("width", funderSize).attr("height", funderSize)
+    .style("fill", "var(--orange)")
+    .call(d3.drag()
+      .on("start", (e,d) => { if (!e.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on("drag",  (e,d) => { d.fx = e.x; d.fy = e.y; })
+      .on("end",   (e,d) => { if (!e.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; }))
+    .on("click", (e,d) => { selectedFunder = d; selected = null; selectedEdge = null; pathResult = null; renderDetail(); syncURL(); e.stopPropagation(); });
+  funderSel.append("title").text(d => d.name);
+
+  labelLayer.selectAll("text")
+    .data(simNodes, d => d.id)
+    .enter().append("text")
+    .attr("class","label")
+    .attr("text-anchor","middle")
+    .text(d => shortName(d.name));
+
+  svg.on("click", () => { selected = null; selectedFunder = null; selectedEdge = null; pathResult = null; renderDetail(); });
+
+  simulation.on("tick", () => {
+    linkLayer.selectAll("line.link")
+      .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+    nodeLayer.selectAll("circle").attr("cx", d => d.x).attr("cy", d => d.y);
+    nodeLayer.selectAll("rect")
+      .attr("x", d => d.x - funderSize(d)/2).attr("y", d => d.y - funderSize(d)/2);
+    labelLayer.selectAll("text")
+      .attr("x", d => d.x).attr("y", d => d.y + 16);
   });
 
   updateHover();
@@ -914,10 +1240,37 @@ function shortName(n) {
 }
 
 function updateHover() {
-  const target = hovered || selected;
-  const links = linkLayer.selectAll("line");
-  const nodes = nodeLayer.selectAll("circle");
+  const links = linkLayer.selectAll("line.link");
+  const nodes = nodeLayer.selectAll(".node");
   const labels = labelLayer.selectAll("text");
+
+  // Feature 7: path highlight takes precedence over everything else.
+  if (pathResult && pathResult.ids && pathResult.ids.length) {
+    const idSet = new Set(pathResult.ids);
+    const edgeKeySet = new Set(pathResult.edges.map(e => {
+      const s = typeof e.source === "object" ? e.source.id : e.source;
+      const t = typeof e.target === "object" ? e.target.id : e.target;
+      return [s,t].sort().join("-");
+    }));
+    links.classed("dim", d => {
+      const s = typeof d.source === "object" ? d.source.id : d.source;
+      const t = typeof d.target === "object" ? d.target.id : d.target;
+      return !edgeKeySet.has([s,t].sort().join("-"));
+    }).classed("hi", d => {
+      const s = typeof d.source === "object" ? d.source.id : d.source;
+      const t = typeof d.target === "object" ? d.target.id : d.target;
+      return edgeKeySet.has([s,t].sort().join("-"));
+    });
+    links.filter(function() { return d3.select(this).classed("dim"); }).style("stroke-opacity", 0.15);
+    links.filter(function() { return !d3.select(this).classed("dim"); }).style("stroke-opacity", null);
+    nodes.classed("dim", d => !idSet.has(d.id)).classed("hi", d => idSet.has(d.id));
+    labels.classed("dim", d => !idSet.has(d.id)).classed("hi", d => idSet.has(d.id));
+    return;
+  } else {
+    links.style("stroke-opacity", null);
+  }
+
+  const target = hovered || selected || selectedFunder;
 
   // Search-active state: highlight top matches, dim everything else
   if (queryTopIds && queryTopIds.size && !hovered) {
@@ -963,21 +1316,49 @@ function updateHover() {
   labels.classed("dim", d => !adj.has(d.id)).classed("hi", d => d.id === id);
 }
 
+// ── Feature 5: "why connected" explanation line for an edge ────────────────
+function explainEdge(e) {
+  if (!e) return "Description similarity only";
+  const parts = [];
+  if (e.shared_topics && e.shared_topics.length) parts.push(e.shared_topics.join(" · "));
+  if (e.shared_funders && e.shared_funders.length) parts.push("Funders: " + e.shared_funders.join(", "));
+  if (e.shared_terms && e.shared_terms.length) parts.push("Terms: " + e.shared_terms.join(", "));
+  if (!parts.length) return "Description similarity only";
+  return parts.join(" · ");
+}
+
+function findEdgeBetween(aId, bId, pool) {
+  for (const e of pool) {
+    const s = typeof e.source === "object" ? e.source.id : e.source;
+    const t = typeof e.target === "object" ? e.target.id : e.target;
+    if ((s === aId && t === bId) || (s === bId && t === aId)) return e;
+  }
+  return null;
+}
+
 function renderDetail() {
   const panel = document.getElementById("detail-panel");
+
+  if (pathResult) { renderPathDetail(panel); return; }
+  if (selectedEdge) { renderEdgeDetail(panel); return; }
+  if (selectedFunder) { renderFunderDetail(panel); return; }
   if (!selected) {
     panel.innerHTML = `<div class="detail-empty">Click any node to see its description, funders, and closest peers.</div>`;
     return;
   }
+  renderNodeDetail(panel);
+}
+
+function renderNodeDetail(panel) {
   const o = selected;
 
-  // Find neighbors via edges
+  // Find neighbors via edges (keep the full edge object for the explanation line)
   const nbrs = [];
   for (const e of visibleEdges) {
     const s = typeof e.source === "object" ? e.source.id : e.source;
     const t = typeof e.target === "object" ? e.target.id : e.target;
-    if (s === o.id) nbrs.push({other: nodeById.get(t), w: e.weight});
-    else if (t === o.id) nbrs.push({other: nodeById.get(s), w: e.weight});
+    if (s === o.id) nbrs.push({other: nodeById.get(t), w: e.weight, edge: e});
+    else if (t === o.id) nbrs.push({other: nodeById.get(s), w: e.weight, edge: e});
   }
   nbrs.sort((a,b) => b.w - a.w);
 
@@ -990,16 +1371,23 @@ function renderDetail() {
   // People matchmaking: any practitioner whose problem_topic is in this org's
   // problem_statements list. Cross-page bridge to /people/ — surfaces who
   // else is actively working on the same problem when a user clicks a node.
+  // Sunset orgs are excluded from this matchmaking.
   const orgTopics = new Set(problems);
-  const peopleMatches = orgTopics.size
+  const peopleMatches = (orgTopics.size && o.status !== "sunset")
     ? allPeople.filter(p => orgTopics.has(p.problem_topic))
     : [];
 
+  const sunsetLine = (o.status === "sunset" && o.status_note)
+    ? `<div class="detail-meta-item" style="grid-column:1/-1">
+        <div class="meta-val">Sunset: ${esc(o.status_note)}</div>
+      </div>` : "";
+
   panel.innerHTML = `
-    <div class="detail-name">${esc(o.name)}</div>
+    <div class="detail-name">${esc(o.name)}${o.status === "sunset" ? " (sunset)" : ""}</div>
     <div class="detail-segs">${segHtml}${focHtml}</div>
     <div class="detail-desc">${esc(o.description || "—")}</div>
     <div class="detail-meta-grid">
+      ${sunsetLine}
       ${problems.length ? `<div class="detail-meta-item" style="grid-column:1/-1">
         <div class="meta-label">Problem statements</div>
         <div class="problem-list">${problems.map(p => `<span class="detail-tag problem">${esc(p)}</span>`).join("")}</div>
@@ -1022,8 +1410,11 @@ function renderDetail() {
       </div>` : ""}
       ${nbrs.length ? `<div class="detail-meta-item" style="grid-column:1/-1">
         <div class="meta-label">Closest peers (by affinity)</div>
-        <div class="neighbors-list">${nbrs.slice(0,12).map(({other,w}) =>
-          `<span class="neighbor-chip" data-id="${other.id}">${esc(other.name)}<span class="w">${w.toFixed(2)}</span></span>`
+        <div class="neighbors-list">${nbrs.slice(0,12).map(({other,w,edge}) =>
+          `<span class="neighbor-chip" data-id="${other.id}">
+            <span class="nc-top">${esc(other.name)}<span class="w">${w.toFixed(2)}</span></span>
+            <span class="explain-line">${esc(explainEdge(edge))}</span>
+          </span>`
         ).join("")}</div>
       </div>` : ""}
       ${peopleMatches.length ? `<div class="detail-meta-item" style="grid-column:1/-1">
@@ -1033,16 +1424,176 @@ function renderDetail() {
           ${peopleMatches.length > 8 ? `<a class="people-card-more" href="../connect/" target="_blank" rel="noopener">+${peopleMatches.length - 8} more →</a>` : ""}
         </div>
       </div>` : ""}
+    </div>
+    <div class="ego-btn-row">
+      ${egoNode === o.id
+        ? `<button class="detail-btn" id="btn-show-everything">Show everything</button>`
+        : `<button class="detail-btn" id="btn-ego-1">Show neighborhood</button>
+           <button class="detail-btn" id="btn-ego-2">Show 2 hops</button>`}
     </div>`;
 
   panel.querySelectorAll(".neighbor-chip").forEach(el => {
     el.addEventListener("click", () => {
       selected = nodeById.get(+el.dataset.id);
+      selectedEdge = null; pathResult = null;
       renderDetail();
       updateHover();
+      syncURL();
       // Pan/center on node
       if (selected.x != null) {
         const t = d3.zoomIdentity.translate(W()/2 - selected.x*1.2, H()/2 - selected.y*1.2).scale(1.2);
+        svg.transition().duration(450).call(zoom.transform, t);
+      }
+    });
+  });
+
+  const btnEgo1 = panel.querySelector("#btn-ego-1");
+  const btnEgo2 = panel.querySelector("#btn-ego-2");
+  const btnAll  = panel.querySelector("#btn-show-everything");
+  if (btnEgo1) btnEgo1.addEventListener("click", () => { egoNode = o.id; egoHops = 1; build(); renderDetail(); recenterView(); });
+  if (btnEgo2) btnEgo2.addEventListener("click", () => { egoNode = o.id; egoHops = 2; build(); renderDetail(); recenterView(); });
+  if (btnAll)  btnAll.addEventListener("click",  () => { egoNode = null; build(); renderDetail(); });
+}
+
+function recenterView() {
+  svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity);
+}
+
+function renderFunderDetail(panel) {
+  const f = selectedFunder;
+  const orgs = (f.org_ids || []).map(id => nodeById.get(id)).filter(Boolean);
+  panel.innerHTML = `
+    <div class="detail-name">${esc(f.name)}</div>
+    <div class="detail-desc">Funds ${orgs.length} organization${orgs.length === 1 ? "" : "s"} in view.</div>
+    <div class="detail-meta-grid">
+      <div class="detail-meta-item" style="grid-column:1/-1">
+        <div class="meta-label">Funded organizations</div>
+        <div class="neighbors-list">${orgs.map(o =>
+          `<span class="funder-org-chip"><span class="detail-tag" style="background:${SEGMENT_COLORS[o.primary_segment]||"#6b7280"}20;color:${SEGMENT_COLORS[o.primary_segment]||"#6b7280"}">${esc(o.primary_segment)}</span>${esc(o.name)}</span>`
+        ).join("")}</div>
+      </div>
+    </div>`;
+}
+
+// ── Feature 5b: edge-pair detail panel ──────────────────────────────────
+function renderEdgeDetail(panel) {
+  const { edge, a, b } = selectedEdge;
+  const pct = (v) => (v == null ? "—" : (v * 100).toFixed(0) + "%");
+  const rows = [
+    ["Description", edge.n_desc != null ? edge.n_desc : edge.desc],
+    ["Topics",      edge.n_prob != null ? edge.n_prob : (edge.n_topics != null ? edge.n_topics : edge.prob)],
+    ["Funders",     edge.n_fund != null ? edge.n_fund : edge.fund],
+    ["Segments",    edge.n_seg  != null ? edge.n_seg  : edge.seg],
+  ];
+  panel.innerHTML = `
+    <div class="detail-name">${esc(a.name)} and ${esc(b.name)}</div>
+    <div class="detail-desc">Affinity weight: <strong>${(edge.weight||0).toFixed(2)}</strong></div>
+    <table class="edge-table">
+      ${rows.map(([lbl,v]) => `<tr><td class="lbl">${lbl}</td><td>${pct(v)}</td></tr>`).join("")}
+    </table>
+    <div class="explain-line" style="margin-top:8px">${esc(explainEdge(edge))}</div>`;
+}
+
+// ── Feature 7: Find a path ───────────────────────────────────────────────
+function bfsPath(startId, endId, edgesPool) {
+  const adj = new Map();
+  for (const e of edgesPool) {
+    const s = typeof e.source === "object" ? e.source.id : e.source;
+    const t = typeof e.target === "object" ? e.target.id : e.target;
+    if (!adj.has(s)) adj.set(s, []);
+    if (!adj.has(t)) adj.set(t, []);
+    adj.get(s).push({to:t, edge:e});
+    adj.get(t).push({to:s, edge:e});
+  }
+  if (startId === endId) return { path:[startId], edges:[] };
+  if (!adj.has(startId) || !adj.has(endId)) return null;
+  const visited = new Set([startId]);
+  const queue = [[startId, []]];
+  while (queue.length) {
+    const [cur, epath] = queue.shift();
+    for (const { to, edge } of (adj.get(cur) || [])) {
+      if (visited.has(to)) continue;
+      const newPath = [...epath, edge];
+      if (to === endId) return { path: null, edges: newPath, endId, startId };
+      visited.add(to);
+      queue.push([to, newPath]);
+    }
+  }
+  return null;
+}
+
+function edgesToNodePath(startId, edges) {
+  const ids = [startId];
+  let cur = startId;
+  for (const e of edges) {
+    const s = typeof e.source === "object" ? e.source.id : e.source;
+    const t = typeof e.target === "object" ? e.target.id : e.target;
+    cur = (s === cur) ? t : s;
+    ids.push(cur);
+  }
+  return ids;
+}
+
+function findOrgIdByName(name) {
+  const lname = name.trim().toLowerCase();
+  const exact = allNodes.find(n => n.name.toLowerCase() === lname);
+  return exact ? exact.id : null;
+}
+
+function runFindPath() {
+  const nameA = document.getElementById("path-a").value;
+  const nameB = document.getElementById("path-b").value;
+  const idA = findOrgIdByName(nameA), idB = findOrgIdByName(nameB);
+  const panel = document.getElementById("detail-panel");
+  if (idA == null || idB == null) {
+    pathResult = { ids: [], edges: [], empty: true };
+    selected = null; selectedFunder = null; selectedEdge = null;
+    renderDetail(); updateHover();
+    return;
+  }
+  let res = bfsPath(idA, idB, visibleEdges);
+  if (!res) res = bfsPath(idA, idB, allEdges);
+  if (!res) {
+    pathResult = { ids: [], edges: [], empty: true };
+  } else {
+    const ids = edgesToNodePath(idA, res.edges);
+    pathResult = { ids, edges: res.edges, empty: false };
+  }
+  selected = null; selectedFunder = null; selectedEdge = null;
+  renderDetail(); updateHover();
+}
+
+function renderPathDetail(panel) {
+  if (pathResult.empty || !pathResult.ids.length) {
+    panel.innerHTML = `<div class="detail-empty">No path between these two in the current graph.</div>`;
+    return;
+  }
+  const chain = pathResult.ids.map(id => {
+    const n = nodeById.get(id);
+    return `<span class="path-node" data-id="${id}" style="cursor:pointer">${esc(n ? n.name : "?")}</span>`;
+  }).join(" → ");
+  const hops = pathResult.edges.map((e, i) => {
+    const aId = pathResult.ids[i], bId = pathResult.ids[i+1];
+    const a = nodeById.get(aId), b = nodeById.get(bId);
+    return `<div class="path-hop"><strong>${esc(a.name)} → ${esc(b.name)}</strong><div class="explain-line">${esc(explainEdge(e))}</div></div>`;
+  }).join("");
+  panel.innerHTML = `
+    <div class="path-chain">${chain}</div>
+    ${hops}
+    <div class="ego-btn-row"><button class="detail-btn" id="btn-path-clear">Clear path</button></div>`;
+  const clearBtn = panel.querySelector("#btn-path-clear");
+  if (clearBtn) clearBtn.addEventListener("click", () => { pathResult = null; renderDetail(); updateHover(); syncURL(); });
+  panel.querySelectorAll(".path-node").forEach(el => {
+    el.addEventListener("click", () => {
+      const target = nodeById.get(+el.dataset.id);
+      if (!target) return;
+      pathResult = null;
+      selected = target; selectedFunder = null; selectedEdge = null;
+      renderDetail();
+      updateHover();
+      syncURL();
+      if (target.x != null) {
+        const t = d3.zoomIdentity.translate(W()/2 - target.x*1.2, H()/2 - target.y*1.2).scale(1.2);
         svg.transition().duration(450).call(zoom.transform, t);
       }
     });
@@ -1125,6 +1676,46 @@ document.getElementById("ctl-threshold").addEventListener("input", (e) => {
   build();
 });
 
+// Feature 2: Cross-segment lens toggle
+document.getElementById("ctl-cross").addEventListener("change", (e) => {
+  crossOnly = e.target.checked;
+  build();
+});
+
+// Feature 4: Hide sunset orgs toggle
+document.getElementById("ctl-hidesunset").addEventListener("change", (e) => {
+  hideSunset = e.target.checked;
+  build();
+});
+
+// Feature 8: view toggle
+document.getElementById("view-orgs").addEventListener("click", () => {
+  viewMode = "orgs";
+  document.getElementById("view-orgs").classList.add("active");
+  document.getElementById("view-funders").classList.remove("active");
+  selected = null; selectedFunder = null; selectedEdge = null; pathResult = null;
+  build(); renderDetail();
+});
+document.getElementById("view-funders").addEventListener("click", () => {
+  viewMode = "funders";
+  document.getElementById("view-funders").classList.add("active");
+  document.getElementById("view-orgs").classList.remove("active");
+  selected = null; selectedFunder = null; selectedEdge = null; pathResult = null;
+  build(); renderDetail();
+});
+
+// Feature 7: Find a path button
+document.getElementById("btn-findpath").addEventListener("click", runFindPath);
+
+// Feature 9: Copy link button
+document.getElementById("btn-copylink").addEventListener("click", () => {
+  syncURL();
+  navigator.clipboard.writeText(location.href).catch(() => {});
+  const msg = document.getElementById("link-copied-msg");
+  msg.style.display = "inline";
+  setTimeout(() => { msg.style.display = "none"; }, 1500);
+});
+
 // Semantic search — accepts a name OR a natural-language question. Ranks orgs by
 // TF-IDF cosine against the query; highlights the top matches and dims the rest.
 function applySearch(rawQ) {
@@ -1138,6 +1729,7 @@ function applySearch(rawQ) {
     selected = null;
     renderDetail();
     updateHover();
+    syncURL();
     return;
   }
   const scores = rankByQuery(q) || new Map();
@@ -1170,6 +1762,7 @@ function applySearch(rawQ) {
         selected = target;
         renderDetail();
         updateHover();
+        syncURL();
         if (target.x != null) {
           const t = d3.zoomIdentity.translate(W()/2 - target.x*1.2, H()/2 - target.y*1.2).scale(1.2);
           svg.transition().duration(450).call(zoom.transform, t);
@@ -1186,14 +1779,15 @@ function applySearch(rawQ) {
     }
   }
   updateHover();
+  syncURL();
 }
 document.getElementById("ctl-search").addEventListener("input", (e) => applySearch(e.target.value));
 
 // Reset
 document.getElementById("btn-reset").addEventListener("click", () => {
-  threshold = 0.18;
-  document.getElementById("ctl-threshold").value = "0.18";
-  document.getElementById("threshold-val").textContent = "0.18";
+  threshold = (statsData.weight_percentiles && statsData.weight_percentiles.p25 != null) ? statsData.weight_percentiles.p25 : 0.18;
+  document.getElementById("ctl-threshold").value = threshold;
+  document.getElementById("threshold-val").textContent = (+threshold).toFixed(2);
   segmentsOn = new Set(allNodes.map(n => n.primary_segment));
   document.querySelectorAll(".seg-chip").forEach(el => el.classList.remove("off"));
   msFocus.reset(); msArea.reset(); msTopic.reset();
@@ -1202,12 +1796,86 @@ document.getElementById("btn-reset").addEventListener("click", () => {
   queryTopIds = new Set();
   document.getElementById("search-results").style.display = "none";
   document.getElementById("search-results").innerHTML = "";
-  selected = null;
+  crossOnly = false; document.getElementById("ctl-cross").checked = false;
+  hideSunset = false; document.getElementById("ctl-hidesunset").checked = false;
+  viewMode = "orgs";
+  document.getElementById("view-orgs").classList.add("active");
+  document.getElementById("view-funders").classList.remove("active");
+  egoNode = null; egoHops = 1;
+  selected = null; selectedFunder = null; selectedEdge = null; pathResult = null;
+  document.getElementById("path-a").value = ""; document.getElementById("path-b").value = "";
   svg.transition().duration(300).call(zoom.transform, d3.zoomIdentity);
   build();
   renderPeopleSidebar();
   renderDetail();
 });
+
+// ── Feature 9: URL state ────────────────────────────────────────────────
+function currentSegParam() {
+  const allSegs = [...new Set(allNodes.map(n => n.primary_segment))];
+  if (allSegs.length && segmentsOn.size === allSegs.length) return null;
+  return [...segmentsOn].join(",");
+}
+
+function syncURL() {
+  if (suppressURLSync || !allNodes.length) return;
+  const p = new URLSearchParams();
+  const q = document.getElementById("ctl-search").value.trim();
+  if (q) p.set("q", q);
+  p.set("w", (+threshold).toFixed(2));
+  const segParam = currentSegParam();
+  if (segParam) p.set("seg", segParam);
+  const geo = [...msFocus.get()]; if (geo.length) p.set("geo", geo.join(","));
+  const area = [...msArea.get()]; if (area.length) p.set("area", area.join(","));
+  const topic = [...msTopic.get()]; if (topic.length) p.set("topic", topic.join(","));
+  if (crossOnly) p.set("cross", "1");
+  if (hideSunset) p.set("hidesunset", "1");
+  if (viewMode !== "orgs") p.set("view", viewMode);
+  if (egoNode != null) { p.set("ego", egoNode); p.set("hops", egoHops); }
+  if (selected) p.set("sel", selected.id);
+  const qs = p.toString();
+  history.replaceState(null, "", qs ? "?" + qs : location.pathname);
+}
+
+function applyURLStateFromParams(sliderMin, sliderMax) {
+  const params = new URLSearchParams(location.search);
+  suppressURLSync = true;
+  const q = params.get("q");
+  if (q) document.getElementById("ctl-search").value = q;
+  const w = params.get("w");
+  if (w !== null && !isNaN(+w)) {
+    const lo = sliderMin != null ? sliderMin : -Infinity;
+    const hi = sliderMax != null ? sliderMax : Infinity;
+    threshold = Math.min(hi, Math.max(lo, +w));
+  }
+  const selParam = params.get("sel") || params.get("id");
+  if (selParam !== null && !isNaN(+selParam)) pendingSelId = +selParam;
+  const seg = params.get("seg");
+  if (seg) {
+    segmentsOn = new Set(seg.split(",").filter(Boolean));
+    buildSegChips([...new Set(allNodes.map(n => n.primary_segment))].sort((a,b) =>
+      allNodes.filter(n => n.primary_segment === b).length - allNodes.filter(n => n.primary_segment === a).length));
+  }
+  const geo = params.get("geo");
+  if (geo) { geo.split(",").forEach(v => msFocus.selected.add(v)); msFocus._sync(); msFocus._upd(); }
+  const area = params.get("area");
+  if (area) { area.split(",").forEach(v => msArea.selected.add(v)); msArea._sync(); msArea._upd(); }
+  const topic = params.get("topic");
+  if (topic) { topic.split(",").forEach(v => msTopic.selected.add(v)); msTopic._sync(); msTopic._upd(); }
+  crossOnly = params.get("cross") === "1";
+  document.getElementById("ctl-cross").checked = crossOnly;
+  hideSunset = params.get("hidesunset") === "1";
+  document.getElementById("ctl-hidesunset").checked = hideSunset;
+  viewMode = params.get("view") === "funders" ? "funders" : "orgs";
+  document.getElementById("view-orgs").classList.toggle("active", viewMode === "orgs");
+  document.getElementById("view-funders").classList.toggle("active", viewMode === "funders");
+  const ego = params.get("ego");
+  if (ego !== null && !isNaN(+ego)) {
+    egoNode = +ego;
+    egoHops = +(params.get("hops") || 1) === 2 ? 2 : 1;
+  }
+  suppressURLSync = false;
+}
 
 // Resize
 window.addEventListener("resize", () => {

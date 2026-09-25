@@ -1,0 +1,229 @@
+{
+ "areas": [
+  "Participatory Democracy",
+  "Procurement & Operations",
+  "Service Delivery",
+  "Talent & Hiring",
+  "Technology & Data",
+  "Test & Learn",
+  "Domains"
+ ],
+ "topics": [
+  {
+   "area": "Participatory Democracy",
+   "topic": "Civic Engagement",
+   "definition": "Connecting residents to government and strengthening democratic participation.",
+   "slug": "civic-engagement"
+  },
+  {
+   "area": "Participatory Democracy",
+   "topic": "Democracy Infrastructure",
+   "definition": "Strengthening the structural foundations of democratic governance and institutions.",
+   "slug": "democracy-infrastructure"
+  },
+  {
+   "area": "Participatory Democracy",
+   "topic": "Transparency & Accountability",
+   "definition": "Transparency, open data, FOIA, and public accountability infrastructure.",
+   "slug": "transparency-accountability"
+  },
+  {
+   "area": "Procurement & Operations",
+   "topic": "Operational Excellence",
+   "definition": "Improving how government operates internally: processes, systems, and workforce efficiency.",
+   "slug": "operational-excellence"
+  },
+  {
+   "area": "Procurement & Operations",
+   "topic": "Procurement Reform",
+   "definition": "Modernizing how government buys, evaluates vendors, and manages technology and service contracts.",
+   "slug": "procurement-reform"
+  },
+  {
+   "area": "Procurement & Operations",
+   "topic": "Reaction Time",
+   "definition": "Improving the speed at which government can respond to problems and opportunities.",
+   "slug": "reaction-time"
+  },
+  {
+   "area": "Procurement & Operations",
+   "topic": "Regulatory & Administrative Burden",
+   "definition": "Reducing unnecessary complexity in government rules, forms, procedures, and compliance requirements.",
+   "slug": "regulatory-administrative-burden"
+  },
+  {
+   "area": "Service Delivery",
+   "topic": "Benefits Access",
+   "definition": "Improving resident access to and delivery of government benefit programs.",
+   "slug": "benefits-access"
+  },
+  {
+   "area": "Service Delivery",
+   "topic": "Service Design",
+   "definition": "Human-centered design of government services, forms, processes, and digital interfaces.",
+   "slug": "service-design"
+  },
+  {
+   "area": "Talent & Hiring",
+   "topic": "Expert Contribution",
+   "definition": "Placing or mobilizing subject matter experts to work on government problems.",
+   "slug": "expert-contribution"
+  },
+  {
+   "area": "Talent & Hiring",
+   "topic": "Hiring Architecture",
+   "definition": "Redesigning how government structures its talent acquisition and retention systems.",
+   "slug": "hiring-architecture"
+  },
+  {
+   "area": "Talent & Hiring",
+   "topic": "Hiring Process",
+   "definition": "Improving the mechanics of government recruitment, assessment, and onboarding.",
+   "slug": "hiring-process"
+  },
+  {
+   "area": "Talent & Hiring",
+   "topic": "Talent Pipeline",
+   "definition": "Building pathways for technologists, policy experts, and public servants to enter government.",
+   "slug": "talent-pipeline"
+  },
+  {
+   "area": "Talent & Hiring",
+   "topic": "Workforce Development",
+   "definition": "Upskilling existing government workers and the broader labor force served by government programs.",
+   "slug": "workforce-development"
+  },
+  {
+   "area": "Technology & Data",
+   "topic": "Data Integration",
+   "definition": "Breaking down fragmented data systems that prevent agencies from sharing information.",
+   "slug": "data-integration"
+  },
+  {
+   "area": "Technology & Data",
+   "topic": "Data Security",
+   "definition": "Protecting government systems and data from cyber threats.",
+   "slug": "data-security"
+  },
+  {
+   "area": "Technology & Data",
+   "topic": "Legacy Systems",
+   "definition": "Replacing or modernizing outdated government technology infrastructure.",
+   "slug": "legacy-systems"
+  },
+  {
+   "area": "Technology & Data",
+   "topic": "Shared Platforms",
+   "definition": "Building reusable, open-source, or collectively-owned technology infrastructure for government.",
+   "slug": "shared-platforms"
+  },
+  {
+   "area": "Test & Learn",
+   "topic": "Evidence Use",
+   "definition": "Embedding research and data into government decision-making and program design.",
+   "slug": "evidence-use"
+  },
+  {
+   "area": "Test & Learn",
+   "topic": "Feedback Loops",
+   "definition": "Building mechanisms for government to collect and act on resident and stakeholder input.",
+   "slug": "feedback-loops"
+  },
+  {
+   "area": "Test & Learn",
+   "topic": "Iterative Learning",
+   "definition": "Building government capacity to test, learn, and improve through iteration.",
+   "slug": "iterative-learning"
+  },
+  {
+   "area": "Test & Learn",
+   "topic": "Outcomes Measurement",
+   "definition": "Using data and evidence to track and improve government program results.",
+   "slug": "outcomes-measurement"
+  },
+  {
+   "area": "Test & Learn",
+   "topic": "Scaling What Works",
+   "definition": "Identifying proven approaches and systematically replicating them across jurisdictions.",
+   "slug": "scaling-what-works"
+  },
+  {
+   "area": "Domains",
+   "topic": "AI in Government",
+   "definition": "Government adoption, governance, and responsible deployment of artificial intelligence.",
+   "slug": "ai-in-government"
+  },
+  {
+   "area": "Domains",
+   "topic": "Broadband & Internet Connectivity",
+   "definition": "Expanding government capacity to deploy and manage broadband infrastructure.",
+   "slug": "broadband-internet-connectivity"
+  },
+  {
+   "area": "Domains",
+   "topic": "Child Welfare",
+   "definition": "Technology and reform capacity for child protective services, foster care, and family systems.",
+   "slug": "child-welfare"
+  },
+  {
+   "area": "Domains",
+   "topic": "Criminal Justice",
+   "definition": "Technology and reform capacity for law enforcement, courts, corrections, and reentry.",
+   "slug": "criminal-justice"
+  },
+  {
+   "area": "Domains",
+   "topic": "Crisis Response",
+   "definition": "Government capacity for emergency management, disaster response, and 911 systems.",
+   "slug": "crisis-response"
+  },
+  {
+   "area": "Domains",
+   "topic": "Economic Mobility",
+   "definition": "Government programs and systems that improve economic opportunity for residents.",
+   "slug": "economic-mobility"
+  },
+  {
+   "area": "Domains",
+   "topic": "Education Delivery",
+   "definition": "Technology capacity for government education agencies to deliver and improve learning.",
+   "slug": "education-delivery"
+  },
+  {
+   "area": "Domains",
+   "topic": "Healthcare Access",
+   "definition": "Technology capacity for government health programs: Medicaid, Medicare, public health delivery.",
+   "slug": "healthcare-access"
+  },
+  {
+   "area": "Domains",
+   "topic": "Housing & Land Use",
+   "definition": "Government capacity for housing policy, permitting, zoning, and affordable housing delivery.",
+   "slug": "housing-land-use"
+  },
+  {
+   "area": "Domains",
+   "topic": "Permitting & Licensing",
+   "definition": "Modernizing government permitting, licensing, and code enforcement processes.",
+   "slug": "permitting-licensing"
+  },
+  {
+   "area": "Domains",
+   "topic": "Physical Infrastructure",
+   "definition": "Technology capacity for managing roads, utilities, transit, and built environment.",
+   "slug": "physical-infrastructure"
+  },
+  {
+   "area": "Domains",
+   "topic": "Public Health",
+   "definition": "Capacity of public health departments and agencies to deliver and modernize health programs.",
+   "slug": "public-health"
+  },
+  {
+   "area": "Domains",
+   "topic": "Tax & Revenue",
+   "definition": "Technology capacity for government finance, tax collection, and fiscal management.",
+   "slug": "tax-revenue"
+  }
+ ]
+}

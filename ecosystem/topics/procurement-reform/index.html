@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/assets/sce_logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procurement Reform — Ecosystem · State Capacity Ecosystem</title>
+  <meta name="description" content="Procurement Reform: Modernizing how government buys, evaluates vendors, and manages technology and service contracts.…">
+  <link rel="canonical" href="https://statecapacityecosystem.com/ecosystem/topics/procurement-reform/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://statecapacityecosystem.com/ecosystem/topics/procurement-reform/">
+  <meta property="og:title" content="Procurement Reform — Ecosystem · State Capacity Ecosystem">
+  <meta property="og:description" content="Procurement Reform: Modernizing how government buys, evaluates vendors, and manages technology and service contracts.…">
+  <meta property="og:image" content="https://statecapacityecosystem.com/assets/sce_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    :root {
+      --blue:#8A5F1E; --blue-hover:#6E4A15; --blue-light:#F5EDDA; --blue-mid:#DFCEA1;
+      --orange:#8A5F1E; --orange-light:#F5EDDA;
+      --text:#1A1918; --text-mid:#444039; --text-muted:#6B6760; --text-faint:#9C968A;
+      --bg:#F4EFE4; --surface:#ffffff; --border:#DDD8CC; --border-mid:#C9C1AF;
+      --shadow-sm:0 1px 3px rgba(26,25,24,0.08);
+      --radius:10px;
+    }
+    body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+
+    header { background:#1A1918; border-bottom:1px solid #2E2B27; padding:0 clamp(16px,4vw,48px); }
+    .header-inner { max-width:1300px; margin:0 auto; height:60px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { display:flex; align-items:center; gap:9px; text-decoration:none; }
+    .brand-name { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:700; color:#D4A853; letter-spacing:-0.02em; }
+    .brand-slash { font-family:'Roboto Mono',monospace; font-size:0.95rem; color:#4b5563; }
+    .brand-section { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:600; color:#DDD8CC; }
+    .header-link { font-size:0.78rem; font-weight:500; color:#9C968A; text-decoration:none; display:flex; align-items:center; gap:5px; transition:color 0.15s; }
+    .header-link:hover { color:#D4A853; }
+
+    .breadcrumb { padding:14px clamp(16px,4vw,48px) 0; }
+    .breadcrumb-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; gap:6px; font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:500; color:var(--text-faint); }
+    .breadcrumb a { color:var(--text-faint); text-decoration:none; transition:color 0.15s; }
+    .breadcrumb a:hover { color:var(--blue); }
+    .breadcrumb .current { color:var(--orange); }
+    .breadcrumb-sep { color:var(--border-mid); }
+
+    .hero { padding:14px clamp(16px,4vw,48px) 0; }
+    .hero-inner { max-width:1300px; margin:0 auto; padding-bottom:14px; }
+    .hero h1 { font-family:'Roboto Mono',monospace; font-size:clamp(1.2rem,3vw,1.7rem); font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.2; margin-bottom:6px; }
+    .hero h1 span { color:var(--blue); }
+    .hero p { font-size:0.88rem; color:var(--text-muted); max-width:780px; line-height:1.6; }
+
+
+    .main { flex:1; padding:clamp(20px,3vw,32px) clamp(16px,4vw,48px) clamp(40px,6vw,64px); }
+    .main-inner { max-width:780px; margin:0 auto; }
+
+    .article {
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-sm);
+      padding:clamp(24px,4vw,42px);
+    }
+    .article h2 {
+      font-family:'Roboto Mono',monospace;
+      font-size:1.05rem; font-weight:700; color:var(--text);
+      letter-spacing:-0.02em;
+      margin:32px 0 12px;
+      padding-top:18px;
+      border-top:1px solid var(--border);
+    }
+    .article h2:first-child { margin-top:0; padding-top:0; border-top:none; }
+    .article h3 {
+      font-family:'Roboto Mono',monospace;
+      font-size:0.78rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.08em;
+      color:var(--orange);
+      margin:22px 0 8px;
+    }
+    .article p {
+      font-size:0.95rem; color:var(--text-mid);
+      line-height:1.75; margin-bottom:14px;
+    }
+    .article p strong { color:var(--text); font-weight:600; }
+    .article a { color:var(--blue); text-decoration:none; border-bottom:1px solid var(--blue-mid); }
+    .article a:hover { background:var(--blue-light); }
+    .article ul { padding-left:1.2rem; margin-bottom:16px; }
+    .article ul li { font-size:0.93rem; color:var(--text-mid); line-height:1.7; margin-bottom:6px; }
+    .article code, .article pre {
+      font-family:'Roboto Mono',monospace;
+      font-size:0.86rem;
+      background:var(--bg);
+      color:var(--text);
+      border-radius:4px;
+    }
+    .article code { padding:2px 7px; }
+    .article pre {
+      padding:14px 18px;
+      border:1px solid var(--border);
+      overflow-x:auto;
+      margin:8px 0 18px;
+      line-height:1.55;
+    }
+
+    .formula-block {
+      background:var(--blue-light);
+      border:1px solid var(--blue-mid);
+      border-radius:8px;
+      padding:18px 22px;
+      margin:14px 0 22px;
+      font-family:'Roboto Mono',monospace;
+      font-size:0.95rem;
+      color:var(--text);
+      line-height:1.7;
+      text-align:center;
+    }
+    .formula-block .coef { color:var(--blue); font-weight:700; }
+
+    .weight-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+      gap:10px;
+      margin:14px 0 22px;
+    }
+    .weight-card {
+      background:var(--bg);
+      border:1px solid var(--border);
+      border-left:3px solid var(--blue);
+      border-radius:6px;
+      padding:12px 14px;
+    }
+    .weight-card .pct {
+      font-family:'Roboto Mono',monospace;
+      font-size:1.15rem; font-weight:700;
+      color:var(--blue);
+      display:block;
+      margin-bottom:2px;
+    }
+    .weight-card .lbl {
+      font-family:'Roboto Mono',monospace;
+      font-size:0.7rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.06em;
+      color:var(--text-muted);
+      margin-bottom:5px;
+    }
+    .weight-card .body {
+      font-size:0.82rem; color:var(--text-mid);
+      line-height:1.5;
+    }
+
+    .callout {
+      background:var(--orange-light);
+      border:1px solid #DFCEA1;
+      border-left:3px solid var(--orange);
+      border-radius:6px;
+      padding:14px 18px;
+      margin:14px 0 22px;
+      font-size:0.9rem;
+      color:#9a3412;
+      line-height:1.7;
+    }
+    .callout strong { color:#7c2d12; }
+
+    table.signals {
+      width:100%;
+      border-collapse:collapse;
+      margin:8px 0 22px;
+      font-size:0.86rem;
+    }
+    table.signals th, table.signals td {
+      text-align:left;
+      padding:9px 12px;
+      border-bottom:1px solid var(--border);
+    }
+    table.signals th {
+      background:#f9fafb;
+      font-family:'Roboto Mono',monospace;
+      font-size:0.65rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.07em;
+      color:var(--text-muted);
+    }
+    table.signals tr:last-child td { border-bottom:none; }
+    table.signals td.weight { font-family:'Roboto Mono',monospace; color:var(--blue); font-weight:700; white-space:nowrap; }
+    table.signals td.area { font-weight:600; color:var(--text); vertical-align:top; white-space:nowrap; }
+
+    footer { background:var(--surface); border-top:1px solid var(--border); padding:18px clamp(16px,4vw,48px); margin-top:32px; }
+    .footer-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+    .footer-copy { font-size:0.78rem; color:var(--text-faint); }
+    .footer-links { display:flex; gap:18px; }
+    .footer-links a { font-size:0.78rem; color:var(--text-muted); text-decoration:none; transition:color 0.15s; }
+    .footer-links a:hover { color:var(--blue); }
+
+    @media (max-width: 540px) { .brand-slash, .brand-section { display:none; } }
+  </style>
+<style id="ribbon-css">
+.ribbon{background:var(--surface);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);position:relative;z-index:80;}
+.ribbon-inner{max-width:1300px;margin:0 auto;display:flex;align-items:stretch;}
+.ribbon-item{position:relative;flex-shrink:0;}
+.ribbon-link{display:flex;align-items:center;gap:6px;padding:13px 14px 11px;font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;color:var(--text-mid);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;}
+.ribbon-item:hover .ribbon-link,.ribbon-link:focus{color:var(--blue);}
+.ribbon-link.active{color:var(--orange);border-bottom-color:var(--orange);}
+.ribbon-caret{font-size:0.55rem;color:var(--text-faint);transform:translateY(1px);}
+.ribbon-drop{display:none;position:absolute;top:100%;left:0;min-width:235px;background:var(--surface);border:1px solid var(--border-mid);border-radius:0 0 8px 8px;box-shadow:0 14px 34px rgba(26,25,24,0.16);z-index:90;padding:6px 0;}
+.ribbon-item:hover .ribbon-drop,.ribbon-item:focus-within .ribbon-drop{display:block;}
+.ribbon-drop a{display:block;padding:8px 16px;font-size:0.82rem;color:var(--text-mid);text-decoration:none;transition:background .1s,color .1s;}
+.ribbon-drop a:hover{background:var(--blue-light);color:var(--blue);}
+@media (max-width:720px){.ribbon-inner{flex-wrap:wrap;}.ribbon-link{padding:11px 7px 9px;font-size:0.7rem;}.ribbon-actions{flex-basis:100%;margin-left:0;padding:0 0 8px 7px;}.ribbon-drop{display:none !important;}}
+.ribbon-actions{margin-left:auto;display:flex;align-items:center;gap:8px;padding:7px 0 7px 14px;flex-shrink:0;}
+.ribbon-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.74rem;font-weight:700;text-decoration:none;padding:7px 13px;border-radius:7px;white-space:nowrap;border:1px solid #DFCEA1;background:#F5EDDA;color:#8A5F1E;transition:background .15s,color .15s;}
+.ribbon-btn:hover{background:#8A5F1E;color:#fff;}
+.ribbon-btn.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
+.ribbon-btn.primary:hover{background:#B08430;border-color:#B08430;color:#fff;}
+.sce-footer{background:#1A1918;color:#F4EFE4;padding:26px clamp(16px,4vw,48px);margin-top:auto;}
+.sce-footer-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.sce-footer-brand{display:flex;align-items:center;gap:10px;font-family:'Roboto Mono',monospace;font-size:0.84rem;font-weight:700;color:#D4A853;text-decoration:none;}
+.sce-footer-brand img{width:22px;height:22px;object-fit:contain;}
+.sce-footer-brand small{font-weight:400;color:#9C968A;font-size:0.72rem;margin-left:4px;}
+.sce-footer-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.sce-footer-actions a{font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;text-decoration:none;padding:8px 14px;border-radius:7px;border:1px solid rgba(244,239,228,0.3);color:#F4EFE4;transition:border-color .15s,background .15s;}
+.sce-footer-actions a:hover{border-color:#D4A853;background:rgba(212,168,83,0.12);}
+.sce-footer-actions a.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
+.sce-footer-actions a.primary:hover{background:#E3C170;}
+</style>
+<style id="event-banner-css">
+.evt-banner{background:#D4A853;color:#1A1918;padding:0 clamp(16px,4vw,48px);position:relative;z-index:100;}
+.evt-banner-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:9px 0;font-family:'Roboto Mono',monospace;font-size:0.8rem;font-weight:600;}
+.evt-banner strong{font-weight:700;}
+.evt-banner .evt-when{color:#6E4A15;}
+.evt-banner a{display:inline-flex;align-items:center;gap:6px;background:#1A1918;color:#F4EFE4;text-decoration:none;padding:6px 14px;border-radius:6px;font-size:0.76rem;font-weight:700;white-space:nowrap;transition:background .15s;}
+.evt-banner a:hover{background:#3E3931;}
+@media (max-width:620px){.evt-banner-inner{font-size:0.74rem;gap:9px;}.evt-banner .evt-when{width:100%;text-align:center;}}
+@media print{.evt-banner{display:none !important;}}
+</style>
+
+<style id="topics-css">
+  .t-main { flex:1; padding:clamp(6px,1vw,12px) clamp(16px,4vw,48px) clamp(40px,6vw,64px); }
+  .t-main-inner { max-width:1300px; margin:0 auto; }
+  .t-kicker { font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--orange); margin:8px 0 10px; }
+  .t-h1 { font-family:'Roboto Mono',monospace; font-size:clamp(1.3rem,3.4vw,2rem); font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.2; margin-bottom:10px; }
+  .t-deck { font-size:0.95rem; color:var(--text-muted); max-width:780px; line-height:1.6; margin-bottom:8px; }
+  .t-lead { font-size:0.92rem; color:var(--text-mid); max-width:900px; line-height:1.7; margin-bottom:28px; }
+  .t-section { margin:28px 0; max-width:100%; }
+  .t-section h2 { font-family:'Roboto Mono',monospace; font-size:1.02rem; font-weight:700; color:var(--text); letter-spacing:-0.02em; margin-bottom:14px; }
+  .t-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; max-width:100%; }
+  .t-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow-sm); padding:16px 18px; max-width:100%; }
+  .t-card-top { display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+  .t-card-name { font-size:0.95rem; font-weight:600; color:var(--text); text-decoration:none; }
+  .t-card-name:hover { color:var(--blue); }
+  .t-chip { font-family:'Roboto Mono',monospace; font-size:0.66rem; font-weight:700; padding:2px 8px; border-radius:10px; white-space:nowrap; }
+  .t-chip-sunset { font-family:'Roboto Mono',monospace; font-size:0.66rem; font-weight:700; padding:2px 8px; border-radius:10px; white-space:nowrap; background:#f3f4f6; color:#6b7280; border:1px solid #d1d5db; }
+  .t-card-desc { font-size:0.84rem; color:var(--text-mid); line-height:1.55; margin-bottom:8px; }
+  .t-card-link { font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:600; color:var(--blue); text-decoration:none; }
+  .t-card-link:hover { text-decoration:underline; }
+  .t-empty { font-size:0.9rem; color:var(--text-muted); margin-bottom:12px; }
+  .t-btn { display:inline-flex; align-items:center; gap:6px; font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:700; text-decoration:none; padding:9px 16px; border-radius:7px; white-space:nowrap; border:1px solid #DFCEA1; background:#F5EDDA; color:#8A5F1E; transition:background .15s, color .15s; }
+  .t-btn:hover { background:#8A5F1E; color:#fff; }
+  .t-related { display:flex; flex-wrap:wrap; gap:8px; max-width:100%; }
+  .t-related a { font-family:'Roboto Mono',monospace; font-size:0.8rem; font-weight:600; color:var(--blue); text-decoration:none; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:7px 12px; }
+  .t-related a:hover { border-color:var(--blue); }
+  .t-cta-band { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--orange); border-radius:8px; padding:20px 22px; margin-top:32px; display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; max-width:100%; }
+  .t-cta-band p { font-size:0.92rem; color:var(--text-mid); margin:0; }
+  .t-cta-actions { display:flex; gap:10px; flex-wrap:wrap; }
+  .t-area-block { margin-bottom:32px; max-width:100%; }
+  .t-area-block h2 { font-family:'Roboto Mono',monospace; font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:12px; }
+  .t-topic-cols { columns:2; column-gap:28px; }
+  .t-topic-row { break-inside:avoid; margin-bottom:14px; }
+  .t-topic-row a { font-size:0.92rem; font-weight:600; color:var(--text); text-decoration:none; }
+  .t-topic-row a:hover { color:var(--blue); }
+  .t-topic-meta { display:block; font-family:'Roboto Mono',monospace; font-size:0.72rem; color:var(--text-faint); margin-top:2px; }
+  html, body { max-width:100%; overflow-x:hidden; }
+  * { max-width:100%; }
+  @media (max-width:720px) {
+    .t-grid { grid-template-columns:1fr; }
+    .t-topic-cols { columns:1; }
+  }
+</style>
+
+
+</head>
+<body>
+
+<!-- PILLAR RIBBON -->
+<!-- EVENT BANNER -->
+<div class="evt-banner">
+  <div class="evt-banner-inner">
+    <span><strong>State Capacity Hackathon: Public Engagement</strong> <span class="evt-when">· Sept 30</span></span>
+    <a href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sign up ↗</a>
+  </div>
+</div>
+
+<style id="ribbon-sub-css">
+.ribbon-drop-desc{min-width:270px;}
+.ribbon-drop-desc a{white-space:normal;}
+.ribbon-sub{display:block;font-family:Inter,sans-serif;font-size:0.7rem;font-weight:400;color:#9C968A;line-height:1.4;margin-top:2px;}
+@media (max-width:720px){
+  .ribbon-item.open .ribbon-drop{display:block !important;position:fixed;left:10px;right:10px;min-width:0;border-radius:10px;border:1px solid var(--border-mid,#C9C1AF);box-shadow:0 18px 40px rgba(26,25,24,0.25);max-height:60vh;overflow-y:auto;z-index:120;}
+  .ribbon-item.open .ribbon-link{color:#8A5F1E;}
+}
+.sce-footer-inner{align-items:flex-start;row-gap:18px;}
+.sce-footer-inner > div:first-child{flex:1 1 340px;min-width:240px;}
+.sce-footer-actions{align-items:center;}
+.sce-footer-tag{font-family:Inter,sans-serif;font-size:0.78rem;color:#9C968A;margin:9px 0 0;max-width:460px;line-height:1.55;}
+@media (max-width:640px){.sce-footer-inner{flex-direction:column;}.sce-footer-actions{width:100%;}}
+</style>
+<nav class="ribbon" aria-label="State Capacity Ecosystem sections">
+  <div class="ribbon-inner">
+    <div class="ribbon-item"><a class="ribbon-link" href="/"><img src="/assets/sce_logo.png" alt="" style="width:16px;height:16px;object-fit:contain;">Home</a></div>
+    <div class="ribbon-item">
+      <a class="ribbon-link active" href="/ecosystem/">Ecosystem <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Say who you are and what you need, and we find the match.</span></a>
+        <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
+        <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
+        <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
+        <a href="/ecosystem/topics/">Problem topics<span class="ribbon-sub">Every problem we track, and who works on it.</span></a>
+      </div>
+    </div>
+    <div class="ribbon-item">
+      <a class="ribbon-link" href="/events/">Events <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/events/hackathons/">Hackathons<span class="ribbon-sub">Build nights that end in working software.</span></a>
+        <a href="/events/demo-nights/">Demo Nights<span class="ribbon-sub">What got built, in front of who can adopt it.</span></a>
+        <a href="/events/salons/">Salons &amp; Meet-ups<span class="ribbon-sub">Speaker nights and monthly office hours.</span></a>
+        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<span class="ribbon-sub">What hosts and sponsors own, on one page.</span></a>
+      </div>
+    </div>
+    <div class="ribbon-item">
+      <a class="ribbon-link" href="/community/">Community <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/community/slack/">Slack<span class="ribbon-sub">The conversation between events.</span></a>
+        <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗<span class="ribbon-sub">The team's writing on state capacity.</span></a>
+        <a href="/community/playbooks/">Playbooks<span class="ribbon-sub">Run our formats without us in the room.</span></a>
+        <a href="/community/proof-points/">Proof Points<span class="ribbon-sub">Every tool built through SCE.</span></a>
+      </div>
+    </div>
+    <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
+    <div class="ribbon-actions">
+      <a class="ribbon-btn primary" href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sept 30 Hackathon ↗</a>
+    </div>
+  </div>
+</nav>
+<script id="ribbon-touch-js">
+(function () {
+  var mq = window.matchMedia("(max-width:720px)");
+  document.querySelectorAll(".ribbon-item").forEach(function (item) {
+    var link = item.querySelector(".ribbon-link");
+    var drop = item.querySelector(".ribbon-drop");
+    if (!link || !drop) return;
+    link.addEventListener("click", function (e) {
+      if (!mq.matches) return;
+      if (!item.classList.contains("open")) {
+        e.preventDefault();
+        document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
+        item.classList.add("open");
+        drop.style.top = (link.getBoundingClientRect().bottom + 6) + "px";
+      }
+    });
+  });
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".ribbon-item")) {
+      document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
+    }
+  });
+})();
+</script>
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="/">State Capacity Ecosystem</a><span class="breadcrumb-sep">/</span><a href="/ecosystem/">Ecosystem</a><span class="breadcrumb-sep">/</span><a href="/ecosystem/topics/">Problem topics</a><span class="breadcrumb-sep">/</span><span class="current">Procurement Reform</span>
+  </div>
+</div>
+<div class="t-main"><div class="t-main-inner">
+<div class="t-kicker">Procurement &amp; Operations</div>
+<h1 class="t-h1">Procurement Reform</h1>
+<p class="t-deck">Modernizing how government buys, evaluates vendors, and manages technology and service contracts.</p>
+<p class="t-lead">54 organizations work on Procurement Reform, 4 people or opportunities on Connect carry it, and 2 tools in Proof Points touch its problem area.</p>
+<div class="t-section"><h2>Who works on it</h2>
+<div class="t-grid">
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=201">8VC (Joe Lonsdale)</a>
+          <span class="t-chip" style="background:#9333ea1a;color:#9333ea;border:1px solid #9333ea55;">Investor</span>
+          
+        </div>
+        <p class="t-card-desc">Venture firm with an explicit govtech and defense thesis, co-founded by Joe Lonsdale. Co-founded and backed OpenGov (acquired by Cox Enterprises for $1.8B in 2024).</p>
+        <a class="t-card-link" href="https://8vc.com" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=74">Accelerator for America</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">Mayor-led nonprofit co-founded by Eric Garcetti giving cities technical assistance on federal funding, infrastructure, and economic development. Active in 60+ cities, supporting smart city plans, EDA…</p>
+        <a class="t-card-link" href="https://acceleratorforamerica.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=202">Advantage Capital / InState Partners</a>
+          <span class="t-chip" style="background:#9333ea1a;color:#9333ea;border:1px solid #9333ea55;">Investor</span>
+          
+        </div>
+        <p class="t-card-desc">St. Louis-based impact investor whose InState Partners line (est. 2013) invests in govtech, pairing capital with a 50-state government affairs network to navigate procurement. First investor in…</p>
+        <a class="t-card-link" href="https://advantagecap.com" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=203">America&#x27;s Frontier Fund</a>
+          <span class="t-chip" style="background:#9333ea1a;color:#9333ea;border:1px solid #9333ea55;">Investor</span>
+          
+        </div>
+        <p class="t-card-desc">Nonprofit strategic investment fund for frontier technologies (semiconductors, AI, quantum, advanced manufacturing) tied to US security and competitiveness. Led by Gilman Louie (former In-Q-Tel CEO),…</p>
+        <a class="t-card-link" href="https://americasfrontier.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=204">Andreessen Horowitz</a>
+          <span class="t-chip" style="background:#9333ea1a;color:#9333ea;border:1px solid #9333ea55;">Investor</span>
+          
+        </div>
+        <p class="t-card-desc">Major VC whose American Dynamism practice backs defense and government technology startups. Govtech investments include OpenGov (sold to Cox for $1.8B in 2024), Flock Safety, and Skydio; defense and…</p>
+        <a class="t-card-link" href="https://a16z.com" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=205">BarronKent Ventures</a>
+          <span class="t-chip" style="background:#9333ea1a;color:#9333ea;border:1px solid #9333ea55;">Investor</span>
+          
+        </div>
+        <p class="t-card-desc">Sacramento-based family office and early-stage VC with an explicit govtech focus, founded by principals who ran a national govtech consulting firm for 18 years. Invests across HHS, transportation and…</p>
+        <a class="t-card-link" href="https://barronkent.com" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=259">Bipartisan Policy Center (BPC)</a>
+          <span class="t-chip" style="background:#2563eb1a;color:#2563eb;border:1px solid #2563eb55;">Research</span>
+          
+        </div>
+        <p class="t-card-desc">Centrist think tank founded by former Senate majority leaders from both parties. Governance program focuses on congressional capacity, executive branch management, and government modernization.…</p>
+        <a class="t-card-link" href="https://bipartisanpolicy.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=207">BV Investment Partners</a>
+          <span class="t-chip" style="background:#9333ea1a;color:#9333ea;border:1px solid #9333ea55;">Investor</span>
+          
+        </div>
+        <p class="t-card-desc">Boston-based middle-market PE firm with government technology as a named sector. Made a minority investment in CivicPlus in 2019 and scaled it before a $290M exit to Insight Partners in 2021.</p>
+        <a class="t-card-link" href="https://bvlp.com" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=22">Center for Civic Futures (CCF) / AI Readiness Project</a>
+          <span class="t-chip" style="background:#ca8a041a;color:#ca8a04;border:1px solid #ca8a0455;">Capacity Building</span>
+          
+        </div>
+        <p class="t-card-desc">Nonpartisan nonprofit running the AI Readiness Project and the State Chief AI Officer Community of Practice (30+ states). Houses the Public Benefit Innovation Fund, which awarded $8.5M to eight state…</p>
+        <a class="t-card-link" href="https://centerforcivicfutures.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=79">City Innovate</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">San Francisco-based nonprofit running the Startup in Residence (STIR) program, connecting startups to government agencies to co-design technology solutions for defined government challenges.…</p>
+        <a class="t-card-link" href="https://cityinnovate.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=80">CivStart</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">Nonprofit govtech accelerator for state and local government, with six cohorts and 71+ startups scaled. Runs a 12-month accelerator, GovTech Lab, and a Venture Partner Network; its recent cohort…</p>
+        <a class="t-card-link" href="https://civstart.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=57">Code for America</a>
+          <span class="t-chip" style="background:#0d94881a;color:#0d9488;border:1px solid #0d948855;">Digital Services &amp; Consulting</span>
+          
+        </div>
+        <p class="t-card-desc">Civic tech nonprofit (est. 2009) building digital tools and changing policies across the safety net, criminal justice, and tax systems. Its $100M Safety Net Innovation Lab has partnered with 14…</p>
+        <a class="t-card-link" href="https://codeforamerica.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=133">Colorado Digital Service</a>
+          <span class="t-chip" style="background:#0891b21a;color:#0891b2;border:1px solid #0891b255;">Government</span>
+          
+        </div>
+        <p class="t-card-desc">State digital team within the Governor&#x27;s Office of Information Technology (OIT), founded by USDS alumni, using product management, user research, and agile delivery. In 2026 OIT adopted the CDS model…</p>
+        <a class="t-card-link" href="https://colorado.gov/digitalservice" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=81">Colorado Smart Cities Alliance</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">Statewide coalition of government, business, and academic partners convening around smart city technology adoption in Colorado. Runs challenge-based procurement programs, pilots, and the Smart…</p>
+        <a class="t-card-link" href="https://coloradosmart.city" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=187">Digital Public Works</a>
+          <span class="t-chip" style="background:#16a34a1a;color:#16a34a;border:1px solid #16a34a55;">GovTech</span>
+          
+        </div>
+        <p class="t-card-desc">Nonprofit govtech founded by former USDS staff. Its first product is a consent-based income verification tool that lets benefits applicants share payroll data directly with state agencies; states are…</p>
+        <a class="t-card-link" href="https://digitalpublicworks.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=271">Foundation for American Innovation</a>
+          <span class="t-chip" style="background:#2563eb1a;color:#2563eb;border:1px solid #2563eb55;">Research</span>
+          
+        </div>
+        <p class="t-card-desc">Center-right innovation policy think tank whose Senior Fellows program places technologists in congressional offices. Work includes GAO reform, AI governance, and congressional tech capacity; runs…</p>
+        <a class="t-card-link" href="https://thefai.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=139">Georgia Office of Artificial Intelligence</a>
+          <span class="t-chip" style="background:#0891b21a;color:#0891b2;border:1px solid #0891b255;">Government</span>
+          
+        </div>
+        <p class="t-card-desc">Dedicated state AI office within the Georgia Technology Authority. Published the state AI Roadmap and Governance Framework and drives a cloud-first initiative with AI integration, backed by $15M in…</p>
+        <a class="t-card-link" href="https://gta.georgia.gov" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=82">GovAI Coalition</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">Coalition of 3,000+ public servants from 900+ agencies promoting responsible public sector AI. Founded by the City of San Jose in 2023; became an independent nonprofit in 2026. Produces AI policy…</p>
+        <a class="t-card-link" href="https://sanjoseca.gov/govai" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=273">Government Finance Officers Association (GFOA)</a>
+          <span class="t-chip" style="background:#2563eb1a;color:#2563eb;border:1px solid #2563eb55;">Research</span>
+          
+        </div>
+        <p class="t-card-desc">Professional association (est. 1906) of 30,000+ state, provincial, and local government finance officers; publishes the GAAFR Blue Book and runs budget and reporting award programs. Its Research and…</p>
+        <a class="t-card-link" href="https://gfoa.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=209">Govtech Fund (Ron Bouganim)</a>
+          <span class="t-chip" style="background:#9333ea1a;color:#9333ea;border:1px solid #9333ea55;">Investor</span>
+          
+        </div>
+        <p class="t-card-desc">First VC fund dedicated to govtech, founded by Ron Bouganim; makes $250K-$500K seed investments in companies selling to government (~$50M across two funds). Portfolio includes Mark43,…</p>
+        <a class="t-card-link" href="https://govtechfund.com" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=210">Govtech Ventures (Rachel Stern)</a>
+          <span class="t-chip" style="background:#9333ea1a;color:#9333ea;border:1px solid #9333ea55;">Investor</span>
+          
+        </div>
+        <p class="t-card-desc">Solo-GP early-stage VC fund (est. 2024) dedicated to state and local government, founded by Rachel Stern, first investor in PayIt and co-founder of InState Partners. Has held a first close on a $15M…</p>
+        <a class="t-card-link" href="https://govtechventures.com" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=61">Harvard Government Performance Lab (GPL)</a>
+          <span class="t-chip" style="background:#0d94881a;color:#0d9488;border:1px solid #0d948855;">Digital Services &amp; Consulting</span>
+          
+        </div>
+        <p class="t-card-desc">Harvard Kennedy School lab embedding full-time fellows in state and local agencies for 12-36 month pro bono reform projects in child welfare, criminal justice, homelessness, housing, and procurement.…</p>
+        <a class="t-card-link" href="https://govlab.hks.harvard.edu" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=310">Hazel</a>
+          <span class="t-chip" style="background:#16a34a1a;color:#16a34a;border:1px solid #16a34a55;">GovTech</span>
+          
+        </div>
+        <p class="t-card-desc">AI procurement software for government that automates solicitation drafting, vendor matching, compliance checks, and proposal evaluation, with procurement officers retaining final decisions.…</p>
+        <a class="t-card-link" href="https://hazelai.com" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=83">HSITAG (Human Services IT Advisory Group)</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">Nonprofit trade association under CompTIA (founded 1993, 123 member companies) bridging health and human services IT vendors and government HHS agencies. Advises federal and state HHS technology…</p>
+        <a class="t-card-link" href="https://hsitag.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=276">IBM Center for the Business of Government</a>
+          <span class="t-chip" style="background:#2563eb1a;color:#2563eb;border:1px solid #2563eb55;">Research</span>
+          
+        </div>
+        <p class="t-card-desc">Research center (est. 1998; part of IBM since 2002) funding practitioner-focused research on federal, state, and local public management. Publishes 25+ reports a year on digital modernization, AI…</p>
+        <a class="t-card-link" href="https://businessofgovernment.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=84">Illinois Smart City and Region Association (ISCRA)</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">501c3 nonprofit association bringing municipalities and technology vendors together in a neutral forum to advance smart city and region initiatives across Illinois. Member of the National Smart…</p>
+        <a class="t-card-link" href="https://illinoissmart.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=277">Information Technology and Innovation Foundation (ITIF)</a>
+          <span class="t-chip" style="background:#2563eb1a;color:#2563eb;border:1px solid #2563eb55;">Research</span>
+          
+        </div>
+        <p class="t-card-desc">Nonpartisan science and tech policy think tank. Research on government IT modernization, AI policy, and digital infrastructure. Published &#x27;After DOGE: Trump&#x27;s Chance to Modernize.&#x27;</p>
+        <a class="t-card-link" href="https://itif.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=212">IQT (In-Q-Tel)</a>
+          <span class="t-chip" style="background:#9333ea1a;color:#9333ea;border:1px solid #9333ea55;">Investor</span>
+          
+        </div>
+        <p class="t-card-desc">Strategic investor for the US intelligence community, founded by the CIA in 1999. Invests in commercial AI, cybersecurity, data analytics, and quantum companies to bring their capabilities to…</p>
+        <a class="t-card-link" href="https://iqt.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=86">Leading Cities</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">Global city network running AcceliGOV, which deploys vetted smart city solutions into municipalities through 90-day paid pilots and handles sourcing, vetting, and deployment. 32+ projects completed,…</p>
+        <a class="t-card-link" href="https://leadingcities.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=145">Lebanon, NH</a>
+          <span class="t-chip" style="background:#0891b21a;color:#0891b2;border:1px solid #0891b255;">Government</span>
+          
+        </div>
+        <p class="t-card-desc">Small city with dedicated Chief Innovation &amp; AI Officer. AI policy, procurement, training. Serves on NH AI Task Force.</p>
+        <a class="t-card-link" href="https://lebanonnh.gov" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=190">Marketplace.city</a>
+          <span class="t-chip" style="background:#16a34a1a;color:#16a34a;border:1px solid #16a34a55;">GovTech</span>
+          
+        </div>
+        <p class="t-card-desc">Market intelligence and procurement platform helping state and local governments research vendors, compare contracts and pricing, and procure technology (Clearbox Source and Clearbox Procure). Grew…</p>
+        <a class="t-card-link" href="https://marketplace.city" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=87">NASCIO (National Association of State Chief Information Officers)</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">Peer network, research body, and voice for state CIOs. Runs the annual State CIO Survey and State CIO Top 10 Priorities, plus research with McKinsey, EY, and Deloitte on GenAI, cybersecurity, and…</p>
+        <a class="t-card-link" href="https://nascio.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=88">National Association of State Workforce Agencies (NASWA)</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">Association (est. 1937) of state workforce agencies in all 50 states, DC, and territories. Runs shared UI and workforce technology infrastructure, including the IT Support Centers, UI SIDES, and the…</p>
+        <a class="t-card-link" href="https://naswa.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=289">New America: Public Interest Technology</a>
+          <span class="t-chip" style="background:#2563eb1a;color:#2563eb;border:1px solid #2563eb55;">Research</span>
+          
+        </div>
+        <p class="t-card-desc">PIT program: fellowships, The Commons (procurement research), policy research. Co-convenes PIT University Network (PIT-UN): 63 institutions, $16M+ deployed.</p>
+        <a class="t-card-link" href="https://newamerica.org/public-interest-technology" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=291">Niskanen Center: Project on State Capacity</a>
+          <span class="t-chip" style="background:#2563eb1a;color:#2563eb;border:1px solid #2563eb55;">Research</span>
+          
+        </div>
+        <p class="t-card-desc">Dedicated state capacity research initiative. Published &#x27;The How We Need Now&#x27; capacity agenda. Policy research on civil service reform, digital modernization, product operating model,…</p>
+        <a class="t-card-link" href="https://niskanencenter.org/policy/state-capacity" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=90">North Texas Innovation Alliance (NTXIA)</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">501c3 regional consortium of 50+ municipalities, agencies, corporations, and academic institutions across North Texas. Facilitates call-for-innovation programs, procurement reform, and smart region…</p>
+        <a class="t-card-link" href="https://ntxia.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=331">Packard Foundation (David and Lucile Packard Foundation)</a>
+          <span class="t-chip" style="background:#dc26261a;color:#dc2626;border:1px solid #dc262655;">Philanthropy</span>
+          
+        </div>
+        <p class="t-card-desc">Private foundation whose state capacity grantmaking includes early backing of the Recoding America Fund. Funded the GovAI Coalition&#x27;s 2026 transition to an independent nonprofit ($150K).</p>
+        <a class="t-card-link" href="https://packard.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=66">Partners for Public Good (PPG)</a>
+          <span class="t-chip" style="background:#0d94881a;color:#0d9488;border:1px solid #0d948855;">Digital Services &amp; Consulting</span>
+          
+        </div>
+        <p class="t-card-desc">Independent nonprofit spun out of Harvard GPL&#x27;s procurement initiative in March 2025. Helps state and local governments improve procurement, staffing, digital infrastructure, and budgeting, with 200+…</p>
+        <a class="t-card-link" href="https://partnersforpublicgood.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=91">Partnership Fund for NYC</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">NYC-based evergreen fund running structured challenge programs connecting early-stage startups to public agencies (MTA, Port Authority, NYCHA) for proof-of-concept pilots and procurement pathways.…</p>
+        <a class="t-card-link" href="https://pfnyc.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=14">POPVOX Foundation</a>
+          <span class="t-chip" style="background:#db27771a;color:#db2777;border:1px solid #db277755;">Advocacy</span>
+          
+        </div>
+        <p class="t-card-desc">Congressional modernization nonprofit focused on AI-ready legislatures and legislative branch capacity. Key 2025 wins: secured 4M House Modernization Initiatives Account; advanced CaseCompass unified…</p>
+        <a class="t-card-link" href="https://popvox.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=158">Presidential Innovation Fellows (PIF)</a>
+          <span class="t-chip" style="background:#0891b21a;color:#0891b2;border:1px solid #0891b255;">Government</span>
+          
+        </div>
+        <p class="t-card-desc">Places mid-to-senior technologists in federal agencies for 12-month tours in product, AI strategy, design, and engineering (est. 2012; 260+ alumni). GSA named a 2026 cohort of 17 fellows serving 10…</p>
+        <a class="t-card-link" href="https://presidentialinnovationfellows.gov" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=248">Public Benefit Innovation Fund</a>
+          <span class="t-chip" style="background:#dc26261a;color:#dc2626;border:1px solid #dc262655;">Philanthropy</span>
+          
+        </div>
+        <p class="t-card-desc">Pooled grantmaking vehicle housed at the Center for Civic Futures that funds states and their partners to develop AI tools for public benefits delivery. Awarded $8.5M to eight projects in Dec 2025.</p>
+        <a class="t-card-link" href="https://publicbenefitinnovationfund.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=16">Recoding America Fund</a>
+          <span class="t-chip" style="background:#db27771a;color:#db2777;border:1px solid #db277755;">Advocacy</span>
+          
+        </div>
+        <p class="t-card-desc">$120M 6-year pooled philanthropic initiative grantmaking for government workforce, digital infrastructure, and procedural reform. Chaired by Jennifer Pahlka.</p>
+        <a class="t-card-link" href="https://recodingamerica.fund" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=297">Responsible AI Institute (RAI Institute)</a>
+          <span class="t-chip" style="background:#2563eb1a;color:#2563eb;border:1px solid #2563eb55;">Research</span>
+          
+        </div>
+        <p class="t-card-desc">Independent nonprofit providing AI certification, conformity assessments, and responsible AI tools for government agencies. Develops standards and frameworks for trustworthy AI procurement and…</p>
+        <a class="t-card-link" href="https://responsible.ai" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=92">SETDA (State Educational Technology Directors Association)</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">National association (founded 2001) of state and territorial education technology leaders, including state education agency CIOs. Publishes the annual State EdTech Trends report and procurement…</p>
+        <a class="t-card-link" href="https://setda.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=68">Skylight Digital</a>
+          <span class="t-chip" style="background:#0d94881a;color:#0d9488;border:1px solid #0d948855;">Digital Services &amp; Consulting</span>
+          
+        </div>
+        <p class="t-card-desc">Digital government consultancy delivering agile procurement support, user-centered design, cloud and DevOps, and API-first architecture to federal and state agencies. Won a $14M CMS task order (2026)…</p>
+        <a class="t-card-link" href="https://skylight.digital" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=94">Southern Arizona Smart Region (Regional Partnering Center)</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">Greater Tucson regional smart city initiative led by the Regional Partnering Center, a public-private partnership. Works to build economic competitiveness and quality of life through collaborative…</p>
+        <a class="t-card-link" href="https://regionalpartneringcenter.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=199">Syncurrent</a>
+          <span class="t-chip" style="background:#16a34a1a;color:#16a34a;border:1px solid #16a34a55;">GovTech</span>
+          
+        </div>
+        <p class="t-card-desc">AI grant discovery and application platform for local and tribal governments, cutting months of manual work to minutes. Active in 200+ governments on a subscription model.</p>
+        <a class="t-card-link" href="https://syncurrent.com" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=166">Technology Modernization Fund (TMF)</a>
+          <span class="t-chip" style="background:#0891b21a;color:#0891b2;border:1px solid #0891b255;">Government</span>
+          
+        </div>
+        <p class="t-card-desc">Federal revolving fund (Modernizing Government Technology Act, 2017) administered by GSA that provides milestone-based, repayable financing for agency IT modernization; GAO counts $1.03B across 68…</p>
+        <a class="t-card-link" href="https://tmf.cio.gov" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=95">The Connective</a>
+          <span class="t-chip" style="background:#65a30d1a;color:#65a30d;border:1px solid #65a30d55;">Ecosystems</span>
+          
+        </div>
+        <p class="t-card-desc">Greater Phoenix smart region consortium launched in 2019. Partners public sector, academia, industry, and civic institutions to co-design and deploy technology solutions for regional challenges.…</p>
+        <a class="t-card-link" href="https://connective.city" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=69">Third Sector Capital Partners</a>
+          <span class="t-chip" style="background:#0d94881a;color:#0d9488;border:1px solid #0d948855;">Digital Services &amp; Consulting</span>
+          
+        </div>
+        <p class="t-card-desc">Nonprofit TA firm helping government agencies design and implement outcomes-focused contracting, Pay for Success structures, and data-driven service delivery. Government agencies are primary clients.</p>
+        <a class="t-card-link" href="https://thirdsectorcap.org" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=70">Truss</a>
+          <span class="t-chip" style="background:#0d94881a;color:#0d9488;border:1px solid #0d948855;">Digital Services &amp; Consulting</span>
+          
+        </div>
+        <p class="t-card-desc">Federal digital services firm with strong portfolio including IRS Direct File, USWDS contributions, .gov registrar, and VA work. 8(a) SBA certified.</p>
+        <a class="t-card-link" href="https://truss.works" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=332">Virginia Digital Service</a>
+          <span class="t-chip" style="background:#0891b21a;color:#0891b2;border:1px solid #0891b255;">Government</span>
+          
+        </div>
+        <p class="t-card-desc">New in-house state team (Sept 2026) of engineers, designers, and technical experts working alongside VITA to modernize websites and systems and scrutinize IT contracts. Created after a $52M failed…</p>
+        <a class="t-card-link" href="https://governor.virginia.gov" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/organizations/?org=119">18F (GSA)</a>
+          <span class="t-chip" style="background:#0891b21a;color:#0891b2;border:1px solid #0891b255;">Government</span>
+          <span class="t-chip-sunset">Sunset</span>
+        </div>
+        <p class="t-card-desc">Defunct (Mar 2025). Former GSA consultancy that provided agile development, procurement consulting, user research, and open-source tooling to federal agencies; alumni continue its open-source…</p>
+        <a class="t-card-link" href="https://18f.gsa.gov" target="_blank" rel="noopener">Website ↗</a>
+      </div>
+</div>
+</div>
+<div class="t-section"><h2>People and opportunities on Connect</h2>
+<div class="t-grid">
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/connect/?entry=7">State Capacity USCIS Project</a>
+        </div>
+        <p class="t-card-desc">Niskanen Center &middot; Capacity Builder</p>
+        <p class="t-card-desc">Collaboration Opportunity, Expertise, Interesting Conversation, Problem to Solve, Tool / Product</p>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/connect/?entry=17">Bobby Zipp</a>
+        </div>
+        <p class="t-card-desc">Shelby County TN DA&#x27;s Office &middot; Government Practitioner</p>
+        <p class="t-card-desc">Expertise, Interesting Conversation, Problem to Solve</p>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/connect/?entry=43">Research Report Stipends</a>
+        </div>
+        <p class="t-card-desc">IBM Center for The Business of Government &middot; Funder</p>
+        <p class="t-card-desc">Grant / Challenge</p>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="/ecosystem/connect/?entry=50">GovAI Coalition</a>
+        </div>
+        <p class="t-card-desc">City of San Jose &middot; Government Practitioner</p>
+        <p class="t-card-desc">Collaboration Opportunity, Expertise</p>
+      </div>
+</div>
+</div>
+<div class="t-section"><h2>Tools built on this problem area</h2>
+<div class="t-grid">
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="https://crol-list.jimdc.com/">Procurement record search</a>
+        </div>
+        <p class="t-card-desc">A tool for searching and reviewing city procurement records, making contracting data legible to anyone who needs to follow where public money goes.</p>
+        <span class="t-card-link">Civic Tech Build Night</span>
+      </div>
+<div class="t-card">
+        <div class="t-card-top">
+          <a class="t-card-name" href="https://civic-bidnyc.vercel.app/">Find open city bids</a>
+        </div>
+        <p class="t-card-desc">A tool for finding and tracking open NYC government bid and procurement opportunities, helping vendors see where they can compete for city work.</p>
+        <span class="t-card-link">Civic Tech Build Night</span>
+      </div>
+</div></div>
+<div class="t-section"><h2>Related topics</h2>
+<div class="t-related">
+<a href="/ecosystem/topics/operational-excellence/">Operational Excellence (79)</a>
+<a href="/ecosystem/topics/reaction-time/">Reaction Time (18)</a>
+<a href="/ecosystem/topics/regulatory-administrative-burden/">Regulatory &amp; Administrative Burden (26)</a>
+</div></div>
+<div class="t-cta-band">
+      <p>Work on Procurement Reform? Add yourself so the people here can find you.</p>
+      <div class="t-cta-actions">
+        <a class="t-btn" href="/ecosystem/connect/?add=1">Add yourself to Connect →</a>
+        <a class="t-btn" href="/ecosystem/organizations/?add=1">Suggest an organization →</a>
+      </div>
+    </div>
+</div></div>
+<footer class="sce-footer">
+  <div class="sce-footer-inner">
+    <div>
+      <a class="sce-footer-brand" href="/"><img src="/assets/sce_logo.png" alt="">State Capacity Ecosystem<small>· statecapacityecosystem.com</small></a>
+      <p class="sce-footer-tag">Where the people making government deliver find each other and build.</p>
+    </div>
+    <div class="sce-footer-actions">
+      <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗</a>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Slack ↗</a>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in Touch ↗</a>
+      <a href="/about/">About →</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

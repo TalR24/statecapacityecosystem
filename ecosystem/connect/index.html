@@ -446,6 +446,7 @@
         <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
         <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
         <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
+        <a href="/ecosystem/topics/">Problem topics<span class="ribbon-sub">Every problem we track, and who works on it.</span></a>
       </div>
     </div>
     <div class="ribbon-item">
@@ -535,6 +536,7 @@
         <div class="filter-group"><label class="filter-label">Problem Topic</label><div id="ms-topic"></div></div>
         <div class="filter-group"><label class="filter-label">Offering</label><div id="ms-offering"></div></div>
         <button class="btn-reset" id="btn-reset">Reset</button>
+        <button class="btn-reset" id="btn-copy-link">Copy link</button>
       </div>
     </div>
 
@@ -807,6 +809,7 @@ let sortDir = 1;
 let page = 1;
 const PAGE_SIZE = 25;
 let expandedId = null;
+let addParamActive = false;
 
 // MultiSelect
 class MS {
@@ -859,6 +862,10 @@ class MS {
   }
   get() { return (this.selected.size === 0 || this.selected.size === this.opts.length) ? new Set() : new Set(this.selected); }
   reset() { this._clear(); }
+  setSelectedSilent(values) {
+    this.selected = new Set(values.filter(v => this.opts.some(o => o.v === v)));
+    this._sync(); this._upd();
+  }
 }
 
 const onChange = () => { expandedId = null; applyFilters(); };
@@ -873,6 +880,25 @@ const showLoadError = (msg) => {
   console.error("[people]", msg);
 };
 
+let directoryData = null;
+let directoryFetchPromise = null;
+function ensureDirectoryData() {
+  if (directoryData) return Promise.resolve(directoryData);
+  if (!directoryFetchPromise) {
+    directoryFetchPromise = fetch("/data/directory.json").then(r => r.json()).then(d => { directoryData = d; return d; }).catch(() => { directoryData = []; return directoryData; });
+  }
+  return directoryFetchPromise;
+}
+function findDirectoryOrg(name) {
+  if (!directoryData || !name) return null;
+  const lower = name.toLowerCase();
+  return directoryData.find(o => (o.name || "").toLowerCase() === lower) || null;
+}
+function maybeLoadDirectoryFor(id) {
+  if (directoryData) return;
+  ensureDirectoryData().then(() => { if (expandedId === id) renderTable(); });
+}
+
 const controller = new AbortController();
 const timeoutId = setTimeout(() => controller.abort(), 15000);
 fetch("/data/connect.json", { signal: controller.signal, cache: "no-cache" })
@@ -885,13 +911,76 @@ fetch("/data/connect.json", { signal: controller.signal, cache: "no-cache" })
     allPeople = people;
     try {
       populateFilters();
+      const params = new URLSearchParams(window.location.search);
+      applyURLStateFromParams(params);
       applyFilters();
+      ensureDirectoryData().then(() => renderTable());
+      const entryParam = params.get("entry");
+      const pageParam = parseInt(params.get("page"), 10);
+      if (entryParam) {
+        expandEntryById(parseInt(entryParam, 10));
+      } else if (pageParam > 1) {
+        goPage(pageParam);
+      }
     } catch (e) { showLoadError("Render failed: " + e.message); throw e; }
   })
   .catch(err => {
     if (err.name === "AbortError") showLoadError("Timed out loading data. Try refreshing the page.");
     else showLoadError(err.message);
   });
+
+function applyURLStateFromParams(params) {
+  const q = params.get("q"); if (q) document.getElementById("f-search").value = q;
+  const role = params.get("role"); if (role) msRole.setSelectedSilent(role.split("|"));
+  const area = params.get("area"); if (area) msArea.setSelectedSilent(area.split("|"));
+  const topic = params.get("topic"); if (topic) msTopic.setSelectedSilent(topic.split("|"));
+  const offering = params.get("offering"); if (offering) msOffering.setSelectedSilent(offering.split("|"));
+}
+
+function currentParams() {
+  const p = new URLSearchParams();
+  const q = document.getElementById("f-search").value.trim();
+  if (q) p.set("q", q);
+  if (msRole.selected.size) p.set("role", [...msRole.selected].join("|"));
+  if (msArea.selected.size) p.set("area", [...msArea.selected].join("|"));
+  if (msTopic.selected.size) p.set("topic", [...msTopic.selected].join("|"));
+  if (msOffering.selected.size) p.set("offering", [...msOffering.selected].join("|"));
+  if (page > 1) p.set("page", String(page));
+  if (expandedId !== null) p.set("entry", String(expandedId));
+  if (addParamActive) p.set("add", "1");
+  return p;
+}
+function syncURL() {
+  const qs = currentParams().toString();
+  history.replaceState(null, "", window.location.pathname + (qs ? "?" + qs : ""));
+}
+
+function scrollToEntryRow(id) {
+  requestAnimationFrame(() => {
+    const tr = document.querySelector(`tr.data-row[data-id="${id}"]`);
+    if (tr) tr.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+}
+
+function expandEntryById(id) {
+  if (!allPeople.some(p => p.id === id)) return; // unknown id: leave filters/page untouched, skip expansion
+  let idx = filtered.findIndex(p => p.id === id);
+  if (idx === -1) {
+    [msRole, msArea, msTopic, msOffering].forEach(m => m.reset());
+    document.getElementById("f-search").value = "";
+    applyFilters();
+    idx = filtered.findIndex(p => p.id === id);
+  }
+  if (idx === -1) return;
+  page = Math.floor(idx / PAGE_SIZE) + 1;
+  expandedId = id;
+  maybeLoadDirectoryFor(id);
+  renderTable();
+  renderPagination();
+  syncURL();
+  scrollToEntryRow(id);
+}
+window.expandEntryById = expandEntryById;
 
 function _pGeos(p)     { return p.geography || p.jurisdictions || []; }
 function _pAreas(p)    { return p.problem_areas ? (Array.isArray(p.problem_areas) ? p.problem_areas : p.problem_areas.split(", ").map(s=>s.trim())) : (p.problem_area ? [p.problem_area] : []); }
@@ -947,6 +1036,7 @@ function applyFilters() {
   updateResultsBar();
   renderTable();
   renderPagination();
+  syncURL();
 }
 
 function updateResultsBar() {
@@ -1004,10 +1094,17 @@ function renderRow(p) {
 
   const contactHtml = renderContactCell(p);
 
+  const dirOrg = p.organization ? findDirectoryOrg(p.organization) : null;
+  const orgHtml = p.organization
+    ? (dirOrg
+        ? `<a href="/ecosystem/organizations/?org=${dirOrg.id}" onclick="event.stopPropagation()" style="color:inherit;text-decoration:underline">${esc(p.organization)}</a>`
+        : esc(p.organization))
+    : "";
+
   return `<tr class="data-row${expanded ? " expanded" : ""}" data-id="${p.id}">
     <td class="name-cell">
       <div class="entry-name">${esc(p.name)}</div>
-      <div class="entry-org">${esc(p.organization || "")}</div>
+      <div class="entry-org">${orgHtml}</div>
     </td>
     <td>${roleHtml}</td>
     <td>${offeringHtml}</td>
@@ -1062,6 +1159,7 @@ function renderDetailRow(p) {
 function toggleDetail(id) {
   expandedId = (expandedId === id) ? null : id;
   renderTable();
+  syncURL();
 }
 
 function esc(s) { return (s||"").toString().replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
@@ -1098,6 +1196,7 @@ function goPage(p) {
   page = Math.max(1, Math.min(p, total));
   expandedId = null;
   renderTable(); renderPagination();
+  syncURL();
   window.scrollTo({top: document.querySelector(".table-wrap").offsetTop - 20, behavior:"smooth"});
 }
 window.goPage = goPage;
@@ -1108,6 +1207,13 @@ document.getElementById("btn-reset").addEventListener("click", () => {
   document.getElementById("f-search").value = "";
   expandedId = null;
   applyFilters();
+});
+document.getElementById("btn-copy-link").addEventListener("click", async () => {
+  const btn = document.getElementById("btn-copy-link");
+  const orig = btn.textContent;
+  try { await navigator.clipboard.writeText(location.href); } catch (e) { /* clipboard unavailable */ }
+  btn.textContent = "Link copied";
+  setTimeout(() => { btn.textContent = orig; }, 1600);
 });
 
 // ─── SUBMISSION FORM ────────────────────────────────────────────────────────
@@ -1349,12 +1455,16 @@ function openSF() {
   document.getElementById("sf-form-body").scrollTop = 0;
   document.getElementById("sf-overlay").classList.add("open");
   document.body.style.overflow = "hidden";
+  addParamActive = true;
+  syncURL();
   requestAnimationFrame(() => document.getElementById("sf-name").focus());
 }
 
 function closeSF() {
   document.getElementById("sf-overlay").classList.remove("open");
   document.body.style.overflow = "";
+  addParamActive = false;
+  syncURL();
 }
 
 document.getElementById("sf-overlay").addEventListener("click", e => {

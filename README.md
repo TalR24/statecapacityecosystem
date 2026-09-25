@@ -138,49 +138,52 @@ The CSV columns are read by name (`csv.DictReader`) in `build_affinity.py`. If t
 
 ```bash
 cd statecapacityecosystem
-python3 data/build_affinity.py
+python3 data/build_affinity.py            # local: falls back to TF-IDF if the embedding model is missing
+python3 data/build_affinity.py --require-embeddings   # CI: fails loudly instead
+python3 data/build_people.py
+python3 data/build_changes.py
+python3 data/build_topics.py
+python3 data/update_stats.py
 ```
 
-Pure stdlib + numpy. No env vars, no API keys, no network calls. Outputs three files into `data/`:
+Dependencies: `data/requirements-build.txt` (numpy, sentence-transformers). The first run downloads the `all-MiniLM-L6-v2` model (about 90 MB) into `~/.cache/huggingface`; the daily Action caches it. No env vars, no API keys, no network calls after the model is cached. Outputs:
 
-- **`affinity.json`** — nodes (with degree) + scored edges + stats block (`org_count`, `edge_count`, `max_weight`, `median_weight`, `last_updated`)
-- **`directory.json`** — same node payload, flat array (no edges, no stats)
-- **`affinity_search.json`** — `{vocab, idf, vectors}` for client-side TF-IDF semantic search
+- **`affinity.json`** — `nodes` (with degree, status, geo_terms, peers), `edges` (weight, the four raw and four normalized component scores, mutual, cross, shared_topics, shared_funders, shared_terms), `funders` (funders with 2+ orgs and their org ids), and `stats` (`org_count`, `edge_count`, `max_weight`, `median_weight`, `weights`, `k`, `text_signal`, `weight_percentiles`, `cross_share`, `mutual_count`, `sunset_count`, `funder_coverage`, `funder_count`, `last_updated`)
+- **`directory.json`** — the same node payload, flat array
+- **`affinity_search.json`** — `{vocab, idf, vectors}` for client-side TF-IDF search
+- **`changes.json`** — per-org hashes plus the last 12 refresh diffs (added, removed, edited), rendered on the Ecosystem page and the homepage Latest band
+- **`ecosystem/topics/`** — one generated page per problem topic plus an index; chrome is copied from `ecosystem/methodology/index.html` at build time, so ribbon edits propagate on the next build
+- **`taxonomy.json`** — the 7 areas and 36 topics with definitions and slugs; source of truth for the topic pages
 
-The build is deterministic — same CSV in, same JSON out.
-
-`last_updated` is stamped automatically from `date.today()` at build time. The hub's "Data last updated" pill reads it and renders `Month D, Year`.
+The build is deterministic: same CSV in, same JSON out. `text_signal` in the stats block records whether embeddings or the TF-IDF fallback produced the description signal.
 
 ---
 
 ## Affinity score (composite, 0–1)
 
 ```
-score = 0.40 × description_TFIDF_cosine
-      + 0.30 × problem_topic_jaccard
-      + 0.15 × named_funder_jaccard
-      + 0.15 × segment_overlap_jaccard     (NO primary boost)
+score = 0.40 × P(description_embedding_cosine)
+      + 0.30 × P(rarity_weighted_topic_jaccard)
+      + 0.15 × P(named_funder_jaccard)
+      + 0.15 × P(segment_jaccard)              (NO primary boost)
 ```
 
-**Why these weights** (rebalanced May 2026 from the original 0.40/0.35/0.25 with primary-segment boost):
+`P(v)` is a percentile: 0 stays 0, and a positive value becomes its rank among all positive values of that signal across every candidate pair. Without this step the tag signals decided almost every edge regardless of the weights, because a Jaccard over two or three tags is often 1.0 while a cosine over 30-word descriptions rarely passes 0.5 (measured Sep 25 2026: topics and segments were the largest contributor on 91% of edges, description on 8%).
 
-- **Description (40%)** — Strongest signal. TF-IDF cosine over a token bag that includes description + funding detail + Problem Area + Problem Topic + segment names. Distinctive terms ("permitting reform," "procurement") matter more than generic ones ("government," "policy").
-- **Problem topics (30%)** — Jaccard over Henry's 36 curated tags. Highest-confidence signal because tags are curator-assigned. Drives cross-segment surprise connections — the whole reason this scoring exists.
-- **Funders (15%)** — Jaccard over funders extracted by substring match against `KNOWN_FUNDERS` (~50 entries at top of `build_affinity.py`). Falls back to a 0.15 bonus when funding-model strings match exactly and no named funders are detected. Coverage is partial (~21% of orgs).
-- **Segments (15%)** — Plain Jaccard over primary + secondary segment sets. **No primary-segment boost.** Earlier versions had 35% weight plus a +0.5 primary boost, which made the network collapse into same-segment cliques. Reducing weight + dropping the boost was a deliberate decision (May 2026) — do not reintroduce the boost without checking with Tal.
+- **Description (40%)** — cosine over sentence embeddings (`all-MiniLM-L6-v2`) of `name. description Topics: t1, t2`. Recognizes paraphrase ("permitting reform" and "faster approvals") where TF-IDF could not.
+- **Problem topics (30%)** — weighted Jaccard over Henry's 36 tags, each weighted `log(N / df_topic)` so rare topics count more. Problem Areas are not a Jaccard signal (too coarse) and are no longer folded into the TF-IDF bag.
+- **Funders (15%)** — Jaccard over funders found two ways: the `KNOWN_FUNDERS` list with alias canonicalization, plus a regex for capitalized phrases ending in Foundation, Fund, Ventures, Philanthropies, Trust, or Initiative (generic heads dropped). Zero when either org has no detected funder; the old funding-model fallback bonus is gone.
+- **Segments (15%)** — plain Jaccard over primary + secondary segments, no primary boost.
 
-**Problem Areas are folded into TF-IDF (description signal) but NOT used as a Jaccard signal.** Reason: an org sharing an Area with another (1 of 7 buckets) is too common to be a high-confidence signal — Jaccard would inflate. Topics are the right granularity for Jaccard.
+**Edge selection:** each org keeps its K=6 strongest pairs; the edge set is the union. `mutual` marks pairs where each org is in the other's top six. No score floor, no degree cap: hubs are real (a fellowship program many orgs resemble holds about 20 edges). Every edge carries the shared topics, funders, and top shared TF-IDF terms so the map can explain it.
 
-**Edge thresholding** (in `build_affinity.py`):
-- Composite < 0.05 → dropped entirely (not even in candidate pool)
-- Composite < 0.10 → dropped from kept set (`MIN_W = 0.10`)
-- Per-node degree cap: walk edges in descending score order; keep an edge only if at least one endpoint has fewer than `MAX_DEG = 8` neighbors. Prevents central hubs from dominating.
+**Status:** `sunset` when the description matches `defunct|dissolved|disbanded|shut down|wound down|sunsetted|ceased operations`, or is listed in `STATUS_OVERRIDES` in the build script. Henry's sheet has no Status column yet; when it gets one, the column replaces the regex.
 
-**Current dataset stats (May 14, 2026 refresh):**
-- 334 orgs, 1,798 kept edges
-- 21,932 candidate edges before thresholding
-- Max edge: 0.82, median: 0.10
-- Funder coverage: 66/334 orgs
+**Current dataset stats (Sep 25 2026 refresh):**
+- 334 orgs, 1,376 kept edges
+- 55,611 candidate pairs before selection
+- Max edge: 0.99, median: 0.74 (kept edges; the map opens at the 25th percentile)
+- Funder coverage: 77/334 orgs
 
 ---
 
@@ -189,18 +192,19 @@ score = 0.40 × description_TFIDF_cosine
 `build_affinity.py` emits `affinity_search.json` containing:
 - `vocab` — sorted list of every term in the corpus (~2,400 terms)
 - `idf` — IDF score per term (parallel array)
-- `vectors` — array of per-org sparse maps `{term_idx_string: tfidf_weight}` (~35 terms per org avg)
+- `vectors` — array of per-org sparse maps `{term_idx_string: tfidf_weight}` (~32 terms per org avg)
 
-At query time, the directory and network views:
+At query time, the directory and map views:
 1. Tokenize the query (same regex + stopword list as the Python build)
 2. Build an IDF-weighted query vector, L2-normalize
 3. Cosine similarity against every org's vector
-4. Apply boosts: +0.5 if query is substring of org name, +0.15 if substring of a funder
-5. Sort descending, take top N
+4. Add 0.5 when the query is a substring of the org name
+5. On the map, multiply by 1.5 when the query names a place in the org's `geo_terms` (states, major cities, NYC), by 1.25 when a level word (state, federal, local) matches the org's focus, and by 1.5 for Philanthropy and Investor orgs when the query asks about funding
+6. Sort descending, take top N
 
-Total cost is one ~190 KB JSON fetch + O(query_terms × num_orgs) per query. No external API. ~$0/query.
+Total cost is one ~190 KB JSON fetch + O(query_terms × num_orgs) per query. No external API.
 
-**Trade-off vs real embeddings:** TF-IDF can't infer that "permits" and "licensing" refer to the same concept unless those words co-occur in the corpus. For 334 orgs with rich curator-assigned tags, this is the right cost/quality point. If the dataset grows past ~2000 orgs or the user wants true semantic understanding, consider switching to OpenAI `text-embedding-3-small` (~$0.02/1M tokens — still cheap) or a local sentence-transformer model.
+**Trade-off vs embeddings:** search stays on TF-IDF because the query has to be scored in the browser with nothing to download; the affinity score uses embeddings at build time where the model cost is paid once. For 334 orgs with rich curator-assigned tags this is the right split. Query-side embeddings (a ~23 MB model via transformers.js, loaded on first search) are the next step if search quality needs to match the graph.
 
 ---
 
@@ -372,6 +376,8 @@ These were arrived at via user feedback over multiple sessions. Don't reintroduc
 
 ---
 
+28. **Affinity score v2 (Sep 25 2026, Tal).** Percentile-normalized components, sentence embeddings for the description signal, rarity-weighted topic Jaccard, regex funder extraction with no funding-model fallback, top-6-per-org edge selection with a `mutual` flag (no floor, no degree cap), regex-inferred `sunset` status, and per-edge explanations. The Methodology page describes only this method; do not reintroduce the old floor/degree-cap text or the additive geography boost. The map's cross-segment lens, ego view, path finder, funder view and URL state, the directory's peers/Connect bridge/suggest-an-edit/URL state, the Connect deep links, the 36 topic pages and the change feed all ship together (see the Sep 25 change log row).
+
 ## Things to NOT change without thinking
 
 - **Weights** (0.40 / 0.30 / 0.15 / 0.15). See above.
@@ -387,11 +393,10 @@ These were arrived at via user feedback over multiple sessions. Don't reintroduc
 
 ## Parking lot — ideas surfaced but not built
 
-- **True semantic embeddings** — if the corpus grows or higher search quality is needed, swap TF-IDF for a local sentence-transformer (`all-MiniLM-L6-v2` is ~25 MB, ~$0/query). Would handle synonyms ("permits"/"licensing") that TF-IDF misses.
 - **Documented relationships layer** — distinguish "inferred affinity" (current edges) from "documented partnerships" (would require a second Henry data-collection pass). Would overlay solid edges from explicit links.
-- **Better funder extraction** — 21% coverage currently. Could move to NER (spaCy) or LLM extraction to cover smaller foundations and family offices. Trade-off: false positives on common nouns.
-- **Automated refresh cadence** — currently manual. A monthly cron pulling Henry's Airtable share-view CSV + running `build_affinity.py` is doable. Airtable has a CSV export endpoint per share view; no API token needed.
+- **Funders column in the sheet** — regex extraction reaches 92/334 orgs; a curated Funders column from Henry would replace it and unlock the funder view fully.
 - **Per-org "claim listing" workflow** — Henry has a Tally form for org reps to claim a listing. Could surface that on individual directory rows to drive traffic into his curation flow.
+- **Query-side embeddings for search** — a ~23 MB transformers.js model loaded on first search would let free-text search match the graph's embedding quality.
 - **Mobile interaction polish for the network view** — drag/zoom is fine on desktop, cramped on mobile. Could add tap-to-select + slide-up panel.
 
 ---
@@ -540,6 +545,7 @@ These are concrete, half-done tasks, not parking-lot ideas. Pick them up when th
 
 | Date | Commit | Summary |
 |---|---|---|
+| 2026-09-25 | affinity v2 | **Affinity score v2 + map, directory, Connect and topic features.** Score: percentile-normalized components, sentence embeddings (all-MiniLM-L6-v2, cached in the Action), rarity-weighted topics, regex funders (92/334 coverage), top-6 edge selection with mutual flag, sunset status, per-edge explanations (`build_affinity.py` rewrite, `requirements-build.txt`). Map: cross-segment lens, mutual/one-way edges, hollow sunset nodes, why-connected panel with edge click, neighborhood and 2-hop views, path finder, Funders view, URL state + Copy link, multiplicative geography and funding-intent boosts. Directory: sunset chip and filter, closest peers, Connect bridge, Suggest an edit prefill, URL state. Connect: org links, `?entry=` deep links, URL state. New: 36 problem-topic pages + index (`build_topics.py`), change feed (`build_changes.py`, `changes.json`, Ecosystem band + homepage Latest card), `taxonomy.json`; workflow runs both builders daily. Methodology page rewritten to describe only the current method. |
 | 2026-09-25 | audit fixes | **Site audit fixes** (Tal). Connect: two contact cells that rendered as broken links (parenthetical labels moved into Details) and `build_people.py` now emits `contact_preference` ("Facilitated" when the Contact cell is empty) so the "Request intro" link and modal can actually appear. Methodology: both tables wrapped in `overflow-x:auto` (the page scrolled sideways on phones), headers in sentence case, prose em dashes removed, the Search-page aside corrected. Ribbon at ≤720px wraps instead of scrolling (About and the hackathon button were off-screen at 400px). TIDELINE page carries the builder credit (decision #20). Build-night meta description matched to the event as it happened; homepage stats read "refreshed daily" and "8 still live"; "Explore the Databases" renamed to Ecosystem on the Connect success panel and the Sponsors Checklist strip; favicons on the four hosted tool pages; voice fixes on Salons, the build-night goal, and the Slack card. |
 | 2026-09-03 | — | **Feedback rounds + Substack custom domain + playbooks library.** Substack moved to substack.statecapacityecosystem.com (publication subdomain renamed from henrygrunzweig, which now 404s; every site link, `build_substack.py`, and `substack_posts.json` repointed). Homepage: flywheel reordered Ecosystem → Events → Community across the ribbon, graphic, and rows; pillar cards clickable; who's-in-the-room grew to 7 rows with a CTA card in the right column; new problem/mission/vision copy ("Inspired by Jennifer Pahlka"); "Who we work with"; Sept 30 is a Wednesday. Events: 9/30 card on the hackathons hub, build-night page reordered (overview → checked goals → restored 8 project cards), sponsor panels shortened, demo/salons/Slack hero copy. `/ecosystem/search/` became a standalone inline-search page and the `?search=1` null-deref auto-open bug was fixed. Playbooks library: 3 .docx playbooks + 2 .pptx pitch files as filterable download cards. About + footer "Get in Touch" now open the interest form (Methodology moved out of the footer, still linked from About and the Ecosystem landing). Mobile: ribbon tabs open tap menus (hover-only dropdowns ate the first tap). Proof Points problem areas tightened (Domains removed). |
 | 2026-09-02 | site-rewrite PR | **Site rewrite: pillars, homepage, naming.** Three-pillar nav (Events · Ecosystem · Community · About) with a single Sept 30 CTA; homepage reordered (who's in the room, pillar loop graphic, why it works, partners); Ecosystem landing rewritten; Proof Points became a JSON-driven gallery of all 11 tools (`data/proof_points.json`, `?source=`/`?area=` filters); About restructured (mission/vision, what we run, what we don't do); methodology copy trimmed; `/databases/…` renamed to `/ecosystem/…` with redirect stubs (`organization-directory`→`organizations`, `opportunities-connections`→`connect`, new `search/` page). |

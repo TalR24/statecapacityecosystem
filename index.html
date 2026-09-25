@@ -258,6 +258,7 @@ a.row-visual:hover{transform:translateY(-2px);}
         <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
         <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
         <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
+        <a href="/ecosystem/topics/">Problem topics<span class="ribbon-sub">Every problem we track, and who works on it.</span></a>
       </div>
     </div>
     <div class="ribbon-item">
@@ -547,7 +548,7 @@ a.row-visual:hover{transform:translateY(-2px);}
   <div class="band-inner reveal">
     <div class="kicker">Latest</div>
     <h2>Recent writing and events.</h2>
-    <div class="mo-list">
+    <div class="mo-list" id="mo-list">
       <a class="mo-item" href="https://substack.statecapacityecosystem.com/p/where-are-governments-ai-engineers" target="_blank" rel="noopener">
         <span class="mo-date">Aug 2026</span>
         <span><span class="mo-title">Where are government's AI engineers?</span><span class="mo-desc">Agencies need AI engineers on their own payroll before vendors build that layer for them.</span></span>
@@ -587,6 +588,49 @@ a.row-visual:hover{transform:translateY(-2px);}
     entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
   }, { threshold: 0.15 });
   els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+<script>
+(function () {
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function esc3(s) { return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  fetch('/data/changes.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+    if (!data || !data.entries || !data.entries.length) return;
+    var entry = data.entries[0];
+    var entryDate = new Date(entry.date + 'T00:00:00');
+    if (isNaN(entryDate.getTime())) return;
+    var ageDays = (Date.now() - entryDate.getTime()) / 86400000;
+    if (ageDays > 45) return;
+
+    var list = document.getElementById('mo-list');
+    if (!list) return;
+
+    var dateLabel = MONTHS[entryDate.getMonth()] + ' ' + entryDate.getFullYear();
+
+    var clauses = [];
+    if (entry.counts.added) clauses.push({ n: entry.counts.added, verb: 'added' });
+    if (entry.counts.removed) clauses.push({ n: entry.counts.removed, verb: 'removed' });
+    if (entry.counts.edited) clauses.push({ n: entry.counts.edited, verb: 'updated' });
+    var parts = clauses.map(function (c, i) {
+      if (i === 0) return c.n + ' organization' + (c.n !== 1 ? 's' : '') + ' ' + c.verb;
+      return c.n + ' ' + c.verb;
+    });
+    var title = 'Directory update: ' + parts.join(', ') + '.';
+
+    var body = (entry.added && entry.added.length)
+      ? entry.added.slice(0, 4).join(', ')
+      : 'Descriptions and funding details refreshed.';
+
+    var card = document.createElement('a');
+    card.className = 'mo-item';
+    card.href = './ecosystem/#changes';
+    card.innerHTML = '<span class="mo-date">' + esc3(dateLabel) + '</span>' +
+      '<span><span class="mo-title">' + esc3(title) + '</span><span class="mo-desc">' + esc3(body) + '</span></span>' +
+      '<span class="mo-cta">See what changed →</span>';
+    list.insertBefore(card, list.firstChild);
+  }).catch(function () {});
 })();
 </script>
 
