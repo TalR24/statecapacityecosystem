@@ -1,0 +1,45 @@
+name: Send a note by email
+
+# Manual utility: emails a short note from the hub's Gmail (GMAIL_USER /
+# GMAIL_APP_PASSWORD secrets), for example to point the team at a new file
+# in this repo. Run from the Actions tab or `gh workflow run send_note.yml`.
+
+on:
+  workflow_dispatch:
+    inputs:
+      to:
+        description: "Recipient addresses, comma-separated"
+        required: true
+        default: "statecapacityecosystem@gmail.com"
+      subject:
+        description: "Subject line"
+        required: true
+      body:
+        description: "Plain-text body"
+        required: true
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          NOTE_TO: ${{ github.event.inputs.to }}
+          NOTE_SUBJECT: ${{ github.event.inputs.subject }}
+          NOTE_BODY: ${{ github.event.inputs.body }}
+        run: |
+          python3 - <<'PYEOF'
+          import os, smtplib, ssl
+          from email.message import EmailMessage
+          user = os.environ["GMAIL_USER"]; pw = os.environ["GMAIL_APP_PASSWORD"]
+          msg = EmailMessage()
+          msg["From"] = f"State Capacity Ecosystem Hub <{user}>"
+          msg["To"] = ", ".join(a.strip() for a in os.environ["NOTE_TO"].split(",") if a.strip())
+          msg["Subject"] = os.environ["NOTE_SUBJECT"]
+          msg.set_content(os.environ["NOTE_BODY"])
+          with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context()) as s:
+              s.login(user, pw); s.send_message(msg)
+          print("sent to", msg["To"])
+          PYEOF
