@@ -59,26 +59,27 @@
     .breadcrumb-sep { color:var(--border-mid); }
 
     /* HOME 2026 — narrative bands */
-    .band { padding: clamp(52px,7vw,88px) clamp(16px,4vw,48px); }
+    .band { padding: clamp(36px,4.2vw,52px) clamp(16px,4vw,48px); }
+    .band-tight { padding-top: clamp(28px,3vw,40px); padding-bottom: clamp(28px,3vw,40px); }
     .band-inner { max-width: 1100px; margin: 0 auto; }
     .band-dark { background:#1A1918; color:#F4EFE4; }
     .band-white { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-    .kicker { font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--orange); margin-bottom:14px; }
+    .kicker { font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--orange); margin-bottom:10px; }
     .band-dark .kicker { color:#D4A853; }
-    .band h2 { font-family:'Roboto Mono',monospace; font-size:clamp(1.35rem,3vw,1.95rem); font-weight:700; letter-spacing:-0.02em; line-height:1.25; margin-bottom:16px; max-width:34ch; }
+    .band h2 { font-family:'Roboto Mono',monospace; font-size:clamp(1.35rem,3vw,1.95rem); font-weight:700; letter-spacing:-0.02em; line-height:1.25; margin-bottom:12px; max-width:34ch; }
     .band-copy { font-size:1.02rem; line-height:1.75; color:var(--text-mid); max-width:76ch; }
     .band-dark .band-copy { color:#C9C1AF; }
 
     /* hero */
-    .home-hero { background:#1A1918; color:#F4EFE4; padding: clamp(64px,10vw,128px) clamp(16px,4vw,48px) clamp(56px,8vw,96px); }
+    .home-hero { background:#1A1918; color:#F4EFE4; padding: clamp(52px,7vw,84px) clamp(16px,4vw,48px) clamp(44px,5.5vw,64px); }
     .home-hero .band-inner { display:flex; flex-direction:column; align-items:flex-start; }
     .hero-logo-row { display:flex; align-items:center; gap:14px; margin-bottom:26px; }
     .hero-logo-row img { width:46px; height:46px; object-fit:contain; }
     .hero-logo-row span { font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:#D4A853; }
     .home-hero h1 { font-family:'Roboto Mono',monospace; font-size:clamp(1.9rem,4.8vw,3.2rem); font-weight:700; letter-spacing:-0.03em; line-height:1.18; max-width:22ch; margin-bottom:22px; }
     .home-hero h1 em { font-style:normal; color:#D4A853; }
-    .hero-sub { font-size:clamp(1rem,1.6vw,1.15rem); line-height:1.7; color:#C9C1AF; max-width:70ch; margin-bottom:38px; }
-    .hero-cta { display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-bottom:30px; }
+    .hero-sub { font-size:clamp(1rem,1.6vw,1.15rem); line-height:1.7; color:#C9C1AF; max-width:70ch; margin-bottom:28px; }
+    .hero-cta { display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-bottom:20px; }
     .hero-cta-btn { display:inline-flex; align-items:center; gap:10px; background:#D4A853; color:#1A1918; text-decoration:none; font-family:'Roboto Mono',monospace; font-size:clamp(0.86rem,1.5vw,0.98rem); font-weight:700; padding:15px 28px; border-radius:9px; transition:background .15s, transform .15s; }
     .hero-cta-btn:hover { background:#E3C170; transform:translateY(-1px); }
     .hero-cta-note { font-size:0.86rem; color:#B3AC9D; line-height:1.5; }
@@ -110,14 +111,14 @@
     .row-link:hover { gap:10px; }
 
     /* stats band */
-    .stats-grid { display:grid; grid-template-columns:repeat(5,1fr); gap: clamp(18px,3vw,36px); margin-top:34px; }
+    .stats-grid { display:grid; grid-template-columns:repeat(5,1fr); gap: clamp(18px,3vw,36px); margin-top:24px; }
     @media (max-width:900px) { .stats-grid { grid-template-columns:repeat(3,1fr); } }
     @media (max-width:560px) { .stats-grid { grid-template-columns:1fr 1fr; } }
     .stat-big b { display:block; font-family:'Roboto Mono',monospace; font-size:clamp(1.7rem,3.6vw,2.6rem); font-weight:700; color:#D4A853; letter-spacing:-0.02em; font-variant-numeric:tabular-nums; }
     .stat-big span { display:block; font-size:0.86rem; color:#C9C1AF; line-height:1.5; margin-top:6px; max-width:22ch; }
 
     /* momentum list */
-    .mo-list { margin-top:26px; }
+    .mo-list { margin-top:18px; }
     .mo-item { display:grid; grid-template-columns:130px 1fr auto; gap: clamp(14px,3vw,34px); align-items:baseline; padding:20px 0; border-top:1px solid var(--border); text-decoration:none; }
     .mo-item:last-child { border-bottom:1px solid var(--border); }
     @media (max-width:700px) { .mo-item { grid-template-columns:1fr; gap:6px; } }
@@ -192,15 +193,15 @@
 .who-role{font-family:'Roboto Mono',monospace;font-weight:700;font-size:0.92rem;min-width:150px;color:var(--text);}
 .who-what{color:var(--text-mid);font-size:0.98rem;}
 .who-actions{display:flex;gap:22px;flex-wrap:wrap;}
-.pillars-fig{background:#1A1918;border-radius:10px;padding:18px clamp(10px,3vw,28px);margin:26px 0 10px;}
+.pillars-fig{background:#1A1918;border-radius:10px;padding:18px clamp(10px,3vw,28px);margin:20px 0 8px;}
 .pillars-fig svg{display:block;width:100%;max-width:680px;height:auto;margin:0 auto;}
-.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:30px;}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:22px;}
 @media (max-width:760px){.why-grid{grid-template-columns:1fr;}}
 .why-num{width:34px;height:34px;border-radius:50%;background:#D4A853;color:#1A1918;font-family:'Roboto Mono',monospace;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
 .why-name{font-family:'Roboto Mono',monospace;font-weight:700;margin-bottom:6px;}
 .why-copy{color:var(--text-mid);font-size:0.95rem;line-height:1.6;}
 @media (max-width:560px){.who-row{flex-direction:column;gap:2px;}.who-role{min-width:0;}}
-.who-grid{display:grid;grid-template-columns:minmax(0,620px) minmax(260px,1fr);gap:clamp(28px,5vw,72px);align-items:center;margin-top:26px;}
+.who-grid{display:grid;grid-template-columns:minmax(0,620px) minmax(260px,1fr);gap:clamp(28px,5vw,72px);align-items:center;margin-top:20px;}
 @media (max-width:860px){.who-grid{grid-template-columns:1fr;}}
 .who-grid .who-rows{margin:0;}
 .who-cta-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 30px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:16px;max-width:420px;}
@@ -533,7 +534,7 @@ a.row-visual:hover{transform:translateY(-2px);}
   </div>
 </section>
 
-<section class="band band-white">
+<section class="band band-white band-tight">
   <div class="band-inner reveal">
     <div class="kicker">Who we work with</div>
     <div class="partner-marks">
