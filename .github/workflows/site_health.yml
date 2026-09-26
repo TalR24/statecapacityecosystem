@@ -99,7 +99,7 @@ jobs:
           context = ssl.create_default_context()
           msg = EmailMessage()
           msg["From"] = f"State Capacity Ecosystem Hub <{gmail_user}>"
-          msg["To"] = gmail_user
+          msg["To"] = ", ".join([gmail_user, "statecapacityecosystem@gmail.com"])
           msg["Subject"] = f"SCE site health {today}: {hard} hard failures, {warn} warnings"
           msg.set_content(body)
 
