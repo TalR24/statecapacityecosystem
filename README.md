@@ -142,7 +142,6 @@ python3 data/build_affinity.py            # local: falls back to TF-IDF if the e
 python3 data/build_affinity.py --require-embeddings   # CI: fails loudly instead
 python3 data/build_people.py
 python3 data/build_changes.py
-python3 data/build_topics.py
 python3 data/update_stats.py
 ```
 
@@ -152,8 +151,6 @@ Dependencies: `data/requirements-build.txt` (numpy, sentence-transformers). The 
 - **`directory.json`** — the same node payload, flat array
 - **`affinity_search.json`** — `{vocab, idf, vectors}` for client-side TF-IDF search
 - **`changes.json`** — per-org hashes plus the last 12 refresh diffs (added, removed, edited), rendered on the Ecosystem page and the homepage Latest band
-- **`ecosystem/topics/`** — one generated page per problem topic plus an index; chrome is copied from `ecosystem/methodology/index.html` at build time, so ribbon edits propagate on the next build
-- **`taxonomy.json`** — the 7 areas and 36 topics with definitions and slugs; source of truth for the topic pages
 
 The build is deterministic: same CSV in, same JSON out. `text_signal` in the stats block records whether embeddings or the TF-IDF fallback produced the description signal.
 
@@ -216,9 +213,6 @@ Total cost is one ~190 KB JSON fetch + O(query_terms × num_orgs) per query. No 
 - **Change feed band** (`#changes`): fetches `data/changes.json` and renders the latest 3 refresh diffs (added, removed, updated; added names as chips linking to the directory search); empty state "No changes recorded yet. The directory refreshes daily." on no entries or fetch failure.
 - `?search=1` auto-opens the search modal (deferred to DOMContentLoaded). `/ecosystem/search/` is the standalone version: same chrome, the modal rendered inline on the page, data fetches root-absolute.
 
-### Problem topics (`ecosystem/topics/`, generated)
-- `data/build_topics.py` writes the index plus one page per topic from `taxonomy.json`, `directory.json`, `connect.json`, `proof_points.json`. Chrome (ribbon, breadcrumb pattern, footer) is copied from `ecosystem/methodology/index.html` at build time: after any ribbon change, rebuild. Each page: kicker (area), H1, definition, lead sentence with counts (singular-aware), org cards (link `?org=`, segment chip, Sunset chip), Connect entries (link `?entry=`), proof points from the same area, related topics, CTA band. Full SEO head. All 37 URLs are in the sitemap.
-
 ### Organization Directory (`ecosystem/organizations/index.html`)
 - **Visible table columns:** Organization · Segment · Secondary Segments · Description (truncated to 180 chars) · Problem Area (orange chips) · Problem Topic (blue chips). Everything else lives in the row-click detail panel.
 - Filters: search box · Primary segment · Geography · Problem area · Problem topic · **Hide sunset orgs** checkbox. Sunset rows show a muted name and a `Sunset` chip.
@@ -247,7 +241,7 @@ Total cost is one ~190 KB JSON fetch + O(query_terms × num_orgs) per query. No 
 - Loads `data/affinity.json` + `data/affinity_search.json` + `data/connect.json`.
 
 ### Methodology (`ecosystem/methodology/index.html`)
-- Describes only the current method: purpose → what state capacity means → data fields (incl. Status) → segment taxonomy → problems taxonomy → the directory → Connect → problem topic pages → change feed → semantic search (with the multiplicative boosts) → the affinity score (percentile scaling, the four signals, which edges are kept, live mutual and cross-segment counts fetched from `affinity.json`) → score table → the map's tools → what the graph does and does not show → color palette → credits.
+- Describes only the current method: purpose → what state capacity means → data fields (incl. Status) → segment taxonomy → problems taxonomy → the directory → Connect → change feed → semantic search (with the multiplicative boosts) → the affinity score (percentile scaling, the four signals, which edges are kept, live mutual and cross-segment counts fetched from `affinity.json`) → score table → the map's tools → what the graph does and does not show → color palette → credits.
 - `update_stats.py` patches two sentences here (the funder callout "Approximately N of M orgs…" and "<strong>N nodes and M edges</strong>, with a maximum edge score of X and a median of Y"); keep their shape when editing.
 - **No links to Claude conversations.**
 
@@ -364,7 +358,7 @@ These were arrived at via user feedback over multiple sessions. Don't reintroduc
 
 ---
 
-28. **Affinity score v2 (Sep 25 2026, Tal).** Percentile-normalized components, sentence embeddings for the description signal, rarity-weighted topic Jaccard, regex funder extraction with no funding-model fallback, top-6-per-org edge selection with a `mutual` flag (no floor, no degree cap), regex-inferred `sunset` status, and per-edge explanations. The Methodology page describes only this method; do not reintroduce the old floor/degree-cap text or the additive geography boost. The map's cross-segment lens, ego view, path finder, funder view and URL state, the directory's peers/Connect bridge/suggest-an-edit/URL state, the Connect deep links, the 36 topic pages and the change feed all ship together (see the Sep 25 change log row).
+28. **Affinity score v2 (Sep 25 2026, Tal).** Percentile-normalized components, sentence embeddings for the description signal, rarity-weighted topic Jaccard, regex funder extraction with no funding-model fallback, top-6-per-org edge selection with a `mutual` flag (no floor, no degree cap), regex-inferred `sunset` status, and per-edge explanations. The Methodology page describes only this method; do not reintroduce the old floor/degree-cap text or the additive geography boost. The map's cross-segment lens, ego view, path finder, funder view and URL state, the directory's peers/Connect bridge/suggest-an-edit/URL state, the Connect deep links, the change feed all ship together (the 36 generated topic pages shipped the same day and were removed Sep 26 2026 at Tal's request: one page per topic was excessive) (see the Sep 25 change log row).
 
 ## Things to NOT change without thinking
 
@@ -533,6 +527,7 @@ These are concrete, half-done tasks, not parking-lot ideas. Pick them up when th
 
 | Date | Commit | Summary |
 |---|---|---|
+| 2026-09-26 | — | **Problem-topic pages removed** (Tal): `ecosystem/topics/`, `build_topics.py`, `taxonomy.json`, the ribbon entry, the Ecosystem explore card and band link, the Methodology section, and the workflow step are gone; sitemap back to 23 URLs. |
 | 2026-09-25 | affinity v2 | **Affinity score v2 + map, directory, Connect and topic features.** Score: percentile-normalized components, sentence embeddings (all-MiniLM-L6-v2, cached in the Action), rarity-weighted topics, regex funders (92/334 coverage), top-6 edge selection with mutual flag, sunset status, per-edge explanations (`build_affinity.py` rewrite, `requirements-build.txt`). Map: cross-segment lens, mutual/one-way edges, hollow sunset nodes, why-connected panel with edge click, neighborhood and 2-hop views, path finder, Funders view, URL state + Copy link, multiplicative geography and funding-intent boosts. Directory: sunset chip and filter, closest peers, Connect bridge, Suggest an edit prefill, URL state. Connect: org links, `?entry=` deep links, URL state. New: 36 problem-topic pages + index (`build_topics.py`), change feed (`build_changes.py`, `changes.json`, Ecosystem band + homepage Latest card), `taxonomy.json`; workflow runs both builders daily. Methodology page rewritten to describe only the current method. |
 | 2026-09-25 | audit fixes | **Site audit fixes** (Tal). Connect: two contact cells that rendered as broken links (parenthetical labels moved into Details) and `build_people.py` now emits `contact_preference` ("Facilitated" when the Contact cell is empty) so the "Request intro" link and modal can actually appear. Methodology: both tables wrapped in `overflow-x:auto` (the page scrolled sideways on phones), headers in sentence case, prose em dashes removed, the Search-page aside corrected. Ribbon at ≤720px wraps instead of scrolling (About and the hackathon button were off-screen at 400px). TIDELINE page carries the builder credit (decision #20). Build-night meta description matched to the event as it happened; homepage stats read "refreshed daily" and "8 still live"; "Explore the Databases" renamed to Ecosystem on the Connect success panel and the Sponsors Checklist strip; favicons on the four hosted tool pages; voice fixes on Salons, the build-night goal, and the Slack card. |
 | 2026-09-03 | — | **Feedback rounds + Substack custom domain + playbooks library.** Substack moved to substack.statecapacityecosystem.com (publication subdomain renamed from henrygrunzweig, which now 404s; every site link, `build_substack.py`, and `substack_posts.json` repointed). Homepage: flywheel reordered Ecosystem → Events → Community across the ribbon, graphic, and rows; pillar cards clickable; who's-in-the-room grew to 7 rows with a CTA card in the right column; new problem/mission/vision copy ("Inspired by Jennifer Pahlka"); "Who we work with"; Sept 30 is a Wednesday. Events: 9/30 card on the hackathons hub, build-night page reordered (overview → checked goals → restored 8 project cards), sponsor panels shortened, demo/salons/Slack hero copy. `/ecosystem/search/` became a standalone inline-search page and the `?search=1` null-deref auto-open bug was fixed. Playbooks library: 3 .docx playbooks + 2 .pptx pitch files as filterable download cards. About + footer "Get in Touch" now open the interest form (Methodology moved out of the footer, still linked from About and the Ecosystem landing). Mobile: ribbon tabs open tap menus (hover-only dropdowns ate the first tap). Proof Points problem areas tightened (Domains removed). |

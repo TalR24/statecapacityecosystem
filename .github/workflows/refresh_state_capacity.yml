@@ -93,11 +93,6 @@ jobs:
         if: steps.check.outputs.connect_changed == 'true'
         run: python3 data/build_people.py
 
-      # ── Problem topic pages (directory + Connect + proof points → ecosystem/topics/) ──
-
-      - name: Rebuild problem topic pages
-        if: steps.check.outputs.org_changed == 'true' || steps.check.outputs.connect_changed == 'true'
-        run: python3 data/build_topics.py
 
       # ── Substack archive (post list on the Substack page) ──
 
@@ -131,12 +126,11 @@ jobs:
               data/affinity_search.json \
               ecosystem/methodology/index.html \
               README.md \
-              data/changes.json \
-              ecosystem/topics
+              data/changes.json
           fi
 
           if [ "$CON_CHANGED" = "true" ]; then
-            git add data/connect.json ecosystem/topics
+            git add data/connect.json
           fi
 
           git add data/substack_posts.json
