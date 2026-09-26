@@ -182,7 +182,7 @@
       .hero-cta-btn { font-size:0.88rem; padding:12px 20px; }
     }
 
-    /* MAD LIBS OVERLAY */
+    /* SEARCH MODAL */
     .ml-overlay {
       display:none; position:fixed; inset:0;
       background:rgba(26,25,24,0.78); z-index:1000;
@@ -209,88 +209,133 @@
     }
     .ml-modal-close:hover { color:#fff; }
     .ml-modal-body { padding:28px 32px 0; }
-    .ml-sentence {
-      font-size:clamp(0.98rem,2.1vw,1.2rem); line-height:2.5;
-      color:var(--text); font-family:'Inter',sans-serif;
-      background:var(--bg); border-radius:10px; padding:20px 24px;
-      border:1px solid var(--border); margin-bottom:0;
+
+    .se-input-row { position:relative; margin-bottom:16px; }
+    .se-input {
+      width:100%; font-family:'Inter',sans-serif; font-size:1rem; color:var(--text);
+      background:var(--bg); border:1px solid var(--border-mid); border-radius:8px;
+      padding:0 40px 0 14px; height:46px;
     }
-    .ml-prose { color:var(--text-mid); }
-    .ml-token { display:inline-block; position:relative; vertical-align:middle; }
-    .ml-tok-btn {
-      font-family:'Roboto Mono',monospace; font-size:0.84em; font-weight:700;
-      color:var(--orange); background:var(--orange-light);
-      border:1px solid #DFCEA1; border-radius:5px;
-      padding:3px 11px; margin:0 3px; cursor:pointer;
-      white-space:nowrap; transition:background 0.15s, border-color 0.15s;
+    .se-input:focus { outline:none; border-color:var(--blue); }
+    .se-clear {
+      display:none; position:absolute; right:6px; top:50%; transform:translateY(-50%);
+      background:none; border:none; font-size:1.3rem; color:var(--text-faint);
+      cursor:pointer; padding:4px 8px; line-height:1;
     }
-    .ml-tok-btn:hover, .ml-tok-btn.open { background:#EFE3C4; border-color:var(--orange); }
-    .ml-tok-btn.ml-tok-set { color:#6E4A15; background:var(--blue-light); border-color:var(--blue-mid); }
-    .ml-tok-btn.ml-tok-set:hover, .ml-tok-btn.ml-tok-set.open { background:#EFE3C4; border-color:var(--blue); }
-    .ml-tok-drop {
-      display:none; position:absolute; top:calc(100% + 5px); left:0;
-      min-width:220px; max-width:340px;
-      background:var(--surface); border:1px solid var(--border-mid);
-      border-radius:8px; box-shadow:0 8px 28px rgba(0,0,0,0.18);
-      z-index:200; overflow:hidden;
+    .se-clear:hover { color:var(--text); }
+
+    .se-filters { display:flex; flex-wrap:wrap; gap:16px; align-items:flex-end; margin-bottom:16px; }
+    .se-filter-group { display:flex; flex-direction:column; gap:6px; }
+    .se-filter-label {
+      font-family:'Roboto Mono',monospace; font-size:0.68rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.08em; color:var(--text-faint);
     }
-    .ml-tok-drop.open { display:block; }
-    .ml-tok-acts {
-      display:flex; gap:6px; padding:8px 10px 6px;
-      border-bottom:1px solid var(--border);
-      background:var(--surface); position:sticky; top:0;
+    .se-chips { display:flex; gap:6px; flex-wrap:wrap; }
+    .se-chip {
+      font-family:'Roboto Mono',monospace; font-size:0.74rem; font-weight:600;
+      color:var(--text-mid); background:var(--surface); border:1px solid var(--border-mid);
+      border-radius:999px; padding:6px 12px; cursor:pointer; transition:all 0.15s;
     }
-    .ml-tok-act {
-      font-family:'Roboto Mono',monospace; font-size:0.65rem; font-weight:600;
-      background:none; border:1px solid var(--border); border-radius:4px;
-      padding:3px 8px; cursor:pointer; color:var(--text-muted); transition:all 0.1s;
+    .se-chip:hover { border-color:var(--blue); }
+    .se-chip.active { background:var(--blue); border-color:var(--blue); color:#fff; }
+
+    .se-ms { position:relative; min-width:150px; }
+    .se-ms-btn {
+      width:100%; display:flex; align-items:center; justify-content:space-between; gap:6px;
+      font-family:'Inter',sans-serif; font-size:0.82rem; color:var(--text);
+      background:var(--bg); border:1px solid var(--border-mid); border-radius:6px;
+      padding:0 10px; height:34px; cursor:pointer;
     }
-    .ml-tok-act:hover { border-color:var(--orange); color:var(--orange); background:var(--orange-light); }
-    .ml-tok-list { max-height:240px; overflow-y:auto; }
-    .ml-tok-item {
-      display:flex; align-items:center; gap:8px;
-      padding:6px 12px; cursor:pointer; font-size:0.83rem; color:var(--text-mid);
-      user-select:none; transition:background 0.1s;
+    .se-ms-btn:hover, .se-ms-btn.open { border-color:var(--blue); }
+    .se-ms-caret { font-size:0.6rem; color:var(--text-faint); transition:transform 0.15s; }
+    .se-ms-btn.open .se-ms-caret { transform:rotate(180deg); }
+    .se-ms-drop {
+      display:none; position:absolute; top:calc(100% + 4px); left:0;
+      min-width:230px; max-width:320px; max-height:280px; overflow-y:auto;
+      background:var(--surface); border:1px solid var(--border-mid); border-radius:8px;
+      box-shadow:0 4px 20px rgba(0,0,0,0.13); z-index:500;
     }
-    .ml-tok-item:hover { background:var(--blue-light); }
-    .ml-tok-item input { accent-color:var(--orange); width:13px; height:13px; flex-shrink:0; cursor:pointer; }
-    .ml-results { padding:16px 32px 28px; min-height:300px; }
-    .ml-results-hdr {
-      font-family:'Roboto Mono',monospace; font-size:0.73rem;
-      color:var(--text-muted); padding-bottom:12px; margin-bottom:12px;
-      border-bottom:1px solid var(--border);
+    .se-ms-drop.open { display:block; }
+    .se-ms-item { display:flex; align-items:center; gap:8px; padding:5px 12px; cursor:pointer; user-select:none; }
+    .se-ms-item:hover { background:var(--blue-light); }
+    .se-ms-item input { width:13px; height:13px; accent-color:var(--blue); cursor:pointer; flex-shrink:0; }
+    .se-ms-item span { font-size:0.82rem; color:var(--text-mid); }
+    .se-ms-item.se-ms-area span { font-weight:700; color:var(--text); }
+    .se-ms-item.se-ms-topic { padding-left:26px; }
+
+    .se-actions { display:flex; gap:8px; margin-left:auto; }
+    .se-action-btn {
+      font-family:'Roboto Mono',monospace; font-size:0.74rem; font-weight:600;
+      color:var(--blue); background:var(--blue-light); border:1px solid var(--blue-mid);
+      border-radius:6px; padding:7px 12px; cursor:pointer; transition:all 0.15s; white-space:nowrap;
     }
-    .ml-results-n { color:var(--text); font-weight:700; font-size:0.88rem; }
-    .ml-results-sub { color:var(--text-faint); }
-    .ml-card {
+    .se-action-btn:hover { background:var(--blue); color:#fff; }
+
+    .se-results { padding:16px 32px 28px; min-height:200px; }
+    .se-results-hdr {
+      font-family:'Roboto Mono',monospace; font-size:0.78rem; color:var(--text-muted);
+      padding-bottom:10px; margin-bottom:12px; border-bottom:1px solid var(--border);
+      min-height:1em;
+    }
+    .se-block { margin-bottom:18px; }
+    .se-block:last-child { margin-bottom:0; }
+    .se-block-hdr {
+      font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.08em; color:var(--text-faint);
+      margin:0 0 8px;
+    }
+    .se-card {
       background:var(--bg); border:1px solid var(--border); border-radius:8px;
       padding:14px 18px; margin-bottom:8px; transition:border-color 0.15s;
     }
-    .ml-card:hover { border-color:var(--blue-mid); }
-    .ml-card-person { border-left:3px solid var(--orange); }
-    .ml-card-org    { border-left:3px solid #2563eb; }
-    .ml-card-type {
+    .se-card:hover { border-color:var(--blue-mid); }
+    .se-card-org    { border-left:3px solid #2563eb; }
+    .se-card-person { border-left:3px solid var(--orange); }
+    .se-card-top { display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:4px; }
+    .se-card-type {
       font-family:'Roboto Mono',monospace; font-size:0.62rem; font-weight:700;
-      text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;
+      text-transform:uppercase; letter-spacing:0.06em; padding:2px 8px; border-radius:9px;
     }
-    .ml-card-person .ml-card-type { color:var(--orange); }
-    .ml-card-org    .ml-card-type { color:#2563eb; }
-    .ml-card-name { font-size:0.92rem; font-weight:600; color:var(--text); margin-bottom:2px; }
-    .ml-card-name a { color:var(--text); text-decoration:none; }
-    .ml-card-name a:hover { color:var(--blue); }
-    .ml-card-sub { font-size:0.78rem; color:var(--text-muted); margin-bottom:7px; }
-    .ml-card-chips { display:flex; flex-wrap:wrap; gap:4px; }
-    .ml-chip { font-size:0.68rem; padding:2px 8px; border-radius:10px; white-space:nowrap; }
-    .ml-chip-blue   { background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; }
-    .ml-chip-orange { background:var(--orange-light); color:var(--orange); border:1px solid #DFCEA1; }
-    .ml-chip-green  { background:#f0fdf4; color:#16a34a; border:1px solid #bbf7d0; }
-    .ml-more { font-size:0.8rem; color:var(--text-faint); padding:10px 0 2px; text-align:center; }
-    .ml-more a { color:var(--blue); text-decoration:none; }
-    .ml-more a:hover { text-decoration:underline; }
-    .ml-empty { text-align:center; padding:28px; color:var(--text-faint); font-size:0.85rem; }
+    .se-card-type.org    { background:#eff6ff; color:#2563eb; }
+    .se-card-type.person { background:var(--orange-light); color:var(--orange); }
+    .se-card-type.sunset { background:#f3f4f6; color:#6b7280; }
+    .se-card-name { font-size:0.94rem; font-weight:600; color:var(--text); margin-bottom:2px; }
+    .se-card-sub  { font-size:0.8rem; color:var(--text-muted); margin-bottom:6px; }
+    .se-card-chips { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:6px; }
+    .se-card-chips .se-card-type { text-transform:none; letter-spacing:0; font-weight:600; }
+    .se-card-why { font-size:0.74rem; color:var(--text-faint); margin-bottom:8px; }
+    .se-card-links { display:flex; gap:14px; flex-wrap:wrap; }
+    .se-card-links a { font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:600; color:var(--blue); text-decoration:none; }
+    .se-card-links a:hover { text-decoration:underline; }
+
+    .se-more-wrap { text-align:center; padding:10px 0 2px; }
+    .se-more-btn {
+      font-family:'Roboto Mono',monospace; font-size:0.8rem; font-weight:600;
+      color:var(--blue); background:var(--blue-light); border:1px solid var(--blue-mid);
+      border-radius:6px; padding:8px 16px; cursor:pointer;
+    }
+    .se-more-btn:hover { background:var(--blue); color:#fff; }
+
+    .se-empty, .se-zero { text-align:center; padding:32px 16px; color:var(--text-muted); }
+    .se-empty h3, .se-zero h3 {
+      font-family:'Roboto Mono',monospace; font-size:0.98rem; color:var(--text); margin-bottom:14px;
+    }
+    .se-suggest-chips { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:16px; }
+    .se-suggest-chip {
+      font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:600;
+      color:var(--blue); background:var(--blue-light); border:1px solid var(--blue-mid);
+      border-radius:999px; padding:7px 14px; cursor:pointer;
+    }
+    .se-suggest-chip:hover { background:var(--blue); color:#fff; }
+    .se-zero-lead { color:var(--text-muted); font-size:0.85rem; margin-bottom:10px; }
+    .se-browse { font-size:0.85rem; color:var(--text-muted); }
+    .se-browse a { color:var(--blue); text-decoration:none; font-weight:600; margin:0 4px; }
+    .se-browse a:hover { text-decoration:underline; }
+
     @media (max-width:640px) {
-      .ml-modal-body, .ml-results { padding-left:16px; padding-right:16px; }
-      .ml-sentence { font-size:0.9rem; line-height:2.3; padding:14px 16px; }
+      .ml-modal-body, .se-results { padding-left:16px; padding-right:16px; }
+      .se-filters { flex-direction:column; align-items:stretch; }
+      .se-actions { margin-left:0; }
     }
 
     /* EXPLORE BUBBLES */
@@ -437,7 +482,7 @@
     <div class="ribbon-item">
       <a class="ribbon-link active" href="/ecosystem/">Ecosystem <span class="ribbon-caret">▾</span></a>
       <div class="ribbon-drop ribbon-drop-desc">
-        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Say who you are and what you need, and we find the match.</span></a>
+        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Type a problem, a place, or a name.</span></a>
         <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
         <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
         <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
@@ -462,7 +507,7 @@
       </div>
     </div>
     <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
-    <div class="ribbon-actions">
+    <div class="ribbon-actions"><a class="ribbon-btn" href="/ecosystem/search/">Search</a>
       <a class="ribbon-btn primary" href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sept 30 Hackathon ↗</a>
     </div>
   </div>
@@ -505,11 +550,11 @@
     <h1><span>Ecosystem</span></h1>
     <p class="hero-lede">Everyone working on state capacity in one place, searchable by organization, person or problem.</p>
     <div class="hero-cta" style="flex-direction:column;align-items:stretch;gap:10px;max-width:640px;">
-      <button class="hero-cta-btn" onclick="openMadLibs()" style="width:100%;justify-content:center;">
+      <button class="hero-cta-btn" onclick="openSearch()" style="width:100%;justify-content:center;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         Search the ecosystem (Beta)
       </button>
-      <p style="font-size:0.85rem;color:var(--text-muted);margin:0;text-align:center;">Say who you are and what you need. We find the match.</p>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin:0;text-align:center;">Type a problem, a place, or a name. Results rank organizations and people together.</p>
       <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
         <a href="./organizations/?add=1" style="font-family:'Roboto Mono',monospace;font-size:0.82rem;font-weight:600;color:var(--blue);text-decoration:none;">Add an organization →</a>
         <a href="./connect/?add=1" style="font-family:'Roboto Mono',monospace;font-size:0.82rem;font-weight:600;color:var(--orange);text-decoration:none;">Add yourself or an opportunity →</a>
@@ -703,259 +748,409 @@
   </div>
 </footer>
 
+<script src="/assets/sce-search.js"></script>
 <script>
-const SEGMENT_COLORS = {
-  "Research":                       "#2563eb",
-  "Government":                     "#0891b2",
-  "Philanthropy":                   "#dc2626",
-  "Fellowships":                    "#d97706",
-  "Community":                      "#7c3aed",
-  "GovTech":                        "#16a34a",
-  "Advocacy":                       "#db2777",
-  "Digital Services & Consulting":  "#0d9488",
-  "Investor":                       "#9333ea",
-  "Capacity Building":              "#ca8a04",
-  "Ecosystems":                     "#65a30d",
-};
+const SE_SEGMENTS = ["Advocacy","Capacity Building","Community","Digital Services & Consulting","Ecosystems","Fellowships","GovTech","Government","Investor","Philanthropy","Research"];
+const SE_GEO = ["Federal","State","City","Outside US"];
 
-const ROLE_TO_SEGS = {
-  "Advocate":               ["Advocacy"],
-  "Capacity Builder":       ["Capacity Building"],
-  "Fellowship Program":     ["Fellowships"],
-  "Funder":                 ["Philanthropy","Investor"],
-  "Government Practitioner":["Government"],
-  "Media":                  [],
-  "Researcher":             ["Research"],
-  "Technologist":           ["GovTech","Digital Services & Consulting"],
-  "Other":                  [],
-};
-const ML_ROLES = Object.keys(ROLE_TO_SEGS);
+let seBooted = false;
+let seInited = false;
+let seShown = 10;
+let seShownOrgs = 10;
+let seShownPpl = 10;
+function seResetShown() { seShown = 10; seShownOrgs = 10; seShownPpl = 10; }
+let seDebounceT = null;
+let seLastResult = { orgs: [], people: [], total: 0 };
+let seState = { show: "both", seg: new Set(), area: new Set(), topic: new Set(), geo: new Set() };
+let seMS = {};
+let seProblemMS = null;
 
-const OFFERING_TO_SEGS = {
-  "Expertise":            ["Research","Digital Services & Consulting","Capacity Building"],
-  "Funding / Investment": ["Philanthropy","Investor"],
-  "Grant / Challenge":    ["Philanthropy"],
-  "Job / Fellowship":     ["Fellowships","Capacity Building"],
-  "Problem to Solve":     ["Government","GovTech"],
-  "Tool / Product":       ["GovTech"],
-  // "Collaboration Opportunity","Interesting Conversation","Other" → no segment constraint
-};
+const seEsc  = s => (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const seHttp = u => !u ? '' : /^https?:\/\//.test(u) ? u : 'https://'+u;
 
-let _mlOrgs = [], _mlPeople = [], _mlReady = false;
-const _mlToks = {};
-
-function openMadLibs() {
+function openSearch() {
   const ov = document.getElementById('ml-overlay');
   ov.style.display = 'flex';
   document.body.style.overflow = 'hidden';
-  if (!_mlReady) {
-    document.getElementById('ml-results-hdr').textContent = 'Loading data…';
-    Promise.all([
-      fetch('../data/directory.json').then(r => r.json()).catch(() => []),
-      fetch('../data/connect.json').then(r => r.json()).catch(() => [])
-    ]).then(([orgs, ppl]) => {
-      _mlOrgs = orgs; _mlPeople = ppl; _mlReady = true;
-      _mlInitToks();
-      _mlSearch();
-    });
-  }
+  seBoot();
 }
-function closeMadLibs() {
+function closeSearch() {
   document.getElementById('ml-overlay').style.display = 'none';
   document.body.style.overflow = '';
+  const p = new URLSearchParams(location.search);
+  ['search', 'q', 'show', 'seg', 'area', 'topic', 'geo'].forEach(k => p.delete(k));
+  const qs = p.toString();
+  history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
 }
-window.openMadLibs = openMadLibs;
-window.closeMadLibs = closeMadLibs;
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMadLibs(); });
-if (new URLSearchParams(location.search).get('search')) document.addEventListener('DOMContentLoaded', openMadLibs);
+window.openSearch = openSearch;
+window.closeSearch = closeSearch;
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+if (new URLSearchParams(location.search).get('search')) document.addEventListener('DOMContentLoaded', openSearch);
 
-function _mlInitToks() {
-  _mkTok('ml-t-myrole',   ML_ROLES, 'single', 'Role');
-  _mkTok('ml-t-offering', [
-    "Collaboration Opportunity","Expertise","Funding / Investment","Grant / Challenge",
-    "Interesting Conversation","Job / Fellowship","Problem to Solve","Tool / Product","Other"
-  ], 'multi', 'any collaboration opp');
-  const areas  = [...new Set(_mlOrgs.flatMap(o => o.problem_areas || []))].sort();
-  const topics = [...new Set(_mlOrgs.flatMap(o => o.problem_statements || []))].sort();
-  _mkTok('ml-t-problem', [...areas, ...topics], 'multi', 'any problem');
-  _mkTok('ml-t-geo', ["Federal","State","City","Outside US"], 'multi', 'any geography');
+function seBoot() {
+  if (seBooted) return;
+  seBooted = true;
+  seInit();
+  seApplyParamsFromURL();
+  document.getElementById('se-results-hdr').textContent = 'Loading…';
+  SCESearch.load().then(() => { seRunSearch(); });
 }
 
-function _mkTok(id, opts, mode, ph) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const tok = { el, opts, mode, ph, sel: mode==='single' ? null : new Set(), _open:false, btn:null, drop:null };
-  _mlToks[id] = tok;
+function seInit() {
+  if (seInited) return;
+  seInited = true;
+  document.getElementById('se-reset').addEventListener('click', seReset);
+  document.getElementById('se-copy').addEventListener('click', seCopyLink);
+  const qEl = document.getElementById('se-q');
+  qEl.addEventListener('input', () => {
+    seSyncClear();
+    clearTimeout(seDebounceT);
+    seDebounceT = setTimeout(() => { seResetShown(); seRunSearch(); }, 150);
+  });
+  qEl.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { clearTimeout(seDebounceT); seResetShown(); seRunSearch(); }
+  });
+  document.getElementById('se-clear').addEventListener('click', () => {
+    qEl.value = '';
+    seSyncClear();
+    seResetShown();
+    seRunSearch();
+  });
+  document.querySelectorAll('#se-show-chips .se-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#se-show-chips .se-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      seState.show = btn.dataset.show;
+      seResetShown();
+      seRunSearch();
+    });
+  });
+  seMS.seg = seMkMS('se-ms-seg', SE_SEGMENTS.map(s => ({ v: s, l: s })), 'segments', seState.seg);
+  seMS.geo = seMkMS('se-ms-geo', SE_GEO.map(s => ({ v: s, l: s })), 'geographies', seState.geo);
+  seMkProblemMS();
+  document.addEventListener('click', seCloseAllMS);
+}
 
+function seCloseAllMS() {
+  document.querySelectorAll('.se-ms-drop.open').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.se-ms-btn.open').forEach(b => b.classList.remove('open'));
+}
+
+function seMkMS(containerId, opts, ph, selSet) {
+  const el = document.getElementById(containerId);
   const btn = document.createElement('button');
-  btn.type = 'button'; btn.className = 'ml-tok-btn';
-  tok.btn = btn;
-
+  btn.type = 'button'; btn.className = 'se-ms-btn';
+  btn.innerHTML = `<span class="se-ms-btn-text">All ${ph}</span><span class="se-ms-caret">▼</span>`;
+  const txt = btn.querySelector('.se-ms-btn-text');
   const drop = document.createElement('div');
-  drop.className = 'ml-tok-drop';
-  tok.drop = drop;
+  drop.className = 'se-ms-drop';
   drop.addEventListener('click', e => e.stopPropagation());
-
-  if (mode === 'multi') {
-    const acts = document.createElement('div');
-    acts.className = 'ml-tok-acts';
-    const mkA = (label, fn) => {
-      const b = document.createElement('button');
-      b.type='button'; b.className='ml-tok-act'; b.textContent=label;
-      b.addEventListener('click', e => { e.stopPropagation(); fn(); });
-      return b;
-    };
-    acts.append(
-      mkA('Any', () => { tok.sel.clear(); _syncTok(tok); _mlSearch(); }),
-      mkA('All', () => { opts.forEach(o => tok.sel.add(o)); _syncTok(tok); _mlSearch(); })
-    );
-    drop.appendChild(acts);
-  }
-
-  const list = document.createElement('div');
-  list.className = 'ml-tok-list';
-  opts.forEach(o => {
-    const item = document.createElement('div');
-    item.className = 'ml-tok-item';
-    if (mode === 'multi') {
-      const cb = document.createElement('input');
-      cb.type = 'checkbox'; cb.value = o;
-      cb.addEventListener('change', () => { cb.checked ? tok.sel.add(o) : tok.sel.delete(o); _syncTok(tok); _mlSearch(); });
-      item.append(cb, document.createTextNode(o));
-    } else {
-      item.textContent = o;
-      item.addEventListener('click', e => { e.stopPropagation(); tok.sel = o; _syncTok(tok); _closeTok(tok); _mlSearch(); });
-    }
-    list.appendChild(item);
+  opts.forEach(({ v, l }) => {
+    const item = document.createElement('label');
+    item.className = 'se-ms-item';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.value = v;
+    cb.addEventListener('change', () => {
+      cb.checked ? selSet.add(v) : selSet.delete(v);
+      upd(); seResetShown(); seRunSearch();
+    });
+    item.append(cb, Object.assign(document.createElement('span'), { textContent: l }));
+    drop.appendChild(item);
   });
-  drop.appendChild(list);
-
-  btn.addEventListener('click', e => { e.stopPropagation(); _togTok(tok); });
-  _syncTok(tok);
+  function upd() {
+    const n = selSet.size;
+    txt.textContent = n === 0 ? `All ${ph}` : n === 1 ? [...selSet][0] : `${n} selected`;
+  }
+  function sync() {
+    drop.querySelectorAll('input').forEach(cb => cb.checked = selSet.has(cb.value));
+    upd();
+  }
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = drop.classList.contains('open');
+    seCloseAllMS();
+    if (!open) { drop.classList.add('open'); btn.classList.add('open'); }
+  });
   el.append(btn, drop);
-  document.addEventListener('click', () => _closeTok(tok));
+  return { sync };
 }
 
-function _syncTok(tok) {
-  if (!tok.btn) return;
-  let lbl;
-  if (tok.mode === 'single') {
-    lbl = tok.sel || `[${tok.ph}]`;
-    tok.btn.classList.toggle('ml-tok-set', !!tok.sel);
-  } else {
-    const n = tok.sel.size;
-    lbl = n === 0 ? `[${tok.ph}]` : n === 1 ? [...tok.sel][0] : `${n} selected`;
-    tok.btn.classList.toggle('ml-tok-set', n > 0);
-  }
-  tok.btn.textContent = lbl;
-}
-function _togTok(tok) { tok._open ? _closeTok(tok) : _openTok(tok); }
-function _openTok(tok) {
-  Object.values(_mlToks).forEach(t => { if (t !== tok) _closeTok(t); });
-  tok._open = true; tok.btn.classList.add('open'); tok.drop.classList.add('open');
-}
-function _closeTok(tok) { tok._open = false; tok.btn?.classList.remove('open'); tok.drop?.classList.remove('open'); }
-function _mlGet(id) { const t = _mlToks[id]; if (!t) return null; return t.mode==='single' ? t.sel : (t.sel.size > 0 ? t.sel : null); }
-
-function _mlSearch() {
-  if (!_mlReady) return;
-  const myRole   = _mlGet('ml-t-myrole');
-  const offering = _mlGet('ml-t-offering');
-  const problems = _mlGet('ml-t-problem');
-  const geos     = _mlGet('ml-t-geo');
-
-  const people = _mlPeople.filter(p => {
-    if (offering) {
-      const pOffs = Array.isArray(p.offering) ? p.offering : (p.offering ? p.offering.split(", ").map(s=>s.trim()) : (p.help_source ? [p.help_source] : []));
-      if (!pOffs.some(o => offering.has(o))) return false;
-    }
-    if (problems) {
-      const pAreas  = p.problem_areas  || (p.problem_area  ? [p.problem_area]  : []);
-      const pTopics = p.problem_topics || (p.problem_topic ? [p.problem_topic] : []);
-      if (!pAreas.some(a => problems.has(a)) && !pTopics.some(t => problems.has(t))) return false;
-    }
-    if (geos) {
-      const pGeos = [...(p.geography||[]), ...(p.jurisdictions||[])];
-      if (!pGeos.some(j => geos.has(j))) return false;
-    }
-    return true;
+function seMkProblemMS() {
+  const el = document.getElementById('se-ms-problem');
+  const btn = document.createElement('button');
+  btn.type = 'button'; btn.className = 'se-ms-btn';
+  btn.innerHTML = `<span class="se-ms-btn-text">All problems</span><span class="se-ms-caret">▼</span>`;
+  const txt = btn.querySelector('.se-ms-btn-text');
+  const drop = document.createElement('div');
+  drop.className = 'se-ms-drop';
+  drop.addEventListener('click', e => e.stopPropagation());
+  Object.keys(SCESearch.TAXONOMY).forEach(area => {
+    const aItem = document.createElement('label');
+    aItem.className = 'se-ms-item se-ms-area';
+    const aCb = document.createElement('input');
+    aCb.type = 'checkbox'; aCb.value = area;
+    aCb.addEventListener('change', () => {
+      aCb.checked ? seState.area.add(area) : seState.area.delete(area);
+      updP(); seResetShown(); seRunSearch();
+    });
+    aItem.append(aCb, Object.assign(document.createElement('span'), { textContent: area }));
+    drop.appendChild(aItem);
+    SCESearch.TAXONOMY[area].forEach(topic => {
+      const tItem = document.createElement('label');
+      tItem.className = 'se-ms-item se-ms-topic';
+      const tCb = document.createElement('input');
+      tCb.type = 'checkbox'; tCb.value = topic;
+      tCb.addEventListener('change', () => {
+        tCb.checked ? seState.topic.add(topic) : seState.topic.delete(topic);
+        updP(); seResetShown(); seRunSearch();
+      });
+      tItem.append(tCb, Object.assign(document.createElement('span'), { textContent: topic }));
+      drop.appendChild(tItem);
+    });
   });
-
-  const targetSegs = myRole ? new Set(ROLE_TO_SEGS[myRole]||[]) : null;
-
-  // Build an org-segment constraint from selected offerings. Only offerings with
-  // a known segment mapping contribute; "Collaboration Opportunity" etc. do not.
-  let offeringSegs = null;
-  if (offering) {
-    const segs = new Set();
-    let hasConstraint = false;
-    for (const o of offering) {
-      if (OFFERING_TO_SEGS[o]) { OFFERING_TO_SEGS[o].forEach(s => segs.add(s)); hasConstraint = true; }
-    }
-    if (hasConstraint) offeringSegs = segs;
+  function updP() {
+    const n = seState.area.size + seState.topic.size;
+    const first = [...seState.area, ...seState.topic][0];
+    txt.textContent = n === 0 ? 'All problems' : n === 1 ? first : `${n} selected`;
   }
-
-  const orgs = _mlOrgs.filter(o => {
-    if (targetSegs && targetSegs.size > 0 && !targetSegs.has(o.primary_segment)) return false;
-    if (offeringSegs && !(o.segments||[]).some(s => offeringSegs.has(s))) return false;
-    if (problems && !((o.problem_areas||[]).some(a => problems.has(a)) || (o.problem_statements||[]).some(t => problems.has(t)))) return false;
-    if (geos && !(o.focus||[]).some(f => geos.has(f))) return false;
-    return true;
+  function sync() {
+    drop.querySelectorAll('input').forEach(cb => cb.checked = seState.area.has(cb.value) || seState.topic.has(cb.value));
+    updP();
+  }
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = drop.classList.contains('open');
+    seCloseAllMS();
+    if (!open) { drop.classList.add('open'); btn.classList.add('open'); }
   });
-
-  _mlRender(people, orgs);
+  el.append(btn, drop);
+  seProblemMS = { sync };
 }
 
-function _mlRender(ppl, orgs) {
-  const hdr  = document.getElementById('ml-results-hdr');
-  const list = document.getElementById('ml-results-list');
-  const allEmpty = Object.values(_mlToks).every(t => t.mode==='single' ? !t.sel : t.sel.size===0);
+function seSyncClear() {
+  document.getElementById('se-clear').style.display = document.getElementById('se-q').value ? 'block' : 'none';
+}
 
-  if (allEmpty) {
-    hdr.innerHTML = 'Select a value above to find matching practitioners and organizations.';
-    list.innerHTML = '';
+function seApplyParamsFromURL() {
+  const params = new URLSearchParams(location.search);
+  const q = params.get('q'); if (q) document.getElementById('se-q').value = q;
+  const show = params.get('show'); if (show && ['orgs','people','both'].includes(show)) seState.show = show;
+  const seg = params.get('seg'); if (seg) seg.split('|').forEach(s => seState.seg.add(s));
+  const area = params.get('area'); if (area) area.split('|').forEach(s => seState.area.add(s));
+  const topic = params.get('topic'); if (topic) topic.split('|').forEach(s => seState.topic.add(s));
+  const geo = params.get('geo'); if (geo) geo.split('|').forEach(s => seState.geo.add(s));
+  document.querySelectorAll('#se-show-chips .se-chip').forEach(b => b.classList.toggle('active', b.dataset.show === seState.show));
+  seMS.seg.sync(); seMS.geo.sync(); seProblemMS.sync();
+  seSyncClear();
+}
+
+function seParamsFromState() {
+  const p = new URLSearchParams();
+  const q = document.getElementById('se-q').value.trim();
+  if (q) p.set('q', q);
+  if (seState.show !== 'both') p.set('show', seState.show);
+  if (seState.seg.size) p.set('seg', [...seState.seg].join('|'));
+  if (seState.area.size) p.set('area', [...seState.area].join('|'));
+  if (seState.topic.size) p.set('topic', [...seState.topic].join('|'));
+  if (seState.geo.size) p.set('geo', [...seState.geo].join('|'));
+  return p;
+}
+
+function seSyncURL() {
+  const p = seParamsFromState();
+  p.set('search', '1');
+  const qs = p.toString();
+  history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
+}
+
+function seReset() {
+  document.getElementById('se-q').value = '';
+  // Clear the existing Sets in place (don't reassign seState): seMkMS's
+  // checkbox closures captured seState.seg/geo by reference at init time.
+  seState.show = 'both';
+  seState.seg.clear(); seState.area.clear(); seState.topic.clear(); seState.geo.clear();
+  document.querySelectorAll('#se-show-chips .se-chip').forEach(b => b.classList.toggle('active', b.dataset.show === 'both'));
+  seMS.seg.sync(); seMS.geo.sync(); seProblemMS.sync();
+  seSyncClear();
+  seResetShown();
+  seRunSearch();
+}
+
+function seCopyLink() {
+  const params = seParamsFromState();
+  const qs = params.toString();
+  const url = location.origin + '/ecosystem/search/' + (qs ? '?' + qs : '');
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('se-copy');
+    const orig = btn.textContent;
+    btn.textContent = 'Link copied';
+    setTimeout(() => { btn.textContent = orig; }, 1500);
+  });
+}
+
+function seRunSearch() {
+  const q = document.getElementById('se-q').value.trim();
+  const filters = { show: seState.show, seg: seState.seg, area: seState.area, topic: seState.topic, geo: seState.geo };
+  seLastResult = SCESearch.search(q, filters);
+  seRender(q);
+  seSyncURL();
+}
+
+function seMergedList(res) {
+  // Org and person scores come from separately-normalized TF-IDF cosines
+  // (short Connect entries saturate cosine faster than long org profiles),
+  // so scale each type to its own max before interleaving for display order.
+  const maxOrg = res.orgs.length ? Math.max(...res.orgs.map(r => r.score)) || 1 : 1;
+  const maxPpl = res.people.length ? Math.max(...res.people.map(r => r.score)) || 1 : 1;
+  const merged = [
+    ...res.orgs.map(r => ({ type: 'org', score: r.score, rank: r.score / maxOrg, why: r.why, item: r.org })),
+    ...res.people.map(r => ({ type: 'person', score: r.score, rank: r.score / maxPpl, why: r.why, item: r.person })),
+  ];
+  merged.sort((a, b) => b.rank - a.rank || b.score - a.score);
+  return merged;
+}
+
+function seRender(q) {
+  const hdrEl = document.getElementById('se-results-hdr');
+  const listEl = document.getElementById('se-results-list');
+  const moreEl = document.getElementById('se-more-wrap');
+  const hasFilters = seState.seg.size || seState.area.size || seState.topic.size || seState.geo.size || seState.show !== 'both';
+  const res = seLastResult;
+  const total = res.orgs.length + res.people.length;
+
+  if (!q && !hasFilters) {
+    hdrEl.textContent = '';
+    listEl.innerHTML = seEmptyStateHtml();
+    moreEl.innerHTML = '';
+    seBindSuggestChips();
     return;
   }
-  const total = ppl.length + orgs.length;
+  if (!q) {
+    // Filters only, no query.
+    moreEl.innerHTML = '';
+    if (total === 0) {
+      hdrEl.textContent = '';
+      listEl.innerHTML = `<div class="se-zero"><h3>No results for these filters.</h3><div class="se-browse"><a href="#" id="se-reset-filters-link">Reset filters</a></div></div>`;
+      document.getElementById('se-reset-filters-link').addEventListener('click', e => { e.preventDefault(); seReset(); });
+      return;
+    }
+    // Two blocks (orgs, then people/opportunities), each ranked within itself
+    // (degree desc / newest first) with its own "Show 10 more" per block,
+    // not interleaved, since there is no relevance score.
+    hdrEl.textContent = `${total} result${total !== 1 ? 's' : ''}`;
+    listEl.innerHTML = seBlockHtml(res.orgs, 'org', 'Organizations', seShownOrgs) +
+                        seBlockHtml(res.people, 'person', 'People and opportunities', seShownPpl);
+    listEl.querySelectorAll('[data-more]').forEach(btn => btn.addEventListener('click', () => {
+      if (btn.dataset.more === 'org') seShownOrgs += 10; else seShownPpl += 10;
+      seRender(q);
+    }));
+    return;
+  }
   if (total === 0) {
-    hdr.innerHTML = 'No matches. Try broadening your selections.';
-    list.innerHTML = '<div class="ml-empty">Try selecting "Any" for one or more filters above.</div>';
+    hdrEl.textContent = '';
+    listEl.innerHTML = seZeroStateHtml(q);
+    moreEl.innerHTML = '';
+    seBindSuggestChips();
     return;
   }
-  hdr.innerHTML = `<span class="ml-results-n">${total}</span> <span class="ml-results-sub">match${total!==1?'es':''} &mdash; ${ppl.length} practitioner${ppl.length!==1?'s':''} &middot; ${orgs.length} org${orgs.length!==1?'s':''}</span>`;
-
-  const e2   = s => (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  const http = u => !u ? '' : /^https?:\/\//.test(u) ? u : 'https://'+u;
-
-  const pCards = ppl.slice(0,8).map(p =>
-    `<div class="ml-card ml-card-person">
-      <div class="ml-card-type">Practitioner</div>
-      <div class="ml-card-name">${e2(p.name)}</div>
-      <div class="ml-card-sub">${e2(p.organization||'')}${p.role?' &middot; '+e2(p.role):''}</div>
-      <div class="ml-card-chips">
-        ${(p.problem_topics||[p.problem_topic].filter(Boolean)).slice(0,2).map(t=>`<span class="ml-chip ml-chip-blue">${e2(t)}</span>`).join('')}
-        ${(p.geography||p.jurisdictions||[]).map(j=>`<span class="ml-chip ml-chip-orange">${e2(j)}</span>`).join('')}
-        ${(Array.isArray(p.offering)?p.offering:[p.offering||p.help_source].filter(Boolean)).slice(0,1).map(o=>`<span class="ml-chip ml-chip-green">${e2(o)}</span>`).join('')}
-      </div>
-    </div>`
-  );
-
-  const oCards = orgs.slice(0,8).map(o =>
-    `<div class="ml-card ml-card-org">
-      <div class="ml-card-type">Organization</div>
-      <div class="ml-card-name">${o.website?`<a href="${e2(http(o.website))}" target="_blank" rel="noopener">${e2(o.name)} ↗</a>`:e2(o.name)}</div>
-      <div class="ml-card-sub">${e2(o.primary_segment||'')}${o.funding_model?' &middot; '+e2(o.funding_model):''}</div>
-      <div class="ml-card-chips">
-        ${(o.problem_statements||[]).slice(0,3).map(t=>`<span class="ml-chip ml-chip-blue">${e2(t)}</span>`).join('')}
-        ${(o.focus||[]).map(f=>`<span class="ml-chip ml-chip-orange">${e2(f)}</span>`).join('')}
-      </div>
-    </div>`
-  );
-
-  list.innerHTML = [...pCards, ...oCards].join('');
-  if (total > 16) {
-    list.innerHTML += `<div class="ml-more">Showing top 16 of ${total}. <a href="./connect/">Connect</a> and the <a href="./organizations/">Organization Directory</a> have full search.</div>`;
+  const merged = seMergedList(res);
+  hdrEl.textContent = `${total} result${total !== 1 ? 's' : ''} for "${q}"`;
+  const slice = merged.slice(0, seShown);
+  listEl.innerHTML = slice.map(seCardHtml).join('');
+  if (seShown < total) {
+    moreEl.innerHTML = `<button type="button" class="se-more-btn" id="se-more-btn">Show 10 more</button>`;
+    document.getElementById('se-more-btn').addEventListener('click', () => { seShown += 10; seRender(q); });
+  } else {
+    moreEl.innerHTML = '';
   }
+}
+
+function seBlockHtml(items, kind, header, shownCount) {
+  if (!items.length) return '';
+  const slice = items.slice(0, shownCount);
+  const cardsHtml = slice.map(r => kind === 'org'
+    ? seOrgCardHtml({ why: r.why, item: r.org })
+    : sePersonCardHtml({ why: r.why, item: r.person })
+  ).join('');
+  const moreHtml = shownCount < items.length
+    ? `<div class="se-more-wrap"><button type="button" class="se-more-btn" data-more="${kind}">Show 10 more</button></div>`
+    : '';
+  return `<div class="se-block"><div class="se-block-hdr">${header}</div>${cardsHtml}${moreHtml}</div>`;
+}
+
+function seCardHtml(entry) {
+  return entry.type === 'org' ? seOrgCardHtml(entry) : sePersonCardHtml(entry);
+}
+
+function seOrgCardHtml(entry) {
+  const o = entry.item;
+  const isSunset = o.status === 'sunset';
+  const why = entry.why && entry.why.length ? `<div class="se-card-why">Why: ${seEsc(entry.why.join(', '))}</div>` : '';
+  const focus = (o.focus || []).join(', ');
+  return `<div class="se-card se-card-org">
+    <div class="se-card-top"><span class="se-card-type org">Organization</span>${isSunset ? '<span class="se-card-type sunset">Sunset</span>' : ''}</div>
+    <div class="se-card-name">${seEsc(o.name)}</div>
+    <div class="se-card-sub">${seEsc(o.primary_segment || '')}${focus ? ' · ' + seEsc(focus) : ''}</div>
+    ${why}
+    <div class="se-card-links">
+      <a href="/ecosystem/organizations/?org=${o.id}">Open in directory →</a>
+      <a href="/ecosystem/affinity-map/?sel=${o.id}">On the map →</a>
+      ${o.website ? `<a href="${seEsc(seHttp(o.website))}" target="_blank" rel="noopener">Website ↗</a>` : ''}
+    </div>
+  </div>`;
+}
+
+function sePersonCardHtml(entry) {
+  const p = entry.item;
+  const typeLabel = SCESearch.isOpportunity(p) ? 'Opportunity' : 'Person';
+  const why = entry.why && entry.why.length ? `<div class="se-card-why">Why: ${seEsc(entry.why.join(', '))}</div>` : '';
+  const chips = (p.problem_topics || []).slice(0, 2).map(t => `<span class="se-card-type person">${seEsc(t)}</span>`).join('');
+  return `<div class="se-card se-card-person">
+    <div class="se-card-top"><span class="se-card-type person">${typeLabel}</span></div>
+    <div class="se-card-name">${seEsc(p.name)}</div>
+    <div class="se-card-sub">${seEsc(p.organization || '')}${p.role ? ' · ' + seEsc(p.role) : ''}</div>
+    ${chips ? `<div class="se-card-chips">${chips}</div>` : ''}
+    ${why}
+    <div class="se-card-links"><a href="/ecosystem/connect/?entry=${p.id}">Open on Connect →</a></div>
+  </div>`;
+}
+
+function seEmptyStateHtml() {
+  return `<div class="se-empty">
+    <h3>Start with a problem, a place, or a name.</h3>
+    <div class="se-suggest-chips">
+      <button type="button" class="se-suggest-chip" data-q="procurement reform">procurement reform</button>
+      <button type="button" class="se-suggest-chip" data-q="benefits access">benefits access</button>
+      <button type="button" class="se-suggest-chip" data-q="AI in government">AI in government</button>
+    </div>
+    <div class="se-browse">Or browse: <a href="/ecosystem/organizations/">Organization Directory →</a><a href="/ecosystem/connect/">Connect →</a><a href="/ecosystem/affinity-map/">Affinity Map →</a></div>
+  </div>`;
+}
+
+function seZeroStateHtml(q) {
+  let near = SCESearch.nearestTopics(q, 2);
+  if (near.length < 2) {
+    const fallback = ['procurement reform', 'benefits access', 'AI in government'];
+    for (const f of fallback) {
+      if (near.length >= 2) break;
+      if (!near.includes(f)) near.push(f);
+    }
+  }
+  const chips = near.map(t => `<button type="button" class="se-suggest-chip" data-q="${seEsc(t)}">${seEsc(t)}</button>`).join('');
+  return `<div class="se-zero">
+    <h3>Nothing matched "${seEsc(q)}".</h3>
+    <div class="se-zero-lead">Try one of these topics:</div><div class="se-suggest-chips">${chips}</div>
+    <div class="se-browse"><a href="/ecosystem/connect/?add=1">Add yourself to Connect →</a></div>
+  </div>`;
+}
+
+function seBindSuggestChips() {
+  document.querySelectorAll('.se-suggest-chip').forEach(b => b.addEventListener('click', () => {
+    document.getElementById('se-q').value = b.dataset.q;
+    seSyncClear();
+    seResetShown();
+    seRunSearch();
+  }));
 }
 </script>
 
@@ -998,25 +1193,49 @@ function _mlRender(ppl, orgs) {
 })();
 </script>
 
-<!-- MAD LIBS OVERLAY -->
-<div id="ml-overlay" class="ml-overlay" onclick="if(event.target===this)closeMadLibs()">
+<!-- SEARCH MODAL -->
+<div id="ml-overlay" class="ml-overlay" onclick="if(event.target===this)closeSearch()">
   <div class="ml-modal">
     <div class="ml-modal-hdr">
-      <span class="ml-modal-title">Who are you looking for?</span>
-      <button class="ml-modal-close" onclick="closeMadLibs()" aria-label="Close">✕</button>
+      <span class="ml-modal-title">Search the ecosystem</span>
+      <button class="ml-modal-close" onclick="closeSearch()" aria-label="Close">✕</button>
     </div>
     <div class="ml-modal-body">
-      <div class="ml-sentence">
-        <span class="ml-prose">I am a </span><span class="ml-token" id="ml-t-myrole"></span>
-        <span class="ml-prose"> seeking </span><span class="ml-token" id="ml-t-offering"></span>
-        <span class="ml-prose"> on </span><span class="ml-token" id="ml-t-problem"></span>
-        <span class="ml-prose"> in </span><span class="ml-token" id="ml-t-geo"></span>
-        <span class="ml-prose">.</span>
+      <div class="se-input-row">
+        <input id="se-q" class="se-input" type="text" placeholder='Try &quot;procurement reform&quot;, &quot;AI in benefits&quot;, or an organization name' autocomplete="off">
+        <button type="button" class="se-clear" id="se-clear" aria-label="Clear search">×</button>
+      </div>
+      <div class="se-filters">
+        <div class="se-filter-group">
+          <div class="se-filter-label">Show</div>
+          <div class="se-chips" id="se-show-chips">
+            <button type="button" class="se-chip active" data-show="both">Organizations and people</button>
+            <button type="button" class="se-chip" data-show="orgs">Organizations</button>
+            <button type="button" class="se-chip" data-show="people">People</button>
+          </div>
+        </div>
+        <div class="se-filter-group">
+          <div class="se-filter-label">Segment</div>
+          <div class="se-ms" id="se-ms-seg"></div>
+        </div>
+        <div class="se-filter-group">
+          <div class="se-filter-label">Problem</div>
+          <div class="se-ms" id="se-ms-problem"></div>
+        </div>
+        <div class="se-filter-group">
+          <div class="se-filter-label">Geography</div>
+          <div class="se-ms" id="se-ms-geo"></div>
+        </div>
+        <div class="se-actions">
+          <button type="button" class="se-action-btn" id="se-reset">Reset</button>
+          <button type="button" class="se-action-btn" id="se-copy">Copy link</button>
+        </div>
       </div>
     </div>
-    <div class="ml-results" id="ml-results-section">
-      <div class="ml-results-hdr" id="ml-results-hdr">Select a value above to find matching practitioners and organizations.</div>
-      <div id="ml-results-list"></div>
+    <div class="se-results" id="ml-results-section">
+      <div class="se-results-hdr" id="se-results-hdr"></div>
+      <div id="se-results-list"></div>
+      <div id="se-more-wrap"></div>
     </div>
   </div>
 </div>

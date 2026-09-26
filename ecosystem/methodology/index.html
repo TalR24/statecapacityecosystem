@@ -263,7 +263,7 @@
     <div class="ribbon-item">
       <a class="ribbon-link active" href="/ecosystem/">Ecosystem <span class="ribbon-caret">▾</span></a>
       <div class="ribbon-drop ribbon-drop-desc">
-        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Say who you are and what you need, and we find the match.</span></a>
+        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Type a problem, a place, or a name.</span></a>
         <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
         <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
         <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
@@ -288,7 +288,7 @@
       </div>
     </div>
     <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
-    <div class="ribbon-actions">
+    <div class="ribbon-actions"><a class="ribbon-btn" href="/ecosystem/search/">Search</a>
       <a class="ribbon-btn primary" href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sept 30 Hackathon ↗</a>
     </div>
   </div>
@@ -429,7 +429,7 @@
       <h2>The directory</h2>
       <p>The directory is a straight rendering of the underlying data, with filters, a search box, and a detail row for every organization:</p>
       <ul>
-        <li><strong>Search</strong> accepts an org name or a natural-language phrase ("procurement reform in NYC", "AI in benefits delivery"). The query is tokenized, scored against a precomputed TF-IDF index of every org's description and tags, and ranked by relevance. See Semantic search below for the boosts.</li>
+        <li><strong>Search</strong> accepts an org name or a natural-language phrase ("procurement reform in NYC", "AI in benefits delivery") and ranks the table by relevance using the same engine as the Search page (see Search below).</li>
         <li><strong>Primary segment</strong>, <strong>Geography</strong>, <strong>Problem area</strong> and <strong>Problem topic</strong> are multi-selects; an org matches if it carries any of the selected values.</li>
         <li><strong>Hide sunset orgs</strong> removes organizations whose description says they have closed. They stay in the directory as history, marked with a Sunset chip.</li>
         <li>The <strong>detail row</strong> shows the full record, the org's three closest peers from the affinity score, the people and opportunities on Connect from the same organization (or, failing that, on the same problem topics), and a <strong>Suggest an edit</strong> button that opens the submission form prefilled with the current values.</li>
@@ -444,10 +444,10 @@
       <h2>Change feed</h2>
       <p>The directory refreshes daily. Each run compares the new spreadsheet to the last one and records which organizations were added, removed, or edited. The latest changes appear on the <a href="/ecosystem/#changes">Ecosystem page</a> and, when there is a recent update, at the top of the homepage's Latest band.</p>
 
-      <h2>Semantic search</h2>
-      <p>The directory's search box and the affinity map share a precomputed search index. (The Search page builds a structured query from four dropdowns instead of free text.) At build time, every org's description, problem-topic tags, segments, and funding-detail text are tokenized into one bag and a TF-IDF vector is stored. At query time, the browser tokenizes your query the same way, builds an IDF-weighted query vector, and computes cosine similarity against every org. An exact substring match in the org name gets a 0.5 boost so typing a name returns it first. The index ships as a static JSON file of about 190 KB: no server, no embedding API, no per-query cost.</p>
-      <p>Two boosts sharpen the ranking on the map. If the query names a place that appears in an org's name or description (a state, a major city, NYC), that org's score is multiplied by 1.5; if the query uses a level word (state, federal, local), orgs at that level are multiplied by 1.25. If the query asks about money (fund, funder, foundation, philanthropy, investor), Philanthropy and Investor orgs are multiplied by 1.5. Multiplying rather than adding keeps an irrelevant org from outranking a relevant one on geography alone.</p>
-      <p>Search is keyword-based: it cannot know that "permits" and "licensing" are the same concept unless the words co-occur in the corpus. The affinity score below uses sentence embeddings for exactly that reason; search stays on TF-IDF because the index has to run in the browser with nothing to download.</p>
+      <h2>Search</h2>
+      <p>One search box ranks organizations and the people and opportunities on Connect together. It lives on the <a href="/ecosystem/search/">Search page</a>, in the Ecosystem landing modal, in the ribbon on every page, and behind the directory's search box. Type a problem, a place, or a name; filter by what to show, segment, problem area or topic, and geography; every state lives in the URL so a result set can be shared.</p>
+      <p>How it ranks. At build time, every org's description, problem-topic tags, segments, and funding-detail text are tokenized into one bag and a TF-IDF vector is stored in a static file of about 190 KB; the people index is built the same way in the browser from Connect entries. At query time the browser tokenizes the query, builds an IDF-weighted vector, and takes the cosine similarity against every org and person. Then four adjustments: an exact substring match on a name adds 0.5; a query that contains a full topic or area name multiplies tagged orgs and people by 1.75; a place name that appears in an org's name or description (a state, a major city, NYC) multiplies by 1.5, and a level word (state, federal, local) multiplies by 1.25 for orgs at that level; a query about money (fund, funder, foundation, philanthropy, investor) multiplies Philanthropy and Investor orgs by 1.5. Multiplying rather than adding keeps an irrelevant org from outranking a relevant one on geography alone. Each result says why it matched.</p>
+      <p>Search is keyword-based: it cannot know that "permits" and "licensing" are the same concept unless the words co-occur in the corpus. The affinity score below uses sentence embeddings for exactly that reason; search stays on TF-IDF because the index has to run in the browser with nothing to download. Two-letter terms that matter here (AI, ML, UX, HR, DC, EV) are kept; other tokens under three letters are dropped.</p>
 
       <h2>The affinity score</h2>
       <p>The map draws an edge between two organizations when they appear to be working on the same underlying problems. Four signals are computed for every pair, each is converted to a percentile so the signals are on the same scale, and the percentiles are combined with these weights:</p>

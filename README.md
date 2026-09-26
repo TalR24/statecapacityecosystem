@@ -184,39 +184,30 @@ score = 0.40 × P(description_embedding_cosine)
 
 ---
 
-## Semantic search (client-side, no API)
+## Search (client-side, no API)
 
-`build_affinity.py` emits `affinity_search.json` containing:
-- `vocab` — sorted list of every term in the corpus (~2,400 terms)
-- `idf` — IDF score per term (parallel array)
-- `vectors` — array of per-org sparse maps `{term_idx_string: tfidf_weight}` (~32 terms per org avg)
+`assets/sce-search.js` is the one search engine, loaded by the Ecosystem landing (modal), `/ecosystem/search/` (inline), and the Organization Directory (its search box). It fetches `directory.json`, `affinity_search.json` and `connect.json` lazily and builds a people TF-IDF index in the browser (org IDF where a term exists, else a max-IDF fallback).
 
-At query time, the directory and map views:
-1. Tokenize the query (same regex + stopword list as the Python build)
-2. Build an IDF-weighted query vector, L2-normalize
-3. Cosine similarity against every org's vector
-4. Add 0.5 when the query is a substring of the org name
-5. On the map, multiply by 1.5 when the query names a place in the org's `geo_terms` (states, major cities, NYC), by 1.25 when a level word (state, federal, local) matches the org's focus, and by 1.5 for Philanthropy and Investor orgs when the query asks about funding
-6. Sort descending, take top N
+Ranking per result: cosine against the TF-IDF vector; +0.5 name substring (+0.25 organization substring for people); ×1.75 when the query contains a full topic or area name and the record carries it; ×1.5 place match on `geo_terms` (alias groups NYC / New York City / New York, Washington DC / D.C.); ×1.25 level match (state, federal, local) only for orgs with no geo_terms or a matching place; ×1.5 funding-intent for Philanthropy and Investor orgs. Org and people scores are normalized to their own max before interleaving. Every result carries a `why` list (matched terms, "name", "tag: X", "place: X", "funding"). Tokenizer = the build's: min 3 letters except SHORT_TERMS {ai, ml, ux, hr, dc, ev}, same stopword list; keep the three copies (build_affinity.py, affinity-map page, sce-search.js) in sync.
 
-Total cost is one ~190 KB JSON fetch + O(query_terms × num_orgs) per query. No external API.
+Filters: show (both / orgs / people), segment (orgs), problem area or topic (two-level menu from `SCESearch.TAXONOMY`, the Methodology table), geography. URL params `q, show, seg, area, topic, geo`; the modal's Copy link always copies a `/ecosystem/search/?…` URL. Empty state offers three suggested queries; zero results offers the two nearest topics (or the suggestions) and Add yourself to Connect.
 
-**Trade-off vs embeddings:** search stays on TF-IDF because the query has to be scored in the browser with nothing to download; the affinity score uses embeddings at build time where the model cost is paid once. For 334 orgs with rich curator-assigned tags this is the right split. Query-side embeddings (a ~23 MB model via transformers.js, loaded on first search) are the next step if search quality needs to match the graph.
+**Trade-off vs embeddings:** search stays on TF-IDF because the query has to be scored in the browser with nothing to download; the affinity score uses embeddings at build time. For 334 orgs with rich curator-assigned tags this is the right split. Query-side embeddings (a ~23 MB transformers.js model, loaded on first search) are the next step if search quality needs to match the graph.
 
 ---
 
 ## Pages — what each does
 
 ### Ecosystem landing (`ecosystem/index.html`) and Search (`ecosystem/search/index.html`)
-- Hero: H1 "Ecosystem", one-line lede, a full-width **Search the ecosystem (Beta)** button (opens the Mad Libs modal), a helper line, and two text links: **Add an organization →** (`./organizations/?add=1`, auto-opens the directory's suggest-an-org modal, which POSTs to a Google Form via `fetch(..., {mode:"no-cors"})`) and **Add yourself or an opportunity →** (`./connect/?add=1`).
+- Hero: H1 "Ecosystem", one-line lede, a full-width **Search the ecosystem (Beta)** button (opens the search modal from `assets/sce-search.js`), a helper line, and two text links: **Add an organization →** (`./organizations/?add=1`, auto-opens the directory's suggest-an-org modal, which POSTs to a Google Form via `fetch(..., {mode:"no-cors"})`) and **Add yourself or an opportunity →** (`./connect/?add=1`).
 - **4 explore cards:** Organizations · Connect · Affinity Map · Problem topics, then **Methodology** and **Submit feedback** panels (feedback is a mailto).
 - **Change feed band** (`#changes`): fetches `data/changes.json` and renders the latest 3 refresh diffs (added, removed, updated; added names as chips linking to the directory search); empty state "No changes recorded yet. The directory refreshes daily." on no entries or fetch failure.
-- `?search=1` auto-opens the search modal (deferred to DOMContentLoaded). `/ecosystem/search/` is the standalone version: same chrome, the modal rendered inline on the page, data fetches root-absolute.
+- `?search=1` (plus `q, show, seg, area, topic, geo`) opens the search modal with that state. `/ecosystem/search/` is the standalone version: same panel inline, same params. The ribbon carries a Search link to it on every page.
 
 ### Organization Directory (`ecosystem/organizations/index.html`)
 - **Visible table columns:** Organization · Segment · Secondary Segments · Description (truncated to 180 chars) · Problem Area (orange chips) · Problem Topic (blue chips). Everything else lives in the row-click detail panel.
 - Filters: search box · Primary segment · Geography · Problem area · Problem topic · **Hide sunset orgs** checkbox. Sunset rows show a muted name and a `Sunset` chip.
-- Search behavior: empty → sorted by column header (default name); non-empty → TF-IDF cosine with a name-substring boost; falls back to plain substring filter when there are no TF-IDF hits.
+- Search behavior: empty → sorted by column header (default name); non-empty → ranked by `SCESearch.search(q, {show:"orgs"})` (the shared engine; the facet filters still apply).
 - Multi-select dropdowns: opening one closes the others; clicking outside closes all.
 - **Detail row:** full record, `Sunset: <note>` when applicable, **Closest peers** (3 links that expand the target row), **People and opportunities on Connect** (org-name match, else shared topics, max 5; `connect.json` fetched lazily on first expand; sunset orgs skip the topic fallback), **Suggest an edit** (opens the suggest-an-org modal prefilled; focus "City" maps to the form's "Local"; values the form has no option for go to the field's Other input or into a `[Current values not offered by this form: …]` note in the description), and the "See in network" link (`../affinity-map/?id=N`).
 - **URL state:** `q, seg, geo, area, topic, hidesunset, page, org, add` via `history.replaceState`; applied on load; `?org=N` expands and scrolls; stale ids leave filters alone. **Copy link** next to Reset.
