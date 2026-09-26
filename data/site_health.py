@@ -364,7 +364,7 @@ def check_stats(chrome_pages):
     meth_path = os.path.join(ROOT, "ecosystem/methodology/index.html")
     meth = open(meth_path).read()
     if funder_coverage is not None:
-        expected = f"Approximately {funder_coverage} of {org_count} orgs"
+        expected = f"Approximately {funder_coverage} of {org_count} organizations"
         if expected not in meth:
             findings.append(f"ecosystem/methodology/index.html: funder-callout sentence does not read {expected!r}")
     expected_nodes = f"<strong>{org_count} nodes and {edge_count:,} edges</strong>"

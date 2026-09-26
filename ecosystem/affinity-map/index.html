@@ -446,7 +446,7 @@
       <a class="ribbon-link active" href="/ecosystem/">Ecosystem <span class="ribbon-caret">▾</span></a>
       <div class="ribbon-drop ribbon-drop-desc">
         <a href="/ecosystem/search/">Search<span class="ribbon-sub">Type a problem, a place, or a name.</span></a>
-        <a href="/ecosystem/organizations/">Organizations<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
+        <a href="/ecosystem/organizations/">Organization Directory<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
         <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
         <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
       </div>
@@ -470,7 +470,7 @@
       </div>
     </div>
     <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
-    <div class="ribbon-actions"><a class="ribbon-btn" href="/ecosystem/search/">Search</a>
+    <div class="ribbon-actions"><a class="ribbon-btn" href="/ecosystem/search/">Search</a><a class="ribbon-btn" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack ↗</a>
       <a class="ribbon-btn primary" href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sept 30 Hackathon ↗</a>
     </div>
   </div>
@@ -538,7 +538,7 @@
           <div class="seg-chips" id="seg-chips"></div>
           <div class="toggle-row">
             <label class="toggle-item"><input type="checkbox" id="ctl-cross"> Cross-segment only</label>
-            <label class="toggle-item"><input type="checkbox" id="ctl-hidesunset"> Hide sunset orgs</label>
+            <label class="toggle-item"><input type="checkbox" id="ctl-hidesunset"> Hide sunset organizations</label>
           </div>
         </div>
         <button class="btn-reset" id="btn-reset">Reset</button>
@@ -586,7 +586,7 @@
     <div class="graph-wrap">
       <svg id="graph"></svg>
       <div class="graph-overlay" id="graph-overlay">
-        Showing <strong id="ovr-nodes">—</strong> orgs · <strong id="ovr-edges">—</strong> edges<span id="ovr-funders-wrap" style="display:none;"> · <strong id="ovr-funders">—</strong> funders</span><br>
+        Showing <strong id="ovr-nodes">—</strong> organizations · <strong id="ovr-edges">—</strong> edges<span id="ovr-funders-wrap" style="display:none;"> · <strong id="ovr-funders">—</strong> funders</span><br>
         <span style="color:var(--text-faint)">Drag a node · scroll to zoom · click for details</span>
       </div>
       <div class="graph-zoom">
@@ -1683,7 +1683,7 @@ document.getElementById("ctl-cross").addEventListener("change", (e) => {
   build();
 });
 
-// Feature 4: Hide sunset orgs toggle
+// Feature 4: Hide sunset organizations toggle
 document.getElementById("ctl-hidesunset").addEventListener("change", (e) => {
   hideSunset = e.target.checked;
   build();

@@ -33,8 +33,8 @@ p = Path("ecosystem/methodology/index.html")
 html = p.read_text()
 html = sub(
     html,
-    r"Approximately \d+ of \d+ orgs have at least one named funder detected",
-    f"Approximately {funded} of {org_count} orgs have at least one named funder detected",
+    r"Approximately \d+ of \d+ organizations have at least one named funder detected",
+    f"Approximately {funded} of {org_count} organizations have at least one named funder detected",
     "ecosystem/methodology/index.html (funder callout)",
 )
 html = sub(
