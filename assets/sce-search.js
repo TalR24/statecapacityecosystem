@@ -16,7 +16,7 @@
   const SEARCH_URL  = "/data/affinity_search.json";
 
   // ── Tokenizer (copied verbatim from ecosystem/affinity-map/index.html) ────
-  const STOPWORDS = new Set("a an the and or but if then so of in on at to for from with by about into over through across under above between among against during before after up down out off as is are was were be been being have has had do does did doing this that these those there here it its their our your his her my we they them us i you he she who whom what which whose when where why how all any both each few more most other some such no nor not only own same than too very can will just dont don't".split(/\s+/));
+  const STOPWORDS = new Set("a about above across after against aimed all also among an and any are around as at based be been before being between both build building built but by can country did do does doing don't dont down during each few focus focused for from grow growing had has have he help helps her here his how i if in include includes including into is it its just like make makes more most my nation new no nor not nyc of off on only or org organization organizations orgs other our out over own primarily program program's programs provide provides range same she so some states such support supports than that the their them then there these they this those through to too toward towards under up us use used using very via was we were what when where whether which who whom whose why wide will with within work working works york you your".split(/\s+/));
   const SHORT_TERMS = new Set(["ai", "ml", "ux", "hr", "dc", "ev"]);
   function tokenize(s) {
     return (String(s || "").toLowerCase().match(/[a-z][a-z\-]+/g) || [])

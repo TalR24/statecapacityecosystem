@@ -1,0 +1,114 @@
+name: Site health
+
+on:
+  schedule:
+    # 9 AM New York on the 1st. UTC fixed (does not shift with DST).
+    - cron: "0 13 1 * *"
+  workflow_dispatch:
+    inputs:
+      external_links:
+        description: "Also run the external-link pass"
+        type: boolean
+        default: true
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run site health check
+        id: health
+        continue-on-error: true
+        run: |
+          if [ "${{ github.event.inputs.external_links }}" = "false" ]; then
+            python3 data/site_health.py
+          else
+            python3 data/site_health.py --external
+          fi
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Read report and hard-failure/warning counts
+        id: report
+        run: |
+          {
+            echo "body<<SITEHEALTH_EOF"
+            cat site_health_report.md
+            echo "SITEHEALTH_EOF"
+          } >> "$GITHUB_OUTPUT"
+          SUMMARY=$(sed -n '3p' site_health_report.md)
+          HARD=$(echo "$SUMMARY" | grep -oE '[0-9]+ hard failures' | grep -oE '^[0-9]+')
+          WARN=$(echo "$SUMMARY" | grep -oE '[0-9]+ warnings' | grep -oE '^[0-9]+')
+          echo "hard=${HARD:-0}" >> "$GITHUB_OUTPUT"
+          echo "warn=${WARN:-0}" >> "$GITHUB_OUTPUT"
+
+      - name: Ensure site-health label exists
+        run: |
+          gh label create site-health --description "Monthly site-health check" --color FBCA04 || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create or update the issue
+        run: |
+          TITLE="Site health: $(date -u +%Y-%m)"
+          EXISTING=$(gh issue list --state open --label site-health --search "in:title \"$TITLE\"" --json number,title --jq ".[] | select(.title==\"$TITLE\") | .number" | head -n1)
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$REPORT_BODY"
+          else
+            gh issue create --title "$TITLE" --label site-health --body "$REPORT_BODY"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPORT_BODY: ${{ steps.report.outputs.body }}
+
+      - name: Email the report
+        if: ${{ env.GMAIL_USER != '' && env.GMAIL_APP_PASSWORD != '' }}
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          HARD: ${{ steps.report.outputs.hard }}
+          WARN: ${{ steps.report.outputs.warn }}
+          REPORT_BODY: ${{ steps.report.outputs.body }}
+        run: |
+          python3 - <<'PYEOF'
+          import os, smtplib, ssl
+          from email.message import EmailMessage
+
+          gmail_user = os.environ["GMAIL_USER"]
+          gmail_pass = os.environ["GMAIL_APP_PASSWORD"]
+          hard = os.environ.get("HARD", "0")
+          warn = os.environ.get("WARN", "0")
+          body = os.environ.get("REPORT_BODY", "")
+          today = __import__("datetime").date.today().isoformat()
+
+          context = ssl.create_default_context()
+          msg = EmailMessage()
+          msg["From"] = f"State Capacity Ecosystem Hub <{gmail_user}>"
+          msg["To"] = gmail_user
+          msg["Subject"] = f"SCE site health {today}: {hard} hard failures, {warn} warnings"
+          msg.set_content(body)
+
+          with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
+              smtp.login(gmail_user, gmail_pass)
+              smtp.send_message(msg)
+          print("Emailed site health report.")
+          PYEOF
+
+      - name: Fail the job if the check found a hard failure
+        if: steps.health.outputs.exit_code != '0'
+        run: exit 1
