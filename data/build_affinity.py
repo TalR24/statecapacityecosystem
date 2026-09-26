@@ -165,8 +165,15 @@ def normalize(text: str) -> str:
     return (text or "").strip()
 
 
+# Two-letter terms that carry meaning in this corpus. Everything else under
+# three letters is dropped. Keep this list identical to SHORT_TERMS in the
+# page tokenizers (affinity-map, organizations, sce-search.js).
+SHORT_TERMS = {"ai", "ml", "ux", "hr", "dc", "ev"}
+
+
 def tokens(text: str):
-    return [t.lower() for t in WORD_RE.findall(text or "") if t.lower() not in STOPWORDS and len(t) > 2]
+    return [t.lower() for t in WORD_RE.findall(text or "")
+            if t.lower() not in STOPWORDS and (len(t) > 2 or t.lower() in SHORT_TERMS)]
 
 
 def parse_segments(primary: str, secondary: str):
