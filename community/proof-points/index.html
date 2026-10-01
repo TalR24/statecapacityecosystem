@@ -171,6 +171,42 @@
 @media (max-width:620px){.evt-banner-inner{font-size:0.74rem;gap:9px;}.evt-banner .evt-when{width:100%;text-align:center;}}
 @media print{.evt-banner{display:none !important;}}
 </style>
+<style id="link-ux-css">
+/* Links as buttons (Oct 2026): every standalone text link and every call to action inside a card is a 40px-tall button. */
+a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { display:inline-flex !important; align-items:center; gap:6px; align-self:flex-start; width:auto; min-height:40px; box-sizing:border-box; padding:9px 16px !important; font-family:'Roboto Mono',monospace !important; font-size:0.8rem !important; font-weight:700 !important; line-height:1.25; text-decoration:none !important; color:#6E4A15 !important; background:#F5EDDA !important; border:1px solid #DFCEA1 !important; border-radius:8px !important; transition:background .15s,color .15s,border-color .15s; cursor:pointer; }
+a.row-link:hover, a.info-link:hover, a.proj-link:hover, a.post-link:hover, a.download-link:hover, a.sce-btn:hover,
+a:hover > .card-cta, a:hover .card-cta, a:hover .tool-cta, a:hover .act-cta, a:hover .bubble-cta, a:hover .mo-cta { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
+a.row-link:focus-visible, a.info-link:focus-visible, a.proj-link:focus-visible, a.post-link:focus-visible, a.download-link:focus-visible, a.sce-btn:focus-visible, a.scroll-cue:focus-visible { outline:2px solid #1A1918; outline-offset:2px; }
+a.row-link, a.sce-btn, a.proj-link { margin:4px 8px 4px 0; }
+.sce-btn-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+a.scroll-cue { min-height:40px; padding:9px 16px; border:1px solid rgba(212,168,83,.55); border-radius:8px; font-size:0.8rem !important; font-weight:700 !important; }
+a.scroll-cue:hover { background:rgba(212,168,83,.14); }
+/* Section headers (kickers) sized to be read, not squinted at. */
+.kicker, .section-label { font-size:0.92rem !important; letter-spacing:0.1em !important; }
+/* Whole-row and whole-card links. */
+.lw-post, .wr-row { position:relative; }
+.lw-post a.t::after, .wr-row a::after { content:""; position:absolute; inset:0; }
+.lw-post:hover, .wr-row:hover { background:rgba(212,168,83,.10); }
+.lw-post a.t { font-size:1rem !important; }
+.wr-row { padding:14px 10px !important; border-radius:6px; }
+a.sit-btn { min-height:40px; display:inline-flex; align-items:center; padding:8px 14px !important; font-size:0.8rem !important; }
+/* Search results and project cards: links are buttons; a card with exactly one link is clickable as a whole. */
+.se-card-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.se-card-links a, a.sg-link { display:inline-flex !important; align-items:center; gap:6px; min-height:40px; box-sizing:border-box; padding:9px 16px !important; font-family:'Roboto Mono',monospace !important; font-size:0.8rem !important; font-weight:700 !important; text-decoration:none !important; color:#6E4A15 !important; background:#F5EDDA !important; border:1px solid #DFCEA1 !important; border-radius:8px !important; }
+.se-card-links a:hover, a.sg-link:hover { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
+.se-card, .proj-card { position:relative; }
+.se-card:not(:has(a ~ a)) .se-card-links a::after, .proj-card:not(:has(a ~ a)) a.proj-link::after { content:""; position:absolute; inset:0; border-radius:inherit; }
+.se-card:not(:has(a ~ a)), .proj-card:not(:has(a ~ a)) { cursor:pointer; transition:box-shadow .15s, transform .15s, border-color .15s; }
+.se-card:not(:has(a ~ a)):hover, .proj-card:not(:has(a ~ a)):hover { box-shadow:0 6px 18px rgba(26,25,24,.12); transform:translateY(-1px); border-color:#8A5F1E; }
+.se-card:not(:has(a ~ a)):hover .se-card-links a, .proj-card:not(:has(a ~ a)):hover a.proj-link { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
+/* Cards that are one big link: the whole card responds. */
+a.card, a.tool-card, a.act-card, a.explore-bubble, a.mo-item, a.row-visual { cursor:pointer; }
+a.mo-item { padding-top:14px; padding-bottom:14px; }
+a.mo-item:hover { background:rgba(212,168,83,.10); }
+a.mo-item:hover .mo-title { text-decoration:underline; }
+@media (max-width:620px){ a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { font-size:0.78rem !important; } }
+@media print { a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { border:none !important; background:none !important; padding:0 !important; min-height:0; } }
+</style>
 </head>
 <body>
 
@@ -281,7 +317,7 @@
 
     <div class="text-panel-x" style="margin-top:28px;background:#fff;border:1px solid #DDD8CC;border-left:3px solid #D4A853;border-radius:8px;padding:20px 24px;">
       <div style="font-family:'Roboto Mono',monospace;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#8A5F1E;margin-bottom:12px;">Where these came from</div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;"><a href="/events/hackathons/civic-tech-build-night/" style="display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;color:#8A5F1E;text-decoration:none;padding:6px 12px;border:1px solid #DFCEA1;border-radius:6px;background:#F5EDDA;">A Civic Tech Build Night: the event that produced eight of these tools →</a><a href="/community/playbooks/" style="display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;color:#8A5F1E;text-decoration:none;padding:6px 12px;border:1px solid #DFCEA1;border-radius:6px;background:#F5EDDA;">Run a build night yourself: the playbooks →</a><a href="/community/playbooks/#partner" style="display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;color:#8A5F1E;text-decoration:none;padding:6px 12px;border:1px solid #DFCEA1;border-radius:6px;background:#F5EDDA;">Bring one to your agency →</a></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;"><a href="/events/hackathons/civic-tech-build-night/" class="sce-btn">A Civic Tech Build Night: the event that produced eight of these tools →</a><a href="/community/playbooks/" class="sce-btn">Run a build night yourself: the playbooks →</a><a href="/community/playbooks/#partner" class="sce-btn">Bring one to your agency →</a></div>
     </div>
 
     <script>
