@@ -521,6 +521,7 @@ These are concrete, half-done tasks, not parking-lot ideas. Pick them up when th
 
 | Date | Commit | Summary |
 |---|---|---|
+| 2026-10-01 | — | **Agency Partner Playbook** added to the Playbooks page under Pitch materials (`community/playbooks/SCE_Agency_Partner_Playbook.pptx`, 12 slides, source of record `Platform/SCE Agency Partner Playbook.pptx` in the work repo). The spine for agency pitches; re-copy the file when Henry updates it. Also the Search button in the homepage hero. |
 | 2026-10-01 | — | **Gold header row** (Tal): the ribbon is gold `#D4A853` with charcoal links, cream secondary buttons and a charcoal primary button; overrides sit at the end of `<style id="ribbon-css">` on every chrome page (dropdowns stay white). |
 | 2026-10-01 | — | **Sept 30 hackathon retired from the chrome** (Tal): event banner removed from every page (styles kept in the head; a comment marks where the next event banner goes); ribbon actions are now Search · Subscribe ↗ · Join the Slack ↗ (primary); homepage hero calls to action are Join the Slack ↗ and Subscribe to the Substack ↗; events hub strip reads MOST RECENT and the hackathons card is dated September 2026 with an Event page link. Homepage kicker 11 posts and "Peeling The Banana" added to Latest. Recap copy for the Sept 30 event is still to be written. |
 | 2026-09-26 | bcc1650, a3c5935 | **Terminology + Slack button** (Tal's feedback): Organization Directory / organizations everywhere (decision #29); Join the Slack ↗ button in the ribbon actions on every page; the action row wraps at phone width. |
