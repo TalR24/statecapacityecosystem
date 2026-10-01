@@ -371,6 +371,8 @@
     }
 
     /* TEXT PANELS (who gets included / problem statements) */
+    .meth-fb-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 20px; align-items:start; }
+    @media (max-width:760px) { .meth-fb-grid { grid-template-columns:1fr; } }
     .text-panel {
       background:var(--surface); border:1px solid var(--border);
       border-left:3px solid var(--orange);
@@ -511,6 +513,7 @@
         <a href="/community/proof-points/">Proof Points<span class="ribbon-sub">Every tool built through SCE.</span></a>
       </div>
     </div>
+    <div class="ribbon-item"><a class="ribbon-link" href="/partner/">Partner</a></div>
     <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
     <div class="ribbon-actions"><a class="ribbon-btn" href="/ecosystem/search/">Search</a><a class="ribbon-btn" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Subscribe ↗</a><a class="ribbon-btn primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack ↗</a>
     </div>
@@ -721,16 +724,22 @@
       </div>
     </section>
 
+    <div class="meth-fb-grid">
+    <div>
     <div class="section-label" style="margin-top:24px;">Methodology</div>
     <div class="text-panel" style="border-left-color:var(--blue);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
       <p style="margin-bottom:0">Inclusion criteria, taxonomy and how the affinity scores are computed.</p>
       <a href="./methodology/" class="info-link" style="flex-shrink:0;white-space:nowrap;margin-left:auto;">Read →</a>
     </div>
 
+    </div>
+    <div>
     <div class="section-label" style="margin-top:24px;">Submit feedback</div>
     <div class="text-panel" style="border-left-color:var(--orange);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
       <p style="margin-bottom:0">Org is misclassified? Feature isn't working? Have a suggestion for the Directory, Connect, or the tool overall? We read everything.</p>
       <a href="mailto:statecapacityecosystem@gmail.com?subject=State%20Capacity%20Ecosystem%20Feedback" class="info-link" style="flex-shrink:0;white-space:nowrap;background:var(--orange-light);border-color:#DFCEA1;color:var(--orange);" onmouseover="this.style.background='var(--orange)';this.style.color='#fff';" onmouseout="this.style.background='var(--orange-light)';this.style.color='var(--orange)';">Send Feedback →</a>
+    </div>
+    </div>
     </div>
 
   </div>

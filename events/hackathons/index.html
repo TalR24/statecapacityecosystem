@@ -98,6 +98,7 @@
     .card:hover .card-cta { gap:7px; }
 
     /* INFO PANEL */
+    @media (max-width:640px) { .text-panel > div[style*="flex-shrink:0"] { flex-shrink:1 !important; } }
     .text-panel {
       background:var(--surface); border:1px solid var(--border);
       border-left:3px solid var(--orange);
@@ -232,6 +233,7 @@
         <a href="/community/proof-points/">Proof Points<span class="ribbon-sub">Every tool built through SCE.</span></a>
       </div>
     </div>
+    <div class="ribbon-item"><a class="ribbon-link" href="/partner/">Partner</a></div>
     <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
     <div class="ribbon-actions"><a class="ribbon-btn" href="/ecosystem/search/">Search</a><a class="ribbon-btn" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Subscribe ↗</a><a class="ribbon-btn primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack ↗</a>
     </div>
@@ -371,6 +373,7 @@
       <div style="display:flex; gap:10px; flex-wrap:wrap; flex-shrink:0;">
         <a href="../sponsors-checklist/" class="info-link">Sponsors Checklist →</a>
         <a href="mailto:statecapacityecosystem@gmail.com?subject=State%20Capacity%20Ecosystem%20Events%20%E2%80%94%20Hosting%20Interest" class="info-link" style="background:var(--orange-light);border-color:#DFCEA1;color:var(--orange);" onmouseover="this.style.background='var(--orange)';this.style.color='#fff';" onmouseout="this.style.background='var(--orange-light)';this.style.color='var(--orange)';">Get in Touch →</a>
+        <a href="/partner/" class="info-link">For agencies →</a>
       </div>
     </div>
 

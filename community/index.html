@@ -77,6 +77,14 @@
     }
 
     /* ACTION CARDS */
+    .act-grid-4 { grid-template-columns:repeat(2,1fr) !important; }
+    @media (min-width:1200px) { .act-grid-4 { grid-template-columns:repeat(4,1fr) !important; } }
+    @media (max-width:640px) { .act-grid-4 { grid-template-columns:1fr !important; } }
+    .lw-post { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 20px; margin-bottom:8px; }
+    .lw-post a.t { font-family:'Roboto Mono',monospace; font-size:0.9rem; font-weight:700; color:var(--blue); text-decoration:none; }
+    .lw-post a.t:hover { text-decoration:underline; }
+    .lw-post p { font-size:0.88rem; color:var(--text-mid); line-height:1.6; margin-top:4px; }
+    .lw-post .d { font-family:'Roboto Mono',monospace; font-size:0.72rem; color:var(--text-faint); margin-top:6px; }
     .act-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; margin-bottom:8px; }
     .act-card {
       background:var(--surface); border:1px solid var(--border);
@@ -225,6 +233,7 @@
         <a href="/community/proof-points/">Proof Points<span class="ribbon-sub">Every tool built through SCE.</span></a>
       </div>
     </div>
+    <div class="ribbon-item"><a class="ribbon-link" href="/partner/">Partner</a></div>
     <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
     <div class="ribbon-actions"><a class="ribbon-btn" href="/ecosystem/search/">Search</a><a class="ribbon-btn" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Subscribe ↗</a><a class="ribbon-btn primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack ↗</a>
     </div>
@@ -274,7 +283,7 @@
   <div class="main-inner">
 
     <div class="section-label" style="margin-top:4px;">Explore this section</div>
-    <div class="act-grid">
+    <div class="act-grid act-grid-4">
 
       <a class="act-card" href="./slack/">
         <div class="act-title">Slack</div>
@@ -301,6 +310,29 @@
       </a>
 
     </div>
+
+    <div id="latest-writing" hidden>
+      <div class="section-label" style="margin-top:24px;">Latest writing</div>
+      <div id="lw-list"></div>
+      <a class="info-link" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">All posts on Substack ↗</a>
+    </div>
+    <script>
+    (function () {
+      fetch("/data/substack_posts.json").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (posts) {
+        if (!posts || !posts.length) return;
+        var M = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+        posts = posts.slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; }).slice(0, 3);
+        var box = document.getElementById("lw-list");
+        posts.forEach(function (p) {
+          var d = p.date.split("-"), div = document.createElement("div"), a = document.createElement("a"), s = document.createElement("p"), dt = document.createElement("div");
+          div.className = "lw-post"; a.className = "t"; a.href = p.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = p.title;
+          s.textContent = p.subtitle || ""; dt.className = "d"; dt.textContent = M[parseInt(d[1], 10) - 1] + " " + d[0];
+          div.appendChild(a); if (p.subtitle) div.appendChild(s); div.appendChild(dt); box.appendChild(div);
+        });
+        document.getElementById("latest-writing").hidden = false;
+      }).catch(function () {});
+    })();
+    </script>
 
     <div class="section-label" style="margin-top:24px;">Get involved</div>
     <div class="act-grid">
