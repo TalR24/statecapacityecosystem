@@ -51,6 +51,9 @@ body::before{ /* grid */
 
 /* ---------- header ---------- */
 header{display:flex;align-items:center;gap:18px;padding:18px 30px 14px}
+/* OpenStreetMap tiles darkened to match the dashboard (the CARTO dark basemap began requiring an API key). */
+.leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.85) contrast(.9) saturate(.35)}
+@media(max-width:620px){header{flex-wrap:wrap;gap:8px;padding:12px 14px 8px}.snap{text-align:left;width:100%}}
 .logo{display:flex;align-items:center;gap:13px}
 .mark{width:38px;height:38px;border-radius:10px;position:relative;
   background:linear-gradient(135deg,var(--cyan),var(--aligned));
@@ -308,6 +311,18 @@ main{flex:1;position:relative;overflow:hidden}
 </head>
 <body>
 <div class="app">
+  <header>
+    <div class="logo">
+      <div class="mark"></div>
+      <div>
+        <h1>TIDELINE</h1>
+        <div class="sub">NYC Flood-Resilience Capital Tracker</div>
+      </div>
+    </div>
+    <div class="hgrow"></div>
+    <div class="snap" id="snap"><span class="pulse"></span>live data</div>
+  </header>
+
   <nav id="tabs">
     <button class="tab active" data-p="map"><span class="n">01</span>Map</button>
     <button class="tab" data-p="breakdown"><span class="n">02</span>The Stakes</button>
@@ -549,9 +564,9 @@ function buildStats(h){
 function buildMap(points){
   MAP=L.map("map",{zoomControl:true,attributionControl:true,preferCanvas:true})
        .setView([40.71,-73.95],11);
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",{
-    subdomains:"abcd",maxZoom:19,
-    attribution:'© OpenStreetMap © CARTO'}).addTo(MAP);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
+    maxZoom:19,
+    attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(MAP);
   document.getElementById("map-load").style.display="none";
 
   const maxSpend=Math.max(...points.map(p=>p.spend),1);
@@ -665,8 +680,8 @@ function floodColor(need){ // dim blue -> bright cyan
 }
 function buildDistricts(D){
   DMAP=L.map("dmap",{zoomControl:true,preferCanvas:false}).setView([40.70,-73.92],10.4);
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-    {subdomains:"abcd",maxZoom:19,attribution:'© OpenStreetMap © CARTO'}).addTo(DMAP);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {maxZoom:19,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(DMAP);
 
   const feats=D.geojson.features;
   const maxEv=Math.max(...feats.map(f=>f.properties.flood_events),1);
@@ -828,8 +843,8 @@ function buildStorm(S){
   sWindow=S.meta.window_sec;
   sStartMs=Date.parse(S.meta.start_gmt.replace(" GMT","Z").replace(" ","T"));
   SMAP=L.map("smap",{zoomControl:true,preferCanvas:true}).setView([40.70,-73.92],10.6);
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-    {subdomains:"abcd",maxZoom:19,attribution:'© OpenStreetMap © CARTO'}).addTo(SMAP);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {maxZoom:19,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(SMAP);
   SMAP.createPane("sublines");           // faint subway route lines, beneath all markers
   SMAP.getPane("sublines").style.zIndex=250;
   document.getElementById("storm-load").style.display="none";

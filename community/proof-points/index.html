@@ -96,6 +96,9 @@
       text-decoration:none; color:inherit;
       transition:border-color 0.2s, box-shadow 0.2s, transform 0.15s;
     }
+    .tool-thumb { margin:-20px -22px 16px; aspect-ratio:16/9; overflow:hidden; background:#1A1918; border-bottom:1px solid var(--border); border-radius:calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0; }
+    .tool-thumb img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; transition:transform .25s; }
+    .tool-card:hover .tool-thumb img { transform:scale(1.03); }
     .tool-card:hover { border-color:var(--green); box-shadow:var(--shadow-md); transform:translateY(-2px); }
     .tool-kicker { font-family:'Roboto Mono',monospace; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--green); margin-bottom:8px; }
     .tool-title { font-family:'Roboto Mono',monospace; font-size:0.96rem; font-weight:700; color:var(--text); letter-spacing:-0.02em; line-height:1.3; margin-bottom:8px; }
@@ -378,6 +381,7 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
           a.href = tl.url;
           if (!tl.hosted) { a.target = "_blank"; a.rel = "noopener"; }
           a.innerHTML =
+            (tl.image ? '<div class="tool-thumb"><img src="' + esc(tl.image) + '" alt="Screenshot of ' + esc(tl.handle || tl.name) + '" loading="lazy" width="640" height="360"></div>' : "") +
             '<div class="tool-kicker">' + esc(SOURCE_LABELS[tl.source] || tl.source) + "</div>" +
             '<div class="tool-title">' + esc(tl.name) + "</div>" +
             (tl.handle && tl.handle !== tl.name ? '<div class="tool-handle">' + esc(tl.handle) + "</div>" : "") +

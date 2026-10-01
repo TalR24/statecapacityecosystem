@@ -8,7 +8,8 @@
     "hosted": true,
     "problem_area": "Service Delivery",
     "builders": "",
-    "date": "2026-07-30"
+    "date": "2026-07-30",
+    "image": "/assets/proof-points/grocery-store-siting-tool.jpg"
   },
   {
     "name": "Answer a City summons",
@@ -19,7 +20,8 @@
     "hosted": true,
     "problem_area": "Service Delivery",
     "builders": "",
-    "date": "2026-07-30"
+    "date": "2026-07-30",
+    "image": "/assets/proof-points/nyc-summons-navigator.jpg"
   },
   {
     "name": "Get affordable housing approved",
@@ -30,7 +32,8 @@
     "hosted": true,
     "problem_area": "Service Delivery",
     "builders": "",
-    "date": "2026-07-30"
+    "date": "2026-07-30",
+    "image": "/assets/proof-points/nyc-affordable-housing-approvals-navigator.jpg"
   },
   {
     "name": "Flood risk against flood spending",
@@ -41,7 +44,8 @@
     "hosted": true,
     "problem_area": "Technology & Data",
     "builders": "David A. Lee, Dean Berkowitz & Lyndsey Kaplan",
-    "date": "2026-06-24"
+    "date": "2026-06-24",
+    "image": "/assets/proof-points/tideline-flood-resilience-capital-tracker.jpg"
   },
   {
     "name": "A game that teaches 311",
@@ -52,7 +56,8 @@
     "hosted": false,
     "problem_area": "Service Delivery",
     "builders": "",
-    "date": "2026-06-24"
+    "date": "2026-06-24",
+    "image": "/assets/proof-points/311-learning-game.jpg"
   },
   {
     "name": "Procurement record search",
@@ -63,18 +68,20 @@
     "hosted": false,
     "problem_area": "Procurement & Operations",
     "builders": "",
-    "date": "2026-06-24"
+    "date": "2026-06-24",
+    "image": "/assets/proof-points/procurement-record-search.jpg"
   },
   {
     "name": "Live transit data for AI tools",
-    "handle": "Transit Reliability MCP \u00b7 npm",
+    "handle": "Transit Reliability MCP · npm",
     "blurb": "A Model Context Protocol (MCP) server enabling live investigation of transit reliability. Already past 1,000 downloads since the event.",
     "url": "https://www.npmjs.com/package/clearlane-mcp",
     "source": "civic-tech-build-night",
     "hosted": false,
     "problem_area": "Technology & Data",
     "builders": "",
-    "date": "2026-06-24"
+    "date": "2026-06-24",
+    "image": "/assets/proof-points/transit-reliability-mcp-npm.jpg"
   },
   {
     "name": "Index of NYC's public datasets",
@@ -85,7 +92,8 @@
     "hosted": false,
     "problem_area": "Technology & Data",
     "builders": "",
-    "date": "2026-06-24"
+    "date": "2026-06-24",
+    "image": "/assets/proof-points/civic-data-index.jpg"
   },
   {
     "name": "Map of NYC business health",
@@ -96,7 +104,8 @@
     "hosted": false,
     "problem_area": "Technology & Data",
     "builders": "",
-    "date": "2026-06-24"
+    "date": "2026-06-24",
+    "image": "/assets/proof-points/nyc-business-health-map.jpg"
   },
   {
     "name": "Find open city bids",
@@ -107,7 +116,8 @@
     "hosted": false,
     "problem_area": "Procurement & Operations",
     "builders": "",
-    "date": "2026-06-24"
+    "date": "2026-06-24",
+    "image": "/assets/proof-points/bid-finder-nyc.jpg"
   },
   {
     "name": "Fill benefits forms by voice",
@@ -118,6 +128,7 @@
     "hosted": false,
     "problem_area": "Service Delivery",
     "builders": "",
-    "date": "2026-06-24"
+    "date": "2026-06-24",
+    "image": "/assets/proof-points/formspeak.jpg"
   }
 ]
