@@ -82,6 +82,8 @@
     .hero-cta { display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-bottom:20px; }
     .hero-cta-btn { display:inline-flex; align-items:center; gap:10px; background:#D4A853; color:#1A1918; text-decoration:none; font-family:'Roboto Mono',monospace; font-size:clamp(0.86rem,1.5vw,0.98rem); font-weight:700; padding:15px 28px; border-radius:9px; transition:background .15s, transform .15s; }
     .hero-cta-btn:hover { background:#E3C170; transform:translateY(-1px); }
+    .hero-cta-btn.alt { background:transparent; color:#F4EFE4; border:1px solid rgba(244,239,228,0.45); }
+    .hero-cta-btn.alt:hover { background:rgba(244,239,228,0.08); border-color:#F4EFE4; }
     .hero-cta-note { font-size:0.86rem; color:#B3AC9D; line-height:1.5; }
     .hero-cta-note b { color:#F4EFE4; font-weight:600; }
     .scroll-cue { font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:600; color:#D4A853; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
@@ -227,13 +229,7 @@ a.row-visual:hover{transform:translateY(-2px);}
 <body>
 
 <!-- PILLAR RIBBON -->
-<!-- EVENT BANNER -->
-<div class="evt-banner">
-  <div class="evt-banner-inner">
-    <span><strong>State Capacity Hackathon: Public Engagement</strong> <span class="evt-when">· Sept 30</span></span>
-    <a href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sign up ↗</a>
-  </div>
-</div>
+<!-- EVENT BANNER: none scheduled. For the next event, paste a div.evt-banner block here (styles are in the head). -->
 
 <style id="ribbon-sub-css">
 .ribbon-drop-desc{min-width:270px;}
@@ -280,8 +276,7 @@ a.row-visual:hover{transform:translateY(-2px);}
       </div>
     </div>
     <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
-    <div class="ribbon-actions"><a class="ribbon-btn" href="/ecosystem/search/">Search</a><a class="ribbon-btn" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack ↗</a>
-      <a class="ribbon-btn primary" href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sept 30 Hackathon ↗</a>
+    <div class="ribbon-actions"><a class="ribbon-btn" href="/ecosystem/search/">Search</a><a class="ribbon-btn" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Subscribe ↗</a><a class="ribbon-btn primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack ↗</a>
     </div>
   </div>
 </nav>
@@ -317,8 +312,8 @@ a.row-visual:hover{transform:translateY(-2px);}
     <h1>The people helping government <em>deliver</em> find each other here.</h1>
     <p class="hero-sub">We map who works on state capacity, bring them into one room, and build the ecosystem that turns their work into tools government can use. The aim: a government with the best technology and the talent to run it.</p>
     <div class="hero-cta">
-      <a class="hero-cta-btn" href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">Sign up for the Sept 30 hackathon ↗</a>
-      <span class="hero-cta-note"><b>Wednesday, September 30</b><br>NYC · free · dinner provided</span>
+      <a class="hero-cta-btn" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack ↗</a>
+      <a class="hero-cta-btn alt" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Subscribe to the Substack ↗</a>
     </div>
     <a class="scroll-cue" href="#problem">See the work <span class="arr">↓</span></a>
   </div>
@@ -494,7 +489,7 @@ a.row-visual:hover{transform:translateY(-2px);}
             <circle cx="278" cy="134" r="5"   fill="#D4A853" opacity="0.9"/>
             <circle cx="262" cy="144" r="4"   fill="#6B6760" opacity="0.8"/>
             <circle cx="290" cy="116" r="3.5" fill="#E5D9BC" opacity="0.8"/>
-            <text x="16" y="176" font-family="'Roboto Mono',monospace" font-size="7.5" font-weight="700" fill="#D4A853">11 TOOLS · 4 PLAYBOOKS · 10 POSTS</text>
+            <text x="16" y="176" font-family="'Roboto Mono',monospace" font-size="7.5" font-weight="700" fill="#D4A853">11 TOOLS · 4 PLAYBOOKS · 11 POSTS</text>
           </svg>
         </a>
         <div>
@@ -549,6 +544,11 @@ a.row-visual:hover{transform:translateY(-2px);}
     <div class="kicker">Latest</div>
     <h2>Recent writing and events.</h2>
     <div class="mo-list" id="mo-list">
+      <a class="mo-item" href="https://substack.statecapacityecosystem.com/p/peeling-the-banana" target="_blank" rel="noopener">
+        <span class="mo-date">Sep 2026</span>
+        <span><span class="mo-title">Peeling The Banana</span><span class="mo-desc">A short guide to diagnosing and solving problems in government</span></span>
+        <span class="mo-cta">Read ↗</span>
+      </a>
       <a class="mo-item" href="https://substack.statecapacityecosystem.com/p/ai-safety-for-government" target="_blank" rel="noopener">
         <span class="mo-date">Sep 2026</span>
         <span><span class="mo-title">Governments must pace the frontier too</span><span class="mo-desc">How can AI solve real constituent problems while maintaining accountability?</span></span>
