@@ -484,6 +484,11 @@ a.sit-btn { min-height:40px; display:inline-flex; align-items:center; padding:8p
 .se-card:not(:has(a ~ a)), .proj-card:not(:has(a ~ a)) { cursor:pointer; transition:box-shadow .15s, transform .15s, border-color .15s; }
 .se-card:not(:has(a ~ a)):hover, .proj-card:not(:has(a ~ a)):hover { box-shadow:0 6px 18px rgba(26,25,24,.12); transform:translateY(-1px); border-color:#8A5F1E; }
 .se-card:not(:has(a ~ a)):hover .se-card-links a, .proj-card:not(:has(a ~ a)):hover a.proj-link { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
+/* Tighter page headers (Oct 2026): less air above the title and between the lede and the first section. */
+.hero { padding-top:18px !important; }
+.hero-inner { padding-bottom:4px !important; }
+.main { padding-top:6px !important; }
+.main-inner > :first-child, .main-inner > .section-label:first-of-type { margin-top:10px !important; }
 /* Cards that are one big link: the whole card responds. */
 a.card, a.tool-card, a.act-card, a.explore-bubble, a.mo-item, a.row-visual { cursor:pointer; }
 a.mo-item { padding-top:14px; padding-bottom:14px; }

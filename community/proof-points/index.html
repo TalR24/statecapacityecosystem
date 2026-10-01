@@ -202,6 +202,11 @@ a.sit-btn { min-height:40px; display:inline-flex; align-items:center; padding:8p
 .se-card:not(:has(a ~ a)), .proj-card:not(:has(a ~ a)) { cursor:pointer; transition:box-shadow .15s, transform .15s, border-color .15s; }
 .se-card:not(:has(a ~ a)):hover, .proj-card:not(:has(a ~ a)):hover { box-shadow:0 6px 18px rgba(26,25,24,.12); transform:translateY(-1px); border-color:#8A5F1E; }
 .se-card:not(:has(a ~ a)):hover .se-card-links a, .proj-card:not(:has(a ~ a)):hover a.proj-link { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
+/* Tighter page headers (Oct 2026): less air above the title and between the lede and the first section. */
+.hero { padding-top:18px !important; }
+.hero-inner { padding-bottom:4px !important; }
+.main { padding-top:6px !important; }
+.main-inner > :first-child, .main-inner > .section-label:first-of-type { margin-top:10px !important; }
 /* Cards that are one big link: the whole card responds. */
 a.card, a.tool-card, a.act-card, a.explore-bubble, a.mo-item, a.row-visual { cursor:pointer; }
 a.mo-item { padding-top:14px; padding-bottom:14px; }
@@ -381,7 +386,7 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
           a.href = tl.url;
           if (!tl.hosted) { a.target = "_blank"; a.rel = "noopener"; }
           a.innerHTML =
-            (tl.image ? '<div class="tool-thumb"><img src="' + esc(tl.image) + '" alt="Screenshot of ' + esc(tl.handle || tl.name) + '" loading="lazy" width="640" height="360"></div>' : "") +
+            (tl.image ? '<div class="tool-thumb"></div>' : "") +
             '<div class="tool-kicker">' + esc(SOURCE_LABELS[tl.source] || tl.source) + "</div>" +
             '<div class="tool-title">' + esc(tl.name) + "</div>" +
             (tl.handle && tl.handle !== tl.name ? '<div class="tool-handle">' + esc(tl.handle) + "</div>" : "") +
@@ -389,6 +394,12 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
             '<div class="tool-tags"><span class="tool-tag">' + (tl.hosted ? "Hosted here" : "External") + '</span><span class="tool-tag">' + esc(tl.problem_area) + "</span></div>" +
             (tl.builders ? '<div class="tool-credit">By ' + esc(tl.builders) + "</div>" : "") +
             '<div class="tool-cta">' + (tl.hosted ? "Open the tool →" : "Open the tool ↗") + "</div>";
+          if (tl.image) {
+            var im = document.createElement("img");
+            im.alt = "Screenshot of " + (tl.handle || tl.name); im.loading = "lazy"; im.width = 640; im.height = 360;
+            im.setAttribute("src", tl.image);
+            a.querySelector(".tool-thumb").appendChild(im);
+          }
           grid.appendChild(a);
         });
       }
