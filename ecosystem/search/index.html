@@ -5,13 +5,13 @@
   <link rel="icon" type="image/png" href="/assets/sce_logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Search — State Capacity Ecosystem</title>
-  <meta name="description" content="Search the State Capacity Ecosystem: one box over 300+ organizations and the people on Connect, ranked by relevance, with filters for segment, problem, and geography.">
+  <meta name="description" content="Search the State Capacity Ecosystem: build a sentence about who you are and what you need, or type a keyword, and get a starting point across 300+ organizations and the people on Connect.">
   <link rel="canonical" href="https://statecapacityecosystem.com/ecosystem/search/">
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://statecapacityecosystem.com/ecosystem/search/">
   <meta property="og:title"       content="Search — State Capacity Ecosystem">
-  <meta property="og:description" content="Search the State Capacity Ecosystem: one box over 300+ organizations and the people on Connect, ranked by relevance, with filters for segment, problem, and geography.">
+  <meta property="og:description" content="Search the State Capacity Ecosystem: build a sentence about who you are and what you need, or type a keyword, and get a starting point across 300+ organizations and the people on Connect.">
   <meta property="og:image"       content="https://statecapacityecosystem.com/assets/sce_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -549,7 +549,7 @@ body{overflow:auto !important;}
 <div class="hero">
   <div class="hero-inner">
     <h1><span>Search</span></h1>
-    <p class="hero-lede">Type a problem, a place, or a name. Results rank organizations and people together.</p>
+    <p class="hero-lede">Tell us who you are and what you need, or search by keyword.</p>
     
   </div>
 </div>
@@ -563,6 +563,9 @@ body{overflow:auto !important;}
       <span class="ml-modal-title">Search the ecosystem</span>
       <button class="ml-modal-close" aria-label="Close" style="display:none;">✕</button>
     </div>
+    <div id="sg-tabs"></div>
+    <div id="sg-pane" class="sg-pane"></div>
+    <div id="se-kw-pane">
     <div class="ml-modal-body">
       <div class="se-input-row">
         <input id="se-q" class="se-input" type="text" placeholder='Try &quot;procurement reform&quot;, &quot;AI in benefits&quot;, or an organization name' autocomplete="off">
@@ -599,6 +602,7 @@ body{overflow:auto !important;}
       <div class="se-results-hdr" id="se-results-hdr"></div>
       <div id="se-results-list"></div>
       <div id="se-more-wrap"></div>
+    </div>
     </div>
   </div>
 </div>
@@ -642,6 +646,7 @@ const seHttp = u => !u ? '' : /^https?:\/\//.test(u) ? u : 'https://'+u;
 
 document.addEventListener('DOMContentLoaded', () => {
   seInit();
+  seMountGuide();
   seApplyParamsFromURL();
   document.getElementById('se-results-hdr').textContent = 'Loading…';
   SCESearch.load().then(() => { seRunSearch(); });
@@ -781,6 +786,7 @@ function seSyncClear() {
 }
 
 function seApplyParamsFromURL() {
+  if (SCESearch.guideMode && SCESearch.guideMode() === 'guide') return;
   const params = new URLSearchParams(location.search);
   const q = params.get('q'); if (q) document.getElementById('se-q').value = q;
   const show = params.get('show'); if (show && ['orgs','people','both'].includes(show)) seState.show = show;
@@ -805,8 +811,21 @@ function seParamsFromState() {
   return p;
 }
 
+function seModeParams() {
+  if (SCESearch.guideMode && SCESearch.guideMode() === 'guide') return SCESearch.guideParams();
+  const p = seParamsFromState(); p.set('mode', 'search'); return p;
+}
+function seMountGuide() {
+  SCESearch.mountGuide({
+    tabs: 'sg-tabs', guide: 'sg-pane', keyword: 'se-kw-pane',
+    orgCard: seOrgCardHtml, personCard: sePersonCardHtml,
+    onChange: seSyncURL,
+    toKeyword: t => { document.getElementById('se-q').value = t; seSyncClear(); seResetShown(); seRunSearch(); }
+  });
+}
+
 function seSyncURL() {
-  const qs = seParamsFromState().toString();
+  const qs = seModeParams().toString();
   history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
 }
 
@@ -824,9 +843,7 @@ function seReset() {
 }
 
 function seCopyLink() {
-  const params = seParamsFromState();
-  const qs = params.toString();
-  const url = location.origin + '/ecosystem/search/' + (qs ? '?' + qs : '');
+  const url = location.origin + '/ecosystem/search/?' + seModeParams().toString();
   navigator.clipboard.writeText(url).then(() => {
     const btn = document.getElementById('se-copy');
     const orig = btn.textContent;

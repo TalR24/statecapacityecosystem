@@ -741,7 +741,7 @@ HOSTED_TOOL_PAGES = {
 }
 NOT_JUST_RE = re.compile(r"\bnot just\b|\bisn't just\b|\bnot only\b|\bisn't about\b|\bit's not about\b", re.IGNORECASE)
 RETIRED_PATTERNS = [
-    "Explore the Databases", "degree cap", "MIN_W", "Mad Libs", "I am a ", "seeking ",
+    "Explore the Databases", "degree cap", "MIN_W",
     "Browse topics", "ecosystem/topics", "4 still live", "refreshed periodically", "TF-IDF cosine)",
 ]
 LOREM_PATTERNS = ["lorem", "TODO", "TBD", "XXX"]

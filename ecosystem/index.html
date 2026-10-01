@@ -558,7 +558,7 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         Search the ecosystem (Beta)
       </button>
-      <p style="font-size:0.85rem;color:var(--text-muted);margin:0;text-align:center;">Type a problem, a place, or a name. Results rank organizations and people together.</p>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin:0;text-align:center;">Tell us who you are and what you need, or search by keyword.</p>
       <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
         <a href="./organizations/?add=1" style="font-family:'Roboto Mono',monospace;font-size:0.82rem;font-weight:600;color:var(--blue);text-decoration:none;">Add an organization →</a>
         <a href="./connect/?add=1" style="font-family:'Roboto Mono',monospace;font-size:0.82rem;font-weight:600;color:var(--orange);text-decoration:none;">Add yourself or an opportunity →</a>
@@ -782,7 +782,7 @@ function closeSearch() {
   document.getElementById('ml-overlay').style.display = 'none';
   document.body.style.overflow = '';
   const p = new URLSearchParams(location.search);
-  ['search', 'q', 'show', 'seg', 'area', 'topic', 'geo'].forEach(k => p.delete(k));
+  ['search', 'q', 'show', 'seg', 'area', 'topic', 'geo', 'mode', 'role', 'goal', 'level'].forEach(k => p.delete(k));
   const qs = p.toString();
   history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
 }
@@ -795,6 +795,7 @@ function seBoot() {
   if (seBooted) return;
   seBooted = true;
   seInit();
+  seMountGuide();
   seApplyParamsFromURL();
   document.getElementById('se-results-hdr').textContent = 'Loading…';
   SCESearch.load().then(() => { seRunSearch(); });
@@ -936,6 +937,7 @@ function seSyncClear() {
 }
 
 function seApplyParamsFromURL() {
+  if (SCESearch.guideMode && SCESearch.guideMode() === 'guide') return;
   const params = new URLSearchParams(location.search);
   const q = params.get('q'); if (q) document.getElementById('se-q').value = q;
   const show = params.get('show'); if (show && ['orgs','people','both'].includes(show)) seState.show = show;
@@ -960,8 +962,21 @@ function seParamsFromState() {
   return p;
 }
 
+function seModeParams() {
+  if (SCESearch.guideMode && SCESearch.guideMode() === 'guide') return SCESearch.guideParams();
+  const p = seParamsFromState(); p.set('mode', 'search'); return p;
+}
+function seMountGuide() {
+  SCESearch.mountGuide({
+    tabs: 'sg-tabs', guide: 'sg-pane', keyword: 'se-kw-pane',
+    orgCard: seOrgCardHtml, personCard: sePersonCardHtml,
+    onChange: seSyncURL,
+    toKeyword: t => { document.getElementById('se-q').value = t; seSyncClear(); seResetShown(); seRunSearch(); }
+  });
+}
+
 function seSyncURL() {
-  const p = seParamsFromState();
+  const p = seModeParams();
   p.set('search', '1');
   const qs = p.toString();
   history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
@@ -981,9 +996,7 @@ function seReset() {
 }
 
 function seCopyLink() {
-  const params = seParamsFromState();
-  const qs = params.toString();
-  const url = location.origin + '/ecosystem/search/' + (qs ? '?' + qs : '');
+  const url = location.origin + '/ecosystem/search/?' + seModeParams().toString();
   navigator.clipboard.writeText(url).then(() => {
     const btn = document.getElementById('se-copy');
     const orig = btn.textContent;
@@ -1204,6 +1217,9 @@ function seBindSuggestChips() {
       <span class="ml-modal-title">Search the ecosystem</span>
       <button class="ml-modal-close" onclick="closeSearch()" aria-label="Close">✕</button>
     </div>
+    <div id="sg-tabs"></div>
+    <div id="sg-pane" class="sg-pane"></div>
+    <div id="se-kw-pane">
     <div class="ml-modal-body">
       <div class="se-input-row">
         <input id="se-q" class="se-input" type="text" placeholder='Try &quot;procurement reform&quot;, &quot;AI in benefits&quot;, or an organization name' autocomplete="off">
@@ -1240,6 +1256,7 @@ function seBindSuggestChips() {
       <div class="se-results-hdr" id="se-results-hdr"></div>
       <div id="se-results-list"></div>
       <div id="se-more-wrap"></div>
+    </div>
     </div>
   </div>
 </div>
