@@ -5,13 +5,13 @@
   <link rel="icon" type="image/png" href="/assets/sce_logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Playbooks — State Capacity Ecosystem</title>
-  <meta name="description" content="Reusable playbooks for running state capacity events: the Sponsors Checklist today, the full Event Playbook next.">
+  <meta name="description" content="Playbooks for running state capacity events yourself, and the decks agencies, funders and hosts use to partner with the State Capacity Ecosystem.">
   <link rel="canonical" href="https://statecapacityecosystem.com/community/playbooks/">
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://statecapacityecosystem.com/community/playbooks/">
   <meta property="og:title"       content="Playbooks — State Capacity Ecosystem">
-  <meta property="og:description" content="Reusable playbooks for running state capacity events: the Sponsors Checklist today, the full Event Playbook next.">
+  <meta property="og:description" content="Playbooks for running state capacity events yourself, and the decks agencies, funders and hosts use to partner with the State Capacity Ecosystem.">
   <meta property="og:image"       content="https://statecapacityecosystem.com/assets/sce_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,7 +70,18 @@
     .main { flex:1; padding:clamp(6px,1vw,12px) clamp(16px,4vw,48px) clamp(40px,6vw,64px); }
     .main-inner { max-width:1300px; margin:0 auto; }
 
-    .pb-filters { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 16px; }
+    .pb-jump { display:flex; flex-wrap:wrap; gap:10px; margin:4px 0 26px; }
+.pb-jump a { font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:600; text-decoration:none; color:var(--text); background:var(--surface); border:1px solid var(--border-mid); border-radius:8px; padding:9px 14px; }
+.pb-jump a:hover { border-color:var(--blue); color:var(--blue); }
+.pb-jump a span { color:var(--text-faint); font-weight:500; margin-left:6px; }
+.pb-section { scroll-margin-top:16px; }
+.pb-section + .pb-section { margin-top:40px; padding-top:32px; border-top:1px solid var(--border); }
+.pb-h2 { font-family:'Roboto Mono',monospace; font-size:clamp(1.1rem,2.2vw,1.4rem); font-weight:700; letter-spacing:-0.02em; line-height:1.3; margin:0 0 8px; color:var(--text); }
+.pb-cta { margin-top:18px; display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; background:var(--surface); border:1px solid var(--border); border-left:4px solid #D4A853; border-radius:10px; padding:18px 22px; }
+.pb-cta p { margin:0; font-size:0.95rem; color:var(--text-mid); }
+.pb-cta a { font-family:'Roboto Mono',monospace; font-size:0.8rem; font-weight:700; text-decoration:none; background:#1A1918; color:#F4EFE4; padding:10px 16px; border-radius:8px; white-space:nowrap; }
+.pb-cta a:hover { background:#3E3931; }
+.pb-filters { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 16px; }
     .pb-chip { font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:600; padding:5px 12px; border-radius:999px; border:1px solid var(--border-mid); background:var(--surface); color:var(--text-mid); cursor:pointer; transition:background .15s,color .15s; }
     .pb-chip:hover { border-color:var(--blue); color:var(--blue); }
     .pb-chip.active { background:var(--blue); border-color:var(--blue); color:#fff; }
@@ -262,23 +273,24 @@
 <div class="hero">
   <div class="hero-inner">
     <h1>The <span>Playbooks</span></h1>
-    <p class="hero-lede">Everything we learn ships as something you can pick up and run without us in the room. Playbooks cover the formats; pitch materials make the case.</p>
+    <p class="hero-lede">Playbooks let any organizer run our formats without us in the room. Partner materials are what we bring when an agency, funder or host wants to work with us.</p>
   </div>
 </div>
 
 <div class="main">
   <div class="main-inner">
 
-    <div class="section-label" style="margin-top:4px;">The library</div>
-    <p class="section-note">Our events generate methods and our story makes the case. Both ship here so any organizer, sponsor, or agency can reuse them.</p>
+    <nav class="pb-jump" aria-label="On this page">
+      <a href="#run-it">Playbooks: run it yourself <span>4</span></a>
+      <a href="#partner">Partner with us <span>3</span></a>
+    </nav>
 
-    <div class="pb-filters" id="pb-filters">
-      <button type="button" class="pb-chip active" data-cat="">All</button>
-      <button type="button" class="pb-chip" data-cat="playbook">Playbooks</button>
-      <button type="button" class="pb-chip" data-cat="pitch">Pitch materials</button>
-    </div>
+    <section class="pb-section" id="run-it">
+      <div class="section-label">Playbooks</div>
+      <h2 class="pb-h2">Run our formats without us in the room.</h2>
+      <p class="section-note">For organizers. Each playbook is the working document our team uses, with checklists, so a new city or a new host can run the same event.</p>
 
-    <div class="tool-grid" id="pb-grid">
+      <div class="tool-grid" id="pb-grid">
 
       <a class="tool-card" data-cat="playbook" href="/community/playbooks/SCE_Hackathon_Playbook.docx" download>
         <div class="tool-kicker">Playbook</div>
@@ -312,8 +324,18 @@
         <div class="tool-cta">Open the checklist →</div>
       </a>
 
+      </div>
+    </section>
+
+    <section class="pb-section" id="partner">
+      <div class="section-label">Partner with us</div>
+      <h2 class="pb-h2">Bring a build night to your agency, or back one.</h2>
+      <p class="section-note">For agencies, funders and hosts. Start with the deck for your seat at the table, then tell us what you have in mind.</p>
+
+      <div class="tool-grid">
+
       <a class="tool-card" data-cat="pitch" href="/community/playbooks/SCE_Agency_Partner_Playbook.pptx" download>
-        <div class="tool-kicker">Pitch materials</div>
+        <div class="tool-kicker">For government agencies</div>
         <div class="tool-title">Agency Partner Playbook</div>
         <div class="tool-format">.pptx · 450 KB</div>
         <div class="tool-desc">The deck we bring to a first meeting with a government agency: what state capacity is, how a build night works, the June 2026 case study, what a partnership asks of the agency, and answers to the common questions. Twelve slides with tailoring notes for each agency.</div>
@@ -321,39 +343,28 @@
       </a>
 
       <a class="tool-card" data-cat="pitch" href="/community/playbooks/SCE_Pitch_Deck.pptx" download>
-        <div class="tool-kicker">Pitch materials</div>
-        <div class="tool-title">SCE Pitch Deck</div>
+        <div class="tool-kicker">For funders and partners</div>
+        <div class="tool-title">SCE Overview Deck</div>
         <div class="tool-format">.pptx · 2 MB</div>
         <div class="tool-desc">Thirteen slides that make the case: the problem, the flywheel, the record so far, and how to get involved.</div>
         <div class="tool-cta">Download the deck ↓</div>
       </a>
 
       <a class="tool-card" data-cat="pitch" href="/community/playbooks/SCE_Team_One_Pager.pptx" download>
-        <div class="tool-kicker">Pitch materials</div>
-        <div class="tool-title">SCE Team One Pager</div>
+        <div class="tool-kicker">The short version</div>
+        <div class="tool-title">SCE One Pager</div>
         <div class="tool-format">.pptx · 2 MB</div>
         <div class="tool-desc">The whole story on one slide: mission, vision, what we run, and how to reach us.</div>
         <div class="tool-cta">Download the one pager ↓</div>
       </a>
+      </div>
 
-    </div>
+      <div class="text-panel pb-cta">
+        <p><strong>Have an agency, a venue or a problem in mind?</strong> Tell us and we will scope a build night with you.</p>
+        <a class="info-link" href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in Touch ↗</a>
+      </div>
+    </section>
 
-    <script>
-    (function () {
-      var chips = document.querySelectorAll("#pb-filters .pb-chip");
-      var cards = document.querySelectorAll("#pb-grid .tool-card");
-      chips.forEach(function (chip) {
-        chip.addEventListener("click", function () {
-          chips.forEach(function (c) { c.classList.remove("active"); });
-          chip.classList.add("active");
-          var cat = chip.getAttribute("data-cat");
-          cards.forEach(function (card) {
-            card.style.display = (!cat || card.getAttribute("data-cat") === cat) ? "" : "none";
-          });
-        });
-      });
-    })();
-    </script>
 
   </div>
 </div>
