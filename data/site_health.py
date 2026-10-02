@@ -491,6 +491,9 @@ def check_event_dates():
         text = visible_text(FILE_RAW[path])
         for m in DATE_PHRASE_RE.finditer(text):
             window = text[max(0, m.start() - 200): m.start() + 200]
+            # "Coming soon" labels an undated future item (checked by age below),
+            # so it says nothing about a nearby date being upcoming.
+            window = window.replace("Coming soon", "")
             if not any(w in window for w in NEAR_WORDS):
                 continue
             d = parse_date_phrase(m)
