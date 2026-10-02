@@ -180,7 +180,7 @@ score = 0.40 × P(description_embedding_cosine)
 **Current dataset stats (Sep 25 2026 refresh):**
 - 334 orgs, 1,376 kept edges
 - 55,611 candidate pairs before selection
-- Max edge: 0.99, median: 0.74 (kept edges; the map opens at the 25th percentile)
+- Max edge: 0.97, median: 0.74 (kept edges; the map opens at the 25th percentile)
 - Funder coverage: 77/334 orgs
 
 ---
