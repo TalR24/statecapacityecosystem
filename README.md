@@ -105,7 +105,7 @@ statecapacityecosystem/              ← repo root = the site (GitHub Pages from
 ├── assets/sce_logo.png              ← Logo (favicon, ribbon, hero, og:image)
 ├── 404.html · CNAME · robots.txt · sitemap.xml
 └── .github/workflows/refresh_state_capacity.yml   ← daily data refresh + stat patch
-└── .github/workflows/site_health.yml             ← monthly drift check → issue + email (see .github/SITE_HEALTH.md)
+└── .github/workflows/site_health.yml             ← monthly drift check → issue; the email comes from nycur-data-website sce_monthly.yml (see .github/SITE_HEALTH.md)
 ```
 
 ---

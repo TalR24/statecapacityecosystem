@@ -76,38 +76,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPORT_BODY: ${{ steps.report.outputs.body }}
 
-      - name: Email the report
-        if: ${{ env.GMAIL_USER != '' && env.GMAIL_APP_PASSWORD != '' }}
-        env:
-          GMAIL_USER: ${{ secrets.GMAIL_USER }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          HARD: ${{ steps.report.outputs.hard }}
-          WARN: ${{ steps.report.outputs.warn }}
-          REPORT_BODY: ${{ steps.report.outputs.body }}
-        run: |
-          python3 - <<'PYEOF'
-          import os, smtplib, ssl
-          from email.message import EmailMessage
-
-          gmail_user = os.environ["GMAIL_USER"]
-          gmail_pass = os.environ["GMAIL_APP_PASSWORD"]
-          hard = os.environ.get("HARD", "0")
-          warn = os.environ.get("WARN", "0")
-          body = os.environ.get("REPORT_BODY", "")
-          today = __import__("datetime").date.today().isoformat()
-
-          context = ssl.create_default_context()
-          msg = EmailMessage()
-          msg["From"] = f"State Capacity Ecosystem Hub <{gmail_user}>"
-          msg["To"] = ", ".join([gmail_user, "statecapacityecosystem@gmail.com"])
-          msg["Subject"] = f"SCE site health {today}: {hard} hard failures, {warn} warnings"
-          msg.set_content(body)
-
-          with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as smtp:
-              smtp.login(gmail_user, gmail_pass)
-              smtp.send_message(msg)
-          print("Emailed site health report.")
-          PYEOF
+      # The email moved to TalR24/nycur-data-website sce_monthly.yml (15:30 UTC on
+      # the 1st): one HTML report to Tal and statecapacityecosystem@gmail.com
+      # combining this check, the review routine's PR and findings, and Search
+      # Console recommendations.
 
       - name: Fail the job if the check found a hard failure
         if: steps.health.outputs.exit_code != '0'
