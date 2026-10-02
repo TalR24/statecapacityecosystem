@@ -46,7 +46,7 @@ html = sub(
 )
 p.write_text(html)
 
-# ── 2. README.md (project README — three stat locations) ──
+# ── 2. README.md (project README — four stat locations) ──
 p = Path("README.md")
 md = p.read_text()
 md = sub(
@@ -66,6 +66,12 @@ md = sub(
     r"For \d+ orgs with rich curator-assigned tags",
     f"For {org_count} orgs with rich curator-assigned tags",
     "project README.md (TF-IDF trade-off note)",
+)
+md = sub(
+    md,
+    r"- Max edge: \d+\.\d+, median: \d+\.\d+",
+    f"- Max edge: {max_w:.2f}, median: {median_w:.2f}",
+    "project README.md (max edge and median)",
 )
 p.write_text(md)
 
