@@ -1,0 +1,44 @@
+# State Capacity Ecosystem
+
+> We map who works on state capacity, bring them into one room, and build the ecosystem that turns their work into tools government can use.
+
+## Pages
+
+- [About Us](https://statecapacityecosystem.com/about/): The team behind the State Capacity Ecosystem: who we are, where we write, and how to get in touch.
+
+## Ecosystem directory and map
+
+- [Ecosystem](https://statecapacityecosystem.com/ecosystem/): An interactive map of 300+ organizations working on state capacity: research, advocacy, GovTech, philanthropy, fellowships, and digital services across federal, state, and city government.
+- [Affinity Map](https://statecapacityecosystem.com/ecosystem/affinity-map/): Interactive force-directed graph showing affinity between state-capacity organizations, weighted by description similarity, shared problem topics, shared named funders, and segment overlap.
+- [Connect](https://statecapacityecosystem.com/ecosystem/connect/): People and challenges (grants, open calls) working towards growing State Capacity, indexed by the specific problem they're tackling and the kind of help they're looking for.
+- [Organization Directory](https://statecapacityecosystem.com/ecosystem/organizations/): Directory of organizations working on state capacity. Search by name or filter by segment, geographic focus, or problem statement to find relevant orgs.
+- [Search](https://statecapacityecosystem.com/ecosystem/search/): Search the State Capacity Ecosystem: build a sentence about who you are and what you need, or type a keyword, and get a starting point across 300+ organizations and the people on Connect.
+
+## Community
+
+- [Community](https://statecapacityecosystem.com/community/): The community and platform layer of the State Capacity Ecosystem: the Slack, the Substack, reusable event playbooks, and proof points from our build events.
+- [Playbooks](https://statecapacityecosystem.com/community/playbooks/): Playbooks for running state capacity events yourself, and the decks agencies, funders and hosts use to partner with the State Capacity Ecosystem.
+- [Proof Points](https://statecapacityecosystem.com/community/proof-points/): Proof points from the State Capacity Ecosystem: working prototypes and tools from our Substack posts and build nights, all running in the browser on public data.
+- [Slack](https://statecapacityecosystem.com/community/slack/): The State Capacity Ecosystem community Slack is live. Join the workspace and say what you are building.
+
+## Events
+
+- [Events](https://statecapacityecosystem.com/events/): The hub for State Capacity Ecosystem events, past and upcoming: hackathons, demo nights, and speaker and salon-style discussions. Open a past event to see what was discussed or built, or sign up for something coming up.
+- [Demo Nights](https://statecapacityecosystem.com/events/demo-nights/): Demo nights put what our community builds in front of the decision-makers who can adopt it. The first one follows our September 30 hackathon.
+- [Hackathons](https://statecapacityecosystem.com/events/hackathons/): State Capacity Ecosystem hackathons, past and upcoming: large open build nights and targeted single-agency builds. Open a past hackathon to see what got built.
+- [Salons & Meet-ups](https://statecapacityecosystem.com/events/salons/): Salon-style discussion nights, monthly office hours, and meet-ups for the state capacity community. Coming soon.
+
+## Related
+
+- [SCE on Substack](https://substack.statecapacityecosystem.com/): posts and event recaps
+
+## Optional
+
+- [The PIT Crew Is the Tip of the Iceberg](https://statecapacityecosystem.com/community/substack/mamdani-ai-priorities/): Prototypes built in hours, each for a few dollars in token spend, against three of Mayor Mamdani's stated priorities: cheaper groceries, easier small business, faster affordable housing.
+- [NYC Affordable Housing Approvals Navigator](https://statecapacityecosystem.com/community/substack/mamdani-ai-priorities/housing-approval-pathway/): Prototype mapping the approval path for an NYC affordable housing project, from HPD financing to Certificate of Occupancy, on three real HPD and DOB sites.
+- [NYC Summons Navigator](https://statecapacityecosystem.com/community/substack/mamdani-ai-priorities/summons-navigator/): Step-by-step guide for NYC business owners with a summons from DCWP, DOHMH, DSNY, FDNY, DOB or DEP: deadlines, four ways to respond, and free help at OATH.
+- [NYC Grocery Access — Supermarket Site Selection Prototype](https://statecapacityecosystem.com/community/substack/nyc-grocery-access-site-prototype/): Interactive map scoring vacant city-owned NYC lots for a supermarket by food access gap, need, reach and transit, with adjustable weights and a top 10.
+- [Methodology](https://statecapacityecosystem.com/ecosystem/methodology/): How the State Capacity Ecosystem directory, search, connect directory, and affinity network are built: data source, inclusion criteria, taxonomy, problem statements, scoring formula, and limitations.
+- [A Civic Tech Build Night — Events · State Capacity Ecosystem](https://statecapacityecosystem.com/events/hackathons/civic-tech-build-night/): One evening of agentic AI for government service delivery in NYC, June 24, 2026: 80+ people, 20 teams, and 20 working tools built in under two hours.
+- [TIDELINE · NYC Flood-Resilience Capital Tracker](https://statecapacityecosystem.com/events/hackathons/civic-tech-build-night/tideline/): Hackathon dashboard mapping NYC flood-resilience capital projects by committed spend and community district, with a replay of the May 20, 2026 flash flood.
+- [Sponsors Checklist — Events · State Capacity Ecosystem](https://statecapacityecosystem.com/events/sponsors-checklist/): The State Capacity Ecosystem hackathon sponsor responsibility checklist: what a Lead Sponsor, a Cosponsor, and the SCE team each own, start to finish, plus sponsor benefits.

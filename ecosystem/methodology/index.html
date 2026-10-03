@@ -547,7 +547,11 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
 
       <h3>Which edges are kept</h3>
       <p>Every organization keeps its six strongest pairs, and the map's edge set is the union of those lists. An edge is <strong>mutual</strong> when each organization is in the other's top six; the map draws mutual edges solid and one-way edges faint. There is no minimum score and no cap on how many lists an organization can appear in, so a fellowship program that many organizations resemble can hold twenty edges while a niche vendor holds six. Organizations whose description says they have closed are marked sunset, drawn hollow, and can be hidden.</p>
-      <p>The published dataset has <strong>334 nodes and 1,376 edges</strong>, with a maximum edge score of 0.97 and a median of 0.74. <span data-stat-line>Of those edges, <span data-stat="mutual_count">…</span> are mutual and <span data-stat="cross_pct">…</span> connect organizations in different primary segments.</span> The map opens at the 25th-percentile score so the weakest quarter of edges is hidden until you lower the slider.</p>
+      <p>The published dataset has <strong>334 nodes and 1,376 edges</strong>, with a maximum edge score of 0.97 and a median of 0.74. <span data-stat-line>Of those edges, <span data-stat="mutual_count"><!-- static:stat-mutual:start -->
+628
+<!-- static:stat-mutual:end --></span> are mutual and <span data-stat="cross_pct"><!-- static:stat-cross:start -->
+28%
+<!-- static:stat-cross:end --></span> connect organizations in different primary segments.</span> The map opens at the 25th-percentile score so the weakest quarter of edges is hidden until you lower the slider.</p>
 
       <h2>Inside the score table</h2>
       <p>For reference, here is what each signal ranges over before percentile scaling:</p>

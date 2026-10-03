@@ -106,10 +106,22 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
+      # ── Static snapshots (no-JS readable copies of the JS-rendered blocks, from the JSON above) ──
+
+      - name: Rebuild static snapshots
+        id: snap
+        run: |
+          python3 data/build_static_snapshots.py
+          if git diff --quiet -- community ecosystem; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
       # ── Commit and push whatever changed ──
 
       - name: Commit and push
-        if: steps.check.outputs.org_changed == 'true' || steps.check.outputs.connect_changed == 'true' || steps.substack.outputs.changed == 'true'
+        if: steps.check.outputs.org_changed == 'true' || steps.check.outputs.connect_changed == 'true' || steps.substack.outputs.changed == 'true' || steps.snap.outputs.changed == 'true'
         env:
           ORG_CHANGED: ${{ steps.check.outputs.org_changed }}
           CON_CHANGED: ${{ steps.check.outputs.connect_changed }}
@@ -134,6 +146,16 @@ jobs:
           fi
 
           git add data/substack_posts.json
+
+          # Static snapshots rewritten by build_static_snapshots.py
+          git add \
+            community/index.html \
+            community/proof-points/index.html \
+            ecosystem/index.html \
+            ecosystem/organizations/index.html \
+            ecosystem/connect/index.html \
+            ecosystem/methodology/index.html \
+            ecosystem/affinity-map/index.html
 
           if git diff --staged --quiet; then
             echo "Nothing staged — skipping commit."

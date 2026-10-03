@@ -351,9 +351,15 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
 
     </div>
 
-    <div id="latest-writing" hidden>
+    <div id="latest-writing">
       <div class="section-label" style="margin-top:24px;">Latest writing</div>
-      <div id="lw-list"></div>
+      <div id="lw-list">
+<!-- static:latest-writing:start -->
+<div class="lw-post"><a class="t" href="https://substack.statecapacityecosystem.com/p/peeling-the-banana" target="_blank" rel="noopener">Peeling The Banana</a><p>A short guide to diagnosing and solving problems in government</p><div class="d">Sep 2026</div></div>
+<div class="lw-post"><a class="t" href="https://substack.statecapacityecosystem.com/p/ai-safety-for-government" target="_blank" rel="noopener">Governments must pace the frontier too</a><p>How can AI solve real constituent problems while maintaining accountability?</p><div class="d">Sep 2026</div></div>
+<div class="lw-post"><a class="t" href="https://substack.statecapacityecosystem.com/p/public-engagement-hackathon-september" target="_blank" rel="noopener">Public Engagement Hackathon: September 30</a><p>Our second flagship event! Three problem streams on community board operations, public voice at scale, and Judge specials. Read on to learn more.</p><div class="d">Aug 2026</div></div>
+<!-- static:latest-writing:end -->
+</div>
       <a class="info-link" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">All posts on Substack ↗</a>
     </div>
     <script>
@@ -363,6 +369,7 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
         var M = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
         posts = posts.slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; }).slice(0, 3);
         var box = document.getElementById("lw-list");
+        box.innerHTML = "";
         posts.forEach(function (p) {
           var d = p.date.split("-"), div = document.createElement("div"), a = document.createElement("a"), s = document.createElement("p"), dt = document.createElement("div");
           div.className = "lw-post"; a.className = "t"; a.href = p.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = p.title;
