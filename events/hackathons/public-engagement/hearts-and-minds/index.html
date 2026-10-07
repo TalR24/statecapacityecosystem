@@ -1,0 +1,1102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hearts &amp; Minds NYC · Medicaid pain points</title>
+<meta name="description" content="Hackathon prototype for the NYS Office of Customer Experience: the biggest problems New Yorkers hit with Medicaid, sized by people affected and shaded by online mentions, with public stories in residents' own words. Sample data.">
+<meta property="og:description" content="Hackathon prototype for the NYS Office of Customer Experience: the biggest problems New Yorkers hit with Medicaid, sized by people affected and shaded by online mentions, with public stories in residents' own words. Sample data.">
+<link rel="canonical" href="https://statecapacityecosystem.com/events/hackathons/public-engagement/hearts-and-minds/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://statecapacityecosystem.com/events/hackathons/public-engagement/hearts-and-minds/">
+<meta property="og:title" content="Hearts &amp; Minds · Medicaid pain points radar">
+<meta property="og:image" content="https://statecapacityecosystem.com/assets/sce_logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/assets/sce_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  /* NYS Design System tokens (designsystem.ny.gov). Montserrat stands in for Proxima Nova. */
+  :root {
+    --nys-color-theme: #154973;
+    --nys-color-theme-strong: #0e324f;
+    --nys-color-theme-stronger: #081b2b;
+    --nys-color-theme-mid: #457aa5;
+    --nys-color-theme-weak: #cddde9;
+    --nys-color-theme-weaker: #eff6fb;
+    --nys-color-accent: #face00;
+    --nys-color-ink: #1b1b1b;
+    --nys-color-text-weak: #4a4d4f;
+    --nys-color-text-weaker: #797c7f;
+    --nys-color-base-weak: #ededed;
+    --nys-color-surface: #ffffff;
+    --nys-color-surface-raised: #f6f6f6;
+    --nys-color-link: #004dd1;
+    --nys-color-focus: #004dd1;
+
+    /* heat scale, least → most harm */
+    --heat-0: #e4edf5;
+    --heat-1: #c3d6e7;
+    --heat-2: #94b5d2;
+    --heat-3: #6592bb;
+    --heat-4: #3f74a3;
+    --heat-5: #1f5584;
+    --heat-6: #0e3a60;
+    --heat-7: #061827;
+    --highlight: var(--nys-color-accent);
+    --primary: var(--nys-color-theme);
+    --primary-strong: var(--nys-color-theme-strong);
+
+    --font-ui: "Montserrat", "Proxima Nova", -apple-system, system-ui, sans-serif;
+    --font-alt: "Oswald", "Arial Narrow", sans-serif;
+  }
+  /* lo-fi wireframe theme, matches the Paper file */
+  body.lofi {
+    --heat-0: #e6e6e6; --heat-1: #c8c9ca; --heat-2: #a7a9ab; --heat-3: #8a8d90;
+    --heat-4: #62666a; --heat-5: #4a4d4f; --heat-6: #323435; --heat-7: #1b1b1b;
+    --highlight: #1b1b1b; --primary: #1b1b1b; --primary-strong: #000;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { font-family: var(--font-ui); color: var(--nys-color-ink); background: var(--nys-color-surface); -webkit-font-smoothing: antialiased; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--nys-color-focus); outline-offset: 2px; }
+
+  .app { display: flex; min-height: 100vh; }
+
+  /* ---------- sidebar ---------- */
+  .side { width: 232px; flex-shrink: 0; background: var(--nys-color-surface-raised); border-right: 1px solid #d0d0ce; padding: 20px 16px; display: flex; flex-direction: column; justify-content: space-between; position: sticky; top: 0; height: 100vh; }
+  .brand { padding: 0 8px 28px; }
+  .brand b { display: block; font-size: 17px; font-weight: 800; letter-spacing: -0.01em; }
+  .brand span { font-size: 12px; font-weight: 500; color: var(--nys-color-text-weak); }
+  .nav a { display: flex; align-items: center; gap: 10px; padding: 9px 8px; font-size: 14px; font-weight: 500; color: var(--nys-color-text-weak); text-decoration: none; border: 1px solid transparent; }
+  .nav a .ico { width: 14px; height: 14px; background: #bec0c1; flex-shrink: 0; }
+  .nav a.on { background: #fff; border-color: #bec0c1; color: var(--nys-color-ink); font-weight: 700; }
+  .nav a.on .ico { background: none; border: 2px solid var(--primary); border-radius: 50%; }
+  .nav a .count { margin-left: auto; font-size: 11px; font-weight: 700; padding: 1px 6px; background: var(--primary); color: #fff; }
+  .side-foot { display: flex; flex-direction: column; gap: 10px; }
+  .howto { text-align: left; padding: 12px; border: 1px dashed #797c7f; }
+  .howto b { display: block; font-size: 13px; }
+  .howto span { font-size: 12px; line-height: 18px; color: var(--nys-color-text-weak); }
+  .theme-toggle { display: flex; border: 1px solid #bec0c1; background: #fff; }
+  .theme-toggle button { flex: 1; font-size: 12px; font-weight: 600; padding: 6px 0; color: var(--nys-color-text-weak); }
+  .theme-toggle button[aria-pressed="true"] { background: var(--primary); color: #fff; }
+
+  /* ---------- main ---------- */
+  .main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .nysbar { display: flex; align-items: center; gap: 10px; padding: 6px 40px; background: var(--nys-color-surface-raised); border-bottom: 1px solid var(--nys-color-base-weak); font-size: 12px; color: var(--nys-color-text-weak); }
+  .nysbar .ny { font-family: var(--font-alt); font-weight: 600; font-size: 11px; color: #fff; background: var(--nys-color-theme); padding: 1px 7px; letter-spacing: 0.04em; }
+  body.lofi .nysbar .ny { background: #bec0c1; color: #1b1b1b; }
+  .top { display: flex; align-items: center; justify-content: space-between; padding: 14px 40px; border-bottom: 1px solid #d0d0ce; gap: 16px; }
+  .top-l { display: flex; align-items: center; gap: 16px; }
+  .top h1 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
+  .live { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--nys-color-ink); font-size: 12px; font-weight: 500; color: var(--nys-color-text-weak); white-space: nowrap; }
+  .live b { color: var(--nys-color-ink); font-weight: 700; }
+  .live i { width: 8px; height: 8px; border-radius: 50%; background: #1e752e; animation: pulse 2s infinite; }
+  body.lofi .live i { background: #1b1b1b; }
+  @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .3 } }
+  .sample { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 4px 8px; background: var(--nys-color-base-weak); color: var(--nys-color-text-weak); cursor: help; white-space: nowrap; }
+  .top-r { display: flex; gap: 8px; }
+  .btn { font-size: 13px; font-weight: 700; padding: 9px 14px; border: 1px solid var(--nys-color-ink); }
+  .btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+  .btn.primary:hover { background: var(--primary-strong); }
+  .btn:not(.primary):hover { background: var(--nys-color-surface-raised); }
+  .scope { font-size: 13px; font-weight: 600; padding: 9px 12px; border: 1px solid #bec0c1; white-space: nowrap; }
+
+  @media (max-width: 1240px) {
+    .top { flex-wrap: wrap; }
+    .top-r { width: 100%; }
+    .top-r .scope { flex: 1; }
+    .top-r .btn { white-space: nowrap; }
+  }
+  @media (max-width: 800px) {
+    .top-l, .top-r { flex-wrap: wrap; }
+    .top-r .scope { flex-basis: 100%; white-space: normal; }
+  }
+
+  .content { padding: 36px 40px 56px; display: flex; flex-direction: column; gap: 28px; }
+  .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+  .head h2 { margin: 0 0 8px; font-size: 38px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; }
+  .head p { margin: 0; font-size: 16px; line-height: 24px; color: var(--nys-color-text-weak); max-width: 620px; }
+  .legend { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--nys-color-text-weak); white-space: nowrap; }
+  .legend .ramp { display: flex; }
+  .legend .ramp i { width: 20px; height: 10px; }
+
+  .filters { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .filters .lbl { font-size: 12px; font-weight: 600; color: var(--nys-color-text-weak); padding-right: 4px; }
+  .chip { font-size: 13px; font-weight: 600; padding: 7px 14px; border: 1px solid #bec0c1; }
+  .chip:hover { border-color: var(--nys-color-ink); }
+  .chip[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: #fff; font-weight: 700; }
+  [data-tip] { position: relative; }
+  [data-tip]::after { content: attr(data-tip); font-family: var(--font-ui); position: absolute; left: 0; top: calc(100% + 8px); z-index: 20; width: 300px; padding: 10px 12px; background: var(--nys-color-ink); color: #fff; font-size: 12px; font-weight: 500; line-height: 18px; letter-spacing: 0; text-transform: none; text-align: left; white-space: normal; box-shadow: 0 6px 18px rgba(0,0,0,.18); opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .12s, transform .12s; }
+  [data-tip]:hover::after, [data-tip]:focus-visible::after { opacity: 1; transform: none; transition-delay: .15s; }
+  .tip-label { border-bottom: 1px dotted currentColor; cursor: help; }
+  .filters .inview { margin-left: auto; font-size: 13px; color: var(--nys-color-text-weak); }
+  .filters .inview b { color: var(--nys-color-ink); }
+
+  /* ---------- journey heatmap ---------- */
+  .journey { display: flex; flex-direction: column; gap: 10px; }
+  .stages, .cols { display: flex; gap: 4px; }
+  .stage { display: flex; align-items: center; gap: 8px; padding-bottom: 8px; border-bottom: 2px solid var(--nys-color-ink); min-width: 0; }
+  .stage .n { font-family: var(--font-alt); font-weight: 600; font-size: 13px; }
+  .stage .t { font-size: 13px; font-weight: 700; white-space: nowrap; }
+  .stage .arr { margin-left: auto; font-size: 13px; color: var(--nys-color-text-weaker); white-space: nowrap; }
+  .cols { height: 600px; }
+  .col { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+
+  .tile { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; padding: 14px; min-height: 58px; text-align: left; overflow: hidden; color: #fff; transition: opacity .25s, transform .15s, box-shadow .15s; }
+  .tile.light { color: var(--nys-color-ink); }
+  .tile:hover { transform: translateY(-1px); box-shadow: 0 0 0 2px #fff inset; }
+  .tile[aria-pressed="true"] { box-shadow: 0 0 0 4px var(--highlight) inset; }
+  .tile.dim { opacity: .14; pointer-events: none; }
+  .tile .tag { align-self: flex-start; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; padding: 2px 6px; border: 1px solid currentColor; white-space: nowrap; }
+  .tile .tag.hot { background: var(--highlight); border-color: var(--highlight); color: var(--nys-color-ink); }
+  body.lofi .tile .tag.hot { background: #fff; border-color: #fff; }
+  .tile .title { font-weight: 700; font-size: 15px; line-height: 20px; }
+  .tile.lg .title { font-size: 20px; line-height: 26px; letter-spacing: -0.01em; }
+  .tile.xs .title { font-size: 12px; line-height: 16px; }
+  .tile .top-part { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .tile .preview { display: none; gap: 12px; align-items: flex-start; }
+  .tile.lg .preview { display: flex; }
+  .tile .thumb { width: 64px; aspect-ratio: 9/16; flex-shrink: 0; display: grid; place-items: center; background: rgba(255,255,255,.18); }
+  .tile .thumb.yt { background-size: cover; background-position: center; }
+  .tile .thumb span { width: 26px; height: 26px; border-radius: 50%; background: #fff; display: grid; place-items: center; }
+  .tile .thumb span::after { content: ""; border-left: 9px solid #1b1b1b; border-top: 5.5px solid transparent; border-bottom: 5.5px solid transparent; margin-left: 2px; }
+  .tile .thumb { cursor: pointer; transition: transform .15s; }
+  .tile .thumb:hover { transform: scale(1.04); }
+  .tile .thumb:hover span { background: var(--highlight); }
+  .tile .pv-text { display: flex; flex-direction: column; gap: 6px; font-size: 13px; line-height: 19px; }
+  .tile .pv-text small { font-size: 11px; font-weight: 600; opacity: .8; }
+  .tile .preview q { font-size: 13px; font-style: italic; line-height: 19px; quotes: "\201C" "\201D"; }
+  .tile .bottom { display: flex; flex-direction: column; gap: 6px; }
+  .tile .spark { width: 100%; height: 28px; display: block; }
+  .tile.xs .spark, .tile.sm .spark { display: none; }
+  .tile .num { font-size: 26px; font-weight: 800; letter-spacing: -0.025em; line-height: 1; }
+  .tile.lg .num { font-size: 44px; }
+  .tile.xs .num { font-size: 16px; }
+  .tile.xs { padding: 8px 10px; flex-direction: row; align-items: flex-end; }
+  .tile.xs .tag { display: none; }
+
+  /* ---------- selected + feed ---------- */
+  .selected { display: flex; align-items: center; gap: 28px; padding: 18px 20px; border: 1.5px solid var(--nys-color-ink); }
+  .selected .who { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 4px; }
+  .selected .eyebrow { font-family: var(--font-alt); font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nys-color-text-weak); }
+  .selected h3 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
+  .selected .note { font-size: 12px; line-height: 18px; color: var(--nys-color-text-weak); }
+  .selected .big { font-size: 40px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+  .selected .big small { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0; color: var(--nys-color-text-weak); margin-top: 6px; }
+  .chart { position: relative; width: 360px; flex-shrink: 0; }
+  .chart svg { width: 100%; height: 72px; display: block; overflow: visible; }
+  .chart .axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--nys-color-text-weaker); margin-top: 4px; }
+  .chart .readout { position: absolute; top: -22px; font-size: 11px; font-weight: 700; white-space: nowrap; transform: translateX(-50%); pointer-events: none; }
+  .selected .acts { display: flex; flex-direction: column; gap: 8px; width: 190px; flex-shrink: 0; }
+  .selected .acts .btn { text-align: center; }
+
+  .feed-head { display: flex; align-items: baseline; justify-content: space-between; }
+  .feed-head h4 { margin: 0; font-size: 16px; font-weight: 800; }
+  .feed-head h4 span { font-weight: 500; font-size: 13px; color: var(--nys-color-text-weak); margin-left: 8px; }
+  .arrows { display: flex; gap: 6px; }
+  .arrows button { width: 36px; height: 32px; border: 1px solid var(--nys-color-ink); font-weight: 700; }
+  .arrows button:disabled { border-color: #d0d0ce; color: #bec0c1; cursor: default; }
+  .feed-wrap { position: relative; }
+  .feed-wrap::after { content: ""; position: absolute; right: 0; top: 0; bottom: 24px; width: 90px; background: linear-gradient(90deg, rgba(255,255,255,0), #fff 90%); pointer-events: none; transition: opacity .2s; }
+  .feed-wrap.end::after { opacity: 0; }
+  .feed { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding-bottom: 12px; scrollbar-width: thin; }
+  .card { flex: 0 0 190px; scroll-snap-align: start; display: flex; flex-direction: column; gap: 8px; text-align: left; }
+  .card .vid { position: relative; aspect-ratio: 9/16; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; color: #fff; overflow: hidden; }
+  .card .vid::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,.55)); }
+  .card .vid > * { position: relative; }
+  .card .plat { align-self: flex-start; font-size: 10px; font-weight: 700; padding: 2px 6px; background: rgba(0,0,0,.75); }
+  .card .new { position: absolute; top: 10px; right: 10px; font-size: 10px; font-weight: 800; padding: 2px 6px; background: var(--highlight); color: var(--nys-color-ink); }
+  .card .play { position: absolute; left: 50%; top: 42%; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; background: rgba(255,255,255,.95); display: grid; place-items: center; opacity: 0; transition: opacity .15s; }
+  .card .play::after { content: ""; border-left: 12px solid #1b1b1b; border-top: 7px solid transparent; border-bottom: 7px solid transparent; margin-left: 3px; }
+  .card:hover .play, .card:focus-visible .play { opacity: 1; }
+  .card .vid.yt { background-size: cover !important; background-position: center !important; }
+  .card .vid.yt::before { background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,.85) 70%); }
+  .card .real { position: absolute; top: 10px; right: 10px; font-size: 10px; font-weight: 800; letter-spacing: .04em; padding: 2px 6px; background: var(--highlight); color: var(--nys-color-ink); }
+  .card .real.news { background: #fff; }
+  .card .desc { font-size: 13px; font-weight: 600; line-height: 18px; }
+  .card q { font-size: 15px; font-weight: 700; line-height: 21px; quotes: "\201C" "\201D"; }
+  .card .meta { font-size: 12px; color: var(--nys-color-text-weak); }
+
+  /* ---------- modal player ---------- */
+  .modal { position: fixed; inset: 0; background: rgba(8,27,43,.82); display: none; align-items: center; justify-content: center; z-index: 50; }
+  body.lofi .modal { background: rgba(0,0,0,.8); }
+  .modal.open { display: flex; }
+  .player { display: flex; gap: 32px; align-items: center; max-width: 900px; padding: 24px; }
+  .screen { position: relative; width: 320px; aspect-ratio: 9/16; display: flex; flex-direction: column; justify-content: flex-end; padding: 22px; color: #fff; overflow: hidden; }
+  .screen::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.65)); }
+  .screen > * { position: relative; }
+  .screen .cap { font-size: 22px; font-weight: 700; line-height: 30px; }
+  .screen .prog { position: absolute; left: 0; right: 0; top: 0; height: 4px; background: rgba(255,255,255,.25); }
+  .screen .prog i { display: block; height: 100%; width: 0; background: #fff; }
+  .screen.wide { width: 640px; aspect-ratio: 16/9; padding: 0; }
+  .screen.wide::before { display: none; }
+  .screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .player-side { color: #fff; max-width: 380px; display: flex; flex-direction: column; gap: 14px; }
+  .player-side .eyebrow { font-family: var(--font-alt); letter-spacing: .12em; font-size: 13px; text-transform: uppercase; color: var(--nys-color-theme-weak); }
+  body.lofi .player-side .eyebrow { color: #d0d0ce; }
+  .player-side h5 { margin: 0; font-size: 26px; font-weight: 800; line-height: 32px; }
+  .player-side p { margin: 0; font-size: 14px; line-height: 21px; color: #d0d0ce; }
+  .player-side .row { display: flex; gap: 8px; }
+  .player-side .btn { border-color: #fff; color: #fff; }
+  .player-side .btn.primary { background: #fff; color: var(--nys-color-ink); border-color: #fff; }
+  .close { position: absolute; top: 20px; right: 28px; color: #fff; font-size: 28px; }
+
+  .rank-modal .sheet { background: #fff; max-width: 640px; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .rank-modal h5 { margin: 0; font-size: 24px; font-weight: 800; }
+  .rank-modal .bar { display: flex; height: 64px; gap: 3px; }
+  .rank-modal .bar div { padding: 8px 10px; color: #fff; font-size: 12px; font-weight: 700; display: flex; flex-direction: column; justify-content: space-between; }
+  .rank-modal .bar div b { font-size: 18px; }
+  .rank-modal p { margin: 0; font-size: 14px; line-height: 21px; color: var(--nys-color-text-weak); }
+  .rank-modal .close { color: var(--nys-color-ink); position: static; align-self: flex-end; font-size: 24px; }
+
+  .toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px); background: var(--nys-color-ink); color: #fff; font-size: 14px; font-weight: 600; padding: 12px 18px; opacity: 0; transition: .25s; pointer-events: none; z-index: 60; }
+  .toast.show { opacity: 1; transform: translateX(-50%); }
+
+  /* ---------- views ---------- */
+  [hidden] { display: none !important; }
+  .eyebrow { font-family: var(--font-alt); font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nys-color-text-weak); }
+  a.btn { display: block; color: inherit; text-decoration: none; text-align: center; }
+  .tags { display: flex; gap: 4px; flex-wrap: wrap; }
+  .tile.xs .tags { display: none; }
+  .tile .tag.fix { background: #fff; border-color: #fff; color: var(--nys-color-ink); }
+  .tile.light .tag.fix { background: var(--nys-color-ink); border-color: var(--nys-color-ink); color: #fff; }
+
+  /* ---------- design impact ---------- */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .pillar { padding: 16px 18px 18px; background: var(--nys-color-theme-weaker); border-top: 3px solid var(--primary); display: flex; flex-direction: column; gap: 6px; }
+  body.lofi .pillar { background: #f2f2f2; }
+  .pillar b { font-size: 16px; font-weight: 800; }
+  .pillar p { margin: 0; font-size: 13px; line-height: 19px; color: var(--nys-color-text-weak); }
+  .pillar .sub { font-size: 12px; line-height: 18px; color: var(--nys-color-text-weak); margin-top: 4px; }
+  .pillar .sub b { font-size: 12px; font-weight: 700; color: var(--nys-color-ink); }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+  .stat { padding: 16px 18px; border: 1px solid #d0d0ce; display: flex; flex-direction: column; gap: 6px; }
+  .stat .num { font-size: 34px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+  .stat .lbl { font-size: 13px; line-height: 19px; font-weight: 600; }
+  .stat .src, .std .src, .case .src { font-size: 11px; line-height: 16px; color: var(--nys-color-text-weaker); }
+  .stat .src a, .std .src a, .case .src a, .note a { color: inherit; }
+
+  .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 14px; }
+  .section-head h3 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -.01em; }
+  .section-head p { margin: 4px 0 0; font-size: 14px; line-height: 21px; color: var(--nys-color-text-weak); max-width: 660px; }
+  .section-head .hint { font-size: 12px; color: var(--nys-color-text-weak); white-space: nowrap; }
+  .section-head .hint b { color: var(--nys-color-ink); }
+
+  .stds { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+  .std { text-align: left; padding: 14px 16px; border: 1px solid #bec0c1; display: flex; flex-direction: column; gap: 8px; transition: opacity .2s; min-height: 150px; }
+  .std:hover { border-color: var(--nys-color-ink); }
+  .std[aria-pressed="true"] { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary) inset; }
+  .std.dim { opacity: .3; }
+  .std .code { font-family: var(--font-alt); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--nys-color-text-weak); }
+  .std b { font-size: 14px; line-height: 19px; }
+  .std span.desc { font-size: 12px; line-height: 17px; color: var(--nys-color-text-weak); }
+  .std .src { margin-top: auto; }
+  .std .uses { font-size: 11px; font-weight: 700; padding: 1px 6px; background: var(--primary); color: #fff; align-self: flex-start; }
+
+  .cases { display: flex; flex-direction: column; gap: 20px; }
+  .case { border: 1.5px solid var(--nys-color-ink); transition: opacity .25s; scroll-margin-top: 80px; }
+  .case.dim { opacity: .18; }
+  .case.is-open { border-style: dashed; }
+  .case-top { display: grid; grid-template-columns: minmax(0, 1.15fr) 380px minmax(0, .95fr); gap: 32px; padding: 22px 24px 24px; }
+  .case h3 { margin: 6px 0 10px; font-size: 24px; font-weight: 800; letter-spacing: -.015em; line-height: 1.15; }
+  .case p { margin: 0; font-size: 14px; line-height: 21px; color: var(--nys-color-text-weak); }
+  .case .status { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .06em; padding: 2px 6px; margin-left: 10px; vertical-align: middle; white-space: nowrap; }
+  .case .status.shipped { background: var(--highlight); color: var(--nys-color-ink); }
+  body.lofi .case .status.shipped { background: #1b1b1b; color: #fff; }
+  .case .status.open { border: 1px solid var(--nys-color-ink); }
+  .facts { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .facts li { font-size: 13px; line-height: 19px; padding-left: 14px; position: relative; }
+  .facts li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; background: var(--primary); }
+  .case .src { margin-top: 12px; font-size: 12px; color: var(--nys-color-text-weak); }
+  .applied { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; align-items: center; }
+  .applied .lbl { font-size: 12px; font-weight: 600; color: var(--nys-color-text-weak); margin-right: 2px; }
+  .applied .chip { font-size: 12px; padding: 5px 10px; }
+
+  .impact { display: flex; flex-direction: column; gap: 16px; }
+  .impact .delta { display: flex; gap: 28px; }
+  .impact .big { font-size: 40px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+  .impact .big small { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0; color: var(--nys-color-text-weak); margin-top: 6px; line-height: 16px; }
+  .impact .big .was { font-size: 20px; font-weight: 600; color: var(--nys-color-text-weaker); text-decoration: line-through; margin-right: 8px; }
+  .ichart svg { width: 100%; height: 88px; display: block; overflow: visible; }
+  .ichart .axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--nys-color-text-weaker); margin-top: 4px; }
+  .ichart .axis .mark { font-weight: 700; color: var(--nys-color-ink); }
+
+  .hoods { display: flex; flex-direction: column; gap: 10px; }
+  .hoods .hd { display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: var(--nys-color-text-weak); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 2px; }
+  .hood { display: grid; grid-template-columns: 148px 1fr 48px; align-items: center; gap: 10px; font-size: 13px; }
+  .hood .nm { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hood .track { position: relative; height: 14px; border: 1px solid #d0d0ce; background: #fff; }
+  .hood .was { position: absolute; left: -1px; top: -1px; bottom: -1px; border: 1px dashed var(--nys-color-text-weaker); border-left: 0; }
+  .hood .now { position: absolute; left: 0; top: 0; bottom: 0; }
+  .hood .d { font-weight: 800; text-align: right; font-size: 13px; white-space: nowrap; }
+  .hood .d.down { color: #1e752e; }
+  .hood .d.up { color: #b3261e; }
+  body.lofi .hood .d.down, body.lofi .hood .d.up { color: inherit; }
+  .hoods .foot { font-size: 11px; line-height: 16px; color: var(--nys-color-text-weaker); margin-top: 2px; }
+
+  .case-vids { display: flex; gap: 14px; padding: 16px 24px 20px; border-top: 1px solid #d0d0ce; background: var(--nys-color-surface-raised); overflow-x: auto; scrollbar-width: thin; }
+  .case-vids .lbl { flex: 0 0 150px; display: flex; flex-direction: column; gap: 4px; font-size: 12px; line-height: 17px; color: var(--nys-color-text-weak); }
+  .case-vids .lbl b { font-size: 13px; color: var(--nys-color-ink); }
+  .card.wide { flex: 0 0 256px; }
+  .card.wide .vid { aspect-ratio: 16/9; }
+  .note { margin: 0; font-size: 12px; line-height: 18px; color: var(--nys-color-text-weak); border-top: 1px solid #d0d0ce; padding-top: 14px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div>
+      <div class="brand"><b>Hearts &amp; Minds</b><span>NYS Office of Customer Experience</span></div>
+      <nav class="nav" aria-label="Main">
+        <a href="#radar" class="on" aria-current="page" data-view="radar"><i class="ico"></i>Radar</a>
+        <a href="#impact" data-view="impact"><i class="ico"></i>Design impact<span class="count">4</span></a>
+        <a href="#" data-soon><i class="ico"></i>Problems</a>
+        <a href="#" data-soon><i class="ico"></i>Voices</a>
+        <a href="#" data-soon><i class="ico"></i>Agency inbox<span class="count">7</span></a>
+        <a href="#" data-soon><i class="ico"></i>Briefs</a>
+      </nav>
+    </div>
+    <div class="side-foot">
+      <button class="howto" id="howto"><b>How problems are ranked</b><span>Harm Score v0.3 · open to all agencies</span></button>
+      <div class="theme-toggle" role="group" aria-label="Theme">
+        <button data-theme="nys" aria-pressed="true">NYS</button>
+        <button data-theme="lofi" aria-pressed="false">Lo-fi</button>
+      </div>
+    <div class="sce-credit" style="font-size:11px;line-height:1.45;color:#5b5f66;border-top:1px solid #d6d9de;padding-top:10px;">Built by Douglas Dahl and Sherry Liu at the <a href="/events/hackathons/public-engagement/" style="color:inherit;">State Capacity Hackathon: Public Engagement</a>, September 30, 2026. Runner-up. Republished on the State Capacity Ecosystem site with permission. <a href="https://github.com/doug-dahl/medicaidhackathon" target="_blank" rel="noopener" style="color:inherit;">Source ↗</a></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="nysbar"><span class="ny">NY</span>An official website of New York State</div>
+    <header class="top">
+      <div class="top-l">
+        <h1 id="viewTitle">Radar</h1>
+        <div class="live"><i></i><b>LIVE</b><span id="updated">· updated just now</span></div>
+        <span class="sample" title="Counts, Harm Scores, trends and unlabeled clips are illustrative. Videos marked Real story or News are real public videos.">Sample data</span>
+      </div>
+      <div class="top-r" id="topRadar">
+        <span class="scope">Medicaid · All NYC · Last 90 days</span>
+        <button class="btn" data-toast="Alert set. You'll get an email when any problem spikes.">Set alert</button>
+        <button class="btn primary" data-toast="Brief drafted with the top 3 problems and their clips.">Generate brief</button>
+      </div>
+      <div class="top-r" id="topImpact" hidden>
+        <span class="scope">NYX standards · 4 cases · Pilot neighborhoods</span>
+        <button class="btn" data-toast="Case study exported as a one-page brief for the NYX Task Force.">Export</button>
+        <button class="btn primary" data-toast="Proposal opened. Tag a Radar problem, pick the standards, describe the fix.">Propose a fix</button>
+      </div>
+    </header>
+
+    <section class="content view" id="view-radar">
+      <div class="head">
+        <div>
+          <h2>Medicaid pain points</h2>
+          <p>Problems are laid out in the order people move through Medicaid. Bigger boxes affect more New Yorkers. Darker boxes get more mentions online.</p>
+        </div>
+        <div class="legend" title="Mentions in the last 30 days">Fewer mentions <span class="ramp"><i style="background:var(--heat-0)"></i><i style="background:var(--heat-2)"></i><i style="background:var(--heat-4)"></i><i style="background:var(--heat-6)"></i><i style="background:var(--heat-7)"></i></span> More mentions</div>
+      </div>
+
+      <div class="filters" id="filters" role="group" aria-label="Filter by agency"></div>
+
+      <div class="journey">
+        <div class="stages" id="stages"></div>
+        <div class="cols" id="cols"></div>
+      </div>
+
+      <div class="selected" id="selected" aria-live="polite"></div>
+
+      <div>
+        <div class="feed-head">
+          <h4 id="feedTitle"></h4>
+          <div class="arrows"><button id="prev" aria-label="Scroll voices left">←</button><button id="next" aria-label="Scroll voices right">→</button></div>
+        </div>
+        <div class="feed-wrap" id="feedWrap" style="margin-top:14px"><div class="feed" id="feed"></div></div>
+      </div>
+    </section>
+
+    <section class="content view" id="view-impact" hidden>
+      <div class="head">
+        <div>
+          <h2>What changed</h2>
+          <p>An agency ships a fix. We tag it to a problem on the Radar and score it against the standards the NYS Office of Customer Experience has published. Then we check whether the neighborhoods that got the fix report fewer problems.</p>
+        </div>
+        <div class="legend">Lower risk <span class="ramp"><i style="background:var(--heat-0)"></i><i style="background:var(--heat-2)"></i><i style="background:var(--heat-4)"></i><i style="background:var(--heat-6)"></i><i style="background:var(--heat-7)"></i></span> Higher risk</div>
+      </div>
+
+      <div>
+        <div class="section-head"><div><span class="eyebrow">NYX Customer Experience Strategy · Nov 2024</span><h3 style="margin-top:6px">The three pillars</h3></div><span class="hint">Five measures: <b>Closing gaps · Time tax · Efficiency · Digital · Satisfaction</b></span></div>
+        <div class="pillars" id="pillars"></div>
+      </div>
+
+      <div>
+        <div class="section-head"><div><h3>What the state has already done</h3><p>Results the Department of Health and NY State of Health have published. The case studies below take the same fixes to NYC neighborhoods.</p></div></div>
+        <div class="stats" id="stats"></div>
+      </div>
+
+      <div>
+        <div class="section-head"><div><h3>The standards</h3><p>From the NYX Playbook, the Digital First Standards, and the NYS Design System. Select one to see which fixes used it.</p></div><span class="hint" id="stdHint"></span></div>
+        <div class="stds" id="stds" role="group" aria-label="Filter case studies by standard"></div>
+      </div>
+
+      <div>
+        <div class="section-head"><div><h3>Case studies</h3><p>Three fixes in pilot neighborhoods. One problem with no fix yet. Risk is the Harm Score for one neighborhood. The dashed line is the number before the fix.</p></div></div>
+        <div class="cases" id="cases"></div>
+      </div>
+
+      <p class="note">Each published result links to its source on NY.gov, the NYS Office of Customer Experience, or the NYS Department of Health. Pilot neighborhoods, risk numbers, and post trends are sample data for the demo. Videos are public YouTube videos with their original attribution. Harm Score is explained under “How problems are ranked.” Pillars: <a href="https://www.ny.gov/new-york-experience-nyx/three-pillars-new-yorks-cx" target="_blank" rel="noopener">Three Pillars of New York's CX</a> · Standards: <a href="https://www.ny.gov/new-york-experience-nyx/digital-first-standards" target="_blank" rel="noopener">Digital First Standards</a> · Components: <a href="https://designsystem.ny.gov/" target="_blank" rel="noopener">NYS Design System</a>.</p>
+    </section>
+  </main>
+</div>
+
+<div class="modal" id="player" role="dialog" aria-modal="true" aria-label="Clip player">
+  <button class="close" id="closePlayer" aria-label="Close">×</button>
+  <div class="player">
+    <div class="screen" id="screen"><div class="prog"><i id="prog"></i></div><div class="cap" id="cap"></div></div>
+    <div class="player-side">
+      <span class="eyebrow" id="pEyebrow"></span>
+      <h5 id="pTitle"></h5>
+      <p id="pMeta"></p>
+      <div class="row">
+        <button class="btn" id="pPrev">← Prev</button>
+        <button class="btn" id="pNext">Next →</button>
+        <button class="btn primary" data-toast="Clip added to the brief (face blurred, name removed).">Add to brief</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal rank-modal" id="rank" role="dialog" aria-modal="true" aria-label="How problems are ranked">
+  <div class="sheet">
+    <button class="close" data-close="rank" aria-label="Close">×</button>
+    <h5>How problems are ranked</h5>
+    <p>A problem is a group of voices that share what broke, where in the journey, and who owns it. It must be confirmed by 2+ independent sources and 50+ people before it's scored.</p>
+    <div class="bar">
+      <div style="flex:35;background:var(--heat-7)"><span>Severity</span><b>35</b></div>
+      <div style="flex:30;background:var(--heat-5)"><span>Reach</span><b>30</b></div>
+      <div style="flex:20;background:var(--heat-3)"><span>Equity</span><b>20</b></div>
+      <div style="flex:15;background:var(--heat-2)"><span>Velocity</span><b>15</b></div>
+    </div>
+    <p><b>Never counts:</b> views, likes, shares, or how angry a post sounds. Clips tell the story, but they don't set the rank.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ------------------------------------------------------------------ data */
+const STAGES = [
+  { id: "apply",  n: 1, name: "Apply" },
+  { id: "verify", n: 2, name: "Verify" },
+  { id: "enroll", n: 3, name: "Enroll" },
+  { id: "care",   n: 4, name: "Use care" },
+  { id: "renew",  n: 5, name: "Renew", note: "↻ back to 2" },
+];
+const AGENCIES = ["NYS DOH", "NYC HRA", "NY State of Health"];
+const AGENCY_INFO = {
+  "NYS DOH": "New York State Department of Health. Runs Medicaid statewide through its Office of Health Insurance Programs (OHIP), including CDPAP home care, NYRx pharmacy, and Medicaid transportation.",
+  "NYC HRA": "NYC Human Resources Administration, the city's local Medicaid office. Handles applications and renewals for 65+, disability and long-term care cases, plus Medicare Savings Program applications. Helpline 888-692-6116.",
+  "NY State of Health": "New York's official health plan marketplace, run by NYS DOH. Enrolls and renews the Essential Plan and most Medicaid for families, kids and adults under 65, and sends the 2027 work-rule notices. 1-855-355-5777.",
+};
+
+// Sample data for the demo. Reach = New Yorkers affected; harm = Harm Score 0–100.
+const PROBLEMS = [
+  { id: "helpline", stage: "apply", agency: "NYC HRA", note: "HRA Medicaid Helpline, 888-692-6116.", reach: 54000, harm: 68, shape: "wave",
+    title: "Helpline holds over 60 minutes",
+    clips: [
+      ["YouTube", "8:55", "Homeless in the Bronx and getting treated for a hand infection. A street interview.", "William · Bronx · Nourish Street", "Real story", { yt: "PqxplFX8hVo", kind: "story", fit: "context", desc: true }],
+      ["YouTube", "3:05", "MetroPlus members who had been homeless share how they moved into housing.", "MetroPlusHealth members · NYC · 2019", "Real story", { yt: "RZ5Fi5jn5Oo", kind: "story", fit: "context", desc: true }],
+      ["TikTok", "0:22", "I held for 94 minutes and it hung up on me.", "Applicant · Jamaica", "3h ago"],
+      ["Facebook", "0:40", "I took a day off work just to call.", "Parent · Bronx", "1d ago"],
+      ["Reddit", "post", "Is there anyone who has actually reached a person?", "Applicant · Brooklyn", "2d ago"],
+      ["YouTube", "1:03", "Press 1 for English. Then nothing.", "Applicant · Queens", "3d ago"],
+    ] },
+  { id: "work", stage: "verify", agency: "NYS DOH", note: "Starts Jan 1, 2027. NY State of Health mailed notices on Sept 1, 2026.", reach: 96000, harm: 74, shape: "surge", tag: "▲ EMERGING",
+    title: "Fear about 2027 work-reporting rules",
+    clips: [
+      ["BronxNet", "news", "A Bronx call to action on protecting SNAP and Medicaid. About 30,000 Bronx residents are at risk of losing coverage.", "BronxNet · June 2026", "News", { yt: "CL-HHwAj9jo", kind: "news", fit: "direct", desc: true }],
+      ["YouTube", "1:55", "1199SEIU members rally at Montefiore against proposed Medicaid cuts.", "Ruby Graham and 1199SEIU members · Bronx · 2019", "Real story", { yt: "RyVWvO6FyCU", kind: "story", fit: "context", desc: true }],
+      ["YouTube", "1:53", "Without the help of Medicaid, I'd be in the train system, sleeping.", "Joel · Sun River Health patient", "Real story", { yt: "e5hGbhQvz4c", kind: "story", fit: "context", lead: true }],
+      ["YouTube", "3:18", "Kidney transplant patient: Medicaid covers his anti-rejection meds and home aide. Speaks English, then Spanish.", "Robert Cabrera · Bronx · Medicaid Day of Action", "Real story", { yt: "5Skd_CO-Byk", start: 856, end: 1054, kind: "story", fit: "context", desc: true }],
+      ["YouTube", "2:52", "A mom on what Medicaid means for her autistic son.", "Phyllis Lombardi · NYC · borough not stated", "Real story", { yt: "VNe2scG_QNs", kind: "story", fit: "context", desc: true }],
+      ["YouTube", "3:26", "Sun River Health patients share how Medicaid has affected their lives.", "Sun River Health · compilation", "Real story", { yt: "4WVhjBiXNDk", kind: "story", fit: "context", desc: true }],
+      ["Shorts", "0:58", "I'm a caregiver. Does that count as work?", "Enrollee · Brooklyn", "1h ago"],
+      ["TikTok", "0:42", "In July I work 60 hours a week. In January there's nothing.", "Concessions · Far Rockaway", "4h ago"],
+      ["Facebook", "0:31", "School's out July and August. So am I.", "Cafeteria worker · Soundview", "8h ago"],
+      ["Reddit", "post", "Nobody told me I have to report. Report where?", "Home attendant · Brownsville", "1d ago"],
+      ["TikTok", "0:27", "My insulin is $300. Without Medicaid I just won't take it.", "Event staff · Harlem", "2d ago"],
+    ] },
+  { id: "ep", stage: "enroll", agency: "NY State of Health", note: "Since July 1, 2026, people earning 200–250% of the poverty line no longer qualify.", reach: 42000, harm: 66, shape: "step",
+    title: "Essential Plan change confusion",
+    clips: [
+      ["ABC7", "3:32", "450,000 New Yorkers are losing their Essential Plan. An NYC freelancer opens the email saying his coverage ends.", "Mike Walsh · NYC · ABC7, Dec 2025", "Real story", { yt: "WflVUmR-_3g", kind: "story", fit: "direct", desc: true }],
+      ["TikTok", "0:35", "My letter says I'm moved. Moved to what?", "Enrollee · Corona", "5h ago"],
+      ["Facebook", "0:48", "Am I still covered next month? Nobody can say.", "Enrollee · Sunset Park", "1d ago"],
+      ["Reddit", "post", "Three different answers from three different people.", "Enrollee · Flushing", "3d ago"],
+    ] },
+  { id: "msp", stage: "enroll", agency: "NYC HRA", note: "HRA processes MSP applications in NYC. HIICAP (NYC Aging) offers free counseling.", reach: 33000, harm: 58, shape: "climb",
+    title: "Seniors miss Medicare Savings help",
+    clips: [
+      ["Facebook", "1:10", "I paid my premiums for years. I qualified the whole time.", "Retiree, 71 · Bronx", "6h ago"],
+      ["YouTube", "2:04", "My mother didn't know this program existed.", "Daughter · Washington Heights", "2d ago"],
+      ["Reddit", "post", "The form is 14 pages. She's 83.", "Caregiver · Queens", "4d ago"],
+    ] },
+  { id: "cdpap", stage: "care", agency: "NYS DOH", note: "Since April 1, 2025, Public Partnerships LLC (PPL) is the only CDPAP fiscal intermediary.", reach: 71000, harm: 87, shape: "spike", tag: "▲ SPIKING", hot: true,
+    title: "Home-care aides unpaid after CDPAP switch",
+    clips: [
+      ["YouTube", "0:42", "Paralyzed as a teenager, Medicaid-funded home care let him finish college and raise a family.", "Jose Hernandez · Bronx", "Real story", { yt: "6DaH3Pg0pNg", kind: "story", fit: "context", desc: true }],
+      ["TikTok", "0:42", "If I stop, my mother can't get out of bed.", "Aide · Bronx", "2h ago"],
+      ["Facebook", "0:31", "My hours say zero. I worked 60.", "Aide · Brooklyn", "5h ago"],
+      ["Reddit", "post", "My aide cried in my kitchen today.", "Consumer, 78 · Bronx", "9h ago"],
+      ["TikTok", "0:18", "I called 14 times. Nobody knows.", "Aide · Queens", "1d ago"],
+      ["YouTube", "1:12", "I borrowed rent from my sister.", "Aide · Staten Island", "1d ago"],
+      ["TikTok", "0:27", "If she quits, I go to a nursing home.", "Consumer · Manhattan", "2d ago"],
+      ["Facebook", "0:49", "I love this work. I can't afford it.", "Aide · Bronx", "3d ago"],
+    ] },
+  { id: "rides", stage: "care", agency: "NYS DOH", note: "DOH contracts Medical Answering Services (MAS) to run Medicaid trips.", reach: 12000, harm: 55, shape: "bump",
+    title: "Medicaid rides no-show",
+    clips: [
+      ["TikTok", "0:20", "Missed dialysis again. The van never came.", "Patient · East New York", "7h ago"],
+      ["Reddit", "post", "Waited 2 hours outside the clinic in the cold.", "Patient · Bronx", "2d ago"],
+    ] },
+  { id: "dental", stage: "care", agency: "NYS DOH", reach: 9000, harm: 48, shape: "climb",
+    title: "Dentists not taking Medicaid",
+    clips: [
+      ["Reddit", "post", "Called 11 dentists. Zero take Medicaid.", "Parent · Queens", "1d ago"],
+      ["TikTok", "0:25", "My son's tooth has hurt for two months.", "Parent · Brooklyn", "3d ago"],
+    ] },
+  { id: "renewal", stage: "renew", agency: "NYC HRA", note: "HRA renews 65+, disability and long-term care cases. Most other renewals run through NY State of Health.", reach: 138000, harm: 81, shape: "escalate", tag: "PERSISTENT · 90 DAYS",
+    title: "Renewal packets arrive late, so enrollees lose coverage",
+    clips: [
+      ["BronxNet", "news", "The Bronx is Covered: Sen. Gustavo Rivera urges Bronx residents to recertify their Medicaid.", "BronxNet · 2024", "News", { yt: "CTUF6lcWotU", kind: "news", fit: "direct", desc: true }],
+      ["Reels", "1:05", "I found out my son lost coverage at the pharmacy counter. Nobody sent us anything.", "Parent · Queens", "3h ago"],
+      ["TikTok", "0:33", "The letter came the day after the deadline.", "Enrollee · Bronx", "6h ago"],
+      ["Facebook", "0:52", "I renewed online. It still says terminated.", "Enrollee · Harlem", "1d ago"],
+      ["Reddit", "post", "Third time this year I've had to reapply from scratch.", "Enrollee · Brooklyn", "2d ago"],
+      ["YouTube", "1:40", "My chemo was scheduled. Then I wasn't covered.", "Patient · Staten Island", "4d ago"],
+    ] },
+  { id: "pharmacy", stage: "renew", agency: "NYS DOH", note: "Pharmacy claims run through NYRx (DOH). The termination itself comes from HRA or NY State of Health.", reach: 21000, harm: 62, shape: "surge",
+    title: "Coverage shows terminated at pharmacy",
+    clips: [
+      ["TikTok", "0:29", "Walked out without my inhaler.", "Enrollee · Hunts Point", "8h ago"],
+      ["Facebook", "0:37", "The pharmacist said call Medicaid. Medicaid said call the pharmacy.", "Enrollee · Flatbush", "2d ago"],
+    ] },
+  { id: "language", stage: "renew", agency: "NYC HRA", reach: 18000, harm: 57, shape: "step",
+    title: "Notices not in enrollee's language",
+    clips: [
+      ["TikTok", "0:24", "I got a letter in English. I read Spanish.", "Enrollee · Washington Heights", "5h ago"],
+      ["Reddit", "post", "My grandmother reads Bengali. The notice was English only.", "Grandson · Jamaica", "3d ago"],
+    ] },
+];
+
+/* ------------------------------------------------- design impact data */
+const SRC = {
+  dfs:      { label: "Digital First Standards · NYS Digital Service", url: "https://www.ny.gov/new-york-experience-nyx/digital-first-standards" },
+  strategy: { label: "NYS Customer Experience Strategy · Nov 2024", url: "https://www.ny.gov/sites/default/files/2024-11/NYS-CX-Strategy-Nov-24.pdf" },
+  pillars:  { label: "Three Pillars of New York's CX", url: "https://www.ny.gov/new-york-experience-nyx/three-pillars-new-yorks-cx" },
+  playbook: { label: "NYX Playbook · Call Center Standards", url: "https://www.ny.gov/programs/new-york-experience-nyx" },
+  nysds:    { label: "NYS Design System", url: "https://designsystem.ny.gov/" },
+  annual:   { label: "NYS CX Annual Report Summary · Nov 2024", url: "https://www.ny.gov/sites/default/files/2024-11/NYS-CX-Annual-Report-Summary-Nov-24.pdf" },
+  accomp:   { label: "NYX Accomplishments · ny.gov", url: "https://www.ny.gov/new-york-experience-nyx/new-york-state-experience-accomplishments" },
+  blog26:   { label: "CX Accomplishments Across NYS · Feb 2026", url: "https://www.ny.gov/blog/cx-accomplishments-across-new-york-state" },
+  cdpap:    { label: "NYS DOH CDPAP transition update · Mar 2025", url: "https://www.health.ny.gov/press/releases/2025/2025-03-24_cdpap_update.htm" },
+  nyha:     { label: "NY Health Access · CDPAP transition archive", url: "https://nyhealthaccess.org/entry/256/" },
+};
+const link = s => `<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`;
+
+// The three NYX pillars, as published by the Office of Customer Experience.
+const PILLARS = [
+  { name: "Customer-Centric Design", desc: "Listen to residents. Design services they can use. Make the path to help clear.", sub: ["Human-centered design", "Plain language", "Customer service standards", "Digital First Standards", "Trust and transparency"] },
+  { name: "Innovative Solutions", desc: "Use data and modern tools to make access simpler.", sub: ["Voice of the customer", "Journey assessments", "Policy reviews", "Process improvement"] },
+  { name: "Commitment to Excellence", desc: "Set performance standards. Hold agencies to them. Keep improving.", sub: ["CX culture", "CX teams", "Annual action plans and reporting"] },
+];
+
+// Documented statewide results the case studies build on.
+const STATS = [
+  { num: "~70%", lbl: "Medicaid renewals completed automatically, against a target of 50%, after DOH automated eligibility checks.", src: SRC.annual },
+  { num: "20%", lbl: "Enrollment gaps closed year over year after DOH changed the Medicaid renewal process.", src: SRC.annual },
+  { num: "30 min", lbl: "Cut from the time it takes to apply for Medicaid after the application was made to work on a phone, for 3.4 million users.", src: SRC.annual },
+  { num: "650k", lbl: "Texts and WhatsApp messages in 7 languages from NY State of Health. 41% of the people who got one secured coverage.", src: SRC.accomp },
+];
+
+// Design standards proposed by the NYS Office of Customer Experience and the NYS Digital Service.
+const STANDARDS = [
+  { id: "plain",      code: "Content",        short: "Plain language",        name: "Plain language at an eighth-grade reading level", desc: "Limited jargon, short descriptive headings, content in small logical sections.", src: SRC.dfs },
+  { id: "cta",        code: "Design",         short: "Clear call to action",  name: "Clear, prominent calls to action", desc: "The next step is visible. The important thing comes first.", src: SRC.dfs },
+  { id: "mobile",     code: "Design",         short: "Mobile-first",          name: "Mobile-first, with a focus on content", desc: "Works on the phone people have. Responsive on every device and current browser.", src: SRC.dfs },
+  { id: "lang",       code: "Content",        short: "Language access",       name: "Multilingual support for limited-English users", desc: "Translations tested for accuracy. Outreach to the communities the state has missed.", src: SRC.dfs },
+  { id: "a11y",       code: "Accessibility",  short: "WCAG 2.2 AA",           name: "Conforms to WCAG 2.2 AA", desc: "Tested with screen readers and keyboards. Captions and ASL on video. A published accessibility statement.", src: SRC.dfs },
+  { id: "hcd",        code: "6-month objective", short: "Human-centered design", name: "Human-centered design on every customer-facing project", desc: "Research with New Yorkers while the project is researched, built, and rolled out.", src: SRC.strategy },
+  { id: "forms",      code: "Design",         short: "Digital forms first",   name: "Digital forms whenever possible", desc: "Tested with users. Refined. Tested again.", src: SRC.dfs },
+  { id: "callcenter", code: "Playbook",       short: "Call center standards", name: "Call center standards: call-backs over holds", desc: "Short menus. A call back for callers who do not speak English. A survey after the call.", src: SRC.playbook },
+  { id: "measure",    code: "Governance",     short: "Measure and report",    name: "Define KPIs, measure, and report impact", desc: "An analytics plan, feedback surveys, and an annual action plan for the three critical agencies.", src: SRC.strategy },
+  { id: "nysds",      code: "Components",     short: "NYS Design System",     name: "Ship with shared NYS Design System components", desc: "nys-alert, nys-processlist, nys-stepper. Built to WCAG AA and matched to the Figma library.", src: SRC.nysds },
+];
+
+// Case studies: a design fix tagged to a Radar problem, and what happened to the neighborhoods that got it.
+// Documented facts carry a source. Pilot neighborhoods and risk numbers are sample data.
+const yt = (plat, desc, meta, id, kind = "story", extra = {}) => [plat, kind, desc, meta, kind === "news" ? "News" : "Real story", Object.assign({ yt: id, kind, desc: true }, extra)];
+const CASES = [
+  { id: "envelope", n: 1, problem: "renewal", agency: "NYS DOH + NYC HRA", measure: "Closing gaps", status: "shipped", shipDay: 48, floor: .42,
+    title: "The renewal envelope now says renew",
+    what: "In focus groups, New Yorkers said the Medicaid renewal envelope looked like junk mail. They did not open it. The deadline passed. DOH redesigned the envelope. It now says it is time to renew, in large red type, and the notice inside is in plain language. HRA is piloting the same envelope in five NYC districts.",
+    facts: ["Administrative renewal rate reached about 70% against a 50% target", "Enrollment gaps closed 20% over the prior year", "Renewals rose as soon as the new envelope went out"],
+    source: SRC.annual, standards: ["cta", "plain", "hcd", "measure"],
+    harmBefore: 81, harmAfter: 59,
+    hoods: [["Soundview · Bronx", 88, 61], ["Jamaica · Queens", 82, 58], ["Central Harlem · Manhattan", 76, 54], ["East New York · Brooklyn", 73, 57], ["Stapleton · Staten Island", 64, 49]],
+    videos: [
+      yt("BronxNet", "The Bronx is Covered: Sen. Gustavo Rivera urges residents to recertify, and shows them how.", "BronxNet · Bronx", "CTUF6lcWotU", "news"),
+      yt("YouTube", "Michelle got her renewal notice, called a Certified Enrollment Assistor, and stayed covered.", "Michelle · NY State of Health", "1ZrR7HxU3-I"),
+      yt("YouTube", "Robert's Medicaid covers his anti-rejection meds and his home aide. In English, then Spanish.", "Robert Cabrera · Bronx · Montefiore", "5Skd_CO-Byk", "story", { start: 856, end: 1054 }),
+    ] },
+  { id: "nudges", n: 2, problem: "language", agency: "NY State of Health + NYC HRA", measure: "Improving the digital experience", status: "shipped", shipDay: 62, floor: .5,
+    title: "Renewal reminders by text, in seven languages",
+    what: "Enrollees said the notice came in English only, or did not come. NY State of Health now sends renewal reminders by text and WhatsApp in seven languages. Each one is short and has one link to renew from a phone. The NYC pilot covers the five neighborhoods where notices in the wrong language caused the most posts.",
+    facts: ["650,000 messages sent in 7 languages", "41% of the people who got a message secured coverage", "Hundreds of thousands of New Yorkers re-enrolled"],
+    source: SRC.accomp, standards: ["lang", "mobile", "plain", "measure"],
+    harmBefore: 57, harmAfter: 44,
+    hoods: [["Washington Heights · Manhattan", 74, 48], ["Jamaica · Queens", 71, 50], ["Corona · Queens", 68, 47], ["Sunset Park · Brooklyn", 63, 44], ["Flushing · Queens", 60, 41]],
+    videos: [
+      yt("YouTube", "Robert tells his story in English, then again in Spanish, so his neighbors hear it too.", "Robert Cabrera · Bronx · Montefiore", "5Skd_CO-Byk", "story", { start: 856, end: 1054 }),
+      yt("YouTube", "Seven Sun River Health patients on what staying covered let them do.", "Sun River Health · NY", "4WVhjBiXNDk"),
+      yt("YouTube", "A mom on what Medicaid means for her autistic son.", "Phyllis Lombardi · NYC", "VNe2scG_QNs"),
+    ] },
+  { id: "callback", n: 3, problem: "helpline", agency: "NYS DOH + NYC HRA", measure: "Reducing the time tax", status: "shipped", shipDay: 40, floor: .55,
+    title: "The helpline calls back",
+    what: "Callers waited more than an hour, often in a language the menu did not offer. DOH shortened the menu, added messages about renewal, and let callers who do not speak English ask for a call back instead of waiting. The HRA Medicaid helpline is piloting the same call back and a survey in nine languages.",
+    facts: ["Shorter phone menus, with messages about renewal", "Call backs and phone surveys in nine languages", "Tax and Finance replaced hold times with call backs. This pilot copies that."],
+    source: SRC.annual, standards: ["callcenter", "lang", "plain", "measure"],
+    harmBefore: 68, harmAfter: 52,
+    hoods: [["Jamaica · Queens", 79, 58], ["Mott Haven · Bronx", 75, 55], ["Flatbush · Brooklyn", 69, 53], ["Far Rockaway · Queens", 66, 50], ["Central Harlem · Manhattan", 61, 47]],
+    videos: [
+      yt("YouTube", "35 formerly homeless MetroPlus members moved into housing once someone picked up.", "MetroPlus members · NYC", "RZ5Fi5jn5Oo"),
+      yt("YouTube", "Without Medicaid, Joel says, he would be sleeping in the train system.", "Joel Medina · Bronx · Sun River Health", "e5hGbhQvz4c"),
+      yt("YouTube", "William, homeless in the Bronx, on getting treated for a hand infection.", "William Rada · Bronx", "PqxplFX8hVo"),
+    ] },
+  { id: "cdpap", n: 4, problem: "cdpap", agency: "NYS DOH", measure: "Increasing customer satisfaction", status: "open", shipDay: 96,
+    title: "CDPAP aides are still not paid",
+    what: "In April 2025 the state moved CDPAP payroll to one company. Aides report hours they were not paid for and no one to call. DOH has told plans and local districts to mail consumers a letter on how to get help. Legislators have asked for a clear phone escalation path. A design brief for a one-page pay notice and a published escalation path is with DOH. Nothing has shipped. The risk is still rising.",
+    facts: ["280,000 CDPAP consumers moved to one fiscal intermediary on April 1, 2025", "DOH ordered plans and local districts to send “how to get help” letters to consumers", "Legislators asked for faster pay disputes and a clearer phone escalation path"],
+    source: SRC.nyha, standards: ["plain", "cta", "callcenter", "a11y"],
+    hoods: [["Mott Haven · Bronx", 86, 91], ["Flatbush · Brooklyn", 80, 84], ["Jamaica · Queens", 77, 83], ["Stapleton · Staten Island", 72, 78], ["Washington Heights · Manhattan", 70, 76]],
+    videos: [
+      yt("YouTube", "Paralyzed as a teenager, Medicaid-funded home care let Jose finish college and raise a family.", "Jose Hernandez · Bronx", "6DaH3Pg0pNg"),
+      yt("YouTube", "Ruby Graham and other 1199SEIU patients at the Stop the Medicaid Cuts rally.", "Ruby Graham · Bronx", "RyVWvO6FyCU"),
+    ] },
+];
+
+/* --------------------------------------------------------------- helpers */
+const $ = (s, el = document) => el.querySelector(s);
+const fmtK = n => n >= 1000 ? Math.round(n / 1000) + "k" : String(n);
+const fmt = n => n.toLocaleString("en-US");
+const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
+
+
+function rng(seed) {         // deterministic noise so trends don't jump on reload
+  let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647;
+}
+// Trend shapes are exaggerated on purpose so the demo reads at a glance.
+function trend(p) {          // 90 days of posts/day
+  const r = rng(p.id.split("").reduce((a, c) => a + c.charCodeAt(0), 7) * 97);
+  const base = p.reach / 3000;
+  const ease = x => x * x * (3 - 2 * x);
+  return Array.from({ length: 90 }, (_, d) => {
+    const t = d / 89, n = (r() - .5) * .1;
+    let v;
+    switch (p.shape) {
+      case "spike":      v = d < 62 ? .12 : .12 + Math.pow((d - 62) / 27, 2.4) * 3.2; break;   // quiet, then explodes
+      case "surge":      v = .08 + Math.pow(t, 3) * 2.6; break;                               // slow burn → surge
+      case "step":       v = d < 52 ? .2 : .2 + ease(Math.min(1, (d - 52) / 10)) * 1.5; break; // letters mailed → jump
+      case "escalate":   v = .45 + ease(Math.min(1, d / 30)) * .9 + (d > 60 ? (d - 60) / 29 * .7 : 0); break;
+      case "wave":       v = .35 + (1 - ((d % 30) / 30)) * (.5 + t * 1.1); break;             // monthly peaks, growing
+      case "bump":       v = .2 + Math.exp(-Math.pow((d - 58) / 9, 2)) * 1.8 + t * .3; break; // cold snap
+      case "climb":      v = .15 + t * 1.6; break;
+      default:           v = .3 + t * .8;
+    }
+    return Math.max(1, Math.round(base * Math.max(.04, v + n) * 1.5));
+  });
+}
+const rank = c => (c[5] ? (c[5].fit === "direct" ? 0 : c[5].kind === "story" ? 1 : 2) : 3);   // on-topic real, real context, news, samples
+PROBLEMS.forEach(p => { p.series = trend(p); p.mentions = p.series.slice(-30).reduce((a, b) => a + b, 0); p.clips.sort((a, b) => rank(a) - rank(b)); });
+// shade = mentions in the last 30 days, spread by rank so every step of the ramp is used
+[...PROBLEMS].sort((a, b) => a.mentions - b.mentions).forEach((p, i, arr) => p.lvl = Math.round(i / (arr.length - 1) * 7));
+
+// 120 days of posts/day for a case study: rising until the fix ships, then easing toward a floor.
+// Open cases keep climbing. Exaggerated on purpose, like the Radar trends.
+function impactSeries(c) {
+  const p = PROBLEMS.find(x => x.id === c.problem);
+  const r = rng(c.id.length * 131 + c.n * 17), base = p.reach / 3000;
+  return Array.from({ length: 120 }, (_, d) => {
+    const n = (r() - .5) * .12;
+    let v;
+    if (c.status === "open") v = .3 + Math.pow(d / 119, 2.2) * 2.4;
+    else if (d < c.shipDay) v = .6 + (d / c.shipDay) * .9;
+    else { const t = (d - c.shipDay) / (119 - c.shipDay); v = 1.5 - (1.5 - c.floor) * (1 - Math.exp(-t * 4)); }
+    return Math.max(1, Math.round(base * Math.max(.05, v + n) * 10));
+  });
+}
+const riskLvl = a => Math.max(0, Math.min(7, Math.floor((a - 30) / 8)));   // neighborhood risk 0–100 → heat step
+const dayLabel = d => new Date(Date.now() - (119 - d) * 864e5).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+CASES.forEach(c => { c.series = impactSeries(c); c.shipped = dayLabel(c.shipDay); });
+
+function sparkPath(series, w, h, pad = 2) {
+  const max = Math.max(...series), min = 0;
+  return series.map((v, i) => {
+    const x = (i / (series.length - 1)) * w;
+    const y = h - pad - ((v - min) / (max - min || 1)) * (h - pad * 2);
+    return (i ? "L" : "M") + x.toFixed(1) + " " + y.toFixed(1);
+  }).join(" ");
+}
+
+/* ----------------------------------------------------------------- state */
+const state = { agency: null, selected: "cdpap", nextNewAt: 0, view: "radar", std: null };
+
+/* ---------------------------------------------------------------- render */
+function renderFilters() {
+  const el = $("#filters");
+  const counts = Object.fromEntries(AGENCIES.map(a => [a, PROBLEMS.filter(p => p.agency === a).length]));
+  const inView = PROBLEMS.filter(p => !state.agency || p.agency === state.agency).reduce((s, p) => s + p.reach, 0);
+  el.innerHTML = `<span class="lbl">Agency</span>` +
+    `<button class="chip" data-agency="" aria-pressed="${!state.agency}">All agencies</button>` +
+    AGENCIES.map(a => `<button class="chip" data-agency="${a}" aria-pressed="${state.agency === a}" data-tip="${AGENCY_INFO[a]}" aria-describedby="tip-${a.replace(/\W+/g, "")}">${a} · ${counts[a]}</button><span hidden id="tip-${a.replace(/\W+/g, "")}">${AGENCY_INFO[a]}</span>`).join("") +
+    `<span class="inview"><b>${fmt(inView)}</b> New Yorkers affected in view</span>`;
+}
+
+function renderStages() {
+  $("#stages").innerHTML = STAGES.map((s, i) => {
+    const total = PROBLEMS.filter(p => p.stage === s.id).reduce((a, p) => a + p.reach, 0);
+    const arr = s.note || (i < STAGES.length - 1 ? "→" : "");
+    return `<div class="stage" style="flex:${total}"><span class="n">${s.n}</span><span class="t">${s.name}</span><span class="arr">${arr}</span></div>`;
+  }).join("");
+}
+
+function renderCols() {
+  $("#cols").innerHTML = STAGES.map(s => {
+    const items = PROBLEMS.filter(p => p.stage === s.id).sort((a, b) => b.reach - a.reach);
+    const total = items.reduce((a, p) => a + p.reach, 0);
+    return `<div class="col" style="flex:${total}">` + items.map(p => {
+      const lvl = p.lvl, light = lvl <= 1;
+      const clip = p.clips.find(c => c[5] && c[5].lead) || p.clips.find(c => c[5] && c[5].fit === "direct" && c[5].kind === "story")
+        || p.clips.find(c => c[5] && c[5].kind === "story") || p.clips.find(c => !c[5]) || p.clips[0];
+      const clipIdx = p.clips.indexOf(clip), real = clip[5] && clip[5].yt;
+      const cs = CASES.find(c => c.problem === p.id);
+      const tags = [p.tag ? `<span class="tag ${p.hot ? "hot" : ""}">${p.tag}</span>` : "", cs && cs.status !== "open" ? `<span class="tag fix">↘ FIX IN PILOT</span>` : ""].filter(Boolean).join("");
+      return `<button class="tile ${light ? "light" : ""}" data-id="${p.id}" style="flex:${p.reach};background:var(--heat-${lvl})"
+          aria-pressed="${state.selected === p.id}" aria-label="${p.title}, ${fmt(p.reach)} New Yorkers affected, ${fmt(p.mentions)} mentions in the last 30 days">
+        <div class="top-part">
+          ${tags ? `<div class="tags">${tags}</div>` : ""}
+          <span class="title">${p.title}</span>
+          <div class="preview"><span class="thumb ${real ? "yt" : ""}" data-pid="${p.id}" data-idx="${clipIdx}" title="Play this clip" style="${real ? `background-image:url(https://i.ytimg.com/vi/${clip[5].yt}/mqdefault.jpg)` : ""}"><span></span></span><span class="pv-text">${clip[5] && clip[5].desc ? `<span>${clip[2]}</span>` : `<q>${clip[2]}</q>`}${real ? `<small>${clip[3].split(" · ")[0]}</small>` : ""}</span></div>
+        </div>
+        <div class="bottom">
+          <svg class="spark" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true"><path d="${sparkPath(p.series, 100, 28)}" fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+          <span class="num">${fmtK(p.reach)}</span>
+        </div>
+      </button>`;
+    }).join("") + `</div>`;
+  }).join("");
+  sizeTiles();
+  applyFilter();
+}
+
+function sizeTiles() {        // pick a content density per tile from its rendered box
+  document.querySelectorAll(".tile").forEach(t => {
+    const { width: w, height: h } = t.getBoundingClientRect();
+    t.classList.remove("xs", "sm", "md", "lg");
+    t.classList.add(h < 90 ? "xs" : h < 170 || w < 140 ? "sm" : h > 380 && w > 190 ? "lg" : "md");
+  });
+}
+
+function applyFilter() {
+  document.querySelectorAll(".tile").forEach(t => {
+    const p = PROBLEMS.find(x => x.id === t.dataset.id);
+    t.classList.toggle("dim", !!state.agency && p.agency !== state.agency);
+  });
+}
+
+function renderSelected() {
+  const p = PROBLEMS.find(x => x.id === state.selected);
+  const stage = STAGES.find(s => s.id === p.stage);
+  const s = p.series, avg = a => a.reduce((x, y) => x + y, 0) / a.length;
+  const change = Math.round((avg(s.slice(-7)) / avg(s.slice(0, 7)) - 1) * 100);
+  const cs = CASES.find(c => c.problem === p.id);
+  $("#selected").innerHTML = `
+    <div class="who">
+      <span class="eyebrow">${stage.n} · ${stage.name} · <span class="tip-label" tabindex="0" data-tip="${AGENCY_INFO[p.agency]}">${p.agency}</span></span>
+      <h3>${p.title}</h3>
+      ${p.note ? `<span class="note">${p.note}</span>` : ""}
+    </div>
+    <div class="big">${fmt(p.reach)}<small>New Yorkers affected</small><small style="margin-top:2px">${fmt(p.mentions)} mentions (30 days) · Harm ${p.harm}</small></div>
+    <div class="chart" id="chart">
+      <span class="readout" id="readout"></span>
+      <svg viewBox="0 0 360 72" preserveAspectRatio="none" aria-label="Posts per day over the last 90 days, ${change >= 0 ? "up" : "down"} ${Math.abs(change)} percent">
+        <path d="${sparkPath(s, 360, 72, 4)} L360 72 L0 72 Z" fill="var(--heat-0)" opacity=".7"/>
+        <path d="${sparkPath(s, 360, 72, 4)}" fill="none" stroke="var(--heat-6)" stroke-width="2.5"/>
+        <line id="cursor" x1="0" x2="0" y1="0" y2="72" stroke="var(--nys-color-ink)" stroke-width="1" opacity="0"/>
+      </svg>
+      <div class="axis"><span>90 days ago</span><span><b style="color:var(--nys-color-ink)">${change >= 0 ? "▲" : "▼"} ${fmt(Math.abs(change))}%</b> posts/day vs. 90 days ago</span><span>Today</span></div>
+    </div>
+    <div class="acts">
+      <button class="btn primary" data-play="0">▶ Watch compilation</button>
+      <button class="btn" data-toast="Sent to ${p.agency} with the top clips and the 90-day trend.">Send to ${p.agency}</button>
+      ${cs ? `<a class="btn" href="#impact/${cs.id}">${cs.status === "open" ? "Design brief open →" : "See design impact →"}</a>` : ""}
+    </div>`;
+  const chart = $("#chart"), cursor = $("#cursor"), readout = $("#readout");
+  chart.addEventListener("mousemove", e => {
+    const r = chart.getBoundingClientRect();
+    const i = Math.max(0, Math.min(89, Math.round(((e.clientX - r.left) / r.width) * 89)));
+    const x = (i / 89) * 360;
+    cursor.setAttribute("x1", x); cursor.setAttribute("x2", x); cursor.setAttribute("opacity", 1);
+    readout.style.left = (i / 89) * 100 + "%";
+    readout.textContent = `${89 - i === 0 ? "Today" : (89 - i) + "d ago"} · ${s[i]} posts`;
+  });
+  chart.addEventListener("mouseleave", () => { cursor.setAttribute("opacity", 0); readout.textContent = ""; });
+}
+
+function renderFeed() {
+  const p = PROBLEMS.find(x => x.id === state.selected);
+  $("#feedTitle").innerHTML = `Voices · ${p.title}<span>${plural(p.clips.filter(c => c[5]).length, "real video")} · ${plural(p.clips.filter(c => !c[5]).length, "sample clip")} (illustrative)</span>`;
+  const lvl = p.lvl;
+  $("#feed").innerHTML = p.clips.map((c, i) => {
+    const shade = `var(--heat-${Math.max(2, Math.min(7, lvl - (i % 3)))})`;
+    const v = c[5], bg = v && v.yt ? `background:${shade} url(https://i.ytimg.com/vi/${v.yt}/hqdefault.jpg)` : `background:${shade}`;
+    return `<button class="card" data-play="${i}" aria-label="Play: ${c[2]}">
+      <div class="vid ${v && v.yt ? "yt" : ""}" style="${bg}">
+        <span class="plat">${c[0]}${!["post", "news", "story", "rally", "compilation"].includes(c[1]) ? " · " + c[1] : ""}</span>
+        ${v ? `<span class="real ${v.kind === "news" ? "news" : ""}">${v.kind === "news" ? "NEWS" : "REAL STORY"}</span>` : c.isNew ? `<span class="new">NEW</span>` : ""}
+        <span class="play"></span>
+        ${v && v.desc ? `<span class="desc">${c[2]}</span>` : `<q>${c[2]}</q>`}
+      </div>
+      <span class="meta">${c[3]}${v ? (v.fit === "context" ? " · on what Medicaid covers" : "") : " · " + c[4] + " · sample"}</span>
+    </button>`;
+  }).join("");
+  $("#feed").scrollLeft = 0;
+  updateArrows();
+}
+
+/* --------------------------------------------------------- design impact */
+function renderPillars() {
+  $("#pillars").innerHTML = PILLARS.map((pl, i) => `<div class="pillar">
+    <span class="eyebrow">Pillar ${i + 1}</span><b>${pl.name}</b><p>${pl.desc}</p>
+    <span class="sub"><b>Includes</b> · ${pl.sub.join(" · ")}</span></div>`).join("");
+}
+function renderStats() {
+  $("#stats").innerHTML = STATS.map(st => `<div class="stat"><span class="num">${st.num}</span><span class="lbl">${st.lbl}</span><span class="src">${link(st.src)}</span></div>`).join("");
+}
+function renderStds() {
+  $("#stds").innerHTML = STANDARDS.map(st => {
+    const uses = CASES.filter(c => c.standards.includes(st.id)).length;
+    return `<button class="std ${state.std && state.std !== st.id ? "dim" : ""}" data-std="${st.id}" aria-pressed="${state.std === st.id}">
+      <span class="code">${st.code}</span><b>${st.name}</b><span class="desc">${st.desc}</span>
+      <span class="src">${link(st.src)}</span><span class="uses">${uses} case${uses === 1 ? "" : "s"}</span></button>`;
+  }).join("");
+  const st = STANDARDS.find(x => x.id === state.std);
+  $("#stdHint").innerHTML = st ? `Showing fixes that used <b>${st.short}</b> · <button class="chip" data-std="${st.id}" style="padding:3px 8px;font-size:11px">Clear</button>` : `<b>${STANDARDS.length}</b> standards · <b>${CASES.length}</b> cases`;
+}
+function renderCases() {
+  const W = 380, H = 88, avg = a => a.reduce((x, y) => x + y, 0) / a.length;
+  $("#cases").innerHTML = CASES.map(c => {
+    const p = PROBLEMS.find(x => x.id === c.problem), stage = STAGES.find(s => s.id === p.stage);
+    const open = c.status === "open", s = c.series, sx = (c.shipDay / 119) * W;
+    const change = Math.round((avg(s.slice(-14)) / avg(s.slice(c.shipDay - 14, c.shipDay)) - 1) * 100);
+    const dim = state.std && !c.standards.includes(state.std);
+    return `<article class="case ${open ? "is-open" : ""} ${dim ? "dim" : ""}" id="case-${c.id}" data-case="${c.id}">
+      <div class="case-top">
+        <div>
+          <span class="eyebrow">Case ${String(c.n).padStart(2, "0")} · ${stage.n} · ${stage.name} · ${c.agency} · ${c.measure}</span>
+          <h3>${c.title}<span class="status ${c.status}">${open ? "OPEN · NO FIX YET" : "IN PILOT · SINCE " + c.shipped.toUpperCase()}</span></h3>
+          <p>${c.what}</p>
+          <ul class="facts">${c.facts.map(f => `<li>${f}</li>`).join("")}</ul>
+          <div class="src">Documented in ${link(c.source)}</div>
+          <div class="applied"><span class="lbl">${open ? "Standards proposed" : "Standards applied"}</span>${c.standards.map(id => {
+            const st = STANDARDS.find(x => x.id === id);
+            return `<button class="chip" data-std="${id}" aria-pressed="${state.std === id}" title="${st.name}">${st.short}</button>`; }).join("")}</div>
+        </div>
+        <div class="impact">
+          <div class="delta">
+            <div class="big">${open ? `${p.harm}<small>Harm Score · still rising</small>` : `<span class="was">${c.harmBefore}</span>${c.harmAfter}<small>Harm Score in pilot neighborhoods</small>`}</div>
+            <div class="big">${change >= 0 ? "▲" : "▼"} ${Math.abs(change)}%<small>posts a day, against the two weeks before ${open ? "the brief" : "the fix"}</small></div>
+          </div>
+          <div class="ichart">
+            <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-label="Posts per day over 120 days, ${change >= 0 ? "up" : "down"} ${Math.abs(change)} percent since ${open ? "the brief was sent" : "the fix shipped"}">
+              <path d="${sparkPath(s, W, H, 4)} L${W} ${H} L0 ${H} Z" fill="var(--heat-0)" opacity=".7"/>
+              <path d="${sparkPath(s, W, H, 4)}" fill="none" stroke="var(--heat-6)" stroke-width="2.5"/>
+              <line x1="${sx}" x2="${sx}" y1="0" y2="${H}" stroke="var(--nys-color-ink)" stroke-width="1.5" stroke-dasharray="3 3"/>
+            </svg>
+            <div class="axis"><span>120 days ago</span><span class="mark">┊ ${open ? "Brief sent" : "Shipped"} · ${c.shipped}</span><span>Today</span></div>
+          </div>
+        </div>
+        <div class="hoods">
+          <div class="hd"><span>Neighborhood risk profile</span><span>${open ? "Then → now" : "Before → after"}</span></div>
+          ${c.hoods.map(([nm, b, a]) => { const d = a - b; return `<div class="hood"><span class="nm" title="${nm}">${nm}</span>
+            <div class="track" role="img" aria-label="${nm}: risk ${b} before, ${a} after"><span class="was" style="width:${b}%"></span><span class="now" style="width:${a}%;background:var(--heat-${riskLvl(a)})"></span></div>
+            <span class="d ${d < 0 ? "down" : "up"}">${d < 0 ? "▼" : "▲"} ${Math.abs(d)}</span></div>`; }).join("")}
+          <span class="foot">${open ? "No pilot yet. We track risk so a drop shows the week a fix ships." : `Pilot districts only. Citywide, “${p.title}” is still on the Radar at Harm ${p.harm}.`}</span>
+        </div>
+      </div>
+      <div class="case-vids">
+        <div class="lbl"><b>${open ? "People waiting on a fix" : "Success stories"}</b><span>${c.videos.length} public videos · select one to play</span></div>
+        ${c.videos.map((v, i) => `<button class="card wide" data-case-play="${c.id}:${i}" aria-label="Play: ${v[2]}">
+          <div class="vid yt" style="background:var(--heat-5) url(https://i.ytimg.com/vi/${v[5].yt}/hqdefault.jpg)"><span class="plat">${v[0]}</span><span class="real ${v[5].kind === "news" ? "news" : ""}">${v[5].kind === "news" ? "NEWS" : "REAL STORY"}</span><span class="play"></span><span class="desc">${v[2]}</span></div>
+          <span class="meta">${v[3]}</span></button>`).join("")}
+      </div>
+    </article>`;
+  }).join("");
+}
+
+/* ----------------------------------------------------------------- views */
+function showView(v) {
+  state.view = v;
+  document.querySelectorAll(".view").forEach(el => el.hidden = el.id !== "view-" + v);
+  document.querySelectorAll(".nav a[data-view]").forEach(a => {
+    const on = a.dataset.view === v; a.classList.toggle("on", on);
+    if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+  });
+  $("#viewTitle").textContent = v === "impact" ? "Design impact" : "Radar";
+  $("#topRadar").hidden = v !== "radar"; $("#topImpact").hidden = v !== "impact";
+  document.title = `Hearts & Minds NYC · ${v === "impact" ? "Design impact" : "Radar"}`;
+  if (v === "radar") { sizeTiles(); updateArrows(); }
+}
+function route() {
+  const h = location.hash.replace("#", "");
+  if (h.startsWith("impact")) {
+    showView("impact");
+    const m = h.match(/^impact\/(.+)$/);
+    if (m) requestAnimationFrame(() => $("#case-" + m[1])?.scrollIntoView({ behavior: "smooth", block: "start" }));
+    else window.scrollTo(0, 0);
+  } else showView("radar");
+}
+window.addEventListener("hashchange", route);
+
+function select(id) {
+  state.selected = id;
+  document.querySelectorAll(".tile").forEach(t => t.setAttribute("aria-pressed", t.dataset.id === id));
+  renderSelected(); renderFeed();
+}
+
+/* ---------------------------------------------------------------- player */
+let playIdx = 0, playTimer = null, playList = null, playTitle = "";
+function openPlayer(i) {
+  const p = PROBLEMS.find(x => x.id === state.selected);
+  const list = playList || p.clips, title = playList ? playTitle : p.title;
+  playIdx = (i + list.length) % list.length;
+  const c = list[playIdx], v = c[5];
+  const screen = $("#screen");
+  screen.querySelector("iframe")?.remove();
+  screen.classList.toggle("wide", !!(v && v.yt));
+  screen.style.background = `var(--heat-${Math.max(3, p.lvl - (playIdx % 3))})`;
+  $("#cap").textContent = v && v.yt ? "" : `“${c[2]}”`;
+  $("#prog").parentElement.style.display = v && v.yt ? "none" : "";
+  if (v && v.yt) {
+    const f = document.createElement("iframe");
+    f.src = `https://www.youtube-nocookie.com/embed/${v.yt}?autoplay=1&rel=0&modestbranding=1${v.start ? "&start=" + v.start : ""}${v.end ? "&end=" + v.end : ""}`;
+    f.allow = "autoplay; encrypted-media; picture-in-picture"; f.allowFullscreen = true; f.title = c[3];
+    screen.appendChild(f);
+  }
+  $("#pEyebrow").textContent = `Clip ${playIdx + 1} of ${list.length} · ${c[0]}`;
+  $("#pTitle").textContent = title;
+  $("#pMeta").textContent = v && v.yt
+    ? `${c[3]}. ${v.desc ? c[2] : "“" + c[2] + "”"} Public video, shown with its original attribution.`
+    : `${c[3]} · posted ${c[4]}. Sample clip. Faces are blurred and names removed before clips are shared with agencies.`;
+  $("#player").classList.add("open");
+  const bar = $("#prog"); bar.style.transition = "none"; bar.style.width = "0";
+  const secs = /^\d+:\d+$/.test(c[1]) ? Math.min(8, parseInt(c[1].split(":")[1], 10) / 6 + 3) : 6;
+  requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.transition = `width ${secs}s linear`; bar.style.width = "100%"; }));
+  clearTimeout(playTimer);
+  if (!(v && v.yt)) playTimer = setTimeout(() => openPlayer(playIdx + 1), secs * 1000 + 400);
+}
+function closePlayer() { $("#player").classList.remove("open"); clearTimeout(playTimer); $("#screen iframe")?.remove(); playList = null; }
+
+/* ---------------------------------------------------------------- events */
+document.addEventListener("click", e => {
+  const chip = e.target.closest(".chip");
+  if (chip) {
+    state.agency = chip.dataset.agency || null;
+    renderFilters(); applyFilter();
+    const cur = PROBLEMS.find(p => p.id === state.selected);
+    if (state.agency && cur.agency !== state.agency) {
+      select(PROBLEMS.filter(p => p.agency === state.agency).sort((a, b) => b.harm - a.harm)[0].id);
+    }
+    return;
+  }
+  const thumb = e.target.closest(".tile .thumb[data-idx]");
+  if (thumb) { if (state.selected !== thumb.dataset.pid) select(thumb.dataset.pid); return openPlayer(+thumb.dataset.idx); }
+  const std = e.target.closest("[data-std]");
+  if (std) { state.std = state.std === std.dataset.std ? null : std.dataset.std; renderStds(); renderCases(); return; }
+  const cp = e.target.closest("[data-case-play]");
+  if (cp) { const [id, i] = cp.dataset.casePlay.split(":"); const c = CASES.find(x => x.id === id); playList = c.videos; playTitle = c.title; return openPlayer(+i); }
+  const tile = e.target.closest(".tile"); if (tile) return select(tile.dataset.id);
+  const play = e.target.closest("[data-play]"); if (play) return openPlayer(+play.dataset.play);
+  const t = e.target.closest("[data-toast]"); if (t) return toast(t.dataset.toast);
+  const soon = e.target.closest("[data-soon]"); if (soon) { e.preventDefault(); return toast("Not part of this demo yet."); }
+  const th = e.target.closest("[data-theme]");
+  if (th) {
+    document.body.classList.toggle("lofi", th.dataset.theme === "lofi");
+    document.querySelectorAll("[data-theme]").forEach(b => b.setAttribute("aria-pressed", b === th));
+    return;
+  }
+  if (e.target.closest("#howto")) return $("#rank").classList.add("open");
+  if (e.target.closest("[data-close]") || e.target.id === "rank") return $("#rank").classList.remove("open");
+  if (e.target.id === "player") return closePlayer();
+});
+$("#closePlayer").onclick = closePlayer;
+$("#pPrev").onclick = () => openPlayer(playIdx - 1);
+$("#pNext").onclick = () => openPlayer(playIdx + 1);
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") { closePlayer(); $("#rank").classList.remove("open"); }
+  if ($("#player").classList.contains("open")) {
+    if (e.key === "ArrowRight") openPlayer(playIdx + 1);
+    if (e.key === "ArrowLeft") openPlayer(playIdx - 1);
+  }
+});
+
+const feed = $("#feed");
+function updateArrows() {
+  const end = feed.scrollLeft + feed.clientWidth >= feed.scrollWidth - 4;
+  $("#prev").disabled = feed.scrollLeft <= 4; $("#next").disabled = end;
+  $("#feedWrap").classList.toggle("end", end);
+}
+feed.addEventListener("scroll", updateArrows);
+$("#prev").onclick = () => feed.scrollBy({ left: -408 });
+$("#next").onclick = () => feed.scrollBy({ left: 408 });
+window.addEventListener("resize", () => { sizeTiles(); updateArrows(); });
+
+let toastTimer;
+function toast(msg) {
+  const el = $("#toast"); el.textContent = msg; el.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
+}
+
+/* ------------------------------------------------------------ live feel */
+let lastUpdate = Date.now();
+setInterval(() => {
+  const s = Math.round((Date.now() - lastUpdate) / 1000);
+  $("#updated").textContent = s < 5 ? "· updated just now" : `· updated ${s}s ago`;
+}, 1000);
+const INCOMING = {
+  cdpap: [["TikTok", "0:36", "Week seven. Still nothing. Still going.", "Aide · Bronx"],
+          ["Facebook", "0:21", "We're a family. We can't just stop.", "Aide · Queens"]],
+  work:  [["TikTok", "0:44", "I pick up shifts when I can. Is that enough?", "Enrollee · Far Rockaway"]],
+  renewal: [["Reels", "0:39", "I mailed it back twice. Still terminated.", "Enrollee · Bronx"]],
+};
+setInterval(() => {            // every ~25s a new clip lands on the selected problem
+  const q = INCOMING[state.selected]; if (!q || !q.length) return;
+  const c = q.shift(); c.push("just now"); c.isNew = true;
+  const p = PROBLEMS.find(x => x.id === state.selected);
+  p.clips.unshift(c); p.series[89] += 3;
+  lastUpdate = Date.now();
+  renderFeed(); renderSelected();
+  toast(`New voice on “${p.title}”`);
+}, 25000);
+
+/* ------------------------------------------------------------------ boot */
+renderFilters(); renderStages(); renderCols(); renderSelected(); renderFeed();
+renderPillars(); renderStats(); renderStds(); renderCases();
+route();
+if (document.fonts) document.fonts.ready.then(sizeTiles);
+</script>
+</body>
+</html>

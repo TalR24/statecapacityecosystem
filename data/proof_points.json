@@ -1,5 +1,29 @@
 [
   {
+    "name": "What every community board asked the City for",
+    "handle": "Budget Requests",
+    "blurb": "Every community board's Capital and Expense Budget Requests since 2019 with the agency's response to each, combined from NYC Open Data and the Register PDFs. Click a district on the map, compare its requests against its 311 complaint categories, and draft a follow-up email to the agency.",
+    "url": "https://nyc-cb-budget-requests.vercel.app/",
+    "source": "public-engagement",
+    "hosted": false,
+    "problem_area": "Participatory Democracy",
+    "builders": "",
+    "date": "2026-09-30",
+    "image": "/assets/proof-points/budget-requests.jpg"
+  },
+  {
+    "name": "Where Medicaid hurts, in New Yorkers' own words",
+    "handle": "Hearts & Minds",
+    "blurb": "A radar for the NYS Office of Customer Experience: the biggest problems people hit with Medicaid, laid out in the order they move through the program, sized by people affected and shaded by online mentions, with public YouTube stories for each. Sample data for the demo.",
+    "url": "/events/hackathons/public-engagement/hearts-and-minds/",
+    "source": "public-engagement",
+    "hosted": true,
+    "problem_area": "Service Delivery",
+    "builders": "Douglas Dahl & Sherry Liu",
+    "date": "2026-09-30",
+    "image": "/assets/proof-points/hearts-and-minds.jpg"
+  },
+  {
     "name": "Where to put a city grocery store",
     "handle": "Grocery Store Siting Tool",
     "blurb": "Identifies disadvantaged census tracts with high food insecurity and strong transit connectivity, then scores vacant city-owned lots as candidate store sites. Adjust the scoring weights and the top sites re-rank live.",

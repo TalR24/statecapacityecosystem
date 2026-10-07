@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  ===========================================================================
+  EVENT PAGE TEMPLATE — State Capacity Ecosystem · Events
+  ===========================================================================
+  To add a NEW event, copy this folder (events/<event-slug>/index.html), then:
+    1. Update <title>, <meta> tags, breadcrumb, and the hero block.
+    2. Edit the FACTS list (date / format / location / organizers).
+    3. Edit the OVERVIEW + GOAL prose.
+    4. Edit the TRACKS grid (one .track-card per track).
+    5. Edit the PROJECTS grid (one .proj-card per project produced).
+         - Drop each project's real URL into the marked href="#" slots.
+    6. Edit the WRITEUPS section (one .post-row per Substack post).
+         - Drop each post's real URL into the marked href="#" slots.
+    7. Update the LUMA archive link.
+    8. Add a matching .card to ../index.html (the Events hub) linking here.
+  Style note: NYCuriosity prose uses no em dashes. Use periods, colons,
+  commas, parentheses, or the "·" middot separator instead.
+  ===========================================================================
+-->
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/assets/sce_logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State Capacity Hackathon: Public Engagement — Events · State Capacity Ecosystem</title>
+  <meta name="description" content="Our second hackathon, September 30, 2026 at the CUNY Graduate Center: about 80 builders, two themes (community board operations and the public's voice), five expert judges, and the tools that came out of it.">
+  <link rel="canonical" href="https://statecapacityecosystem.com/events/hackathons/public-engagement/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://statecapacityecosystem.com/events/hackathons/public-engagement/">
+  <meta property="og:title"       content="State Capacity Hackathon: Public Engagement — State Capacity Ecosystem Events">
+  <meta property="og:description" content="Our second hackathon, September 30, 2026: about 80 builders, two themes, five expert judges, and the tools that came out of it.">
+  <meta property="og:image"       content="https://statecapacityecosystem.com/assets/sce_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    :root {
+      --blue:#8A5F1E; --blue-hover:#6E4A15; --blue-light:#F5EDDA; --blue-mid:#DFCEA1;
+      --orange:#8A5F1E; --orange-light:#F5EDDA;
+      --text:#1A1918; --text-mid:#444039; --text-muted:#6B6760; --text-faint:#9C968A;
+      --bg:#F4EFE4; --surface:#ffffff; --border:#DDD8CC; --border-mid:#C9C1AF;
+      --shadow-sm:0 1px 3px rgba(26,25,24,0.08);
+      --shadow-md:0 4px 16px rgba(138,95,30,0.10);
+      --radius:10px;
+    }
+    body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+
+    header { background:#1A1918; border-bottom:1px solid #2E2B27; padding:0 clamp(16px,4vw,48px); }
+    .header-inner { max-width:1300px; margin:0 auto; height:60px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { display:flex; align-items:center; gap:9px; text-decoration:none; }
+    .brand-name { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:700; color:#D4A853; letter-spacing:-0.02em; }
+    .brand-slash { font-family:'Roboto Mono',monospace; font-size:0.95rem; color:#4b5563; }
+    .brand-section { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:600; color:#DDD8CC; }
+    .header-link { font-size:0.78rem; font-weight:500; color:#9C968A; text-decoration:none; display:flex; align-items:center; gap:5px; transition:color 0.15s; }
+    .header-link:hover { color:#D4A853; }
+
+    .breadcrumb { padding:14px clamp(16px,4vw,48px) 0; }
+    .breadcrumb-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; gap:6px; font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:500; color:var(--text-faint); flex-wrap:wrap; }
+    .breadcrumb a { color:var(--text-faint); text-decoration:none; transition:color 0.15s; }
+    .breadcrumb a:hover { color:var(--blue); }
+    .breadcrumb .current { color:var(--orange); }
+    .breadcrumb-sep { color:var(--border-mid); }
+
+    .hero { padding:14px clamp(16px,4vw,48px) 0; }
+    .hero-inner { max-width:1000px; margin:0 auto; padding-bottom:14px; }
+    .hero-eyebrow { font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--orange); margin-bottom:10px; }
+    .hero h1 { font-family:'Roboto Mono',monospace; font-size:clamp(1.4rem,3.5vw,2rem); font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.2; margin-bottom:8px; }
+    .hero h1 span { color:var(--blue); }
+    .hero .subtitle { font-size:1rem; color:var(--text-mid); line-height:1.5; margin-bottom:4px; font-weight:500; }
+    .hero .meta-line { font-family:'Roboto Mono',monospace; font-size:0.82rem; color:var(--text-muted); }
+
+
+    .main { flex:1; padding:clamp(20px,3vw,32px) clamp(16px,4vw,48px) clamp(40px,6vw,64px); }
+    .main-inner { max-width:1000px; margin:0 auto; }
+
+    .section-label { font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--orange); margin:34px 0 14px; }
+    .section-label:first-child { margin-top:0; }
+
+    .panel { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow-sm); padding:clamp(20px,3vw,28px); }
+    .panel p { font-size:0.95rem; color:var(--text-mid); line-height:1.75; margin-bottom:14px; }
+    .panel p:last-child { margin-bottom:0; }
+    .panel p strong { color:var(--text); font-weight:600; }
+    .panel a { color:var(--blue); text-decoration:none; border-bottom:1px solid var(--blue-mid); }
+    .panel a:hover { background:var(--blue-light); }
+
+    /* FACTS */
+    .facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+    .fact { background:var(--surface); padding:14px 18px; }
+    .fact-label { font-family:'Roboto Mono',monospace; font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-faint); margin-bottom:5px; }
+    .fact-value { font-size:0.9rem; color:var(--text); line-height:1.5; font-weight:500; }
+    .fact-value .li { color:var(--text-muted); font-weight:400; }
+
+    /* GOAL list */
+    .goal-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+    .goal-list li { position:relative; padding-left:26px; font-size:0.93rem; color:var(--text-mid); line-height:1.6; }
+    .goal-list li::before { content:""; position:absolute; left:0; top:4px; width:14px; height:14px; border-radius:4px; background:var(--orange-light); border:1.5px solid var(--orange); }
+    .goal-list li::after { content:""; position:absolute; left:3.5px; top:7px; width:8px; height:4px; border-left:2px solid var(--orange); border-bottom:2px solid var(--orange); transform:rotate(-45deg); }
+    .goal-list li strong { color:var(--text); font-weight:600; }
+
+    /* TRACKS */
+    .track-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+    .track-card { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--blue); border-radius:8px; padding:16px 18px; }
+    .track-name { font-family:'Roboto Mono',monospace; font-size:0.9rem; font-weight:700; color:var(--text); margin-bottom:7px; letter-spacing:-0.01em; }
+    .track-desc { font-size:0.85rem; color:var(--text-muted); line-height:1.6; margin-bottom:10px; }
+    .track-judge { font-family:'Roboto Mono',monospace; font-size:0.7rem; color:var(--text-faint); }
+    .track-judge strong { color:var(--blue); font-weight:600; }
+
+    /* PROJECTS */
+    .proj-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
+    .proj-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow-sm); padding:18px 20px; display:flex; flex-direction:column; transition:border-color 0.2s, box-shadow 0.2s, transform 0.15s; }
+    .proj-card:hover { border-color:var(--blue); box-shadow:var(--shadow-md); transform:translateY(-2px); }
+    .proj-icon { width:38px; height:38px; border-radius:9px; background:#1A1918; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
+    .proj-icon svg { width:20px; height:20px; stroke:#D4A853; }
+    .proj-title { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:700; color:var(--text); line-height:1.3; margin-bottom:7px; letter-spacing:-0.01em; }
+    .proj-desc { font-size:0.85rem; color:var(--text-muted); line-height:1.6; flex:1; margin-bottom:12px; }
+    .proj-badge { display:inline-block; font-family:'Roboto Mono',monospace; font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#8A5F1E; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px; padding:2px 9px; margin-bottom:10px; align-self:flex-start; }
+    .proj-link { font-family:'Roboto Mono',monospace; font-size:0.76rem; font-weight:600; color:var(--blue); text-decoration:none; display:inline-flex; align-items:center; gap:5px; transition:gap 0.15s; align-self:flex-start; }
+    .proj-link:hover { gap:8px; }
+    .proj-link.pending { color:var(--text-faint); cursor:default; }
+
+    /* WRITEUPS */
+    .post-list { display:flex; flex-direction:column; gap:10px; }
+    .post-row { display:flex; align-items:center; justify-content:space-between; gap:16px; background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--orange); border-radius:8px; padding:14px 18px; flex-wrap:wrap; }
+    .post-info { flex:1; min-width:200px; }
+    .post-title { font-size:0.92rem; font-weight:600; color:var(--text); margin-bottom:2px; }
+    .post-sub { font-size:0.78rem; color:var(--text-muted); }
+    .post-link { font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:600; text-decoration:none; padding:5px 13px; border-radius:6px; white-space:nowrap; border:1px solid; color:#8A5F1E; border-color:#DFCEA1; background:#F5EDDA; transition:all 0.15s; }
+    .post-link:hover { background:#8A5F1E; color:#fff; border-color:#8A5F1E; }
+    .post-link.pending { color:var(--text-faint); border-color:var(--border); background:var(--bg); cursor:default; }
+
+    /* CTA / archive panel */
+    .text-panel { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--orange); border-radius:8px; padding:18px 22px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+    .text-panel p { font-size:0.9rem; color:var(--text-mid); line-height:1.65; margin:0; }
+    .text-panel strong { color:var(--text); font-weight:600; }
+    .arch-btn { display:inline-flex; align-items:center; gap:8px; font-family:'Roboto Mono',monospace; font-size:0.8rem; font-weight:700; color:#fff; background:var(--orange); border:none; border-radius:8px; padding:10px 18px; text-decoration:none; box-shadow:0 3px 12px rgba(212,168,83,0.32); transition:transform 0.15s, box-shadow 0.15s; flex-shrink:0; white-space:nowrap; }
+    .arch-btn:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(212,168,83,0.42); }
+
+    footer { background:var(--surface); border-top:1px solid var(--border); padding:18px clamp(16px,4vw,48px); }
+    .footer-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+    .footer-copy { font-size:0.78rem; color:var(--text-faint); }
+    .footer-links { display:flex; gap:18px; flex-wrap:wrap; }
+    .footer-links a { font-size:0.78rem; color:var(--text-muted); text-decoration:none; transition:color 0.15s; }
+    .footer-links a:hover { color:var(--blue); }
+
+    @media (max-width: 640px) { .brand-slash, .brand-section { display:none; } }
+  </style>
+<style id="ribbon-css">
+.ribbon{background:var(--surface);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);position:relative;z-index:80;}
+.ribbon-inner{max-width:1300px;margin:0 auto;display:flex;align-items:stretch;}
+.ribbon-item{position:relative;flex-shrink:0;}
+.ribbon-link{display:flex;align-items:center;gap:6px;padding:13px 14px 11px;font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;color:var(--text-mid);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;}
+.ribbon-item:hover .ribbon-link,.ribbon-link:focus{color:var(--blue);}
+.ribbon-link.active{color:var(--orange);border-bottom-color:var(--orange);}
+.ribbon-caret{font-size:0.55rem;color:var(--text-faint);transform:translateY(1px);}
+.ribbon-drop{display:none;position:absolute;top:100%;left:0;min-width:235px;background:var(--surface);border:1px solid var(--border-mid);border-radius:0 0 8px 8px;box-shadow:0 14px 34px rgba(26,25,24,0.16);z-index:90;padding:6px 0;}
+.ribbon-item:hover .ribbon-drop,.ribbon-item:focus-within .ribbon-drop{display:block;}
+.ribbon-drop a{display:block;padding:8px 16px;font-size:0.82rem;color:var(--text-mid);text-decoration:none;transition:background .1s,color .1s;}
+.ribbon-drop a:hover{background:var(--blue-light);color:var(--blue);}
+@media (max-width:720px){.ribbon-inner{flex-wrap:wrap;}.ribbon-link{padding:11px 7px 9px;font-size:0.7rem;}.ribbon-actions{flex-basis:100%;margin-left:0;padding:0 0 8px 7px;flex-wrap:wrap;gap:6px;}.ribbon-btn{padding:6px 10px;font-size:0.7rem;}.ribbon-drop{display:none !important;}}
+.ribbon-actions{margin-left:auto;display:flex;align-items:center;gap:8px;padding:7px 0 7px 14px;flex-shrink:0;}
+.ribbon-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.74rem;font-weight:700;text-decoration:none;padding:7px 13px;border-radius:7px;white-space:nowrap;border:1px solid #DFCEA1;background:#F5EDDA;color:#8A5F1E;transition:background .15s,color .15s;}
+.ribbon-btn:hover{background:#8A5F1E;color:#fff;}
+.ribbon-btn.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
+.ribbon-btn.primary:hover{background:#B08430;border-color:#B08430;color:#fff;}
+.sce-footer{background:#1A1918;color:#F4EFE4;padding:26px clamp(16px,4vw,48px);margin-top:auto;}
+.sce-footer-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.sce-footer-brand{display:flex;align-items:center;gap:10px;font-family:'Roboto Mono',monospace;font-size:0.84rem;font-weight:700;color:#D4A853;text-decoration:none;}
+.sce-footer-brand img{width:22px;height:22px;object-fit:contain;}
+.sce-footer-brand small{font-weight:400;color:#9C968A;font-size:0.72rem;margin-left:4px;}
+.sce-footer-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.sce-footer-actions a{font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;text-decoration:none;padding:8px 14px;border-radius:7px;border:1px solid rgba(244,239,228,0.3);color:#F4EFE4;transition:border-color .15s,background .15s;}
+.sce-footer-actions a:hover{border-color:#D4A853;background:rgba(212,168,83,0.12);}
+.sce-footer-actions a.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
+.sce-footer-actions a.primary:hover{background:#E3C170;}
+/* gold header row (Oct 2026) */
+.ribbon{background:#D4A853;border-bottom:1px solid #B88E3D;}
+.ribbon-link{color:#1A1918;}
+.ribbon-item:hover .ribbon-link,.ribbon-link:focus{color:#1A1918;border-bottom-color:#1A1918;}
+.ribbon-link.active{color:#1A1918;border-bottom-color:#1A1918;}
+.ribbon-caret{color:#5C4310;}
+.ribbon-btn{background:#F4EFE4;border-color:#F4EFE4;color:#1A1918;}
+.ribbon-btn:hover{background:#FFFFFF;color:#1A1918;}
+.ribbon-btn.primary{background:#1A1918;border-color:#1A1918;color:#F4EFE4;}
+.ribbon-btn.primary:hover{background:#3E3931;color:#F4EFE4;}
+.ribbon-link img{filter:brightness(0.2);}
+</style>
+<style id="event-banner-css">
+.evt-banner{background:#D4A853;color:#1A1918;padding:0 clamp(16px,4vw,48px);position:relative;z-index:100;}
+.evt-banner-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:9px 0;font-family:'Roboto Mono',monospace;font-size:0.8rem;font-weight:600;}
+.evt-banner strong{font-weight:700;}
+.evt-banner .evt-when{color:#6E4A15;}
+.evt-banner a{display:inline-flex;align-items:center;gap:6px;background:#1A1918;color:#F4EFE4;text-decoration:none;padding:6px 14px;border-radius:6px;font-size:0.76rem;font-weight:700;white-space:nowrap;transition:background .15s;}
+.evt-banner a:hover{background:#3E3931;}
+@media (max-width:620px){.evt-banner-inner{font-size:0.74rem;gap:9px;}.evt-banner .evt-when{width:100%;text-align:center;}}
+@media print{.evt-banner{display:none !important;}}
+</style>
+<style id="link-ux-css">
+/* Links as buttons (Oct 2026): every standalone text link and every call to action inside a card is a 40px-tall button. */
+a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { display:inline-flex !important; align-items:center; gap:6px; align-self:flex-start; width:auto; min-height:40px; box-sizing:border-box; padding:9px 16px !important; font-family:'Roboto Mono',monospace !important; font-size:0.8rem !important; font-weight:700 !important; line-height:1.25; text-decoration:none !important; color:#6E4A15 !important; background:#F5EDDA !important; border:1px solid #DFCEA1 !important; border-radius:8px !important; transition:background .15s,color .15s,border-color .15s; cursor:pointer; }
+a.row-link:hover, a.info-link:hover, a.proj-link:hover, a.post-link:hover, a.download-link:hover, a.sce-btn:hover,
+a:hover > .card-cta, a:hover .card-cta, a:hover .tool-cta, a:hover .act-cta, a:hover .bubble-cta, a:hover .mo-cta { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
+a.row-link:focus-visible, a.info-link:focus-visible, a.proj-link:focus-visible, a.post-link:focus-visible, a.download-link:focus-visible, a.sce-btn:focus-visible, a.scroll-cue:focus-visible { outline:2px solid #1A1918; outline-offset:2px; }
+a.row-link, a.sce-btn, a.proj-link { margin:4px 8px 4px 0; }
+.sce-btn-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+a.scroll-cue { min-height:40px; padding:9px 16px; border:1px solid rgba(212,168,83,.55); border-radius:8px; font-size:0.8rem !important; font-weight:700 !important; }
+a.scroll-cue:hover { background:rgba(212,168,83,.14); }
+/* Section headers (kickers) sized to be read, not squinted at. */
+.kicker, .section-label { font-size:0.92rem !important; letter-spacing:0.1em !important; }
+/* Whole-row and whole-card links. */
+.lw-post, .wr-row { position:relative; }
+.lw-post a.t::after, .wr-row a::after { content:""; position:absolute; inset:0; }
+.lw-post:hover, .wr-row:hover { background:rgba(212,168,83,.10); }
+.lw-post a.t { font-size:1rem !important; }
+.wr-row { padding:14px 10px !important; border-radius:6px; }
+a.sit-btn { min-height:40px; display:inline-flex; align-items:center; padding:8px 14px !important; font-size:0.8rem !important; }
+/* Search results and project cards: links are buttons; a card with exactly one link is clickable as a whole. */
+.se-card-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.se-card-links a, a.sg-link { display:inline-flex !important; align-items:center; gap:6px; min-height:40px; box-sizing:border-box; padding:9px 16px !important; font-family:'Roboto Mono',monospace !important; font-size:0.8rem !important; font-weight:700 !important; text-decoration:none !important; color:#6E4A15 !important; background:#F5EDDA !important; border:1px solid #DFCEA1 !important; border-radius:8px !important; }
+.se-card-links a:hover, a.sg-link:hover { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
+.se-card, .proj-card { position:relative; }
+.se-card:not(:has(a ~ a)) .se-card-links a::after, .proj-card:not(:has(a ~ a)) a.proj-link::after { content:""; position:absolute; inset:0; border-radius:inherit; }
+.se-card:not(:has(a ~ a)), .proj-card:not(:has(a ~ a)) { cursor:pointer; transition:box-shadow .15s, transform .15s, border-color .15s; }
+.se-card:not(:has(a ~ a)):hover, .proj-card:not(:has(a ~ a)):hover { box-shadow:0 6px 18px rgba(26,25,24,.12); transform:translateY(-1px); border-color:#8A5F1E; }
+.se-card:not(:has(a ~ a)):hover .se-card-links a, .proj-card:not(:has(a ~ a)):hover a.proj-link { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
+/* Tighter page headers (Oct 2026): less air above the title and between the lede and the first section. */
+.hero { padding-top:18px !important; }
+.hero-inner { padding-bottom:4px !important; }
+.main { padding-top:6px !important; }
+.main-inner > :first-child, .main-inner > .section-label:first-of-type { margin-top:10px !important; }
+/* Cards that are one big link: the whole card responds. */
+a.card, a.tool-card, a.act-card, a.explore-bubble, a.mo-item, a.row-visual { cursor:pointer; }
+a.mo-item { padding-top:14px; padding-bottom:14px; }
+a.mo-item:hover { background:rgba(212,168,83,.10); }
+a.mo-item:hover .mo-title { text-decoration:underline; }
+@media (max-width:620px){ a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { font-size:0.78rem !important; } }
+@media print { a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { border:none !important; background:none !important; padding:0 !important; min-height:0; } }
+/* Project cards whose public link is not posted yet: not clickable. */
+.proj-card.no-link, .proj-card.no-link:hover { cursor:default; box-shadow:none; transform:none; border-color:var(--border); }
+.proj-card.no-link .proj-link { color:var(--text-faint); background:var(--bg); border-color:var(--border); }
+</style>
+</head>
+<body>
+
+<!-- PILLAR RIBBON -->
+<!-- EVENT BANNER: none scheduled. For the next event, paste a div.evt-banner block here (styles are in the head). -->
+
+<style id="ribbon-sub-css">
+.ribbon-drop-desc{min-width:270px;}
+.ribbon-drop-desc a{white-space:normal;}
+.ribbon-sub{display:block;font-family:Inter,sans-serif;font-size:0.7rem;font-weight:400;color:#9C968A;line-height:1.4;margin-top:2px;}
+@media (max-width:720px){
+  .ribbon-item.open .ribbon-drop{display:block !important;position:fixed;left:10px;right:10px;min-width:0;border-radius:10px;border:1px solid var(--border-mid,#C9C1AF);box-shadow:0 18px 40px rgba(26,25,24,0.25);max-height:60vh;overflow-y:auto;z-index:120;}
+  .ribbon-item.open .ribbon-link{color:#8A5F1E;}
+}
+.sce-footer-inner{align-items:flex-start;row-gap:18px;}
+.sce-footer-inner > div:first-child{flex:1 1 340px;min-width:240px;}
+.sce-footer-actions{align-items:center;}
+.sce-footer-tag{font-family:Inter,sans-serif;font-size:0.78rem;color:#9C968A;margin:9px 0 0;max-width:460px;line-height:1.55;}
+@media (max-width:640px){.sce-footer-inner{flex-direction:column;}.sce-footer-actions{width:100%;}}
+</style>
+<nav class="ribbon" aria-label="State Capacity Ecosystem sections">
+  <div class="ribbon-inner">
+    <div class="ribbon-item"><a class="ribbon-link" href="/"><img src="/assets/sce_logo.png" alt="" style="width:16px;height:16px;object-fit:contain;">Home</a></div>
+    <div class="ribbon-item">
+      <a class="ribbon-link" href="/ecosystem/">Ecosystem <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Type a problem, a place, or a name.</span></a>
+        <a href="/ecosystem/organizations/">Organization Directory<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
+        <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
+        <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
+      </div>
+    </div>
+    <div class="ribbon-item">
+      <a class="ribbon-link active" href="/events/">Events <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/events/hackathons/">Hackathons<span class="ribbon-sub">Build nights that end in working software.</span></a>
+        <a href="/events/demo-nights/">Demo Nights<span class="ribbon-sub">What got built, in front of who can adopt it.</span></a>
+        <a href="/events/salons/">Salons &amp; Meet-ups<span class="ribbon-sub">Speaker nights and monthly office hours.</span></a>
+        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<span class="ribbon-sub">What hosts and sponsors own, on one page.</span></a>
+      </div>
+    </div>
+    <div class="ribbon-item">
+      <a class="ribbon-link" href="/community/">Community <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/community/slack/">Slack<span class="ribbon-sub">The conversation between events.</span></a>
+        <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗<span class="ribbon-sub">The team's writing on state capacity.</span></a>
+        <a href="/community/playbooks/">Playbooks<span class="ribbon-sub">Run our formats without us in the room.</span></a>
+        <a href="/community/proof-points/">Proof Points<span class="ribbon-sub">Every tool built through SCE.</span></a>
+      </div>
+    </div>
+    <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
+    <div class="ribbon-actions"><a class="ribbon-btn" href="/ecosystem/search/">Search</a><a class="ribbon-btn" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Subscribe ↗</a><a class="ribbon-btn primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack ↗</a>
+    </div>
+  </div>
+</nav>
+<script id="ribbon-touch-js">
+(function () {
+  var mq = window.matchMedia("(max-width:720px)");
+  document.querySelectorAll(".ribbon-item").forEach(function (item) {
+    var link = item.querySelector(".ribbon-link");
+    var drop = item.querySelector(".ribbon-drop");
+    if (!link || !drop) return;
+    link.addEventListener("click", function (e) {
+      if (!mq.matches) return;
+      if (!item.classList.contains("open")) {
+        e.preventDefault();
+        document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
+        item.classList.add("open");
+        drop.style.top = (link.getBoundingClientRect().bottom + 6) + "px";
+      }
+    });
+  });
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".ribbon-item")) {
+      document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
+    }
+  });
+})();
+</script>
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="/">State Capacity Ecosystem</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/events/">Events</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/events/hackathons/">Hackathons</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="current">Public Engagement</span>
+  </div>
+</div>
+
+<!-- ============================ HERO ============================ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">State Capacity Hackathon</div>
+    <h1>Public <span>Engagement</span></h1>
+    <p class="meta-line">Wednesday, September 30, 2026 · CUNY Graduate Center, Midtown Manhattan</p>
+    <p class="meta-line" style="color:var(--blue);font-weight:700;margin-top:6px;">About 80 builders · 2 themes · 5 expert judges · built in 2 hours</p>
+  </div>
+</div>
+
+
+<div class="main">
+  <div class="main-inner">
+
+    <!-- ============================ WRITEUPS ============================ -->
+    <div class="section-label" style="margin-top:0;">Read about it</div>
+    <div class="post-list">
+      <div class="post-row">
+        <div class="post-info">
+          <div class="post-title">Hackathon takeaways, on the State Capacity Ecosystem Substack</div>
+          <div class="post-sub">What the teams built, the three lessons the night taught, and the winners. Coming soon.</div>
+        </div>
+        <!-- TODO: replace href="#" with the recap post URL, then drop .pending -->
+        <a class="post-link pending" href="#" aria-disabled="true">Recap coming soon</a>
+      </div>
+      <div class="post-row">
+        <div class="post-info">
+          <div class="post-title">Public Engagement Hackathon: September 30</div>
+          <div class="post-sub">The announcement: the three problem streams, the judges, and how the evening ran.</div>
+        </div>
+        <a class="post-link" href="https://substack.statecapacityecosystem.com/p/public-engagement-hackathon-september" target="_blank" rel="noopener">Read the announcement ↗</a>
+      </div>
+    </div>
+
+    <!-- ============================ OVERVIEW ============================ -->
+    <div class="section-label">Overview</div>
+    <div class="panel">
+      <p>Our second hackathon packed about 80 people into a room at the CUNY Graduate Center. Unlike the June build night, teams got two narrowly scoped themes and were asked to color inside the box: tools that help New York's 59 community boards run, and tools that help the city capture, triage, and act on what New Yorkers say.</p>
+      <p>Teams formed at 5:30, built from 6:15 to 8:30, and demoed to the judges in three-minute slots. The strongest projects came from people who already knew the problem firsthand: board members tired of PDF stacks, residents who had sat through rezoning hearings, organizers watching complaints pile up on social media with nowhere to go.</p>
+      <p style="margin-bottom:0;">Hosted with our partners <strong>Civic Roundtable</strong> and <strong>CUNY PIT Lab</strong>. Dinner was on Civic Roundtable.</p>
+    </div>
+
+    <!-- ============================ GOAL ============================ -->
+    <div class="section-label">The goal</div>
+    <div class="panel">
+      <p style="margin-bottom:14px;">What we set out to do:</p>
+      <ul class="goal-list">
+        <li><strong>Test whether scoped themes beat an open brief.</strong> June proved a room can ship 20 prototypes in an evening. September asked whether tighter problem statements produce tools closer to adoption.</li>
+        <li>Put the judges' own problems on the table. Five experts pitched the frustrations they live with, from transit-oriented rezoning to centering communities in city plans, so teams matched real needs rather than guessing at them.</li>
+      </ul>
+    </div>
+
+    <!-- ============================ PROJECTS PRODUCED ============================
+         One .proj-card per project; the Proof Points gallery renders the same list
+         from /data/proof_points.json and stays the canonical, filterable view.
+         Cards with class "no-link" are waiting on a public URL from the team.
+    -->
+    <div class="section-label">Projects produced</div>
+    <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.7; max-width:720px; margin-bottom:16px;">The winner, the two runners-up, and three more tools from the night. Every tool with a public link is in the <a href="/community/proof-points/?source=public-engagement" style="color:var(--blue);">Proof Points gallery</a>.</p>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
+        <div class="proj-badge">Winner</div>
+        <div class="proj-title">Budget Requests</div>
+        <div class="proj-desc">The first central place to see every community board's Capital and Expense Budget Requests since 2019, with the agency's response to each, combined from NYC Open Data and the Register PDFs. Click a district on the map to see its requests, compare them against the district's 311 complaint categories to spot gaps, and draft a follow-up email to the agency or elected official.</div>
+        <a class="proj-link" href="https://nyc-cb-budget-requests.vercel.app/" target="_blank" rel="noopener">Open the app ↗</a>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+        <div class="proj-badge">Runner-up · Hosted on this site</div>
+        <div class="proj-title">Hearts &amp; Minds</div>
+        <div class="proj-desc">A radar for the NYS Office of Customer Experience: the biggest problems New Yorkers hit with Medicaid, laid out in the order people move through the program, sized by people affected and shaded by how often each one is mentioned online. Select a problem to see its trend and public YouTube stories in residents' own words. Problem counts and trends are sample data.</div>
+        <div style="font-size:0.72rem; color:var(--text-faint); line-height:1.5; margin-bottom:12px;">By Douglas Dahl &amp; Sherry Liu. Republished with permission.</div>
+        <a class="proj-link" href="./hearts-and-minds/">Open the radar →</a>
+      </div>
+
+      <div class="proj-card no-link">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></div>
+        <div class="proj-badge">Runner-up</div>
+        <div class="proj-title">In the Zone</div>
+        <div class="proj-desc">A single map of where density is low near transit and what would change for residents and planners if those lots were rezoned for housing. It skips modeling the whole land use process and gives residents and planners the same starting point.</div>
+        <span class="proj-link">Public link coming soon</span>
+      </div>
+
+      <div class="proj-card no-link">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg></div>
+        <div class="proj-title">BoardOS</div>
+        <div class="proj-desc">Gives a community board member every piece of information they need before a meeting on one screen, instead of reading a dozen PDFs by hand before each session.</div>
+        <span class="proj-link">Public link coming soon</span>
+      </div>
+
+      <div class="proj-card no-link">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <div class="proj-title">Robert Rules</div>
+        <div class="proj-desc">Teaches new community board members how a meeting runs under Robert's Rules of Order, built from a CB6 member's experience arguing procedure in real meetings.</div>
+        <span class="proj-link">Public link coming soon</span>
+      </div>
+
+      <div class="proj-card no-link">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.4 8.4 0 0 1-3.6-.8L3 21l1.9-5.4A8.4 8.4 0 0 1 3 11.5a8.4 8.4 0 0 1 9-8.4 8.4 8.4 0 0 1 9 8.4z"/></svg></div>
+        <div class="proj-title">Mamdani, Fix This</div>
+        <div class="proj-desc">Takes every TikTok asking the mayor for help and routes it to the relevant agency and a public queue, so a viral complaint turns into something trackable.</div>
+        <span class="proj-link">Public link coming soon</span>
+      </div>
+
+    </div>
+
+    <!-- ============================ TRACKS ============================ -->
+    <div class="section-label">Themes</div>
+    <div class="panel" style="margin-bottom:14px;padding-bottom:18px;">
+      <p style="margin-bottom:0;">Two scoped themes plus the judges' own problems. Teams self-selected at matchmaking.</p>
+    </div>
+    <div class="track-grid">
+      <div class="track-card">
+        <div class="track-name">Community board operations</div>
+        <div class="track-desc">New York's 59 community boards run on volunteer members, a staff of two or three, and improvised filing systems. Build paths: a meeting assistant for Robert's Rules and resolution drafting, a member educator ahead of the 2027 term-limit turnover, and an end-to-end tracker that connects each resolution to its target agency and follows what happens.</div>
+      </div>
+      <div class="track-card">
+        <div class="track-name">Public voice at scale</div>
+        <div class="track-desc">New Yorkers filed 3,655,040 requests through 311 in 2025. Build paths: a complaint-pattern dashboard that maps where complaints fall below expectation, a citizen-observation toolkit, and tools that turn social media, hearing testimony, and participatory budgeting ideas into something an agency or a board can act on.</div>
+      </div>
+      <div class="track-card">
+        <div class="track-name">Judge specials</div>
+        <div class="track-desc">Problems the judges brought themselves, pitched on the night: mapping the areas around transit stations zoned C8 or M1 that should allow housing, with a focus on the Bronx, and how a big-tent coalition gets things done without biting off everything at once.</div>
+      </div>
+    </div>
+
+    <!-- ============================ EXPERT JUDGES ============================
+         One .track-card per judge. Bios drawn from the Public Engagement Hackathon
+         announcement on the SCE Substack (Aug 26 2026) and the Luma event page.
+    -->
+    <div class="section-label">Expert judges</div>
+    <div class="track-grid">
+      <div class="track-card" style="border-left-color:var(--orange);">
+        <div class="track-name">Raj Korpan</div>
+        <div class="track-judge" style="color:var(--text-muted);font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:8px;">CUNY PIT Lab; Assistant Professor of Computer Science, Hunter College</div>
+        <div class="track-desc">Raj researches artificial intelligence, human-robot interaction, explainable AI, and socially aware robotics through Hunter's Trustworthy, Intelligent, and Explainable Robotics (TIER) Lab. He pushed teams on who their AI is designed for, whose perspectives are missing, and whether trust, explainability, and inclusion are built into the product.</div>
+      </div>
+      <div class="track-card" style="border-left-color:var(--orange);">
+        <div class="track-name">Jeremy Ney</div>
+        <div class="track-judge" style="color:var(--text-muted);font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:8px;">Author, American Inequality</div>
+        <div class="track-desc">Jeremy maps America's regional divides county by county for more than 25,000 readers, work covered by TIME, The New York Times, and NPR. He works full-time at Google and teaches as an adjunct professor at Columbia. He pushed teams on how data reveals the less obvious relationships behind social problems and how to turn those insights into solutions.</div>
+      </div>
+      <div class="track-card" style="border-left-color:var(--orange);">
+        <div class="track-name">Sara Lind</div>
+        <div class="track-judge" style="color:var(--text-muted);font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:8px;">Co-Executive Director, Open Plans</div>
+        <div class="track-desc">Sara leads Open Plans, a nonprofit working to transform how people experience New York City's streets and public spaces. She has guided major public policies, driven agendas in City Hall and Albany, and shaped the narrative on making New York's streets more livable, safer, and joyful. She pushed teams on connecting public voice to the public realm.</div>
+      </div>
+      <div class="track-card" style="border-left-color:var(--orange);">
+        <div class="track-name">Amaury Dujardin</div>
+        <div class="track-judge" style="color:var(--text-muted);font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:8px;">Public Policy Manager, Citizens Union</div>
+        <div class="track-desc">Amaury helps lead Citizens Union's legislative advocacy in Albany and City Hall and manages the organization's candidate evaluations, after nearly a decade in politics before turning to policy. He pushed teams on closing the gap between constituents and the officials who represent them, so reaching out feels less like shouting into a void.</div>
+      </div>
+      <div class="track-card" style="border-left-color:var(--orange);">
+        <div class="track-name">Abbey Kos</div>
+        <div class="track-judge" style="color:var(--text-muted);font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:8px;">Expert judge</div>
+        <div class="track-desc">Abbey joined the panel after the announcement went out and pitched her own problem statements to the builders alongside the other four judges.</div>
+      </div>
+    </div>
+
+    <!-- ============================ LUMA ARCHIVE ============================ -->
+    <div class="section-label">Event archive</div>
+    <div class="text-panel">
+      <p><strong>The original event page lives on Luma</strong> as a historical archive of the hackathon: agenda, signups, and logistics as they ran.</p>
+      <a class="arch-btn" href="https://luma.com/0hy8qqmd" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        View on Luma ↗
+      </a>
+    </div>
+
+    <div class="text-panel-x" style="margin-top:28px;background:#fff;border:1px solid #DDD8CC;border-left:3px solid #D4A853;border-radius:8px;padding:20px 24px;">
+      <div style="font-family:'Roboto Mono',monospace;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#8A5F1E;margin-bottom:12px;">Want one of these for your agency?</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;"><a href="/community/playbooks/#partner" class="sce-btn">See the partner materials →</a><a href="/community/playbooks/" class="sce-btn">Run it yourself: the Hackathon Playbook →</a></div>
+    </div>
+
+    <div style="margin-top:28px;">
+      <a href="../" class="proj-link" style="font-size:0.8rem;">← Back to all hackathons</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="sce-footer">
+  <div class="sce-footer-inner">
+    <div>
+      <a class="sce-footer-brand" href="/"><img src="/assets/sce_logo.png" alt="">State Capacity Ecosystem<small>· statecapacityecosystem.com</small></a>
+      <p class="sce-footer-tag">Where the people making government deliver find each other and build.</p>
+    </div>
+    <div class="sce-footer-actions">
+      <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗</a>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Slack ↗</a>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in Touch ↗</a>
+      <a href="/about/">About →</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

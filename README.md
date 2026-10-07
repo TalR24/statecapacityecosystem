@@ -18,7 +18,7 @@ Every page is a hand-authored static HTML file. The shared ribbon (Home, Events,
 | Section | Path | What it holds |
 |---|---|---|
 | Home | `/` (`index.html`) | Narrative bands: hero, problem, mission and vision, who is in the room, three-pillar loop, why it works, record stats, partners, latest, build with us |
-| Events | `/events/` | Events hub; `hackathons/` (with `civic-tech-build-night/` and the rehosted `tideline/`), `sponsors-checklist/`, `demo-nights/` and `salons/` (both Coming soon, kept out of the nav until scheduled) |
+| Events | `/events/` | Events hub; `hackathons/` (with `civic-tech-build-night/` and the rehosted `tideline/`; `public-engagement/`, the Sept 30 2026 recap, and the rehosted `hearts-and-minds/` under it), `sponsors-checklist/`, `demo-nights/` and `salons/` (both Coming soon, kept out of the nav until scheduled) |
 | Ecosystem | `/ecosystem/` | Landing with the search entry and change feed; `search/`, `organizations/` (Organization Directory), `connect/`, `affinity-map/`, `methodology/` |
 | Community | `/community/` | Landing; `slack/`, `substack/` (post hub, `mamdani-ai-priorities/` and the grocery prototype, hosted as-is), `playbooks/` (docx and pptx downloads), `proof-points/` |
 | About | `/about/` | Mission, what we run, the team, interest form |
@@ -52,7 +52,7 @@ Scripts (run from the repo root; `data/requirements-build.txt` lists numpy and s
 | `data/site_health.py` | the whole repo | monthly drift report (see `.github/SITE_HEALTH.md`) |
 | `data/candidates/build_civictech_guide_candidates.py` | Civic Tech Field Guide export | the review CSV for Henry (see `data/candidates/README.md`) |
 
-`data/proof_points.json` is hand-maintained (11 tools). Every other `data/*.json` is generated; never hand-edit it. The builds are deterministic: the same CSV gives the same JSON.
+`data/proof_points.json` is hand-maintained (13 tools). Every other `data/*.json` is generated; never hand-edit it. The builds are deterministic: the same CSV gives the same JSON.
 
 ### Affinity score
 
@@ -149,12 +149,12 @@ Segment colors encode data and are not rethemed. The map lives in `SEGMENT_COLOR
 4. **No filters** for Funding Model or Named Funder on the directory (inconsistent source data, clutter). Funder text is still searchable.
 5. **No links to Claude conversations** anywhere on the public site.
 6. **Do not invent URLs** (Slack, Community, event pages). Use `.pending` styling for a placeholder card until the real URL exists.
-7. **Rehosted projects** (TIDELINE) only with the builders' written permission, credited on the rehosted page and the event card, linked back to the source repo.
+7. **Rehosted projects** (TIDELINE, Hearts & Minds) only with the builders' written permission, credited on the rehosted page and the event card, linked back to the source repo.
 8. **No Support or Buy Me a Coffee button** in subpage headers.
 9. **Substack target** is always the SCE publication, never NYCuriosity.
 10. **Terminology:** the page is "Organization Directory"; the feature keeps the proper noun "Connect" ("Add Yourself to Connect"). Connect uses neutral words ("entry", "Name"), never "person" or "practitioners".
 11. **Links as buttons:** standalone links use `class="sce-btn"`; a card with exactly one link becomes clickable as a whole through the `<style id="link-ux-css">` block at the end of each chrome page head (add a new card class to its `:has` rule).
-12. **Hosted prototypes** (tideline, grocery, the Mamdani prototypes) are served as-is with no chrome injected.
+12. **Hosted prototypes** (tideline, hearts-and-minds, grocery, the Mamdani prototypes) are served as-is with no chrome injected.
 13. **Hardcoded "300+ organizations"** copy (homepage, Ecosystem dropdown) changes only when the organization count crosses a hundred; `site_health.py` flags it.
 14. **Dated backup CSVs** in `data/` are local working files; the tracked source is `directory.csv`.
 
