@@ -237,6 +237,8 @@ a.mo-item:hover { background:rgba(212,168,83,.10); }
 a.mo-item:hover .mo-title { text-decoration:underline; }
 @media (max-width:620px){ a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { font-size:0.78rem !important; } }
 @media print { a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { border:none !important; background:none !important; padding:0 !important; min-height:0; } }
+/* Project card banner: a 16:9 screenshot that bleeds to the card edges above the padded body. */
+.proj-banner { display:block; width:calc(100% + 40px); height:auto; margin:-18px -20px 14px; aspect-ratio:16/9; object-fit:cover; object-position:top; border-bottom:1px solid var(--border); border-radius:var(--radius) var(--radius) 0 0; }
 /* Project cards whose public link is not posted yet: not clickable. */
 .proj-card.no-link, .proj-card.no-link:hover { cursor:default; box-shadow:none; transform:none; border-color:var(--border); }
 .proj-card.no-link .proj-link { color:var(--text-faint); background:var(--bg); border-color:var(--border); }
@@ -387,19 +389,6 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
       </ul>
     </div>
 
-    <!-- ============================ JUDGING ============================ -->
-    <div class="section-label">What the judges looked for</div>
-    <div class="panel">
-      <p style="margin-bottom:14px;">Judges scored every demo on five questions. The second one is specific to this theme.</p>
-      <ul class="goal-list">
-        <li>Does it address a real operational constraint?</li>
-        <li><strong>Whose voice does it bring in that today's process leaves out?</strong></li>
-        <li>Does the data exist to support it?</li>
-        <li>Would practitioners understand how to use it?</li>
-        <li>Is there a pathway to real deployment?</li>
-      </ul>
-    </div>
-
     <!-- ============================ PROJECTS PRODUCED ============================
          One .proj-card per project; the Proof Points gallery renders the same list
          from /data/proof_points.json and stays the canonical, filterable view.
@@ -410,6 +399,7 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
     <div class="proj-grid">
 
       <div class="proj-card">
+        <img class="proj-banner" src="/assets/proof-points/budget-requests.jpg" alt="Map of New York City community districts in the Budget Requests app" loading="lazy" width="640" height="360">
         <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
         <div class="proj-badge">Winner</div>
         <div class="proj-title">Budget Requests</div>
@@ -418,6 +408,7 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
       </div>
 
       <div class="proj-card">
+        <img class="proj-banner" src="/assets/proof-points/hearts-and-minds.jpg" alt="The Hearts and Minds radar of Medicaid pain points" loading="lazy" width="640" height="360">
         <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
         <div class="proj-badge">Runner-up · Hosted on this site</div>
         <div class="proj-title">Hearts &amp; Minds</div>
@@ -517,21 +508,6 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
         <div class="track-desc">Governor Hochul appointed Abbey in March 2025. She has led digital transformations for federal, state and local government in the US and UK for more than 15 years, including three years at 18F and three at AWS. She is a user researcher and content designer by background. She pushed teams on operationalization: what would make officials want to work with you, how they would act on the information and how the design survives.</div>
         <div class="track-desc" style="margin-top:10px;"><strong>Asked teams to build:</strong> something that goes beyond text to include people's faces, voices and stories.</div>
       </div>
-    </div>
-
-    <!-- ============================ EXPERTS IN THE ROOM ============================ -->
-    <div class="section-label">Experts in the room</div>
-    <div class="panel">
-      <p>Eight practitioners roamed the tables and ran check-ins at 7:00 and 8:00. Their job was to say where a prototype did not match how the work runs.</p>
-      <ul class="goal-list" style="margin-top:12px;">
-        <li><strong>Zachary Feder</strong>, NYC Office of Technology and Innovation</li>
-        <li><strong>Yuki Mitsuda</strong>, NYC Department of Housing Preservation and Development</li>
-        <li><strong>Cordelia Yu</strong>, government practitioner</li>
-        <li><strong>Sarah Sachs</strong>, Block Party</li>
-        <li><strong>Jonathan Internicola</strong>, Auringon Consulting</li>
-        <li><strong>Brenda Pitts</strong>, consultant</li>
-        <li><strong>Fred Hua</strong> and <strong>Sanjana Rao</strong>, Civic Roundtable</li>
-      </ul>
     </div>
 
     <!-- ============================ WHAT CAME NEXT ============================ -->
