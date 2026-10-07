@@ -2,7 +2,7 @@
   {
     "name": "What every community board asked the City for",
     "handle": "Budget Requests",
-    "blurb": "Every community board's Capital and Expense Budget Requests since 2019 with the agency's response to each, combined from NYC Open Data and the Register PDFs. Click a district on the map, compare its requests against its 311 complaint categories, and draft a follow-up email to the agency.",
+    "blurb": "Every community board's Capital and Expense Budget Requests since 2019 with the agency response to each, combined from NYC Open Data and the Register PDFs. Click a district on the map, compare its requests against its 311 complaints and draft the follow-up email to the agency.",
     "url": "https://nyc-cb-budget-requests.vercel.app/",
     "source": "public-engagement",
     "hosted": false,
@@ -14,7 +14,7 @@
   {
     "name": "Where Medicaid hurts, in New Yorkers' own words",
     "handle": "Hearts & Minds",
-    "blurb": "A radar for the NYS Office of Customer Experience: the biggest problems people hit with Medicaid, laid out in the order they move through the program, sized by people affected and shaded by online mentions, with public YouTube stories for each. Sample data for the demo.",
+    "blurb": "A radar for the NYS Office of Customer Experience. The biggest problems people hit with Medicaid are laid out in the order they move through the program, sized by people affected and shaded by online mentions, with public YouTube stories for each. Sample data for the demo.",
     "url": "/events/hackathons/public-engagement/hearts-and-minds/",
     "source": "public-engagement",
     "hosted": true,
