@@ -442,7 +442,7 @@
 </style>
 <style id="search-inline-css">
 .ml-overlay{position:static !important;display:block !important;background:transparent;padding:0;}
-.ml-modal{margin:0 auto;max-width:960px;box-shadow:var(--shadow-md);}
+.ml-modal{margin:0 auto;max-width:1300px;min-height:max(720px,calc(100vh - 120px));padding-bottom:24px;box-shadow:var(--shadow-md);}
 .ml-modal-close{display:none;}
 body{overflow:auto !important;}
 </style>
@@ -591,7 +591,10 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
   <div class="hero-inner">
     <h1><span>Search</span></h1>
     <p class="hero-lede">Tell us who you are and what you need, or search by keyword.</p>
-    
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="/ecosystem/organizations/?add=1" class="sce-btn">Add an organization →</a>
+      <a href="/ecosystem/connect/?add=1" class="sce-btn">Add yourself or an opportunity →</a>
+    </div>
   </div>
 </div>
 

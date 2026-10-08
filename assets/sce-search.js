@@ -602,7 +602,7 @@
       const lv = [...state.levels]; const lvl = lv.length > 1 ? lv.slice(0, -1).join(", ") + " or " + lv[lv.length - 1] : (lv[0] || "");
       sent.querySelectorAll(".sg-menu").forEach(x => { if (!menu) x.remove(); });
       const keep = menu; if (keep) keep.remove();
-      sent.innerHTML = `I am ${r ? r[2] : ""}${tok("role", r ? r[1].toLowerCase() : "anyone", !!r)} looking for ${tok("goal", state.goal ? S.GOALS[state.goal].label : "anything", !!state.goal)} working on ${tok("problem", state.areas.size + state.topics.size ? problemLabel() : "any problem", !!(state.areas.size + state.topics.size))} at ${lvl ? "the " : ""}${tok("level", lvl || "any", !!lvl)} level.`;
+      sent.innerHTML = `I am ${r ? r[2] : "a/an "}${tok("role", r ? r[1].toLowerCase() : "role", !!r)} looking for ${tok("goal", state.goal ? S.GOALS[state.goal].label : "anything", !!state.goal)} working on ${tok("problem", state.areas.size + state.topics.size ? problemLabel() : "any problem", !!(state.areas.size + state.topics.size))} at ${lvl ? "the " : ""}${tok("level", lvl || "any", !!lvl)} level.`;
       if (keep) { sent.appendChild(keep); const t = sent.querySelector(`.sg-tok[data-kind="${menuKind}"]`); if (t) { t.setAttribute("aria-expanded", "true"); menuTok = t; } }
       const sug = !state.goal && state.role && !state.dismissed ? ROLE_DEFAULT[state.role] : "";
       pane.querySelector(".sg-suggest").innerHTML = sug ? `<span>Suggested for ${esc(roleOf(state.role)[1])}: ${esc(S.GOALS[sug].label)}</span><button type="button" class="sg-link" data-apply="${sug}">Apply</button><button type="button" class="sg-link" data-dismiss="1" aria-label="Dismiss suggestion">Dismiss</button>` : "";
