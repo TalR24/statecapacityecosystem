@@ -24,6 +24,18 @@
     "image": "/assets/proof-points/hearts-and-minds.jpg"
   },
   {
+    "name": "Community board updates for every feed",
+    "handle": "BoardCast",
+    "blurb": "Turns a community board's minutes, agendas or meeting transcripts into reviewed posts for X, Instagram, TikTok, Facebook and LinkedIn plus an email, with translations. Residents get a citywide meeting calendar and meeting alerts.",
+    "url": "https://boardcast-nyc.vercel.app/",
+    "source": "public-engagement",
+    "hosted": false,
+    "problem_area": "Participatory Democracy",
+    "builders": "Gibson Chu and others",
+    "date": "2026-09-30",
+    "image": "/assets/proof-points/boardcast.jpg"
+  },
+  {
     "name": "Where to put a city grocery store",
     "handle": "Grocery Store Siting Tool",
     "blurb": "Identifies disadvantaged census tracts with high food insecurity and strong transit connectivity, then scores vacant city-owned lots as candidate store sites. Adjust the scoring weights and the top sites re-rank live.",
