@@ -402,10 +402,10 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
 <script>
 /* Roadmap data: one row per item.
    Source of truth: set SHEET_CSV_URL to the team Google Sheet's published CSV
-   (File > Share > Publish to web > CSV). Until then the page reads /data/roadmap.csv.
+   (File > Share > Publish to web > CSV). /data/roadmap.csv is the fallback if the sheet cannot be reached.
    Columns: start,end,workstream,title,owner,support,status,brief,partner,note
    start/end are YYYY-MM; start "later" puts the item in the Later column. */
-const SHEET_CSV_URL = '';
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSvtRUXcen8KTG2MjAJD5bCDkj3L7ddT2-YWDg1WPrcPbZyRLAGgpY7I0bL6zBsA4SE_QoY-Q_y-1x7/pub?output=csv';
 const RM_FALLBACK = '/data/roadmap.csv';
 
 const RM_OWNERS = {
@@ -441,15 +441,22 @@ function rmParseCSV(text) {
   return rows.map(r => Object.fromEntries(head.map((h, i) => [h, (r[i] || '').trim()])));
 }
 
-const rmKey = ym => { const [y, m] = ym.split('-').map(Number); return y * 12 + (m - 1); };
+// Accepts 2026-11, 2026-11-01, 11/1/2026, 11/2026 and "Nov 2026" (Sheets reformats typed dates).
+function rmKey(v) {
+  v = String(v).trim(); let m;
+  if ((m = v.match(/^(\d{4})-(\d{1,2})/))) return +m[1] * 12 + (+m[2] - 1);
+  if ((m = v.match(/^(\d{1,2})\/(?:\d{1,2}\/)?(\d{4})$/))) return +m[2] * 12 + (+m[1] - 1);
+  if ((m = v.match(/^([A-Za-z]{3})[a-z]*\.?\s+(\d{4})$/))) { const i = RM_MON.indexOf(m[1][0].toUpperCase() + m[1].slice(1, 3).toLowerCase()); if (i >= 0) return +m[2] * 12 + i; }
+  return NaN;
+}
 const rmLabel = k => RM_MON[k % 12] + ' ' + Math.floor(k / 12);
 const rmSplit = s => (s || '').split(/[;|]/).map(x => x.trim()).filter(Boolean);
 
 function rmNormalize(rows) {
   return rows.filter(r => r.title).map(r => {
-    const later = !r.start || r.start.toLowerCase() === 'later';
+    const later = !r.start || r.start.toLowerCase() === 'later' || isNaN(rmKey(r.start));
     const s = later ? null : rmKey(r.start);
-    const e = later ? null : (r.end ? rmKey(r.end) : s);
+    const e = later ? null : (r.end && !isNaN(rmKey(r.end)) ? rmKey(r.end) : s);
     const owner = RM_OWNERS[r.owner] ? r.owner : 'Team';
     return { id: r.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), later, s, e: Math.max(s, e), owner, support: rmSplit(r.support), partner: rmSplit(r.partner),
              lane: r.workstream || 'Other', title: r.title, status: r.status || '', brief: r.brief || '', note: r.note || '' };
