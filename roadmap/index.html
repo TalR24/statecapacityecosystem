@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/assets/sce_logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roadmap — State Capacity Ecosystem</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="What the State Capacity Ecosystem team plans to do from October 2026 through March 2027, by workstream and owner.">
+  <link rel="canonical" href="https://statecapacityecosystem.com/roadmap/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://statecapacityecosystem.com/roadmap/">
+  <meta property="og:title"       content="Roadmap — State Capacity Ecosystem">
+  <meta property="og:description" content="What the State Capacity Ecosystem team plans to do from October 2026 through March 2027, by workstream and owner.">
+  <meta property="og:image"       content="https://statecapacityecosystem.com/assets/sce_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:        #8A5F1E;
+      --blue-hover:  #6E4A15;
+      --blue-light:  #F5EDDA;
+      --blue-mid:    #DFCEA1;
+      --orange:      #8A5F1E;
+      --orange-light:#F5EDDA;
+      --green:       #8A5F1E;
+      --text:        #1A1918;
+      --text-mid:    #444039;
+      --text-muted:  #6B6760;
+      --text-faint:  #9C968A;
+      --bg:          #F4EFE4;
+      --surface:     #ffffff;
+      --border:      #DDD8CC;
+      --border-mid:  #C9C1AF;
+      --shadow-sm:   0 1px 3px rgba(26,25,24,0.08);
+      --shadow-md:   0 4px 16px rgba(138,95,30,0.10);
+      --radius:      10px;
+    }
+    body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+
+    /* HEADER */
+    header { background:#1A1918; border-bottom:1px solid #2E2B27; padding:0 clamp(16px,4vw,48px); }
+    .header-inner { max-width:1300px; margin:0 auto; height:60px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { display:flex; align-items:center; gap:9px; text-decoration:none; }
+    .brand-name { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:700; color:#D4A853; letter-spacing:-0.02em; }
+    .brand-slash { font-family:'Roboto Mono',monospace; font-size:0.95rem; color:#4b5563; }
+    .brand-section { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:600; color:#DDD8CC; }
+    .header-link { font-size:0.78rem; font-weight:500; color:#9C968A; text-decoration:none; display:flex; align-items:center; gap:5px; transition:color 0.15s; }
+    .header-link:hover { color:#D4A853; }
+
+    /* BREADCRUMB */
+    .breadcrumb { padding:14px clamp(16px,4vw,48px) 0; }
+    .breadcrumb-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; gap:6px; font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:500; color:var(--text-faint); }
+    .breadcrumb a { color:var(--text-faint); text-decoration:none; transition:color 0.15s; }
+    .breadcrumb a:hover { color:var(--blue); }
+    .breadcrumb .current { color:var(--orange); }
+    .breadcrumb-sep { color:var(--border-mid); }
+
+    /* HERO */
+    .hero { padding:clamp(20px,4vw,40px) clamp(16px,4vw,48px) 0; }
+    .hero-inner { max-width:1300px; margin:0 auto; padding-bottom:4px; }
+    .hero h1 { font-family:'Roboto Mono',monospace; font-size:clamp(1.4rem,3.5vw,2.1rem); font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.2; margin-bottom:14px; }
+    .hero h1 span { color:var(--green); }
+    .hero-lede { font-size:1rem; color:var(--text-mid); line-height:1.65; max-width:820px; margin-bottom:16px; }
+
+    /* MAIN */
+    .main { flex:1; padding:clamp(6px,1vw,12px) clamp(16px,4vw,48px) clamp(40px,6vw,64px); }
+    .main-inner { max-width:1300px; margin:0 auto; }
+
+    .pb-jump { display:flex; flex-wrap:wrap; gap:10px; margin:4px 0 26px; }
+.pb-jump a { font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:600; text-decoration:none; color:var(--text); background:var(--surface); border:1px solid var(--border-mid); border-radius:8px; padding:9px 14px; }
+.pb-jump a:hover { border-color:var(--blue); color:var(--blue); }
+.pb-jump a span { color:var(--text-faint); font-weight:500; margin-left:6px; }
+.pb-section { scroll-margin-top:16px; }
+.pb-section + .pb-section { margin-top:40px; padding-top:32px; border-top:1px solid var(--border); }
+.pb-h2 { font-family:'Roboto Mono',monospace; font-size:clamp(1.1rem,2.2vw,1.4rem); font-weight:700; letter-spacing:-0.02em; line-height:1.3; margin:0 0 8px; color:var(--text); }
+.pb-cta { margin-top:18px; display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; background:var(--surface); border:1px solid var(--border); border-left:4px solid #D4A853; border-radius:10px; padding:18px 22px; }
+.pb-cta p { margin:0; font-size:0.95rem; color:var(--text-mid); }
+.pb-cta a { font-family:'Roboto Mono',monospace; font-size:0.8rem; font-weight:700; text-decoration:none; background:#1A1918; color:#F4EFE4; padding:10px 16px; border-radius:8px; white-space:nowrap; }
+.pb-cta a:hover { background:#3E3931; }
+.pb-filters { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 16px; }
+    .pb-chip { font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:600; padding:5px 12px; border-radius:999px; border:1px solid var(--border-mid); background:var(--surface); color:var(--text-mid); cursor:pointer; transition:background .15s,color .15s; }
+    .pb-chip:hover { border-color:var(--blue); color:var(--blue); }
+    .pb-chip.active { background:var(--blue); border-color:var(--blue); color:#fff; }
+    .tool-format { font-family:'Roboto Mono',monospace; font-size:0.66rem; color:var(--text-faint); margin:-4px 0 10px; }
+
+    .section-label {
+      font-family:'Roboto Mono',monospace;
+      font-size:0.72rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.1em; color:var(--orange);
+      margin:8px 0 16px;
+    }
+    .section-note { font-size:0.88rem; color:var(--text-muted); line-height:1.65; max-width:820px; margin:-6px 0 16px; }
+
+    /* CARDS */
+    .tool-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; margin-bottom:8px; }
+    .tool-card {
+      background:var(--surface); border:1px solid var(--border);
+      border-top:3px solid var(--green); border-radius:var(--radius);
+      box-shadow:var(--shadow-sm); padding:20px 22px;
+      display:flex; flex-direction:column;
+      text-decoration:none; color:inherit;
+      transition:border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .tool-card:hover { border-color:var(--green); box-shadow:var(--shadow-md); transform:translateY(-2px); }
+    .tool-kicker { font-family:'Roboto Mono',monospace; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--green); margin-bottom:8px; }
+    .tool-title { font-family:'Roboto Mono',monospace; font-size:0.96rem; font-weight:700; color:var(--text); letter-spacing:-0.02em; line-height:1.3; margin-bottom:8px; }
+    .tool-desc { font-size:0.86rem; color:var(--text-muted); line-height:1.6; flex:1; margin-bottom:14px; }
+    .tool-credit { font-size:0.74rem; color:var(--text-faint); line-height:1.5; margin-bottom:10px; }
+    .tool-cta { font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:600; color:var(--green); display:flex; align-items:center; gap:4px; transition:gap 0.15s; }
+    .tool-card:hover .tool-cta { gap:7px; }
+    .tool-card.pending {
+      border:1.5px dashed var(--border-mid); border-top:1.5px dashed var(--border-mid);
+      box-shadow:none; background:transparent; cursor:default;
+    }
+    .tool-card.pending:hover { transform:none; border-color:var(--border-mid); box-shadow:none; }
+    .tool-card.pending .tool-kicker { color:var(--text-faint); }
+    .tool-card.pending .tool-title { color:var(--text-muted); }
+
+    /* FOOTER */
+    footer { background:var(--surface); border-top:1px solid var(--border); padding:18px clamp(16px,4vw,48px); }
+    .footer-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+    .footer-copy { font-size:0.78rem; color:var(--text-faint); }
+    .footer-links { display:flex; gap:18px; }
+    .footer-links a { font-size:0.78rem; color:var(--text-muted); text-decoration:none; transition:color 0.15s; }
+    .footer-links a:hover { color:var(--blue); }
+
+    @media (max-width: 640px) { .brand-slash, .brand-section { display:none; } }
+  </style>
+<style id="ribbon-css">
+.ribbon{background:var(--surface);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);position:relative;z-index:80;}
+.ribbon-inner{max-width:1300px;margin:0 auto;display:flex;align-items:stretch;}
+.ribbon-item{position:relative;flex-shrink:0;}
+.ribbon-link{display:flex;align-items:center;gap:6px;padding:13px 14px 11px;font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;color:var(--text-mid);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;}
+.ribbon-item:hover .ribbon-link,.ribbon-link:focus{color:var(--blue);}
+.ribbon-link.active{color:var(--orange);border-bottom-color:var(--orange);}
+.ribbon-caret{font-size:0.55rem;color:var(--text-faint);transform:translateY(1px);}
+.ribbon-drop{display:none;position:absolute;top:100%;left:0;min-width:235px;background:var(--surface);border:1px solid var(--border-mid);border-radius:0 0 8px 8px;box-shadow:0 14px 34px rgba(26,25,24,0.16);z-index:90;padding:6px 0;}
+.ribbon-item:hover .ribbon-drop,.ribbon-item:focus-within .ribbon-drop{display:block;}
+.ribbon-drop a{display:block;padding:8px 16px;font-size:0.82rem;color:var(--text-mid);text-decoration:none;transition:background .1s,color .1s;}
+.ribbon-drop a:hover{background:var(--blue-light);color:var(--blue);}
+@media (max-width:720px){.ribbon-inner{flex-wrap:wrap;}.ribbon-link{padding:11px 7px 9px;font-size:0.7rem;}.ribbon-actions{flex-basis:100%;margin-left:0;padding:0 0 8px 7px;flex-wrap:wrap;gap:6px;}.ribbon-btn{padding:6px 10px;font-size:0.7rem;}.ribbon-drop{display:none !important;}}
+.ribbon-actions{margin-left:auto;display:flex;align-items:center;gap:8px;padding:7px 0 7px 14px;flex-shrink:0;}
+.ribbon-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.74rem;font-weight:700;text-decoration:none;padding:7px 13px;border-radius:7px;white-space:nowrap;border:1px solid #DFCEA1;background:#F5EDDA;color:#8A5F1E;transition:background .15s,color .15s;}
+.ribbon-btn:hover{background:#8A5F1E;color:#fff;}
+.ribbon-btn.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
+.ribbon-btn.primary:hover{background:#B08430;border-color:#B08430;color:#fff;}
+.sce-footer{background:#1A1918;color:#F4EFE4;padding:26px clamp(16px,4vw,48px);margin-top:auto;}
+.sce-footer-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.sce-footer-brand{display:flex;align-items:center;gap:10px;font-family:'Roboto Mono',monospace;font-size:0.84rem;font-weight:700;color:#D4A853;text-decoration:none;}
+.sce-footer-brand img{width:22px;height:22px;object-fit:contain;}
+.sce-footer-brand small{font-weight:400;color:#9C968A;font-size:0.72rem;margin-left:4px;}
+.sce-footer-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.sce-footer-actions a{font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;text-decoration:none;padding:8px 14px;border-radius:7px;border:1px solid rgba(244,239,228,0.3);color:#F4EFE4;transition:border-color .15s,background .15s;}
+.sce-footer-actions a:hover{border-color:#D4A853;background:rgba(212,168,83,0.12);}
+.sce-footer-actions a.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
+.sce-footer-actions a.primary:hover{background:#E3C170;}
+/* gold header row (Oct 2026) */
+.ribbon{background:#D4A853;border-bottom:1px solid #B88E3D;}
+.ribbon-link{color:#1A1918;}
+.ribbon-item:hover .ribbon-link,.ribbon-link:focus{color:#1A1918;border-bottom-color:#1A1918;}
+.ribbon-link.active{color:#1A1918;border-bottom-color:#1A1918;}
+.ribbon-caret{color:#5C4310;}
+.ribbon-btn{background:#F4EFE4;border-color:#F4EFE4;color:#1A1918;}
+.ribbon-btn:hover{background:#FFFFFF;color:#1A1918;}
+.ribbon-btn.primary{background:#1A1918;border-color:#1A1918;color:#F4EFE4;}
+.ribbon-btn.primary:hover{background:#3E3931;color:#F4EFE4;}
+.ribbon-link img{filter:brightness(0.2);}
+</style>
+<style id="event-banner-css">
+.evt-banner{background:#D4A853;color:#1A1918;padding:0 clamp(16px,4vw,48px);position:relative;z-index:100;}
+.evt-banner-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:9px 0;font-family:'Roboto Mono',monospace;font-size:0.8rem;font-weight:600;}
+.evt-banner strong{font-weight:700;}
+.evt-banner .evt-when{color:#6E4A15;}
+.evt-banner a{display:inline-flex;align-items:center;gap:6px;background:#1A1918;color:#F4EFE4;text-decoration:none;padding:6px 14px;border-radius:6px;font-size:0.76rem;font-weight:700;white-space:nowrap;transition:background .15s;}
+.evt-banner a:hover{background:#3E3931;}
+@media (max-width:620px){.evt-banner-inner{font-size:0.74rem;gap:9px;}.evt-banner .evt-when{width:100%;text-align:center;}}
+@media print{.evt-banner{display:none !important;}}
+</style>
+<style id="link-ux-css">
+/* Links as buttons (Oct 2026): every standalone text link and every call to action inside a card is a 40px-tall button. */
+a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { display:inline-flex !important; align-items:center; gap:6px; align-self:flex-start; width:auto; min-height:40px; box-sizing:border-box; padding:9px 16px !important; font-family:'Roboto Mono',monospace !important; font-size:0.8rem !important; font-weight:700 !important; line-height:1.25; text-decoration:none !important; color:#6E4A15 !important; background:#F5EDDA !important; border:1px solid #DFCEA1 !important; border-radius:8px !important; transition:background .15s,color .15s,border-color .15s; cursor:pointer; }
+a.row-link:hover, a.info-link:hover, a.proj-link:hover, a.post-link:hover, a.download-link:hover, a.sce-btn:hover,
+a:hover > .card-cta, a:hover .card-cta, a:hover .tool-cta, a:hover .act-cta, a:hover .bubble-cta, a:hover .mo-cta { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
+a.row-link:focus-visible, a.info-link:focus-visible, a.proj-link:focus-visible, a.post-link:focus-visible, a.download-link:focus-visible, a.sce-btn:focus-visible, a.scroll-cue:focus-visible { outline:2px solid #1A1918; outline-offset:2px; }
+a.row-link, a.sce-btn, a.proj-link { margin:4px 8px 4px 0; }
+.sce-btn-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+a.scroll-cue { min-height:40px; padding:9px 16px; border:1px solid rgba(212,168,83,.55); border-radius:8px; font-size:0.8rem !important; font-weight:700 !important; }
+a.scroll-cue:hover { background:rgba(212,168,83,.14); }
+/* Section headers (kickers) sized to be read, not squinted at. */
+.kicker, .section-label { font-size:0.92rem !important; letter-spacing:0.1em !important; }
+/* Whole-row and whole-card links. */
+.lw-post, .wr-row { position:relative; }
+.lw-post a.t::after, .wr-row a::after { content:""; position:absolute; inset:0; }
+.lw-post:hover, .wr-row:hover { background:rgba(212,168,83,.10); }
+.lw-post a.t { font-size:1rem !important; }
+.wr-row { padding:14px 10px !important; border-radius:6px; }
+a.sit-btn { min-height:40px; display:inline-flex; align-items:center; padding:8px 14px !important; font-size:0.8rem !important; }
+/* Search results and project cards: links are buttons; a card with exactly one link is clickable as a whole. */
+.se-card-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.se-card-links a, a.sg-link { display:inline-flex !important; align-items:center; gap:6px; min-height:40px; box-sizing:border-box; padding:9px 16px !important; font-family:'Roboto Mono',monospace !important; font-size:0.8rem !important; font-weight:700 !important; text-decoration:none !important; color:#6E4A15 !important; background:#F5EDDA !important; border:1px solid #DFCEA1 !important; border-radius:8px !important; }
+.se-card-links a:hover, a.sg-link:hover { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
+.se-card, .proj-card { position:relative; }
+.se-card:not(:has(a ~ a)) .se-card-links a::after, .proj-card:not(:has(a ~ a)) a.proj-link::after { content:""; position:absolute; inset:0; border-radius:inherit; }
+.se-card:not(:has(a ~ a)), .proj-card:not(:has(a ~ a)) { cursor:pointer; transition:box-shadow .15s, transform .15s, border-color .15s; }
+.se-card:not(:has(a ~ a)):hover, .proj-card:not(:has(a ~ a)):hover { box-shadow:0 6px 18px rgba(26,25,24,.12); transform:translateY(-1px); border-color:#8A5F1E; }
+.se-card:not(:has(a ~ a)):hover .se-card-links a, .proj-card:not(:has(a ~ a)):hover a.proj-link { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
+/* Tighter page headers (Oct 2026): less air above the title and between the lede and the first section. */
+.hero { padding-top:18px !important; }
+.hero-inner { padding-bottom:4px !important; }
+.main { padding-top:6px !important; }
+.main-inner > :first-child, .main-inner > .section-label:first-of-type { margin-top:10px !important; }
+/* Cards that are one big link: the whole card responds. */
+a.card, a.tool-card, a.act-card, a.explore-bubble, a.mo-item, a.row-visual { cursor:pointer; }
+a.mo-item { padding-top:14px; padding-bottom:14px; }
+a.mo-item:hover { background:rgba(212,168,83,.10); }
+a.mo-item:hover .mo-title { text-decoration:underline; }
+@media (max-width:620px){ a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { font-size:0.78rem !important; } }
+@media print { a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { border:none !important; background:none !important; padding:0 !important; min-height:0; } }
+</style>
+<style id="roadmap-css">
+.hero .sce-btn { margin-bottom:8px; }
+.rm-bar { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; margin:18px 0 16px; }
+.rm-legend { display:flex; flex-wrap:wrap; gap:8px; }
+.rm-key { display:inline-flex; align-items:center; gap:8px; font:600 0.8rem 'Inter',sans-serif; color:var(--text); background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:7px 14px; cursor:pointer; }
+.rm-key[aria-pressed="false"] { opacity:0.45; text-decoration:line-through; }
+.rm-dot { width:11px; height:11px; border-radius:50%; background:var(--c); flex-shrink:0; }
+.rm-views { display:flex; border:1px solid var(--border-mid); border-radius:8px; overflow:hidden; }
+.rm-views button { font:700 0.78rem 'Roboto Mono',monospace; padding:9px 16px; background:var(--surface); color:var(--text-mid); border:0; cursor:pointer; }
+.rm-views button[aria-selected="true"] { background:#1A1918; color:#F4EFE4; }
+
+.rm-timeline-wrap { overflow-x:auto; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow-sm); }
+.rm-grid { min-width:980px; }
+.rm-head, .rm-lane { display:grid; grid-template-columns:150px 1fr; }
+.rm-head { position:sticky; top:0; z-index:2; background:#1A1918; border-radius:var(--radius) var(--radius) 0 0; }
+.rm-cols { display:grid; grid-template-columns:repeat(var(--n), minmax(0,1fr)); }
+.rm-mh { font:700 0.78rem 'Roboto Mono',monospace; color:#F4EFE4; padding:12px 10px; border-left:1px solid #3E3931; }
+.rm-mh small { display:inline-block; margin-left:8px; font-size:0.66rem; color:#1A1918; background:#D4A853; border-radius:4px; padding:1px 6px; }
+.rm-mh.later { color:#D4A853; }
+.rm-lane { border-top:1px solid var(--border); }
+.rm-lane-h { font:700 0.78rem 'Roboto Mono',monospace; color:var(--text); padding:14px 12px; background:#FBF8F1; border-right:1px solid var(--border); }
+.rm-track { position:relative; grid-auto-flow:row dense; gap:6px 0; padding:10px 0; align-content:start;
+  background-image:linear-gradient(to right, var(--border) 1px, transparent 1px); background-size:calc(100% / var(--n)) 100%; }
+.rm-nowcol { position:absolute; top:0; bottom:0; background:rgba(212,168,83,0.13); pointer-events:none; }
+.rm-cell { padding:0 5px; position:relative; min-width:0; }
+.rm-chip { display:block; width:100%; text-align:left; cursor:pointer; font-family:'Inter',sans-serif; color:var(--text);
+  background:color-mix(in srgb, var(--c) 11%, #fff); border:1px solid color-mix(in srgb, var(--c) 30%, #fff); border-left:4px solid var(--c);
+  border-radius:6px; padding:7px 9px; transition:box-shadow .15s, transform .15s; }
+.rm-chip:hover, .rm-chip:focus-visible { box-shadow:0 3px 10px rgba(26,25,24,0.14); transform:translateY(-1px); outline:none; }
+.rm-chip-t { display:block; font-size:0.8rem; font-weight:600; line-height:1.3; }
+.rm-chip-m { display:block; font:600 0.68rem 'Roboto Mono',monospace; color:var(--c); margin-top:3px; filter:brightness(0.8); }
+
+.rm-list { display:flex; flex-direction:column; gap:22px; }
+.rm-month .section-label { margin-bottom:8px; }
+.rm-row { display:flex; align-items:center; gap:12px; width:100%; text-align:left; cursor:pointer; background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--c); border-radius:8px; padding:11px 14px; margin-bottom:6px; font-family:'Inter',sans-serif; color:var(--text); }
+.rm-row:hover { box-shadow:var(--shadow-sm); }
+.rm-row-t { flex:1; font-size:0.92rem; font-weight:600; line-height:1.35; }
+.rm-row-t small { display:block; font-weight:500; font-size:0.78rem; color:var(--text-muted); margin-top:2px; }
+.rm-status { font:600 0.7rem 'Roboto Mono',monospace; color:var(--text-muted); white-space:nowrap; }
+
+.rm-detail { position:fixed; right:24px; bottom:24px; z-index:900; width:min(380px, calc(100vw - 32px)); background:var(--surface); border:1px solid var(--border-mid); border-top:5px solid var(--c); border-radius:10px; box-shadow:0 12px 40px rgba(26,25,24,0.25); padding:20px 22px; }
+.rm-d-close { position:absolute; top:10px; right:12px; background:none; border:0; font-size:1rem; color:var(--text-muted); cursor:pointer; padding:4px; }
+.rm-d-kicker { font:700 0.72rem 'Roboto Mono',monospace; color:var(--text-muted); margin-bottom:6px; padding-right:24px; }
+.rm-detail h2 { font:700 1.05rem 'Roboto Mono',monospace; letter-spacing:-0.02em; line-height:1.3; margin-bottom:12px; }
+.rm-detail dl { display:grid; grid-template-columns:auto 1fr; gap:4px 12px; font-size:0.84rem; margin-bottom:10px; }
+.rm-detail dt { color:var(--text-muted); }
+.rm-detail p { font-size:0.88rem; line-height:1.6; color:var(--text-mid); margin-bottom:12px; }
+.rm-nobrief { font:600 0.76rem 'Roboto Mono',monospace; color:var(--text-faint); }
+.rm-updated, .rm-loading { font-size:0.8rem; color:var(--text-muted); margin-top:14px; }
+.rm-loading { padding:20px; margin:0; }
+@media (max-width:640px) { .rm-detail { right:16px; bottom:16px; } }
+</style>
+</head>
+<body>
+
+<!-- PILLAR RIBBON -->
+<!-- EVENT BANNER: none scheduled. For the next event, paste a div.evt-banner block here (styles are in the head). -->
+
+<style id="ribbon-sub-css">
+.ribbon-drop-desc{min-width:270px;}
+.ribbon-drop-desc a{white-space:normal;}
+.ribbon-sub{display:block;font-family:Inter,sans-serif;font-size:0.7rem;font-weight:400;color:#9C968A;line-height:1.4;margin-top:2px;}
+@media (max-width:720px){
+  .ribbon-item.open .ribbon-drop{display:block !important;position:fixed;left:10px;right:10px;min-width:0;border-radius:10px;border:1px solid var(--border-mid,#C9C1AF);box-shadow:0 18px 40px rgba(26,25,24,0.25);max-height:60vh;overflow-y:auto;z-index:120;}
+  .ribbon-item.open .ribbon-link{color:#8A5F1E;}
+}
+.sce-footer-inner{align-items:flex-start;row-gap:18px;}
+.sce-footer-inner > div:first-child{flex:1 1 340px;min-width:240px;}
+.sce-footer-actions{align-items:center;}
+.sce-footer-tag{font-family:Inter,sans-serif;font-size:0.78rem;color:#9C968A;margin:9px 0 0;max-width:460px;line-height:1.55;}
+@media (max-width:640px){.sce-footer-inner{flex-direction:column;}.sce-footer-actions{width:100%;}}
+</style>
+<nav class="ribbon" aria-label="State Capacity Ecosystem sections">
+  <div class="ribbon-inner">
+    <div class="ribbon-item"><a class="ribbon-link" href="/"><img src="/assets/sce_logo.png" alt="" style="width:16px;height:16px;object-fit:contain;">Home</a></div>
+    <div class="ribbon-item">
+      <a class="ribbon-link" href="/ecosystem/">Ecosystem <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Type a problem, a place, or a name.</span></a>
+        <a href="/ecosystem/organizations/">Organization Directory<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
+        <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
+        <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
+      </div>
+    </div>
+    <div class="ribbon-item">
+      <a class="ribbon-link" href="/events/">Events <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/events/hackathons/">Hackathons<span class="ribbon-sub">Build nights that end in working software.</span></a>
+        <a href="/events/demo-nights/">Demo Nights<span class="ribbon-sub">What got built, in front of who can adopt it.</span></a>
+        <a href="/events/salons/">Salons &amp; Meet-ups<span class="ribbon-sub">Speaker nights and monthly office hours.</span></a>
+        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<span class="ribbon-sub">What hosts and sponsors own, on one page.</span></a>
+      </div>
+    </div>
+    <div class="ribbon-item">
+      <a class="ribbon-link" href="/community/">Community <span class="ribbon-caret">▾</span></a>
+      <div class="ribbon-drop ribbon-drop-desc">
+        <a href="/community/slack/">Slack<span class="ribbon-sub">The conversation between events.</span></a>
+        <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗<span class="ribbon-sub">The team's writing on state capacity.</span></a>
+        <a href="/community/playbooks/">Playbooks<span class="ribbon-sub">Run our formats without us in the room.</span></a>
+        <a href="/community/proof-points/">Proof Points<span class="ribbon-sub">Every tool built through SCE.</span></a>
+      </div>
+    </div>
+    <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
+    <div class="ribbon-actions"><a class="ribbon-btn primary" href="/ecosystem/search/">Search</a><a class="ribbon-btn" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Subscribe ↗</a><a class="ribbon-btn" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack ↗</a>
+    </div>
+  </div>
+</nav>
+<script id="ribbon-touch-js">
+(function () {
+  var mq = window.matchMedia("(max-width:720px)");
+  document.querySelectorAll(".ribbon-item").forEach(function (item) {
+    var link = item.querySelector(".ribbon-link");
+    var drop = item.querySelector(".ribbon-drop");
+    if (!link || !drop) return;
+    link.addEventListener("click", function (e) {
+      if (!mq.matches) return;
+      if (!item.classList.contains("open")) {
+        e.preventDefault();
+        document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
+        item.classList.add("open");
+        drop.style.top = (link.getBoundingClientRect().bottom + 6) + "px";
+      }
+    });
+  });
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".ribbon-item")) {
+      document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
+    }
+  });
+})();
+</script>
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="/">State Capacity Ecosystem</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="current">Roadmap</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1>The <span>Roadmap</span></h1>
+    <p class="hero-lede">This is what the SCE team plans to do from October 2026 through March 2027. Each item names the team member who owns it. Click an item to see its details and its brief.</p>
+    <p class="hero-lede">Partners can join any event or workstream on this page. Tell us which ones interest you.</p>
+    <a class="sce-btn" href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in Touch ↗</a>
+  </div>
+</div>
+
+<div class="main">
+  <div class="main-inner">
+
+    <div class="rm-bar">
+      <div class="rm-legend" id="rm-legend" aria-label="Filter by owner"></div>
+      <div class="rm-views" role="tablist" aria-label="View">
+        <button type="button" role="tab" data-view="timeline" aria-selected="true">Timeline</button>
+        <button type="button" role="tab" data-view="list" aria-selected="false">List</button>
+      </div>
+    </div>
+
+    <div id="rm-timeline" class="rm-timeline-wrap"><p class="rm-loading">Loading the roadmap…</p></div>
+    <div id="rm-list" class="rm-list" hidden></div>
+
+    <p class="rm-updated" id="rm-updated"></p>
+
+  </div>
+</div>
+
+<div class="rm-detail" id="rm-detail" hidden role="dialog" aria-modal="false" aria-labelledby="rm-d-title">
+  <button type="button" class="rm-d-close" aria-label="Close">✕</button>
+  <div class="rm-d-kicker" id="rm-d-kicker"></div>
+  <h2 id="rm-d-title"></h2>
+  <dl id="rm-d-meta"></dl>
+  <p id="rm-d-note"></p>
+  <div id="rm-d-brief"></div>
+</div>
+
+<script>
+/* Roadmap data: one row per item.
+   Source of truth: set SHEET_CSV_URL to the team Google Sheet's published CSV
+   (File > Share > Publish to web > CSV). Until then the page reads /data/roadmap.csv.
+   Columns: start,end,workstream,title,owner,support,status,brief,partner,note
+   start/end are YYYY-MM; start "later" puts the item in the Later column. */
+const SHEET_CSV_URL = '';
+const RM_FALLBACK = '/data/roadmap.csv';
+
+const RM_OWNERS = {
+  Henry:   { name: 'Henry Grunzweig',     color: '#2F6690' },
+  Sourabh: { name: 'Sourabh Chakraborty', color: '#2E7D4F' },
+  Jeremie: { name: 'Jeremie Ponak',       color: '#7B3F8C' },
+  Tal:     { name: 'Tal Roded',           color: '#B4531F' },
+  Team:    { name: 'Whole team',          color: '#5A554C' },
+};
+const RM_LANES = ['Ecosystem', 'Incubator', 'Events', 'Thought leadership', 'Marketing & community', 'Partnerships'];
+const RM_MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const rmState = { items: [], months: [], hidden: new Set(), view: 'timeline' };
+
+function rmEsc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function rmParseCSV(text) {
+  const rows = []; let row = [], f = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) {
+      if (c === '"' && text[i + 1] === '"') { f += '"'; i++; }
+      else if (c === '"') q = false;
+      else f += c;
+    } else if (c === '"') q = true;
+    else if (c === ',') { row.push(f); f = ''; }
+    else if (c === '\n' || c === '\r') {
+      if (c === '\r' && text[i + 1] === '\n') i++;
+      row.push(f); f = ''; if (row.some(x => x.trim())) rows.push(row); row = [];
+    } else f += c;
+  }
+  row.push(f); if (row.some(x => x.trim())) rows.push(row);
+  const head = rows.shift().map(h => h.trim().toLowerCase());
+  return rows.map(r => Object.fromEntries(head.map((h, i) => [h, (r[i] || '').trim()])));
+}
+
+const rmKey = ym => { const [y, m] = ym.split('-').map(Number); return y * 12 + (m - 1); };
+const rmLabel = k => RM_MON[k % 12] + ' ' + Math.floor(k / 12);
+const rmSplit = s => (s || '').split(/[;|]/).map(x => x.trim()).filter(Boolean);
+
+function rmNormalize(rows) {
+  return rows.filter(r => r.title).map(r => {
+    const later = !r.start || r.start.toLowerCase() === 'later';
+    const s = later ? null : rmKey(r.start);
+    const e = later ? null : (r.end ? rmKey(r.end) : s);
+    const owner = RM_OWNERS[r.owner] ? r.owner : 'Team';
+    return { id: r.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), later, s, e: Math.max(s, e), owner, support: rmSplit(r.support), partner: rmSplit(r.partner),
+             lane: r.workstream || 'Other', title: r.title, status: r.status || '', brief: r.brief || '', note: r.note || '' };
+  });
+}
+
+function rmWhen(it) {
+  if (it.later) return 'Later';
+  return it.s === it.e ? rmLabel(it.s) : rmLabel(it.s) + ' to ' + rmLabel(it.e);
+}
+
+function rmVisible() { return rmState.items.filter(it => !rmState.hidden.has(it.owner)); }
+
+function rmChip(it) {
+  const c = RM_OWNERS[it.owner].color;
+  const sup = it.support.join(', ');
+  return `<button type="button" class="rm-chip" data-id="${it.id}" style="--c:${c}">
+    <span class="rm-chip-t">${rmEsc(it.title)}</span>
+    <span class="rm-chip-m">${rmEsc(it.owner === 'Team' ? 'Team' : it.owner)}${sup ? ' with ' + rmEsc(sup) : ''}${it.brief ? ' · Brief' : ''}</span>
+  </button>`;
+}
+
+function rmRenderLegend() {
+  const used = new Set(rmState.items.map(i => i.owner));
+  document.getElementById('rm-legend').innerHTML = Object.entries(RM_OWNERS).filter(([k]) => used.has(k)).map(([k, o]) =>
+    `<button type="button" class="rm-key" data-owner="${k}" aria-pressed="${!rmState.hidden.has(k)}" style="--c:${o.color}"><span class="rm-dot"></span>${rmEsc(o.name)}</button>`
+  ).join('');
+}
+
+function rmRenderTimeline() {
+  const ms = rmState.months, n = ms.length + 1;
+  const now = (() => { const d = new Date(); return d.getFullYear() * 12 + d.getMonth(); })();
+  const items = rmVisible();
+  const lanes = RM_LANES.concat([...new Set(rmState.items.map(i => i.lane))].filter(l => !RM_LANES.includes(l)));
+  let h = `<div class="rm-grid" style="--n:${n}"><div class="rm-head"><div class="rm-lane-h"></div><div class="rm-cols">`;
+  ms.forEach(k => { h += `<div class="rm-mh${k === now ? ' now' : ''}">${rmLabel(k)}${k === now ? '<small>Now</small>' : ''}</div>`; });
+  h += `<div class="rm-mh later">Later</div></div></div>`;
+  lanes.forEach(lane => {
+    const li = items.filter(i => i.lane === lane);
+    if (!li.length && !rmState.items.some(i => i.lane === lane)) return;
+    h += `<div class="rm-lane"><div class="rm-lane-h">${rmEsc(lane)}</div><div class="rm-cols rm-track">`;
+    const ni = ms.indexOf(now);
+    if (ni >= 0) h += `<div class="rm-nowcol" style="left:calc(${ni} * 100% / ${n});width:calc(100% / ${n})"></div>`;
+    li.slice().sort((a, b) => (a.later - b.later) || (a.s - b.s) || ((b.e - b.s) - (a.e - a.s))).forEach(it => {
+      const a = it.later ? n : it.s - ms[0] + 1, b = it.later ? n + 1 : it.e - ms[0] + 2;
+      h += `<div class="rm-cell" style="grid-column:${a} / ${b}">${rmChip(it)}</div>`;
+    });
+    h += `</div></div>`;
+  });
+  h += `</div>`;
+  document.getElementById('rm-timeline').innerHTML = h;
+}
+
+function rmRenderList() {
+  const items = rmVisible();
+  const groups = rmState.months.map(k => [rmLabel(k), items.filter(i => !i.later && i.s === k)]);
+  groups.push(['Later', items.filter(i => i.later)]);
+  document.getElementById('rm-list').innerHTML = groups.filter(g => g[1].length).map(([lab, its]) =>
+    `<section class="rm-month"><h2 class="section-label">${lab}</h2>${its.map(it => `
+      <button type="button" class="rm-row" data-id="${it.id}" style="--c:${RM_OWNERS[it.owner].color}">
+        <span class="rm-dot"></span>
+        <span class="rm-row-t">${rmEsc(it.title)}<small>${rmEsc(it.lane)} · ${rmEsc(RM_OWNERS[it.owner].name)}${it.s !== it.e && !it.later ? ' · through ' + rmLabel(it.e) : ''}</small></span>
+        <span class="rm-status">${rmEsc(it.status)}</span>
+      </button>`).join('')}</section>`
+  ).join('');
+}
+
+function rmRender() {
+  rmRenderLegend(); rmRenderTimeline(); rmRenderList();
+  document.getElementById('rm-timeline').hidden = rmState.view !== 'timeline';
+  document.getElementById('rm-list').hidden = rmState.view !== 'list';
+  document.querySelectorAll('.rm-views button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === rmState.view)));
+}
+
+function rmOpen(id) {
+  const it = rmState.items.find(i => i.id === id); if (!it) return;
+  const o = RM_OWNERS[it.owner];
+  const box = document.getElementById('rm-detail');
+  box.style.setProperty('--c', o.color);
+  document.getElementById('rm-d-kicker').textContent = it.lane + ' · ' + rmWhen(it);
+  document.getElementById('rm-d-title').textContent = it.title;
+  const meta = [['Owner', o.name]];
+  if (it.support.length) meta.push(['Support', it.support.map(s => RM_OWNERS[s] ? RM_OWNERS[s].name : s).join(', ')]);
+  if (it.partner.length) meta.push(['Partner', it.partner.join(', ')]);
+  if (it.status) meta.push(['Status', it.status]);
+  document.getElementById('rm-d-meta').innerHTML = meta.map(m => `<dt>${m[0]}</dt><dd>${rmEsc(m[1])}</dd>`).join('');
+  const note = document.getElementById('rm-d-note'); note.textContent = it.note; note.hidden = !it.note;
+  document.getElementById('rm-d-brief').innerHTML = it.brief
+    ? `<a class="sce-btn" href="${rmEsc(it.brief)}" target="_blank" rel="noopener">Open the brief ↗</a>`
+    : `<span class="rm-nobrief">Brief coming</span>`;
+  box.hidden = false;
+  history.replaceState(null, '', '#' + it.id);
+  box.querySelector('.rm-d-close').focus();
+}
+
+document.addEventListener('click', e => {
+  const k = e.target.closest('.rm-key');
+  if (k) { const o = k.dataset.owner; rmState.hidden.has(o) ? rmState.hidden.delete(o) : rmState.hidden.add(o); rmRender(); return; }
+  const v = e.target.closest('.rm-views button');
+  if (v) { rmState.view = v.dataset.view; rmRender(); return; }
+  const c = e.target.closest('.rm-chip, .rm-row');
+  if (c) { rmOpen(c.dataset.id); return; }
+  if (e.target.closest('.rm-d-close') || (!e.target.closest('#rm-detail'))) rmClose();
+});
+function rmClose() { const b = document.getElementById('rm-detail'); if (b.hidden) return; b.hidden = true; history.replaceState(null, '', location.pathname + location.search); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') rmClose(); });
+
+(async function rmInit() {
+  if (window.matchMedia('(max-width: 760px)').matches) rmState.view = 'list';
+  let text = '';
+  try { text = await (await fetch(SHEET_CSV_URL || RM_FALLBACK, { cache: 'no-store' })).text(); }
+  catch (err) { text = await (await fetch(RM_FALLBACK)).text(); }
+  rmState.items = rmNormalize(rmParseCSV(text));
+  const dated = rmState.items.filter(i => !i.later);
+  const lo = Math.min(...dated.map(i => i.s)), hi = Math.max(...dated.map(i => i.e));
+  for (let k = lo; k <= hi; k++) rmState.months.push(k);
+  document.getElementById('rm-updated').textContent = rmState.items.length + ' items. The team updates this page as plans change.';
+  rmRender();
+  if (location.hash.length > 1) rmOpen(decodeURIComponent(location.hash.slice(1)));
+})();
+</script>
+
+<!-- FOOTER -->
+<footer class="sce-footer">
+  <div class="sce-footer-inner">
+    <div>
+      <a class="sce-footer-brand" href="/"><img src="/assets/sce_logo.png" alt="">State Capacity Ecosystem<small>· statecapacityecosystem.com</small></a>
+      <p class="sce-footer-tag">Where the people making government deliver find each other and build.</p>
+    </div>
+    <div class="sce-footer-actions">
+      <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗</a>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Slack ↗</a>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in Touch ↗</a>
+      <a href="/about/">About →</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

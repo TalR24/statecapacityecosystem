@@ -145,6 +145,7 @@ for f in HTML_FILES:
         "canonical": canonical,
     }
 STUB_PATHS = set(STUBS.keys())
+NOINDEX_RE = re.compile(r'<meta\s+name="robots"\s+content="[^"]*noindex', re.I)
 NON_STUB_PAGES = sorted(
     repo_rel(f) for f in HTML_FILES
     if repo_rel(f) not in STUB_PATHS and repo_rel(f) != "404.html"
@@ -281,6 +282,9 @@ def check_sitemap():
         sitemap_paths.add(rel)
 
     for p in NON_STUB_PAGES:
+        # Unlisted pages (robots noindex, e.g. /roadmap/) stay out of the sitemap on purpose.
+        if NOINDEX_RE.search(FILE_CLEAN[os.path.join(ROOT, p)]):
+            continue
         if p not in sitemap_paths:
             findings.append(f"{p} not in sitemap.xml")
 
