@@ -270,6 +270,28 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
 .rm-detail dt { color:var(--text-muted); }
 .rm-detail p { font-size:0.88rem; line-height:1.6; color:var(--text-mid); margin-bottom:12px; }
 .rm-nobrief { font:600 0.76rem 'Roboto Mono',monospace; color:var(--text-faint); }
+.rm-switches { display:flex; gap:10px; flex-wrap:wrap; }
+.rm-dia { color:var(--c, #8A5F1E); font-size:0.8em; margin-right:4px; }
+.rm-key-note { display:inline-flex; align-items:center; font:600 0.8rem 'Inter',sans-serif; color:var(--text-mid); padding:7px 4px; }
+.rm-chip.ms { background:var(--c); border-color:var(--c); color:#fff; box-shadow:0 2px 8px color-mix(in srgb, var(--c) 35%, transparent); }
+.rm-chip.ms .rm-chip-t { font-weight:700; }
+.rm-chip.ms .rm-chip-m { color:#fff; filter:none; opacity:0.9; }
+.rm-chip.ms .rm-dia { color:#fff; }
+.rm-chip:not(.ms) { opacity:0.92; }
+.rm-row.ms { border-color:var(--c); border-left-width:6px; background:color-mix(in srgb, var(--c) 7%, #fff); }
+.rm-ms { background:#1A1918; border-radius:var(--radius); padding:20px 22px 22px; margin:8px 0 6px; }
+.rm-ms-head { display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:14px; }
+.rm-ms-head .section-label { color:#D4A853; margin:0; }
+.rm-ms-head span { font-size:0.86rem; color:#DDD8CC; }
+.rm-ms-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:14px; }
+.rm-ms-col { display:flex; flex-direction:column; gap:8px; }
+.rm-ms-mon { font:700 0.74rem 'Roboto Mono',monospace; color:#D4A853; text-transform:uppercase; letter-spacing:0.04em; padding-bottom:4px; border-bottom:1px solid #3E3931; }
+.rm-ms-card { display:flex; flex-direction:column; gap:4px; text-align:left; cursor:pointer; background:#F4EFE4; border:0; border-left:5px solid var(--c); border-radius:8px; padding:10px 12px; font-family:'Inter',sans-serif; color:#1A1918; transition:transform .15s, box-shadow .15s; }
+.rm-ms-card:hover, .rm-ms-card:focus-visible { transform:translateY(-1px); box-shadow:0 4px 14px rgba(0,0,0,0.35); outline:none; }
+.rm-ms-kind { font:700 0.66rem 'Roboto Mono',monospace; color:#5C4310; text-transform:uppercase; letter-spacing:0.03em; }
+.rm-ms-t { font-size:0.86rem; font-weight:600; line-height:1.3; }
+.rm-ms-p { font-size:0.74rem; color:var(--text-muted); }
+#rm-d-brief { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
 .rm-updated, .rm-loading { font-size:0.8rem; color:var(--text-muted); margin-top:14px; }
 .rm-loading { padding:20px; margin:0; }
 @media (max-width:640px) { .rm-detail { right:16px; bottom:16px; } }
@@ -365,8 +387,8 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
 <div class="hero">
   <div class="hero-inner">
     <h1>The <span>Roadmap</span></h1>
-    <p class="hero-lede">This is what the SCE team plans to do from October 2026 through March 2027. Each item names the team member who owns it. Click an item to see its details and its brief.</p>
-    <p class="hero-lede">Partners can join any event or workstream on this page. Tell us which ones interest you.</p>
+    <p class="hero-lede">This is what the SCE team plans to do from October 2026 through March 2027. Milestones are the events and publications partners can join, attend or share. Tasks are the work that gets us there.</p>
+    <p class="hero-lede">Pick a milestone you want to be part of and tell us.</p>
     <a class="sce-btn" href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in Touch ↗</a>
   </div>
 </div>
@@ -374,11 +396,19 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
 <div class="main">
   <div class="main-inner">
 
+    <section class="rm-ms" id="rm-ms" aria-label="Milestones"></section>
+
     <div class="rm-bar">
       <div class="rm-legend" id="rm-legend" aria-label="Filter by owner"></div>
+      <div class="rm-switches">
+      <div class="rm-views" role="tablist" aria-label="Show">
+        <button type="button" role="tab" data-show="all" aria-selected="true">All</button>
+        <button type="button" role="tab" data-show="ms" aria-selected="false">Milestones only</button>
+      </div>
       <div class="rm-views" role="tablist" aria-label="View">
         <button type="button" role="tab" data-view="timeline" aria-selected="true">Timeline</button>
         <button type="button" role="tab" data-view="list" aria-selected="false">List</button>
+      </div>
       </div>
     </div>
 
@@ -403,7 +433,8 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
 /* Roadmap data: one row per item.
    Source of truth: set SHEET_CSV_URL to the team Google Sheet's published CSV
    (File > Share > Publish to web > CSV). /data/roadmap.csv is the fallback if the sheet cannot be reached.
-   Columns: start,end,workstream,title,owner,support,status,brief,partner,note
+   Columns: start,end,workstream,title,owner,support,status,brief,partner,note,type
+   type: "milestone" (events and publications partners can engage with) or "task" (blank = task).
    start/end are YYYY-MM; start "later" puts the item in the Later column. */
 const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSvtRUXcen8KTG2MjAJD5bCDkj3L7ddT2-YWDg1WPrcPbZyRLAGgpY7I0bL6zBsA4SE_QoY-Q_y-1x7/pub?output=csv';
 const RM_FALLBACK = '/data/roadmap.csv';
@@ -417,7 +448,9 @@ const RM_OWNERS = {
 };
 const RM_LANES = ['Ecosystem', 'Incubator', 'Events', 'Thought leadership', 'Marketing & community', 'Partnerships'];
 const RM_MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const rmState = { items: [], months: [], hidden: new Set(), view: 'timeline' };
+const rmState = { items: [], months: [], hidden: new Set(), view: 'timeline', show: 'all' };
+const RM_KIND = { 'Events': 'Event', 'Thought leadership': 'Publication' };
+const RM_JOIN = 'https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form';
 
 function rmEsc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
@@ -459,7 +492,8 @@ function rmNormalize(rows) {
     const e = later ? null : (r.end && !isNaN(rmKey(r.end)) ? rmKey(r.end) : s);
     const owner = RM_OWNERS[r.owner] ? r.owner : 'Team';
     return { id: r.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), later, s, e: Math.max(s, e), owner, support: rmSplit(r.support), partner: rmSplit(r.partner),
-             lane: r.workstream || 'Other', title: r.title, status: r.status || '', brief: r.brief || '', note: r.note || '' };
+             lane: r.workstream || 'Other', title: r.title, status: r.status || '', brief: r.brief || '', note: r.note || '',
+             ms: /^milestone/i.test(r.type || ''), kind: RM_KIND[r.workstream] || 'Launch' };
   });
 }
 
@@ -468,13 +502,13 @@ function rmWhen(it) {
   return it.s === it.e ? rmLabel(it.s) : rmLabel(it.s) + ' to ' + rmLabel(it.e);
 }
 
-function rmVisible() { return rmState.items.filter(it => !rmState.hidden.has(it.owner)); }
+function rmVisible() { return rmState.items.filter(it => !rmState.hidden.has(it.owner) && (rmState.show === 'all' || it.ms)); }
 
 function rmChip(it) {
   const c = RM_OWNERS[it.owner].color;
   const sup = it.support.join(', ');
-  return `<button type="button" class="rm-chip" data-id="${it.id}" style="--c:${c}">
-    <span class="rm-chip-t">${rmEsc(it.title)}</span>
+  return `<button type="button" class="rm-chip${it.ms ? ' ms' : ''}" data-id="${it.id}" style="--c:${c}">
+    <span class="rm-chip-t">${it.ms ? '<span class="rm-dia" aria-label="Milestone">◆</span>' : ''}${rmEsc(it.title)}</span>
     <span class="rm-chip-m">${rmEsc(it.owner === 'Team' ? 'Team' : it.owner)}${sup ? ' with ' + rmEsc(sup) : ''}${it.brief ? ' · Brief' : ''}</span>
   </button>`;
 }
@@ -483,7 +517,20 @@ function rmRenderLegend() {
   const used = new Set(rmState.items.map(i => i.owner));
   document.getElementById('rm-legend').innerHTML = Object.entries(RM_OWNERS).filter(([k]) => used.has(k)).map(([k, o]) =>
     `<button type="button" class="rm-key" data-owner="${k}" aria-pressed="${!rmState.hidden.has(k)}" style="--c:${o.color}"><span class="rm-dot"></span>${rmEsc(o.name)}</button>`
-  ).join('');
+  ).join('') + `<span class="rm-key-note"><span class="rm-dia">◆</span> Milestone</span>`;
+}
+
+function rmRenderMilestones() {
+  const ms = rmState.items.filter(it => it.ms && !rmState.hidden.has(it.owner));
+  const cols = rmState.months.map(k => [rmLabel(k), ms.filter(i => !i.later && i.s === k)]);
+  cols.push(['Later', ms.filter(i => i.later)]);
+  document.getElementById('rm-ms').innerHTML = `<div class="rm-ms-head"><h2 class="section-label">Milestones</h2><span>Events and publications you can join, attend or share.</span></div>
+    <div class="rm-ms-grid">${cols.filter(c => c[1].length).map(([lab, its]) => `<div class="rm-ms-col"><div class="rm-ms-mon">${lab}</div>${its.map(it => `
+      <button type="button" class="rm-ms-card" data-id="${it.id}" style="--c:${RM_OWNERS[it.owner].color}">
+        <span class="rm-ms-kind"><span class="rm-dia">◆</span> ${rmEsc(it.kind)}${it.s !== it.e && !it.later ? ' · through ' + rmLabel(it.e) : ''}</span>
+        <span class="rm-ms-t">${rmEsc(it.title)}</span>
+        ${it.partner.length ? `<span class="rm-ms-p">With ${rmEsc(it.partner.join(', '))}</span>` : ''}
+      </button>`).join('')}</div>`).join('')}</div>`;
 }
 
 function rmRenderTimeline() {
@@ -516,19 +563,20 @@ function rmRenderList() {
   groups.push(['Later', items.filter(i => i.later)]);
   document.getElementById('rm-list').innerHTML = groups.filter(g => g[1].length).map(([lab, its]) =>
     `<section class="rm-month"><h2 class="section-label">${lab}</h2>${its.map(it => `
-      <button type="button" class="rm-row" data-id="${it.id}" style="--c:${RM_OWNERS[it.owner].color}">
+      <button type="button" class="rm-row${it.ms ? ' ms' : ''}" data-id="${it.id}" style="--c:${RM_OWNERS[it.owner].color}">
         <span class="rm-dot"></span>
-        <span class="rm-row-t">${rmEsc(it.title)}<small>${rmEsc(it.lane)} · ${rmEsc(RM_OWNERS[it.owner].name)}${it.s !== it.e && !it.later ? ' · through ' + rmLabel(it.e) : ''}</small></span>
+        <span class="rm-row-t">${it.ms ? '<span class="rm-dia">◆</span> ' : ''}${rmEsc(it.title)}<small>${rmEsc(it.lane)} · ${rmEsc(RM_OWNERS[it.owner].name)}${it.s !== it.e && !it.later ? ' · through ' + rmLabel(it.e) : ''}</small></span>
         <span class="rm-status">${rmEsc(it.status)}</span>
       </button>`).join('')}</section>`
   ).join('');
 }
 
 function rmRender() {
-  rmRenderLegend(); rmRenderTimeline(); rmRenderList();
+  rmRenderLegend(); rmRenderMilestones(); rmRenderTimeline(); rmRenderList();
   document.getElementById('rm-timeline').hidden = rmState.view !== 'timeline';
   document.getElementById('rm-list').hidden = rmState.view !== 'list';
-  document.querySelectorAll('.rm-views button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === rmState.view)));
+  document.querySelectorAll('.rm-views button[data-view]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === rmState.view)));
+  document.querySelectorAll('.rm-views button[data-show]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.show === rmState.show)));
 }
 
 function rmOpen(id) {
@@ -536,7 +584,7 @@ function rmOpen(id) {
   const o = RM_OWNERS[it.owner];
   const box = document.getElementById('rm-detail');
   box.style.setProperty('--c', o.color);
-  document.getElementById('rm-d-kicker').textContent = it.lane + ' · ' + rmWhen(it);
+  document.getElementById('rm-d-kicker').textContent = (it.ms ? '◆ Milestone · ' + it.kind : it.lane + ' · Task') + ' · ' + rmWhen(it);
   document.getElementById('rm-d-title').textContent = it.title;
   const meta = [['Owner', o.name]];
   if (it.support.length) meta.push(['Support', it.support.map(s => RM_OWNERS[s] ? RM_OWNERS[s].name : s).join(', ')]);
@@ -544,9 +592,9 @@ function rmOpen(id) {
   if (it.status) meta.push(['Status', it.status]);
   document.getElementById('rm-d-meta').innerHTML = meta.map(m => `<dt>${m[0]}</dt><dd>${rmEsc(m[1])}</dd>`).join('');
   const note = document.getElementById('rm-d-note'); note.textContent = it.note; note.hidden = !it.note;
-  document.getElementById('rm-d-brief').innerHTML = it.brief
+  document.getElementById('rm-d-brief').innerHTML = (it.ms ? `<a class="sce-btn rm-join" href="${RM_JOIN}" target="_blank" rel="noopener">Get involved ↗</a>` : '') + (it.brief
     ? `<a class="sce-btn" href="${rmEsc(it.brief)}" target="_blank" rel="noopener">Open the brief ↗</a>`
-    : `<span class="rm-nobrief">Brief coming</span>`;
+    : `<span class="rm-nobrief">Brief coming</span>`);
   box.hidden = false;
   history.replaceState(null, '', '#' + it.id);
   box.querySelector('.rm-d-close').focus();
@@ -556,8 +604,8 @@ document.addEventListener('click', e => {
   const k = e.target.closest('.rm-key');
   if (k) { const o = k.dataset.owner; rmState.hidden.has(o) ? rmState.hidden.delete(o) : rmState.hidden.add(o); rmRender(); return; }
   const v = e.target.closest('.rm-views button');
-  if (v) { rmState.view = v.dataset.view; rmRender(); return; }
-  const c = e.target.closest('.rm-chip, .rm-row');
+  if (v) { if (v.dataset.view) rmState.view = v.dataset.view; else rmState.show = v.dataset.show; rmRender(); return; }
+  const c = e.target.closest('.rm-chip, .rm-row, .rm-ms-card');
   if (c) { rmOpen(c.dataset.id); return; }
   if (e.target.closest('.rm-d-close') || (!e.target.closest('#rm-detail'))) rmClose();
 });
@@ -573,7 +621,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') rmClose(); }
   const dated = rmState.items.filter(i => !i.later);
   const lo = Math.min(...dated.map(i => i.s)), hi = Math.max(...dated.map(i => i.e));
   for (let k = lo; k <= hi; k++) rmState.months.push(k);
-  document.getElementById('rm-updated').textContent = rmState.items.length + ' items. The team updates this page as plans change.';
+  const nMs = rmState.items.filter(i => i.ms).length;
+  document.getElementById('rm-updated').textContent = nMs + ' milestones and ' + (rmState.items.length - nMs) + ' tasks. The team updates this page as plans change.';
   rmRender();
   if (location.hash.length > 1) rmOpen(decodeURIComponent(location.hash.slice(1)));
 })();

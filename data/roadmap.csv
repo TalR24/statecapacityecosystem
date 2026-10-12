@@ -1,42 +1,42 @@
-start,end,workstream,title,owner,support,status,brief,partner,note
-2026-10,2026-11,Ecosystem,Rework the CRM around NYC partners,Henry,,In progress,,,Decide which NYC organizations we want to work with and track every touchpoint with them.
-2026-10,,Ecosystem,Move site forms to the new CRM intake,Henry,Tal,Planned,,,Join the Slack and Get in Touch buttons point to the new Airtable intake forms.
-2026-11,,Ecosystem,Match Search roles to Connect roles,Tal,,Planned,,,The guided search uses the same role list visitors pick on Connect.
-2026-12,,Ecosystem,Feature the demo night on the homepage,Tal,,Planned,,,One homepage call to action points partners to a specific upcoming event.
-2027-01,2027-03,Ecosystem,Publish the CRM and community handbooks,Henry,,Idea,,,How we add and merge contacts and how we run the Slack.
-later,,Ecosystem,Organization Directory v2,Henry,,Idea,,,Next version of the directory once the event calendar is running.
-2026-10,,Incubator,Check in with past hackathon teams,Sourabh,,In progress,,,Ask each June and September team about progress and plans and what blocks them.
-2026-11,,Incubator,Set three tracks for hackathon projects,Sourabh,,Planned,,,A team ends the project or builds it long term or hands it to an existing tool.
-2026-11,2027-02,Incubator,Pair continuing teams with users and mentors,Sourabh,Henry,Planned,,,Each continuing team meets the people in government who would use the tool.
-2026-10,2026-11,Incubator,Grow the expert and mentor network,Sourabh,,In progress,,,Experts who mentor builders and give feedback without carrying operating load.
-2026-10,,Events,Demo night program brief,Sourabh,Jeremie,In progress,,,Format and audience and who in the room gives builders feedback.
-2026-11,,Events,Demo night room and sponsor confirmed,Sourabh,Tal; Henry,Planned,,,Venue options are Civic Hall and CUNY.
-2026-11,,Events,Community board demo night,Sourabh,Jeremie,Planned,,,Builders demo tools to the community board members and agency staff who would use them.
-2026-11,,Events,Cornell Tech Urban Tech Summit,Team,,Planned,,Civic Roundtable,A hackathon or workshop run with Civic Roundtable.
-2026-10,,Events,Salon brief,Henry,,In progress,,,A casual evening for 10 to 12 people from government and industry and philanthropy on what the ecosystem needs.
-2026-11,,Events,First salon,Henry,,Planned,,,
-2026-10,2026-11,Events,Lightning talk series proposal,Tal,Henry,In progress,,Civic Tech-ish,A simple monthly format: five or six people give five-minute talks and then everyone talks.
-2027-01,2027-03,Events,Lightning talks each month,Team,,Planned,,Civic Tech-ish,Starts in January and runs on a fixed monthly date.
-2026-10,2026-11,Events,Plan the Open Data Week hackathon with OTI,Henry,,In progress,,NYC OTI,Agree on problem statements and on where finished projects live after the event.
-2027-02,,Events,Confirm agency decision-makers for Open Data Week,Henry,Team,Planned,,NYC OTI,Every build event has a government decision-maker in the room.
-2027-03,,Events,Open Data Week 2027 hackathon,Team,,Planned,,NYC OTI,Dates follow the Open Data Week 2027 schedule.
-later,,Events,Targeted hackathon with Columbia CS3,Henry,,Idea,,Columbia CS3,
-later,,Events,Boston event,Team,,Idea,,,
-2026-10,,Thought leadership,Plan the next 12 pieces,Tal,Team,In progress,,,Articles and podcasts and interviews and showcases across the SCE Substack and partner outlets.
-2026-10,,Thought leadership,Searchlight article brainstorm,Tal,Henry,Planned,,Searchlight,A working session with the Searchlight team.
-2026-11,,Thought leadership,Searchlight article,Tal,Henry,Planned,,Searchlight,"About 1,000 words on the root problem, our approach and what comes next."
-2026-11,,Thought leadership,What does an AI-native government look like?,Henry,,Idea,,,SCE Substack.
-2026-12,,Thought leadership,AI-assisted software engineering in government,Sourabh,,Idea,,,SCE Substack.
-2026-12,,Thought leadership,Demo night recap,Team,,Planned,,,What got built and who in government picked it up.
-2027-01,,Thought leadership,Does state capacity mean anti-vendor?,Team,,Idea,,,Where vendors fit when government builds its own capacity.
-2027-02,,Thought leadership,Co-authored use case piece with an expert,Jeremie,Tal,Idea,,,
-2027-02,,Thought leadership,Partner outlet piece,Tal,,Idea,,Vital City; Abundance NY,
-2027-03,,Thought leadership,Open Data Week hackathon recap,Team,,Planned,,NYC OTI,
-2026-10,2026-12,Marketing & community,Research use cases with experts,Jeremie,,In progress,,,Collect data points and line up expert co-authors.
-2026-11,2026-12,Marketing & community,Promote the demo night,Jeremie,Team,Planned,,,Substack and coordinated LinkedIn posts and partner newsletters and Slack.
-2026-12,,Marketing & community,Slack channel for demo night matchmaking,Jeremie,,Planned,,,
-2027-02,2027-03,Marketing & community,Promote the Open Data Week hackathon,Jeremie,Team,Planned,,NYC OTI,
-2026-10,,Partnerships,Share this calendar with Vital City and Abundance NY,Tal,,In progress,,Vital City; Abundance NY,Each partner picks the events and streams it wants to join.
-2026-10,2026-12,Partnerships,Formal partnership with NYC OTI,Henry,,In progress,,NYC OTI,
-2026-10,2027-03,Partnerships,Continue working with Civic Roundtable,Henry,,In progress,,Civic Roundtable,
-2026-12,2027-01,Partnerships,Start agency outreach,Team,,Idea,,NYC Parks,Start with NYC Parks and use NYC OTI for introductions.
+start,end,workstream,title,owner,support,status,brief,partner,note,type
+2026-10,2026-11,Ecosystem,Rework the CRM around NYC partners,Henry,,In progress,,,Decide which NYC organizations we want to work with and track every touchpoint with them.,task
+2026-10,,Ecosystem,Move site forms to the new CRM intake,Henry,Tal,Planned,,,Join the Slack and Get in Touch buttons point to the new Airtable intake forms.,task
+2026-11,,Ecosystem,Match Search roles to Connect roles,Tal,,Planned,,,The guided search uses the same role list visitors pick on Connect.,task
+2026-12,,Ecosystem,Feature the demo night on the homepage,Tal,,Planned,,,One homepage call to action points partners to a specific upcoming event.,task
+2027-01,2027-03,Ecosystem,Publish the CRM and community handbooks,Henry,,Idea,,,How we add and merge contacts and how we run the Slack.,task
+later,,Ecosystem,Organization Directory v2,Henry,,Idea,,,Next version of the directory once the event calendar is running.,milestone
+2026-10,,Incubator,Check in with past hackathon teams,Sourabh,,In progress,,,Ask each June and September team about progress and plans and what blocks them.,task
+2026-11,,Incubator,Set three tracks for hackathon projects,Sourabh,,Planned,,,A team ends the project or builds it long term or hands it to an existing tool.,task
+2026-11,2027-02,Incubator,Pair continuing teams with users and mentors,Sourabh,Henry,Planned,,,Each continuing team meets the people in government who would use the tool.,task
+2026-10,2026-11,Incubator,Grow the expert and mentor network,Sourabh,,In progress,,,Experts who mentor builders and give feedback without carrying operating load.,task
+2026-10,,Events,Demo night program brief,Sourabh,Jeremie,In progress,,,Format and audience and who in the room gives builders feedback.,task
+2026-11,,Events,Demo night room and sponsor confirmed,Sourabh,Tal; Henry,Planned,,,Venue options are Civic Hall and CUNY.,task
+2026-11,,Events,Community board demo night,Sourabh,Jeremie,Planned,,,Builders demo tools to the community board members and agency staff who would use them.,milestone
+2026-11,,Events,Cornell Tech Urban Tech Summit,Team,,Planned,,Civic Roundtable,A hackathon or workshop run with Civic Roundtable.,milestone
+2026-10,,Events,Salon brief,Henry,,In progress,,,A casual evening for 10 to 12 people from government and industry and philanthropy on what the ecosystem needs.,task
+2026-11,,Events,First salon,Henry,,Planned,,,,milestone
+2026-10,2026-11,Events,Lightning talk series proposal,Tal,Henry,In progress,,Civic Tech-ish,A simple monthly format: five or six people give five-minute talks and then everyone talks.,task
+2027-01,2027-03,Events,Lightning talks each month,Team,,Planned,,Civic Tech-ish,Starts in January and runs on a fixed monthly date.,milestone
+2026-10,2026-11,Events,Plan the Open Data Week hackathon with OTI,Henry,,In progress,,NYC OTI,Agree on problem statements and on where finished projects live after the event.,task
+2027-02,,Events,Confirm agency decision-makers for Open Data Week,Henry,Team,Planned,,NYC OTI,Every build event has a government decision-maker in the room.,task
+2027-03,,Events,Open Data Week 2027 hackathon,Team,,Planned,,NYC OTI,Dates follow the Open Data Week 2027 schedule.,milestone
+later,,Events,Targeted hackathon with Columbia CS3,Henry,,Idea,,Columbia CS3,,milestone
+later,,Events,Boston event,Team,,Idea,,,,milestone
+2026-10,,Thought leadership,Plan the next 12 pieces,Tal,Team,In progress,,,Articles and podcasts and interviews and showcases across the SCE Substack and partner outlets.,task
+2026-10,,Thought leadership,Searchlight article brainstorm,Tal,Henry,Planned,,Searchlight,A working session with the Searchlight team.,task
+2026-11,,Thought leadership,Searchlight article,Tal,Henry,Planned,,Searchlight,"About 1,000 words on the root problem, our approach and what comes next.",milestone
+2026-11,,Thought leadership,What does an AI-native government look like?,Henry,,Idea,,,SCE Substack.,milestone
+2026-12,,Thought leadership,AI-assisted software engineering in government,Sourabh,,Idea,,,SCE Substack.,milestone
+2026-12,,Thought leadership,Demo night recap,Team,,Planned,,,What got built and who in government picked it up.,milestone
+2027-01,,Thought leadership,Does state capacity mean anti-vendor?,Team,,Idea,,,Where vendors fit when government builds its own capacity.,milestone
+2027-02,,Thought leadership,Co-authored use case piece with an expert,Jeremie,Tal,Idea,,,,milestone
+2027-02,,Thought leadership,Partner outlet piece,Tal,,Idea,,Vital City; Abundance NY,,milestone
+2027-03,,Thought leadership,Open Data Week hackathon recap,Team,,Planned,,NYC OTI,,milestone
+2026-10,2026-12,Marketing & community,Research use cases with experts,Jeremie,,In progress,,,Collect data points and line up expert co-authors.,task
+2026-11,2026-12,Marketing & community,Promote the demo night,Jeremie,Team,Planned,,,Substack and coordinated LinkedIn posts and partner newsletters and Slack.,task
+2026-12,,Marketing & community,Slack channel for demo night matchmaking,Jeremie,,Planned,,,,task
+2027-02,2027-03,Marketing & community,Promote the Open Data Week hackathon,Jeremie,Team,Planned,,NYC OTI,,task
+2026-10,,Partnerships,Share this calendar with Vital City and Abundance NY,Tal,,In progress,,Vital City; Abundance NY,Each partner picks the events and streams it wants to join.,task
+2026-10,2026-12,Partnerships,Formal partnership with NYC OTI,Henry,,In progress,,NYC OTI,,task
+2026-10,2027-03,Partnerships,Continue working with Civic Roundtable,Henry,,In progress,,Civic Roundtable,,task
+2026-12,2027-01,Partnerships,Start agency outreach,Team,,Idea,,NYC Parks,Start with NYC Parks and use NYC OTI for introductions.,task
