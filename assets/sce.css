@@ -336,3 +336,7 @@ a.mo-item:hover .mo-title { text-decoration: underline; }
 }
 .proj-grid { align-items: start; }
 .ms-btn, .filter-input, .search-input, #f-search { min-height: 44px !important; font-size: 16px !important; font-family: var(--font) !important; border-radius: 6px !important; }
+[hidden] { display: none !important; }
+.sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.rm-ms .section-label { color: var(--gold) !important; }
+.rm-tbl td:last-child { white-space: nowrap; }

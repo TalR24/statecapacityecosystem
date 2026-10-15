@@ -33,7 +33,8 @@
 *, *::before, *::after { box-sizing: border-box; }
 body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
 main { flex: 1; }
-.home-hero { padding-top: 96px; padding-bottom: 88px; }
+.home-hero { padding-top: 64px; padding-bottom: 64px; }
+.home-hero .h-display { font-size: clamp(36px, 4.6vw, 60px); max-width: 860px; }
 .home-hero .lede { margin: 28px 0 0; }
 .does { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; max-width: 820px; }
 .does > div { display: flex; align-items: flex-start; gap: 16px; }
@@ -87,7 +88,6 @@ main { flex: 1; }
 .recent .stats3 { margin-top: 28px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .recent .built-label { margin-top: 28px; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--dark-muted); }
 .recent .built { margin-top: 10px; border-top: 1px solid var(--dark-line); }
-.recent .built > div { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--dark-line); }
 .recent .built .win { color: var(--gold); font-weight: 700; }
 .recent .built .ru { color: var(--dark-muted); }
 .recent .more { margin-top: 20px; display: inline-flex; align-items: center; min-height: 44px; color: var(--cream); font-weight: 700; }
@@ -121,6 +121,28 @@ main { flex: 1; }
 
 .final { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px; }
 .final p { margin: 16px 0 0; font-size: 20px; }
+.fc-stats { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.fc-stats b { display: block; font-size: 40px; line-height: 1; font-weight: 700; }
+.fc-stats span { display: block; margin-top: 4px; font-size: 15px; color: var(--muted); }
+.fly .partners { margin-top: 40px; justify-content: center; }
+.tool-strip { margin-top: 36px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 16px; }
+.tool-tile { display: flex; flex-direction: column; text-decoration: none; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; transition: box-shadow .15s, transform .15s; }
+.tool-tile:hover { box-shadow: var(--lift); transform: translateY(-2px); color: var(--ink); }
+.tool-tile img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); background: var(--cream); }
+.tool-tile .tt-body { padding: 14px 16px 16px; }
+.tool-tile .tt-body, .tool-tile .tt-src, .tool-tile .tt-name { display: block; }
+.tool-tile .tt-src { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--bronze); }
+.tool-tile .tt-name { margin-top: 4px; font-size: 19px; font-weight: 700; line-height: 1.2; }
+.mini-guide .mg-sentence { margin: 12px 0 18px; font-size: clamp(20px, 2vw, 24px); font-weight: 700; line-height: 2.1; }
+.mini-guide select { font: inherit; font-weight: 700; color: var(--ink); background: var(--gold); border: 2px solid var(--gold); border-radius: 8px; padding: 2px 8px; min-height: 44px; max-width: 100%; cursor: pointer; }
+.mini-guide select.unset { background: var(--paper); color: var(--bronze); border-style: dashed; border-color: var(--bronze); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.recent-shot { display: block; margin: -32px -32px 24px; border-radius: 12px 12px 0 0; overflow: hidden; border-bottom: 1px solid var(--dark-line); }
+.recent-shot img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; object-position: top; }
+.recent .built > a, .recent .built > div { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--dark-line); color: var(--cream); text-decoration: none; }
+.recent .built > a:hover strong { color: var(--gold); }
+.recent .more-row { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 12px; }
+.who { grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)) !important; }
 </style>
 <link rel="stylesheet" href="/assets/sce.css">
 <script src="/assets/sce-nav.js" defer></script>
@@ -170,19 +192,19 @@ main { flex: 1; }
 <section class="wrap home-hero">
   <div class="kicker">A community for better government</div>
   <h1 class="h-display">We connect the people making government work better.</h1>
-  <p class="lede">We're a community of public servants, technologists, researchers, and funders.</p>
+  <p class="lede">We're a community of government practitioners, technologists, researchers, funders and everyone else working to help government deliver.</p>
   <div class="does">
     <div>
       <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"></path></svg></div>
-      <p><strong>We map</strong> the 300+ organizations helping government grow its capacity to deliver.</p>
+      <p><strong>We map the ecosystem</strong> of 300+ organizations helping government grow its capacity to deliver.</p>
     </div>
     <div>
       <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"></path></svg></div>
-      <p><strong>We host build nights</strong> where public servants and technologists make tools for government in one evening. Think a <a href="/community/proof-points/">procurement record search or a game that teaches 311</a>.</p>
+      <p><strong>We host events</strong> such as build nights, demo nights, salons and meet-ups, where government practitioners and technologists <a href="/community/proof-points/">build tools for government together</a>.</p>
     </div>
     <div>
       <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM14 3v6h6M8 13h8M8 17h5"></path></svg></div>
-      <p><strong>We share what we learn</strong> through essays, free playbooks, and a Slack for people doing the work.</p>
+      <p><strong>We're building a community</strong> that makes this work more visible and keeps the conversation going, through essays, free playbooks and a Slack for people doing the work.</p>
     </div>
   </div>
   <div class="btn-row">
@@ -199,7 +221,7 @@ main { flex: 1; }
       <div class="kicker">The problem</div>
       <h2 class="h-section">Good policy fails when the people fixing government work in silos.</h2>
       <p>State capacity is government's ability to do what it sets out to do: issue the permit, deliver the benefit, keep the trains running.</p>
-      <p>Plenty of people work on it. Few know who else is out there or how to help. Visible work moves faster.</p>
+      <p>Plenty of people want to contribute to a government that delivers, but few know who else is out there or how to help. When the work is visible, people find each other and it moves faster.</p>
       <p class="credit">Inspired by Jennifer Pahlka, <em>Recoding America</em>.</p>
     </div>
     <div class="mv">
@@ -224,44 +246,49 @@ main { flex: 1; }
       <a class="fly-card" href="/ecosystem/">
         <div class="fc-top"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#6E4E1E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"></path></svg><span class="caps">01 · Ecosystem</span></div>
         <h3>We map who's helping government grow its capacity.</h3>
-        <p>A searchable directory of agencies, nonprofits, researchers, funders, and companies. Plus a board of people and open opportunities.</p>
-        <div class="fc-foot">300+ organizations · 50+ people and opportunities</div>
+        <p>A searchable directory of agencies, nonprofits, researchers, funders and companies, plus a board of people and open opportunities.</p>
+        <div class="fc-stats"><div><b>300+</b><span>organizations</span></div><div><b>50+</b><span>people and opportunities</span></div></div>
       </a>
       <div class="fly-arrow" aria-hidden="true">→</div>
       <a class="fly-card" href="/events/">
         <div class="fc-top"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#6E4E1E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"></path></svg><span class="caps">02 · Events</span></div>
         <h3>We bring people together to build tools for government.</h3>
-        <p>Public servants bring real problems. Technologists bring skills. Mixed teams leave the night with working prototypes.</p>
-        <div class="fc-foot">160+ builders · 2 hackathons</div>
+        <p>Government practitioners bring real problems and technologists bring the skills, so mixed teams leave the night with working prototypes.</p>
+        <div class="fc-stats"><div><b>160+</b><span>builders</span></div><div><b>40+</b><span>prototypes</span></div><div><b>2</b><span>hackathons</span></div></div>
       </a>
       <div class="fly-arrow" aria-hidden="true">→</div>
       <a class="fly-card" href="/community/">
         <div class="fc-top"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#6E4E1E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM14 3v6h6M8 13h8M8 17h5"></path></svg><span class="caps">03 · Community</span></div>
         <h3>We share what we learn so others can build on it.</h3>
-        <p>A Slack for people doing the work. A Substack on what's working. Free playbooks so anyone can run these events in their own city.</p>
-        <div class="fc-foot">14 tools · 4 playbooks · 12 posts</div>
+        <p>A Slack for people doing the work, a Substack on what's working, and free playbooks so anyone can run these events in their own city.</p>
+        <div class="fc-stats"><div><b>14</b><span>tools</span></div><div><b>4</b><span>playbooks</span></div><div><b>12</b><span>posts</span></div></div>
       </a>
     </div>
     <div class="fly-loop" aria-hidden="true"><span>Repeat</span></div>
-    <p class="fly-caption">The directory fills our events. Events grow the community. The community grows the directory.</p>
+    <p class="fly-caption">The directory fills our events, events grow the community, and the community grows the directory.</p>
+    <div class="partners"><span class="caps">Partners</span><span class="pname">CUNY PIT Lab</span><span class="pname">Civic Roundtable</span></div>
   </div>
 </section>
 
-<!-- RECORD -->
-<section class="band band-white" id="record">
+<!-- WHAT WE'VE BUILT: tool screenshots from data/proof_points.json -->
+<section class="band band-white" id="built">
   <div class="wrap">
-    <div class="kicker">The record so far</div>
-    <h2 class="h-section">What we've built.</h2>
-    <div class="stats">
-      <div class="stat"><b>300+</b><span>organizations mapped</span></div>
-      <div class="stat"><b>160+</b><span>builders across two hackathons</span></div>
-      <div class="stat"><b>20</b><span>prototypes in one evening</span></div>
-      <div class="stat"><b>1,000+</b><span>downloads of one build-night tool</span></div>
+    <div class="kicker">What we've built</div>
+    <div class="latest-head">
+      <h2 class="h-section">Working tools from our build nights and our own prototyping.</h2>
+      <a href="/community/proof-points/">See all of them →</a>
     </div>
-    <div class="partners">
-      <span class="caps">Partners</span>
-      <span class="pname">CUNY PIT Lab</span>
-      <span class="pname">Civic Roundtable</span>
+    <div class="tool-strip">
+<!-- static:home-tools:start -->
+<a class="tool-tile" href="https://nyc-cb-budget-requests.vercel.app/" target="_blank" rel="noopener"><img src="/assets/proof-points/budget-requests.jpg" alt="" width="640" height="360" loading="lazy"><span class="tt-body"><span class="tt-src">Sept 2026 hackathon</span><span class="tt-name">Budget Requests</span></span></a>
+<a class="tool-tile" href="/events/hackathons/public-engagement/hearts-and-minds/"><img src="/assets/proof-points/hearts-and-minds.jpg" alt="" width="640" height="360" loading="lazy"><span class="tt-body"><span class="tt-src">Sept 2026 hackathon</span><span class="tt-name">Hearts &amp; Minds</span></span></a>
+<a class="tool-tile" href="https://boardcast-nyc.vercel.app/" target="_blank" rel="noopener"><img src="/assets/proof-points/boardcast.jpg" alt="" width="640" height="360" loading="lazy"><span class="tt-body"><span class="tt-src">Sept 2026 hackathon</span><span class="tt-name">BoardCast</span></span></a>
+<a class="tool-tile" href="/community/substack/nyc-grocery-access-site-prototype/"><img src="/assets/proof-points/grocery-store-siting-tool.jpg" alt="" width="640" height="360" loading="lazy"><span class="tt-body"><span class="tt-src">SCE team prototype</span><span class="tt-name">Grocery Store Siting Tool</span></span></a>
+<a class="tool-tile" href="/community/substack/mamdani-ai-priorities/summons-navigator/"><img src="/assets/proof-points/nyc-summons-navigator.jpg" alt="" width="640" height="360" loading="lazy"><span class="tt-body"><span class="tt-src">SCE team prototype</span><span class="tt-name">NYC Summons Navigator</span></span></a>
+<a class="tool-tile" href="/community/substack/mamdani-ai-priorities/housing-approval-pathway/"><img src="/assets/proof-points/nyc-affordable-housing-approvals-navigator.jpg" alt="" width="640" height="360" loading="lazy"><span class="tt-body"><span class="tt-src">SCE team prototype</span><span class="tt-name">NYC Affordable Housing Approvals Navigator</span></span></a>
+<a class="tool-tile" href="/events/hackathons/civic-tech-build-night/tideline/"><img src="/assets/proof-points/tideline-flood-resilience-capital-tracker.jpg" alt="" width="640" height="360" loading="lazy"><span class="tt-body"><span class="tt-src">June 2026 build night</span><span class="tt-name">TIDELINE: Flood-Resilience Capital Tracker</span></span></a>
+<a class="tool-tile" href="https://mamdanistan-rpg.vercel.app/" target="_blank" rel="noopener"><img src="/assets/proof-points/311-learning-game.jpg" alt="" width="640" height="360" loading="lazy"><span class="tt-body"><span class="tt-src">June 2026 build night</span><span class="tt-name">311 Learning Game</span></span></a>
+<!-- static:home-tools:end -->
     </div>
   </div>
 </section>
@@ -271,22 +298,47 @@ main { flex: 1; }
   <div>
     <div class="kicker">For practitioners and builders</div>
     <h2 class="h-feature">Find who's working on your problem.</h2>
-    <p class="feature-lede">Search 300+ organizations by problem, government level, or name. Then add yourself or an open opportunity to Connect so the right people can find you.</p>
+    <p class="feature-lede">Tell Search who you are and what you need, and it finds the organizations, people and open opportunities that match. Then add yourself to Connect so the right people can find you.</p>
     <div class="btn-row">
-      <a class="btn-primary" href="/ecosystem/connect/?add=1">Add yourself to Connect →</a>
-      <a class="btn-outline" href="/ecosystem/search/">Search the directory</a>
+      <a class="btn-primary" href="/ecosystem/search/">Try Search →</a>
+      <a class="btn-outline" href="/ecosystem/connect/?add=1">Add yourself to Connect →</a>
     </div>
   </div>
   <div class="panel">
-    <form action="/ecosystem/search/" method="get" role="search">
-      <label for="dir-search">Search the directory</label>
-      <div class="field-row">
-        <input type="hidden" name="mode" value="search">
-        <input class="field-input" id="dir-search" name="q" type="search" placeholder="Try &quot;procurement&quot; or &quot;state hiring&quot;">
-        <button class="btn-dark" type="submit">Search</button>
-      </div>
+    <form class="mini-guide" action="/ecosystem/search/" method="get">
+      <div class="caps">Start a search</div>
+      <p class="mg-sentence">
+        I am
+        <label class="sr" for="mg-role">Your role</label>
+        <select id="mg-role" name="role">
+          <option value="">a/an [role]</option>
+          <option value="gov">a government practitioner</option>
+          <option value="tech">a technologist</option>
+          <option value="researcher">a researcher</option>
+          <option value="funder">a funder</option>
+          <option value="advocate">an advocate</option>
+          <option value="builder">a capacity builder</option>
+          <option value="fellowship">with a fellowship program</option>
+          <option value="journalist">in media</option>
+        </select>
+        looking for
+        <label class="sr" for="mg-goal">What you need</label>
+        <select id="mg-goal" name="goal">
+          <option value="">[anything]</option>
+          <option value="orgs">organizations</option>
+          <option value="funding">funding</option>
+          <option value="jobs">jobs and fellowships</option>
+          <option value="tools">tools and vendors</option>
+          <option value="research">research</option>
+          <option value="people">people to talk to</option>
+          <option value="collab">collaborators</option>
+          <option value="gov">government teams</option>
+          <option value="training">training</option>
+        </select>
+      </p>
+      <button class="btn-dark" type="submit">Show me matches →</button>
     </form>
-    <div class="sub">Browse by type</div>
+    <div class="sub">Or browse the directory by type</div>
     <div class="chips">
 <!-- static:home-seg-chips:start -->
 <a class="pill" href="/ecosystem/organizations/?seg=Government">Government <strong>56</strong></a>
@@ -313,9 +365,10 @@ main { flex: 1; }
 <section class="band band-dark" id="agencies">
   <div class="wrap split">
     <div class="recent">
+      <a class="recent-shot" href="https://nyc-cb-budget-requests.vercel.app/" target="_blank" rel="noopener"><img src="/assets/proof-points/budget-requests.jpg" alt="The Budget Requests app: a map of New York City's community districts" width="640" height="360" loading="lazy"></a>
       <div class="caps">Most recent · September 2026</div>
       <h3>State Capacity Hackathon: Public Engagement</h3>
-      <p>Two scoped themes. Mixed teams of practitioners and technologists. Working prototypes judged against real problems.</p>
+      <p>Mixed teams of practitioners and technologists built working prototypes for two scoped themes, judged against real problems.</p>
       <div class="stats3">
         <div class="stat"><b>125+</b><span>sign-ups</span></div>
         <div class="stat"><b>~80</b><span>builders</span></div>
@@ -323,11 +376,11 @@ main { flex: 1; }
       </div>
       <div class="built-label">What got built</div>
       <div class="built">
-        <div><strong>Budget Requests</strong><span class="win">Winner</span></div>
-        <div><strong>Hearts &amp; Minds</strong><span class="ru">Runner-up</span></div>
-        <div><strong>In the Zone</strong><span class="ru">Runner-up</span></div>
+        <a href="https://nyc-cb-budget-requests.vercel.app/" target="_blank" rel="noopener"><strong>Budget Requests ↗</strong><span class="win">Winner</span></a>
+        <a href="/events/hackathons/public-engagement/hearts-and-minds/"><strong>Hearts &amp; Minds →</strong><span class="ru">Runner-up</span></a>
+        <div><strong>In the Zone</strong><span class="ru">Runner-up · link coming soon</span></div>
       </div>
-      <a class="more" href="/events/hackathons/public-engagement/">See the full recap →</a>
+      <div class="more-row"><a class="more" href="/events/hackathons/public-engagement/">See the full recap →</a><a class="more" href="/community/proof-points/?source=public-engagement">See the tools in Proof Points →</a></div>
     </div>
     <div>
       <div class="kicker">For agencies and sponsors</div>
@@ -346,7 +399,7 @@ main { flex: 1; }
   <div>
     <div class="kicker">For people who follow the ideas</div>
     <h2 class="h-feature">We write about what government needs to deliver.</h2>
-    <p class="feature-lede">Essays on technology, talent, and AI in government from people doing the work. Join the Slack to argue with us.</p>
+    <p class="feature-lede">We publish essays on technology, talent and AI in government from people doing the work. Join the Slack to discuss and debate them with us, and be the first to hear about new events.</p>
     <div class="btn-row">
       <a class="btn-primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack →</a>
       <a class="btn-outline" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Subscribe ↗</a>
@@ -376,18 +429,18 @@ main { flex: 1; }
     <div class="who">
       <div>
         <div class="ico ico-lg"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10M19 21V10M9.5 21V10M14.5 21V10M2 10l10-6 10 6z"></path></svg></div>
-        <div class="wt">Public servants</div>
-        <p>Bring the problems and the authority to act.</p>
+        <div class="wt">Government practitioners</div>
+        <p>Bring the problems and the authority to act on them.</p>
       </div>
       <div>
         <div class="ico ico-lg"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"></path></svg></div>
         <div class="wt">Technologists</div>
-        <p>Bring working software.</p>
+        <p>Bring the skills to build working software.</p>
       </div>
       <div>
         <div class="ico ico-lg"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-5-5"></path></svg></div>
         <div class="wt">Researchers</div>
-        <p>Bring the evidence.</p>
+        <p>Bring the evidence on what works.</p>
       </div>
       <div>
         <div class="ico ico-lg"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M15 9.5c0-1.4-1.3-2.5-3-2.5s-3 1-3 2.3c0 3.2 6 1.8 6 5 0 1.4-1.3 2.7-3 2.7s-3-1.1-3-2.5M12 5v2M12 17v2"></path></svg></div>
@@ -401,8 +454,18 @@ main { flex: 1; }
       </div>
       <div>
         <div class="ico ico-lg"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h7a3 3 0 013 3v12a2 2 0 00-2-2H2zM22 5h-7a3 3 0 00-3 3v12a2 2 0 012-2h8z"></path></svg></div>
-        <div class="wt">Trainers and educators</div>
-        <p>Bring the skills and playbooks.</p>
+        <div class="wt">Capacity builders</div>
+        <p>Bring the training, skills and playbooks.</p>
+      </div>
+      <div>
+        <div class="ico ico-lg"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 4.5-9 4.5-9-4.5z"></path><path d="M7 10v5c0 1.7 2.2 3 5 3s5-1.3 5-3v-5"></path></svg></div>
+        <div class="wt">Fellowship programs</div>
+        <p>Bring new talent into government.</p>
+      </div>
+      <div>
+        <div class="ico ico-lg"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a3 3 0 013 3v13H7a3 3 0 01-3-3z"></path><path d="M8 8h8M8 12h8M8 16h5"></path></svg></div>
+        <div class="wt">Media</div>
+        <p>Tell the story of what is working.</p>
       </div>
     </div>
     <a class="you" href="/ecosystem/connect/?add=1">
@@ -430,7 +493,7 @@ main { flex: 1; }
     </a>
     <a href="/events/hackathons/public-engagement/">
       <span class="rl-date">Sep 2026</span><span class="rl-kind">Event</span>
-      <span><strong>State Capacity Hackathon: Public Engagement</strong><br><span class="rl-sub">About 80 builders. Two scoped themes. Five judges.</span></span>
+      <span><strong>State Capacity Hackathon: Public Engagement</strong><br><span class="rl-sub">About 80 builders took on two scoped themes in front of five judges.</span></span>
     </a>
     <a href="https://substack.statecapacityecosystem.com/p/peeling-the-banana" target="_blank" rel="noopener">
       <span class="rl-date">Sep 2026</span><span class="rl-kind">Essay</span>
@@ -467,6 +530,15 @@ main { flex: 1; }
 
 </main>
 
+<script>
+document.querySelectorAll('.mini-guide select').forEach(function (sel) {
+  var sync = function () { sel.classList.toggle('unset', !sel.value); };
+  sel.addEventListener('change', sync); sync();
+});
+document.querySelectorAll('.mini-guide').forEach(function (f) {
+  f.addEventListener('submit', function () { f.querySelectorAll('select').forEach(function (x) { if (!x.value) x.disabled = true; }); });
+});
+</script>
 <footer class="site-footer">
   <div class="site-footer-inner">
     <div>

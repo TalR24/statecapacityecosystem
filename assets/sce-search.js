@@ -379,9 +379,10 @@
   "use strict";
   const S = global.SCESearch;
   const ROLES = [
+    // Labels follow the Connect form's roles (canon); slugs stay stable for old links.
     ["gov", "Government practitioner", "a "], ["tech", "Technologist", "a "], ["researcher", "Researcher", "a "],
     ["funder", "Funder", "a "], ["advocate", "Advocate", "an "], ["builder", "Capacity builder", "a "],
-    ["fellowship", "Fellowship or program lead", "a "], ["journalist", "Journalist", "a "], ["newcomer", "Someone new to this", ""],
+    ["fellowship", "Fellowship program", "with a "], ["journalist", "Media", "in "], ["newcomer", "Someone new to this", ""],
   ];
   const ROLE_DEFAULT = { funder: "orgs", tech: "gov", gov: "tools", researcher: "research", advocate: "collab", builder: "gov", fellowship: "gov", journalist: "people", newcomer: "orgs" };
   const GOAL_ORDER = ["orgs", "funding", "jobs", "tools", "research", "people", "collab", "gov", "training"];

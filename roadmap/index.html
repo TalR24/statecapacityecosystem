@@ -201,6 +201,21 @@
 .rm-ms-t { font-size:0.86rem; font-weight:600; line-height:1.3; }
 .rm-ms-p { font-size:0.74rem; color:var(--text-muted); }
 #rm-d-brief { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.rm-pages { display:flex; gap:8px; border-bottom:1px solid var(--line); margin:8px 0 24px; }
+.rm-pages a { font-size:19px; font-weight:700; color:var(--muted); text-decoration:none; padding:12px 4px; margin-right:18px; border-bottom:4px solid transparent; min-height:48px; display:inline-flex; align-items:center; }
+.rm-pages a[aria-selected="true"] { color:var(--ink); border-bottom-color:var(--gold); }
+.rm-owner select { min-height:44px; font:600 16px var(--font); border:1px solid var(--border-mid); border-radius:6px; padding:0 10px; background:var(--paper); }
+.rm-late { display:inline-block; margin-left:6px; font-size:12px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:#fff; background:#B42318; border-radius:4px; padding:1px 6px; }
+.rm-chip .rm-late { margin:6px 0 0; }
+.rm-table-wrap { overflow-x:auto; background:var(--paper); border:1px solid var(--line); border-radius:10px; }
+.rm-tbl { width:100%; border-collapse:collapse; font-size:16px; min-width:860px; }
+.rm-tbl th { text-align:left; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--bronze); padding:12px 14px; border-bottom:2px solid var(--line); background:#FBF8F1; }
+.rm-tbl td { padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+.rm-tbl tr td:first-child { border-left:4px solid var(--c); }
+.rm-tbl small { display:block; color:var(--muted); font-size:14px; }
+.rm-tbl .rm-dot { display:inline-block; vertical-align:middle; }
+.rm-row-btn, .rm-dep { font:inherit; font-weight:700; color:var(--ink); background:none; border:0; padding:0; text-align:left; cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
+.rm-dep { font-weight:400; }
 .rm-updated, .rm-loading { font-size:0.8rem; color:var(--text-muted); margin-top:14px; }
 .rm-loading { padding:20px; margin:0; }
 @media (max-width:640px) { .rm-detail { right:16px; bottom:16px; } }
@@ -260,34 +275,43 @@
 <div class="hero">
   <div class="hero-inner">
     <div class="kicker">Roadmap</div>
-    <h1>What we're building through March 2027.</h1>
-    <p class="hero-lede">This is what the SCE team plans to do from October 2026 through March 2027. Milestones are the events and publications partners can join, attend or share. Tasks are the work that gets us there.</p>
-    <p class="hero-lede">Pick a milestone you want to be part of and tell us.</p>
-    <a class="sce-btn" href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in touch ↗</a>
+    <h1 id="rm-h1">What we're building through March 2027.</h1>
+    <p class="hero-lede" id="rm-lede-ms">These are the events and publications we have planned through March 2027. Partners can join, host, sponsor or share any of them, so pick the ones that fit and tell us.</p>
+    <p class="hero-lede" id="rm-lede-tasks" hidden>This is the work behind each milestone, grouped by workstream. Every task names the person who owns it, and anything past its due date is flagged.</p>
+    <div class="btn-row" id="rm-cta" style="margin-top:4px">
+      <a class="btn-primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in touch ↗</a>
+    </div>
   </div>
 </div>
 
 <div class="main">
   <div class="main-inner">
 
-    <section class="rm-ms" id="rm-ms" aria-label="Milestones"></section>
-
-    <div class="rm-bar">
-      <div class="rm-legend" id="rm-legend" aria-label="Filter by owner"></div>
-      <div class="rm-switches">
-      <div class="rm-views" role="tablist" aria-label="Show">
-        <button type="button" role="tab" data-show="all" aria-selected="true">All</button>
-        <button type="button" role="tab" data-show="ms" aria-selected="false">Milestones only</button>
-      </div>
-      <div class="rm-views" role="tablist" aria-label="View">
-        <button type="button" role="tab" data-view="timeline" aria-selected="true">Timeline</button>
-        <button type="button" role="tab" data-view="list" aria-selected="false">List</button>
-      </div>
-      </div>
+    <div class="rm-pages" role="tablist" aria-label="Roadmap view">
+      <a role="tab" href="?view=milestones" data-page="milestones" aria-selected="true">Milestones</a>
+      <a role="tab" href="?view=tasks" data-page="tasks" aria-selected="false">Team tasks</a>
     </div>
 
-    <div id="rm-timeline" class="rm-timeline-wrap"><p class="rm-loading">Loading the roadmap…</p></div>
-    <div id="rm-list" class="rm-list" hidden></div>
+    <section id="rm-page-ms">
+      <section class="rm-ms" id="rm-ms" aria-label="Milestones"><p class="rm-loading">Loading the roadmap</p></section>
+    </section>
+
+    <section id="rm-page-tasks" hidden>
+      <div class="rm-bar">
+        <div class="rm-legend" id="rm-legend" aria-label="Filter by workstream"></div>
+        <div class="rm-switches">
+          <label class="rm-owner"><span class="sr">Owner</span>
+            <select id="rm-owner"><option value="">Everyone</option></select>
+          </label>
+          <div class="rm-views" role="tablist" aria-label="View">
+            <button type="button" role="tab" data-view="timeline" aria-selected="true">Timeline</button>
+            <button type="button" role="tab" data-view="table" aria-selected="false">Table</button>
+          </div>
+        </div>
+      </div>
+      <div id="rm-timeline" class="rm-timeline-wrap"></div>
+      <div id="rm-table" class="rm-table-wrap" hidden></div>
+    </section>
 
     <p class="rm-updated" id="rm-updated"></p>
 
@@ -309,6 +333,8 @@
    (File > Share > Publish to web > CSV). /data/roadmap.csv is the fallback if the sheet cannot be reached.
    Columns: start,end,workstream,title,owner,support,status,brief,partner,note,type
    type: "milestone" (events and publications partners can engage with) or "task" (blank = task).
+   Optional columns for the Team tasks view: due (a date, e.g. 2026-11-20) and depends_on (titles of other rows, separated by ;).
+   Views: /roadmap/ = Milestones (partner calendar); /roadmap/?view=tasks = Team tasks (timeline or table by workstream).
    start/end are YYYY-MM; start "later" puts the item in the Later column. */
 const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSvtRUXcen8KTG2MjAJD5bCDkj3L7ddT2-YWDg1WPrcPbZyRLAGgpY7I0bL6zBsA4SE_QoY-Q_y-1x7/pub?output=csv';
 const RM_FALLBACK = '/data/roadmap.csv';
@@ -322,7 +348,9 @@ const RM_OWNERS = {
 };
 const RM_LANES = ['Ecosystem', 'Incubator', 'Events', 'Thought leadership', 'Marketing & community', 'Partnerships'];
 const RM_MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const rmState = { items: [], months: [], hidden: new Set(), view: 'timeline', show: 'all' };
+const RM_LANE_COLORS = { 'Ecosystem': '#2F6690', 'Incubator': '#2E7D4F', 'Events': '#B4531F', 'Thought leadership': '#7B3F8C', 'Marketing & community': '#8A6A12', 'Partnerships': '#5A554C' };
+const rmLaneColor = l => RM_LANE_COLORS[l] || '#5A554C';
+const rmState = { items: [], months: [], hidden: new Set(), owner: '', view: 'timeline', page: 'milestones' };
 const RM_KIND = { 'Events': 'Event', 'Thought leadership': 'Publication' };
 const RM_JOIN = 'https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form';
 
@@ -356,6 +384,15 @@ function rmKey(v) {
   if ((m = v.match(/^([A-Za-z]{3})[a-z]*\.?\s+(\d{4})$/))) { const i = RM_MON.indexOf(m[1][0].toUpperCase() + m[1].slice(1, 3).toLowerCase()); if (i >= 0) return +m[2] * 12 + i; }
   return NaN;
 }
+// A due date: 2026-11-20, 11/20/2026 or a month (end of that month).
+function rmDate(v) {
+  v = String(v || '').trim(); if (!v) return null; let m;
+  if ((m = v.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/))) return new Date(+m[1], +m[2] - 1, +m[3]);
+  if ((m = v.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/))) return new Date(+m[3], +m[1] - 1, +m[2]);
+  const k = rmKey(v); if (!isNaN(k)) return new Date(Math.floor(k / 12), k % 12 + 1, 0);
+  return null;
+}
+const rmOverdue = it => it.due && it.due < new Date(new Date().toDateString()) && !/done/i.test(it.status);
 const rmLabel = k => RM_MON[k % 12] + ' ' + Math.floor(k / 12);
 const rmSplit = s => (s || '').split(/[;|]/).map(x => x.trim()).filter(Boolean);
 
@@ -367,7 +404,8 @@ function rmNormalize(rows) {
     const owner = RM_OWNERS[r.owner] ? r.owner : 'Team';
     return { id: r.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), later, s, e: Math.max(s, e), owner, support: rmSplit(r.support), partner: rmSplit(r.partner),
              lane: r.workstream || 'Other', title: r.title, status: r.status || '', brief: r.brief || '', note: r.note || '',
-             ms: /^milestone/i.test(r.type || ''), kind: RM_KIND[r.workstream] || 'Launch' };
+             ms: /^milestone/i.test(r.type || ''), kind: RM_KIND[r.workstream] || 'Launch',
+             due: rmDate(r.due), dueRaw: r.due || '', deps: rmSplit(r.depends_on || r['depends on'] || '') };
   });
 }
 
@@ -376,31 +414,33 @@ function rmWhen(it) {
   return it.s === it.e ? rmLabel(it.s) : rmLabel(it.s) + ' to ' + rmLabel(it.e);
 }
 
-function rmVisible() { return rmState.items.filter(it => !rmState.hidden.has(it.owner) && (rmState.show === 'all' || it.ms)); }
+function rmVisible() { return rmState.items.filter(it => !it.ms && !rmState.hidden.has(it.lane) && (!rmState.owner || it.owner === rmState.owner || it.support.includes(rmState.owner))); }
 
 function rmChip(it) {
-  const c = RM_OWNERS[it.owner].color;
+  const c = rmLaneColor(it.lane);
   const sup = it.support.join(', ');
   return `<button type="button" class="rm-chip${it.ms ? ' ms' : ''}" data-id="${it.id}" style="--c:${c}">
     <span class="rm-chip-t">${it.ms ? '<span class="rm-dia" aria-label="Milestone">◆</span>' : ''}${rmEsc(it.title)}</span>
-    <span class="rm-chip-m">${rmEsc(it.owner === 'Team' ? 'Team' : it.owner)}${sup ? ' with ' + rmEsc(sup) : ''}${it.brief ? ' · Brief' : ''}</span>
+    <span class="rm-chip-m">${rmEsc(it.owner === 'Team' ? 'Team' : it.owner)}${sup ? ' with ' + rmEsc(sup) : ''}${it.brief ? ' · Brief' : ''}</span>${rmOverdue(it) ? '<span class="rm-late">Overdue</span>' : ''}
   </button>`;
 }
 
 function rmRenderLegend() {
-  const used = new Set(rmState.items.map(i => i.owner));
-  document.getElementById('rm-legend').innerHTML = Object.entries(RM_OWNERS).filter(([k]) => used.has(k)).map(([k, o]) =>
-    `<button type="button" class="rm-key" data-owner="${k}" aria-pressed="${!rmState.hidden.has(k)}" style="--c:${o.color}"><span class="rm-dot"></span>${rmEsc(o.name)}</button>`
-  ).join('') + `<span class="rm-key-note"><span class="rm-dia">◆</span> Milestone</span>`;
+  const lanes = RM_LANES.concat([...new Set(rmState.items.map(i => i.lane))].filter(l => !RM_LANES.includes(l))).filter(l => rmState.items.some(i => i.lane === l && !i.ms));
+  document.getElementById('rm-legend').innerHTML = lanes.map(l =>
+    `<button type="button" class="rm-key" data-lane="${rmEsc(l)}" aria-pressed="${!rmState.hidden.has(l)}" style="--c:${rmLaneColor(l)}"><span class="rm-dot"></span>${rmEsc(l)}</button>`).join('');
+  const sel = document.getElementById('rm-owner');
+  if (sel.options.length === 1) Object.entries(RM_OWNERS).forEach(([k, o]) => { if (rmState.items.some(i => i.owner === k)) sel.add(new Option(o.name, k)); });
+  sel.value = rmState.owner;
 }
 
 function rmRenderMilestones() {
-  const ms = rmState.items.filter(it => it.ms && !rmState.hidden.has(it.owner));
+  const ms = rmState.items.filter(it => it.ms);
   const cols = rmState.months.map(k => [rmLabel(k), ms.filter(i => !i.later && i.s === k)]);
   cols.push(['Later', ms.filter(i => i.later)]);
-  document.getElementById('rm-ms').innerHTML = `<div class="rm-ms-head"><h2 class="section-label">Milestones</h2><span>Events and publications you can join, attend or share.</span></div>
+  document.getElementById('rm-ms').innerHTML = `<div class="rm-ms-head"><h2 class="section-label">Milestones</h2><span>Events and publications you can join, attend or share. Click one for details.</span></div>
     <div class="rm-ms-grid">${cols.filter(c => c[1].length).map(([lab, its]) => `<div class="rm-ms-col"><div class="rm-ms-mon">${lab}</div>${its.map(it => `
-      <button type="button" class="rm-ms-card" data-id="${it.id}" style="--c:${RM_OWNERS[it.owner].color}">
+      <button type="button" class="rm-ms-card" data-id="${it.id}" style="--c:${rmLaneColor(it.lane)}">
         <span class="rm-ms-kind"><span class="rm-dia">◆</span> ${rmEsc(it.kind)}${it.s !== it.e && !it.later ? ' · through ' + rmLabel(it.e) : ''}</span>
         <span class="rm-ms-t">${rmEsc(it.title)}</span>
         ${it.partner.length ? `<span class="rm-ms-p">With ${rmEsc(it.partner.join(', '))}</span>` : ''}
@@ -417,7 +457,7 @@ function rmRenderTimeline() {
   h += `<div class="rm-mh later">Later</div></div></div>`;
   lanes.forEach(lane => {
     const li = items.filter(i => i.lane === lane);
-    if (!li.length && !rmState.items.some(i => i.lane === lane)) return;
+    if (!li.length) return;
     h += `<div class="rm-lane"><div class="rm-lane-h">${rmEsc(lane)}</div><div class="rm-cols rm-track">`;
     const ni = ms.indexOf(now);
     if (ni >= 0) h += `<div class="rm-nowcol" style="left:calc(${ni} * 100% / ${n});width:calc(100% / ${n})"></div>`;
@@ -431,39 +471,52 @@ function rmRenderTimeline() {
   document.getElementById('rm-timeline').innerHTML = h;
 }
 
-function rmRenderList() {
-  const items = rmVisible();
-  const groups = rmState.months.map(k => [rmLabel(k), items.filter(i => !i.later && i.s === k)]);
-  groups.push(['Later', items.filter(i => i.later)]);
-  document.getElementById('rm-list').innerHTML = groups.filter(g => g[1].length).map(([lab, its]) =>
-    `<section class="rm-month"><h2 class="section-label">${lab}</h2>${its.map(it => `
-      <button type="button" class="rm-row${it.ms ? ' ms' : ''}" data-id="${it.id}" style="--c:${RM_OWNERS[it.owner].color}">
-        <span class="rm-dot"></span>
-        <span class="rm-row-t">${it.ms ? '<span class="rm-dia">◆</span> ' : ''}${rmEsc(it.title)}<small>${rmEsc(it.lane)} · ${rmEsc(RM_OWNERS[it.owner].name)}${it.s !== it.e && !it.later ? ' · through ' + rmLabel(it.e) : ''}</small></span>
-        <span class="rm-status">${rmEsc(it.status)}</span>
-      </button>`).join('')}</section>`
-  ).join('');
+function rmRenderTable() {
+  const items = rmVisible().slice().sort((a, b) => (a.later - b.later) || (a.s - b.s) || RM_LANES.indexOf(a.lane) - RM_LANES.indexOf(b.lane));
+  const byTitle = new Map(rmState.items.map(i => [i.title.toLowerCase(), i]));
+  const fmt = d => d ? d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+  document.getElementById('rm-table').innerHTML = items.length ? `<table class="rm-tbl"><thead><tr><th>Task</th><th>Workstream</th><th>Owner</th><th>When</th><th>Due</th><th>Depends on</th><th>Status</th></tr></thead><tbody>${items.map(it => `
+    <tr data-id="${it.id}" style="--c:${rmLaneColor(it.lane)}">
+      <td><button type="button" class="rm-row-btn" data-id="${it.id}">${rmEsc(it.title)}</button></td>
+      <td><span class="rm-dot"></span> ${rmEsc(it.lane)}</td>
+      <td>${rmEsc(RM_OWNERS[it.owner].name)}${it.support.length ? `<small>with ${rmEsc(it.support.join(', '))}</small>` : ''}</td>
+      <td>${rmEsc(rmWhen(it))}</td>
+      <td>${rmEsc(fmt(it.due) || it.dueRaw)}${rmOverdue(it) ? ' <span class="rm-late">Overdue</span>' : ''}</td>
+      <td>${it.deps.map(d => byTitle.get(d.toLowerCase()) ? `<button type="button" class="rm-dep" data-id="${byTitle.get(d.toLowerCase()).id}">${rmEsc(d)}</button>` : rmEsc(d)).join('<br>')}</td>
+      <td>${rmEsc(it.status)}</td>
+    </tr>`).join('')}</tbody></table>` : '<p class="rm-loading">No tasks match these filters.</p>';
 }
 
 function rmRender() {
-  rmRenderLegend(); rmRenderMilestones(); rmRenderTimeline(); rmRenderList();
-  document.getElementById('rm-timeline').hidden = rmState.view !== 'timeline';
-  document.getElementById('rm-list').hidden = rmState.view !== 'list';
-  document.querySelectorAll('.rm-views button[data-view]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === rmState.view)));
-  document.querySelectorAll('.rm-views button[data-show]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.show === rmState.show)));
+  const tasks = rmState.page === 'tasks';
+  document.getElementById('rm-page-ms').hidden = tasks;
+  document.getElementById('rm-page-tasks').hidden = !tasks;
+  document.getElementById('rm-lede-ms').hidden = tasks;
+  document.getElementById('rm-lede-tasks').hidden = !tasks;
+  document.getElementById('rm-cta').hidden = tasks;
+  document.querySelectorAll('.rm-pages a').forEach(a => a.setAttribute('aria-selected', String(a.dataset.page === rmState.page)));
+  rmRenderMilestones();
+  if (tasks) {
+    rmRenderLegend(); rmRenderTimeline(); rmRenderTable();
+    document.getElementById('rm-timeline').hidden = rmState.view !== 'timeline';
+    document.getElementById('rm-table').hidden = rmState.view !== 'table';
+    document.querySelectorAll('.rm-views button[data-view]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === rmState.view)));
+  }
 }
 
 function rmOpen(id) {
   const it = rmState.items.find(i => i.id === id); if (!it) return;
   const o = RM_OWNERS[it.owner];
   const box = document.getElementById('rm-detail');
-  box.style.setProperty('--c', o.color);
+  box.style.setProperty('--c', rmLaneColor(it.lane));
   document.getElementById('rm-d-kicker').textContent = (it.ms ? '◆ Milestone · ' + it.kind : it.lane + ' · Task') + ' · ' + rmWhen(it);
   document.getElementById('rm-d-title').textContent = it.title;
   const meta = [['Owner', o.name]];
   if (it.support.length) meta.push(['Support', it.support.map(s => RM_OWNERS[s] ? RM_OWNERS[s].name : s).join(', ')]);
   if (it.partner.length) meta.push(['Partner', it.partner.join(', ')]);
   if (it.status) meta.push(['Status', it.status]);
+  if (it.due || it.dueRaw) meta.push(['Due', (it.due ? it.due.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : it.dueRaw) + (rmOverdue(it) ? ' (overdue)' : '')]);
+  if (it.deps.length) meta.push(['Depends on', it.deps.join(', ')]);
   document.getElementById('rm-d-meta').innerHTML = meta.map(m => `<dt>${m[0]}</dt><dd>${rmEsc(m[1])}</dd>`).join('');
   const note = document.getElementById('rm-d-note'); note.textContent = it.note; note.hidden = !it.note;
   document.getElementById('rm-d-brief').innerHTML = (it.ms ? `<a class="sce-btn rm-join" href="${RM_JOIN}" target="_blank" rel="noopener">Get involved ↗</a>` : '') + (it.brief
@@ -475,20 +528,24 @@ function rmOpen(id) {
 }
 
 document.addEventListener('click', e => {
+  const pg = e.target.closest('.rm-pages a');
+  if (pg) { e.preventDefault(); rmState.page = pg.dataset.page; history.replaceState(null, '', rmState.page === 'tasks' ? '?view=tasks' : location.pathname); rmRender(); return; }
   const k = e.target.closest('.rm-key');
-  if (k) { const o = k.dataset.owner; rmState.hidden.has(o) ? rmState.hidden.delete(o) : rmState.hidden.add(o); rmRender(); return; }
+  if (k) { const l = k.dataset.lane; rmState.hidden.has(l) ? rmState.hidden.delete(l) : rmState.hidden.add(l); rmRender(); return; }
   const v = e.target.closest('.rm-views button');
-  if (v) { if (v.dataset.view) rmState.view = v.dataset.view; else rmState.show = v.dataset.show; rmRender(); return; }
-  const c = e.target.closest('.rm-chip, .rm-row, .rm-ms-card');
+  if (v) { rmState.view = v.dataset.view; rmRender(); return; }
+  const c = e.target.closest('.rm-chip, .rm-row-btn, .rm-dep, .rm-ms-card');
   if (c) { rmOpen(c.dataset.id); return; }
   if (e.target.closest('.rm-d-close') || (!e.target.closest('#rm-detail'))) rmClose();
 });
 function rmClose() { const b = document.getElementById('rm-detail'); if (b.hidden) return; b.hidden = true; history.replaceState(null, '', location.pathname + location.search); }
+document.addEventListener('change', e => { if (e.target.id === 'rm-owner') { rmState.owner = e.target.value; rmRender(); } });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') rmClose(); });
 window.addEventListener('hashchange', () => { if (location.hash.length > 1 && rmState.items.length) rmOpen(decodeURIComponent(location.hash.slice(1))); });
 
 (async function rmInit() {
-  if (window.matchMedia('(max-width: 760px)').matches) rmState.view = 'list';
+  if (window.matchMedia('(max-width: 760px)').matches) rmState.view = 'table';
+  if (new URLSearchParams(location.search).get('view') === 'tasks') rmState.page = 'tasks';
   let text = '';
   try { text = await (await fetch(SHEET_CSV_URL || RM_FALLBACK, { cache: 'no-store' })).text(); }
   catch (err) { text = await (await fetch(RM_FALLBACK)).text(); }
@@ -499,7 +556,7 @@ window.addEventListener('hashchange', () => { if (location.hash.length > 1 && rm
   const nMs = rmState.items.filter(i => i.ms).length;
   document.getElementById('rm-updated').textContent = nMs + ' milestones and ' + (rmState.items.length - nMs) + ' tasks. The team updates this page as plans change.';
   rmRender();
-  if (location.hash.length > 1) rmOpen(decodeURIComponent(location.hash.slice(1)));
+  if (location.hash.length > 1) { const hit = rmState.items.find(i => i.id === decodeURIComponent(location.hash.slice(1))); if (hit && !hit.ms && rmState.page !== 'tasks') { rmState.page = 'tasks'; rmRender(); } rmOpen(decodeURIComponent(location.hash.slice(1))); }
 })();
 </script>
 

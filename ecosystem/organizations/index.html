@@ -461,7 +461,7 @@
   <div class="hero-inner">
     <div class="kicker">Organization Directory</div>
     <h1>300+ organizations helping government grow its capacity to deliver.</h1>
-    <p class="hero-lede">Search by name, or filter by segment, government level or problem. Click any row for the full description.</p>
+    <p class="hero-lede">Search by name or filter by segment, government level or problem, and click any row for the full description.</p>
     <div class="hero-cta">
       <button class="hero-cta-btn" type="button" onclick="openOF()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -1243,7 +1243,7 @@ document.getElementById("btn-copy-link").addEventListener("click", async () => {
     </div>
 
     <div class="sf-footer" id="of-form-footer">
-      <div class="sf-footer-note">Reviewed before going live. No account needed.</div>
+      <div class="sf-footer-note">Reviewed before going live, with no account needed.</div>
       <button class="sf-submit-btn" type="button" id="of-submit-btn" onclick="ofSubmit()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         Submit
@@ -1462,7 +1462,7 @@ function openOF(org) {
 
   if (org) {
     document.getElementById("of-title").textContent = `Suggest an edit to ${org.name}`;
-    document.getElementById("of-intro").textContent = "Change what needs changing and submit. We review edits before they go live.";
+    document.getElementById("of-intro").textContent = "Change what needs changing and submit, and we'll review your edits before they go live.";
     document.getElementById("of-name").value = org.name || "";
     const primaryChip = document.querySelector(`#of-primary-chips [data-val="${CSS.escape(org.primary_segment || "")}"]`);
     if (primaryChip) {

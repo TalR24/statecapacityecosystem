@@ -412,6 +412,17 @@
     .cf-chip { font-size:0.72rem; padding:2px 9px; border-radius:10px; background:var(--blue-light); color:var(--blue); border:1px solid var(--blue-mid); text-decoration:none; }
     .cf-chip:hover { background:var(--blue); color:#fff; }
     .cf-empty { font-size:0.88rem; color:var(--text-faint); }
+.eco-h2 { font-size: clamp(24px, 2.6vw, 32px); line-height: 1.15; font-weight: 700; max-width: 820px; margin: 0 0 20px; }
+.seg-bars { display: flex; flex-direction: column; gap: 6px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; }
+.seg-bar { display: grid; grid-template-columns: 220px 1fr 44px; align-items: center; gap: 14px; text-decoration: none; color: var(--ink); min-height: 34px; border-radius: 6px; padding: 2px 6px; }
+.seg-bar:hover { background: var(--cream); color: var(--ink); }
+.seg-bar .sb-name { font-weight: 700; font-size: 16px; }
+.seg-bar .sb-track { height: 18px; background: #F1ECE0; border-radius: 4px; overflow: hidden; }
+.seg-bar .sb-fill { display: block; height: 100%; border-radius: 4px; }
+.seg-bar .sb-n { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.seg-bar:hover .sb-fill { filter: brightness(0.9); }
+.seg-note { font-size: 15px; color: var(--muted); margin-top: 10px; }
+@media (max-width: 640px) { .seg-bar { grid-template-columns: 1fr 40px; } .seg-bar .sb-track { grid-column: 1 / -1; grid-row: 2; } }
   </style>
 <!-- jsonld:start -->
 <script type="application/ld+json">
@@ -487,7 +498,7 @@
   <div class="hero-inner">
     <div class="kicker">Ecosystem</div>
     <h1>We map who's helping government grow its capacity.</h1>
-    <p class="hero-lede">A searchable directory of agencies, nonprofits, researchers, funders, and companies. Plus a board of people and open opportunities.</p>
+    <p class="hero-lede">A searchable directory of agencies, nonprofits, researchers, funders and companies, plus a board of people and open opportunities.</p>
     <div class="hero-cta" style="flex-direction:column;align-items:flex-start;gap:12px;">
       <button class="hero-cta-btn" onclick="openSearch()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -505,7 +516,26 @@
 <div class="main">
   <div class="main-inner">
 
-    <div class="section-label" style="margin-top:4px;">Explore the ecosystem</div>
+    <div class="section-label" style="margin-top:4px;">Who's in the directory</div>
+    <h2 class="eco-h2">Government teams, researchers and GovTech companies are the three biggest groups in the directory.</h2>
+    <div class="seg-bars" id="seg-bars">
+<!-- static:eco-seg-bars:start -->
+<a class="seg-bar" href="/ecosystem/organizations/?seg=Government" aria-label="Government: 56 organizations"><span class="sb-name">Government</span><span class="sb-track"><span class="sb-fill" style="width:100.0%;background:#0891b2"></span></span><span class="sb-n">56</span></a>
+<a class="seg-bar" href="/ecosystem/organizations/?seg=Research" aria-label="Research: 50 organizations"><span class="sb-name">Research</span><span class="sb-track"><span class="sb-fill" style="width:89.3%;background:#2563eb"></span></span><span class="sb-n">50</span></a>
+<a class="seg-bar" href="/ecosystem/organizations/?seg=GovTech" aria-label="GovTech: 48 organizations"><span class="sb-name">GovTech</span><span class="sb-track"><span class="sb-fill" style="width:85.7%;background:#16a34a"></span></span><span class="sb-n">48</span></a>
+<a class="seg-bar" href="/ecosystem/organizations/?seg=Philanthropy" aria-label="Philanthropy: 37 organizations"><span class="sb-name">Philanthropy</span><span class="sb-track"><span class="sb-fill" style="width:66.1%;background:#dc2626"></span></span><span class="sb-n">37</span></a>
+<a class="seg-bar" href="/ecosystem/organizations/?seg=Digital%20Services%20%26%20Consulting" aria-label="Digital Services &amp; Consulting: 24 organizations"><span class="sb-name">Digital Services &amp; Consulting</span><span class="sb-track"><span class="sb-fill" style="width:42.9%;background:#0d9488"></span></span><span class="sb-n">24</span></a>
+<a class="seg-bar" href="/ecosystem/organizations/?seg=Ecosystems" aria-label="Ecosystems: 24 organizations"><span class="sb-name">Ecosystems</span><span class="sb-track"><span class="sb-fill" style="width:42.9%;background:#65a30d"></span></span><span class="sb-n">24</span></a>
+<a class="seg-bar" href="/ecosystem/organizations/?seg=Fellowships" aria-label="Fellowships: 24 organizations"><span class="sb-name">Fellowships</span><span class="sb-track"><span class="sb-fill" style="width:42.9%;background:#d97706"></span></span><span class="sb-n">24</span></a>
+<a class="seg-bar" href="/ecosystem/organizations/?seg=Advocacy" aria-label="Advocacy: 21 organizations"><span class="sb-name">Advocacy</span><span class="sb-track"><span class="sb-fill" style="width:37.5%;background:#db2777"></span></span><span class="sb-n">21</span></a>
+<a class="seg-bar" href="/ecosystem/organizations/?seg=Community" aria-label="Community: 21 organizations"><span class="sb-name">Community</span><span class="sb-track"><span class="sb-fill" style="width:37.5%;background:#7c3aed"></span></span><span class="sb-n">21</span></a>
+<a class="seg-bar" href="/ecosystem/organizations/?seg=Investor" aria-label="Investor: 21 organizations"><span class="sb-name">Investor</span><span class="sb-track"><span class="sb-fill" style="width:37.5%;background:#9333ea"></span></span><span class="sb-n">21</span></a>
+<a class="seg-bar" href="/ecosystem/organizations/?seg=Capacity%20Building" aria-label="Capacity Building: 8 organizations"><span class="sb-name">Capacity Building</span><span class="sb-track"><span class="sb-fill" style="width:14.3%;background:#ca8a04"></span></span><span class="sb-n">8</span></a>
+<!-- static:eco-seg-bars:end -->
+    </div>
+    <p class="seg-note">Each bar counts organizations by their primary segment. Click one to open the Organization Directory filtered to it.</p>
+
+    <div class="section-label">Explore the ecosystem</div>
 
     <div class="explore-bubbles">
 
@@ -542,7 +572,7 @@
         <div class="bubble-body">
           <div class="bubble-cat">Organizations</div>
           <div class="bubble-title">Organization Directory</div>
-          <div class="bubble-desc">300+ organizations working on state capacity and how they do it, with filters for segment, geography and problem.</div>
+          <div class="bubble-desc">Browse 300+ organizations working on state capacity and how they do it, and filter by segment, geography and problem.</div>
           <div class="bubble-cta">Open the directory →</div>
         </div>
       </a>
@@ -589,7 +619,7 @@
         <div class="bubble-body">
           <div class="bubble-cat">Connect</div>
           <div class="bubble-title">Connect</div>
-          <div class="bubble-desc">Find people, problems and opportunities. Add yourself so others can find you.</div>
+          <div class="bubble-desc">Find people, problems and opportunities, and add yourself so others can find you.</div>
           <div class="bubble-cta">Open Connect →</div>
         </div>
       </a>
@@ -664,7 +694,7 @@
     <div>
     <div class="section-label" style="margin-top:24px;">Methodology</div>
     <div class="text-panel" style="border-left-color:var(--blue);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
-      <p style="margin-bottom:0">How we decide which organizations are in, how we sort them and how the Affinity Map scores links.</p>
+      <p style="margin-bottom:0">Read how we decide which organizations are in, how we sort them and how the Affinity Map scores links.</p>
       <a href="./methodology/" class="info-link" style="flex-shrink:0;white-space:nowrap;margin-left:auto;">Read →</a>
     </div>
 
@@ -672,7 +702,7 @@
     <div>
     <div class="section-label" style="margin-top:24px;">Submit feedback</div>
     <div class="text-panel" style="border-left-color:var(--orange);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
-      <p style="margin-bottom:0">Is an organization in the wrong category? Is something broken? Send a suggestion for the Organization Directory, Connect or the site. We read everything.</p>
+      <p style="margin-bottom:0">Is an organization in the wrong category, or is something broken? Send a suggestion for the Organization Directory, Connect or the site, and we read everything.</p>
       <a href="mailto:statecapacityecosystem@gmail.com?subject=State%20Capacity%20Ecosystem%20Feedback" class="info-link" style="flex-shrink:0;white-space:nowrap;background:var(--orange-light);border-color:#DFCEA1;color:var(--orange);" onmouseover="this.style.background='var(--orange)';this.style.color='#fff';" onmouseout="this.style.background='var(--orange-light)';this.style.color='var(--orange)';">Send feedback ↗</a>
     </div>
     </div>

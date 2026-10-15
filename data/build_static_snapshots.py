@@ -284,8 +284,42 @@ def home_seg_chips():
         for s in segs)
 
 
+def home_tools():
+    """Homepage "What we've built" tiles: the first 8 Proof Points entries
+    (data/proof_points.json order, newest event first), screenshot + name."""
+    pts = load("proof_points.json")[:8]
+    src = {"public-engagement": "Sept 2026 hackathon", "civic-tech-build-night": "June 2026 build night", "sce-team": "SCE team prototype"}
+    out = []
+    for p in pts:
+        url = p["url"]
+        ext = ' target="_blank" rel="noopener"' if url.startswith("http") else ""
+        out.append(f'<a class="tool-tile" href="{esc(url)}"{ext}><img src="{esc(p["image"])}" alt="" width="640" height="360" loading="lazy">'
+                   f'<span class="tt-body"><span class="tt-src">{esc(src.get(p["source"], ""))}</span>'
+                   f'<span class="tt-name">{esc(p["handle"])}</span></span></a>')
+    return "\n".join(out)
+
+
+def eco_seg_bars():
+    """Ecosystem page bar chart: organizations by primary segment (segment colors are data-encoding), each linked to the filtered directory."""
+    import urllib.parse
+    nodes = load("affinity.json")["nodes"]
+    counts = {}
+    for n in nodes:
+        counts[n["primary_segment"]] = counts.get(n["primary_segment"], 0) + 1
+    top = max(counts.values())
+    out = []
+    for seg in sorted(counts, key=lambda k: (-counts[k], k)):
+        c = SEGMENT_COLORS.get(seg, "#6b7280")
+        pct = round(counts[seg] / top * 100, 1)
+        out.append(f'<a class="seg-bar" href="/ecosystem/organizations/?seg={urllib.parse.quote(seg)}" aria-label="{esc(seg)}: {counts[seg]} organizations">'
+                   f'<span class="sb-name">{esc(seg)}</span><span class="sb-track"><span class="sb-fill" style="width:{pct}%;background:{c}"></span></span>'
+                   f'<span class="sb-n">{counts[seg]}</span></a>')
+    return "\n".join(out)
+
+
 BLOCKS = [
     ("index.html", "home-seg-chips", home_seg_chips),
+    ("index.html", "home-tools", home_tools),
     ("community/index.html", "latest-writing", community_latest_writing),
     ("community/proof-points/index.html", "proof-points-grid", proof_points_grid),
     ("ecosystem/organizations/index.html", "orgs-count", orgs_count),
@@ -293,6 +327,7 @@ BLOCKS = [
     ("ecosystem/connect/index.html", "connect-count", people_count),
     ("ecosystem/connect/index.html", "connect-rows", people_rows),
     ("ecosystem/index.html", "change-feed", change_feed),
+    ("ecosystem/index.html", "eco-seg-bars", eco_seg_bars),
     ("ecosystem/methodology/index.html", "stat-mutual", lambda: stat("mutual_count")),
     ("ecosystem/methodology/index.html", "stat-cross", lambda: stat("cross_pct")),
     ("ecosystem/affinity-map/index.html", "segment-chips", seg_chips),

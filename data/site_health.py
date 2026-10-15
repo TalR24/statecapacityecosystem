@@ -399,7 +399,7 @@ def check_stats(chrome_pages):
     playbooks_html = open(playbooks_path).read()
     playbook_cards = len(re.findall(r'<a class="tool-card" data-cat="playbook"', playbooks_html))
 
-    kicker_re = re.compile(r"(\d+)\s*TOOLS\s*·\s*(\d+)\s*PLAYBOOKS\s*·\s*(\d+)\s*POSTS", re.I)
+    kicker_re = re.compile(r"(\d+)\s*(?:</b><span>)?\s*TOOLS\s*(?:</span></div><div><b>|·)\s*(\d+)\s*(?:</b><span>)?\s*PLAYBOOKS\s*(?:</span></div><div><b>|·)\s*(\d+)\s*(?:</b><span>)?\s*POSTS", re.I)
     kicker_hits = []
     for f in HTML_FILES:
         m = kicker_re.search(FILE_CLEAN[f])
