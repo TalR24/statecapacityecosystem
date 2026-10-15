@@ -145,7 +145,7 @@ def orgs_rows():
         desc = f'<div class="desc-text">{esc(trunc)}</div>' if raw else DASH_FAINT
         areas = [norm_area(a) for a in o.get("problem_areas") or []]
         name_style = ' style="color:var(--text-faint)"' if sunset else ""
-        sun = ' <span class="seg-tag secondary" style="background:#f3f4f6;color:var(--text-faint)">Sunset</span>' if sunset else ""
+        sun = ' <span class="seg-tag secondary" style="background:#f3f4f6;color:var(--text-faint)">Closed</span>' if sunset else ""
         out.append(
             f'<tr class="data-row" data-id="{o["id"]}">\n'
             f'    <td class="name-cell"><div class="org-name"{name_style}>{esc(o["name"])}</div></td>\n'
@@ -270,7 +270,22 @@ def stat(key):
     return f'{round(s["cross_share"] * 100)}%'
 
 
+def home_seg_chips():
+    """Homepage "Browse by type" pills: one per primary segment, linked to the
+    directory filtered to it. Counts from affinity.json, largest first."""
+    import urllib.parse
+    nodes = load("affinity.json")["nodes"]
+    counts = {}
+    for n in nodes:
+        counts[n["primary_segment"]] = counts.get(n["primary_segment"], 0) + 1
+    segs = sorted(counts, key=lambda s: (-counts[s], s))
+    return "\n".join(
+        f'<a class="pill" href="/ecosystem/organizations/?seg={urllib.parse.quote(s)}">{esc(s)} <strong>{counts[s]}</strong></a>'
+        for s in segs)
+
+
 BLOCKS = [
+    ("index.html", "home-seg-chips", home_seg_chips),
     ("community/index.html", "latest-writing", community_latest_writing),
     ("community/proof-points/index.html", "proof-points-grid", proof_points_grid),
     ("ecosystem/organizations/index.html", "orgs-count", orgs_count),

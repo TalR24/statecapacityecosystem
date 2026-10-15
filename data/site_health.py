@@ -308,8 +308,8 @@ def check_sitemap():
 
 
 # ── 5. Ribbon and footer ─────────────────────────────────────────────────
-RIBBON_RE = re.compile(r'<nav class="ribbon".*?</nav>', re.DOTALL)
-FOOTER_RE = re.compile(r'<footer class="sce-footer">.*?</footer>', re.DOTALL)
+RIBBON_RE = re.compile(r'<header class="site-header">.*?</header>', re.DOTALL)
+FOOTER_RE = re.compile(r'<footer class="site-footer">.*?</footer>', re.DOTALL)
 ACTIVE_CLASS_RE = re.compile(r'class="([^"]*)\bactive\b([^"]*)"')
 
 
@@ -399,7 +399,7 @@ def check_stats(chrome_pages):
     playbooks_html = open(playbooks_path).read()
     playbook_cards = len(re.findall(r'<a class="tool-card" data-cat="playbook"', playbooks_html))
 
-    kicker_re = re.compile(r"(\d+)\s*TOOLS\s*·\s*(\d+)\s*PLAYBOOKS\s*·\s*(\d+)\s*POSTS")
+    kicker_re = re.compile(r"(\d+)\s*TOOLS\s*·\s*(\d+)\s*PLAYBOOKS\s*·\s*(\d+)\s*POSTS", re.I)
     kicker_hits = []
     for f in HTML_FILES:
         m = kicker_re.search(FILE_CLEAN[f])
@@ -417,19 +417,12 @@ def check_stats(chrome_pages):
             if n_posts != len(substack_posts):
                 findings.append(f"{rel_f}: kicker says {n_posts} POSTS, substack_posts.json has {len(substack_posts)}")
 
-    # "20 prototypes in one evening, 8 still live" vs proof points with source civic-tech-build-night
-    cbn_count = sum(1 for p in proof_points if p.get("source") == "civic-tech-build-night")
+    # Homepage "50+ people and opportunities" (Connect board) must stay true
+    connect = json.loads(open(os.path.join(ROOT, "data/connect.json")).read())
+    n_connect = len(connect) if isinstance(connect, list) else len(connect.get("people", []))
     home = open(os.path.join(ROOT, "index.html")).read()
-    m = re.search(r"(\d+)\s*</b><span>prototypes in one evening,\s*(\d+)\s*still live</span>", home)
-    if m:
-        n_still_live = int(m.group(2))
-        if n_still_live != cbn_count:
-            findings.append(
-                f"index.html: '{n_still_live} still live' does not match {cbn_count} proof_points entries "
-                f"with source civic-tech-build-night"
-            )
-    else:
-        findings.append("index.html: '<n> prototypes in one evening, <m> still live' sentence not found")
+    if "50+ people and opportunities" in home and n_connect < 50:
+        findings.append(f"index.html says '50+ people and opportunities' but data/connect.json has {n_connect}")
 
     add_section("6. Stat strings vs data", True, findings)
 
@@ -539,16 +532,16 @@ def check_latest_band():
     findings = []
     home_path = os.path.join(ROOT, "index.html")
     home = FILE_RAW[home_path]
-    mo_list_m = re.search(r'<div class="mo-list" id="mo-list">(.*?)</div>\s*</div>\s*</section>', home, re.DOTALL)
+    mo_list_m = re.search(r'<div class="row-list" id="latest-list">(.*?)</section>', home, re.DOTALL)
     band_dates = []
     if mo_list_m:
-        for m in re.finditer(r'<span class="mo-date">([A-Za-z]+)\s+(\d{4})</span>', mo_list_m.group(1)):
+        for m in re.finditer(r'<span class="rl-date">([A-Za-z]+)\s+(\d{4})</span>', mo_list_m.group(1)):
             mon, year = m.group(1), int(m.group(2))
             if mon[:3] in MONTH_ABBR:
                 band_dates.append(datetime.date(year, MONTH_ABBR.index(mon[:3]) + 1, 1))
     substack_posts = json.loads(open(os.path.join(ROOT, "data/substack_posts.json")).read())
     if not band_dates:
-        findings.append("could not parse any month-year label out of #mo-list")
+        findings.append("could not parse any month-year label out of #latest-list")
     elif substack_posts:
         newest_band = max(band_dates)
         for p in substack_posts:

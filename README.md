@@ -13,7 +13,7 @@ The public site for the State Capacity Ecosystem (SCE), a network of people and 
 
 ## Site map
 
-Every page is a hand-authored static HTML file. The shared ribbon (Home, Events, Ecosystem, Community, About, plus Search, Subscribe and Join the Slack buttons) and the footer are copy-paste identical across chrome pages, so a nav change goes into all of them.
+Every page is a hand-authored static HTML file. The shared header (brand mark, Ecosystem, Events, Community and About with dropdowns, and a Join the Slack button) and the footer are generated into every chrome page by `data/sync_chrome.py`; the look comes from `assets/sce.css` (see Design tokens).
 
 | Section | Path | What it holds |
 |---|---|---|
@@ -27,7 +27,7 @@ Every page is a hand-authored static HTML file. The shared ribbon (Home, Events,
 
 Other folders:
 
-- `assets/`: `sce-search.js` (the one search engine), `sce_logo.png` (favicon, ribbon, hero), `proof-points/` (640x360 JPG preview per tool).
+- `assets/`: `sce.css` (the design system), `sce-nav.js` (header dropdowns on touch), `sce-search.js` (the one search engine), `sce_logo.png` (favicon), `proof-points/` (640x360 JPG preview per tool).
 - `data/`: the pipeline, described next.
 - `.github/`: workflows and the site-health docs.
 
@@ -112,9 +112,10 @@ Outside this repo:
 
 - **Refresh organization data:** replace `data/directory.csv`, run `python3 data/build_affinity.py`, `python3 data/build_changes.py`, `python3 data/update_stats.py`, `python3 data/build_static_snapshots.py`, commit the results. The daily workflow does the same when the CSV is newer than `affinity.json`.
 - **Refresh Connect data:** replace `data/connect_submissions.csv`, run `python3 data/build_people.py`.
-- **Add an event:** copy `events/hackathons/civic-tech-build-night/` and follow the HTML-comment checklist at the top of the file, add a card to the events hub and the hackathons hub, regenerate the sitemap. When an event is scheduled, restore the event banner and ribbon button (the `.evt-banner` styles stay in each page head).
+- **Add an event:** copy `events/hackathons/civic-tech-build-night/` and follow the HTML-comment checklist at the top of the file, add a card to the events hub and the hackathons hub, regenerate the sitemap. When an event is scheduled, paste a `div.evt-banner` block where each page's EVENT BANNER comment sits (styles are in `assets/sce.css`).
 - **Add a Proof Points tool:** add an entry to `data/proof_points.json` with an `image` (640x360 JPG in `assets/proof-points/`), then run `build_static_snapshots.py`.
 - **Add a Substack companion prototype:** host it as-is at `community/substack/<post>/` (no chrome injected), add a card to `community/substack/index.html`. Collaborator prototypes arrive through the private work repo's `substack_projects/` folder; confirm the permission line and credits first.
+- **Change the header or footer:** edit the strings in `data/sync_chrome.py`, run `python3 data/sync_chrome.py`, then `site_health.py`.
 - **Check before pushing:** `python3 data/site_health.py`, and syntax-check inline scripts after JS edits (a `const` that shadows a parameter blanks the whole page, silently):
 
 ```bash
@@ -137,7 +138,14 @@ const fs=require('fs');const html=fs.readFileSync('PATH/index.html','utf8');
 
 ## Design tokens
 
-SCE has its own brand, separate from NYCuriosity (the NYCuriosity orange breadcrumb convention does not apply here). Defined in `:root` of each chrome page: `--blue` and `--orange` both hold bronze `#8A5F1E` (the names are legacy); gold `#D4A853` for fills and the ribbon; cream body `#F4EFE4`; charcoal text `#1A1918`. Fonts are Inter and Roboto Mono.
+SCE has its own brand, separate from NYCuriosity. Since Oct 15 2026 the whole site follows Henry Grunzweig's homepage redesign ("SCE Homepage v2" design canvas). The system lives in **`assets/sce.css`**, linked last in every chrome page head, so it overrides each page's own `:root` tokens:
+
+- **Type:** one family, Carlito (the metric twin of Calibri), 18px root and body, line height 1.5. No Inter, no Roboto Mono.
+- **Color:** cream ground `#F4EFE4`; white bands `#FFFFFF` with `#DDD8CC` hairlines; charcoal `#1A1918` for text and dark bands; gold `#D4A853` is the action color (primary buttons, label bars, the final call-to-action band); dark bronze `#6E4E1E` for labels and icons; muted text `#4A4740`. Legacy names (`--blue`, `--orange`) now resolve to bronze.
+- **Sections:** every section opens with a 40x4px gold bar and an uppercase bronze label (`.kicker`, `.section-label`, `.hero-eyebrow`), then a headline that is a complete sentence stating the takeaway. Bands alternate cream, white and charcoal; the page ends on a gold band before the footer when it has a closing call to action.
+- **Buttons:** 48-52px tall, 6px radius. Gold fill (`.btn-primary`) for the one primary action in a block; 2px ink outline (`.btn-outline`, `.sce-btn` and every legacy action-link class) for the rest; `.btn-dark` on gold bands.
+- **Cards:** white, 1px hairline, 10-12px radius, lift shadow on hover only. No colored left rails.
+- **Header and footer:** light cream header with the network-node mark, four nav items with dropdowns, one dark "Join the Slack" button; dark footer with the tagline "Connecting the people making government work better." Both are generated by `data/sync_chrome.py`.
 
 Segment colors encode data and are not rethemed. The map lives in `SEGMENT_COLORS` in `ecosystem/affinity-map/index.html` and `ecosystem/organizations/index.html`, in `data/build_static_snapshots.py`, and as inline dots on the Methodology page; change all four together: Research `#2563eb`, Government `#0891b2`, Philanthropy `#dc2626`, Fellowships `#d97706`, Community `#7c3aed`, GovTech `#16a34a`, Advocacy `#db2777`, Digital Services & Consulting `#0d9488`, Investor `#9333ea`, Capacity Building `#ca8a04`, Ecosystems `#65a30d`.
 
@@ -153,10 +161,12 @@ Segment colors encode data and are not rethemed. The map lives in `SEGMENT_COLOR
 8. **No Support or Buy Me a Coffee button** in subpage headers.
 9. **Substack target** is always the SCE publication, never NYCuriosity.
 10. **Terminology:** the page is "Organization Directory"; the feature keeps the proper noun "Connect" ("Add Yourself to Connect"). Connect uses neutral words ("entry", "Name"), never "person" or "practitioners".
-11. **Links as buttons:** standalone links use `class="sce-btn"`; a card with exactly one link becomes clickable as a whole through the `<style id="link-ux-css">` block at the end of each chrome page head (add a new card class to its `:has` rule).
+11. **Links as buttons:** standalone links use `class="sce-btn"` (or `.btn-primary` / `.btn-outline` on new markup); a card with exactly one link becomes clickable as a whole through the `:has` rule in `assets/sce.css` (add a new card class there).
 12. **Hosted prototypes** (tideline, hearts-and-minds, grocery, the Mamdani prototypes) are served as-is with no chrome injected.
 13. **Hardcoded "300+ organizations"** copy (homepage, Ecosystem dropdown) changes only when the organization count crosses a hundred; `site_health.py` flags it.
 14. **Dated backup CSVs** in `data/` are local working files; the tracked source is `directory.csv`.
+15. **Design system and chrome (decision #30, Oct 15 2026):** follow `assets/sce.css` and the homepage. Never paste page-level fonts, colors, header or footer markup; extend `sce.css`. The header and footer come only from `data/sync_chrome.py` (edit its strings, run it, then `site_health.py` checks parity). Mission and vision match the homepage word for word: mission "Connect the people working to improve government. Help them build tools government can use."; vision "A government with the technology and talent to deliver for the people it serves."
+16. **Copy register:** the homepage is the model. Short plain sentences in the "we" voice, who it is for and what they get, real numbers, headlines as complete sentences. Name the audience the way the homepage does (public servants, technologists, researchers, funders).
 
 ## Ideas not built
 

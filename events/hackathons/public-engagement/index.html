@@ -34,7 +34,7 @@
   <meta property="og:image"       content="https://statecapacityecosystem.com/assets/sce_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     :root {
@@ -46,19 +46,19 @@
       --shadow-md:0 4px 16px rgba(138,95,30,0.10);
       --radius:10px;
     }
-    body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+    body { font-family:Carlito, Calibri, sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
 
     header { background:#1A1918; border-bottom:1px solid #2E2B27; padding:0 clamp(16px,4vw,48px); }
     .header-inner { max-width:1300px; margin:0 auto; height:60px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
     .brand { display:flex; align-items:center; gap:9px; text-decoration:none; }
-    .brand-name { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:700; color:#D4A853; letter-spacing:-0.02em; }
-    .brand-slash { font-family:'Roboto Mono',monospace; font-size:0.95rem; color:#4b5563; }
-    .brand-section { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:600; color:#DDD8CC; }
+    .brand-name { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; font-weight:700; color:#D4A853; letter-spacing:-0.02em; }
+    .brand-slash { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; color:#4b5563; }
+    .brand-section { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; font-weight:600; color:#DDD8CC; }
     .header-link { font-size:0.78rem; font-weight:500; color:#9C968A; text-decoration:none; display:flex; align-items:center; gap:5px; transition:color 0.15s; }
     .header-link:hover { color:#D4A853; }
 
     .breadcrumb { padding:14px clamp(16px,4vw,48px) 0; }
-    .breadcrumb-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; gap:6px; font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:500; color:var(--text-faint); flex-wrap:wrap; }
+    .breadcrumb-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; gap:6px; font-family:Carlito, Calibri, sans-serif; font-size:0.72rem; font-weight:500; color:var(--text-faint); flex-wrap:wrap; }
     .breadcrumb a { color:var(--text-faint); text-decoration:none; transition:color 0.15s; }
     .breadcrumb a:hover { color:var(--blue); }
     .breadcrumb .current { color:var(--orange); }
@@ -66,17 +66,17 @@
 
     .hero { padding:14px clamp(16px,4vw,48px) 0; }
     .hero-inner { max-width:1000px; margin:0 auto; padding-bottom:14px; }
-    .hero-eyebrow { font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--orange); margin-bottom:10px; }
-    .hero h1 { font-family:'Roboto Mono',monospace; font-size:clamp(1.4rem,3.5vw,2rem); font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.2; margin-bottom:8px; }
+    .hero-eyebrow { font-family:Carlito, Calibri, sans-serif; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--orange); margin-bottom:10px; }
+    .hero h1 { font-family:Carlito, Calibri, sans-serif; font-size:clamp(1.4rem,3.5vw,2rem); font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.2; margin-bottom:8px; }
     .hero h1 span { color:var(--blue); }
     .hero .subtitle { font-size:1rem; color:var(--text-mid); line-height:1.5; margin-bottom:4px; font-weight:500; }
-    .hero .meta-line { font-family:'Roboto Mono',monospace; font-size:0.82rem; color:var(--text-muted); }
+    .hero .meta-line { font-family:Carlito, Calibri, sans-serif; font-size:0.82rem; color:var(--text-muted); }
 
 
     .main { flex:1; padding:clamp(20px,3vw,32px) clamp(16px,4vw,48px) clamp(40px,6vw,64px); }
     .main-inner { max-width:1000px; margin:0 auto; }
 
-    .section-label { font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--orange); margin:34px 0 14px; }
+    .section-label { font-family:Carlito, Calibri, sans-serif; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--orange); margin:34px 0 14px; }
     .section-label:first-child { margin-top:0; }
 
     .panel { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow-sm); padding:clamp(20px,3vw,28px); }
@@ -89,7 +89,7 @@
     /* FACTS */
     .facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
     .fact { background:var(--surface); padding:14px 18px; }
-    .fact-label { font-family:'Roboto Mono',monospace; font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-faint); margin-bottom:5px; }
+    .fact-label { font-family:Carlito, Calibri, sans-serif; font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-faint); margin-bottom:5px; }
     .fact-value { font-size:0.9rem; color:var(--text); line-height:1.5; font-weight:500; }
     .fact-value .li { color:var(--text-muted); font-weight:400; }
 
@@ -103,9 +103,9 @@
     /* TRACKS */
     .track-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
     .track-card { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--blue); border-radius:8px; padding:16px 18px; }
-    .track-name { font-family:'Roboto Mono',monospace; font-size:0.9rem; font-weight:700; color:var(--text); margin-bottom:7px; letter-spacing:-0.01em; }
+    .track-name { font-family:Carlito, Calibri, sans-serif; font-size:0.9rem; font-weight:700; color:var(--text); margin-bottom:7px; letter-spacing:-0.01em; }
     .track-desc { font-size:0.85rem; color:var(--text-muted); line-height:1.6; margin-bottom:10px; }
-    .track-judge { font-family:'Roboto Mono',monospace; font-size:0.7rem; color:var(--text-faint); }
+    .track-judge { font-family:Carlito, Calibri, sans-serif; font-size:0.7rem; color:var(--text-faint); }
     .track-judge strong { color:var(--blue); font-weight:600; }
 
     /* PROJECTS */
@@ -114,10 +114,10 @@
     .proj-card:hover { border-color:var(--blue); box-shadow:var(--shadow-md); transform:translateY(-2px); }
     .proj-icon { width:38px; height:38px; border-radius:9px; background:#1A1918; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
     .proj-icon svg { width:20px; height:20px; stroke:#D4A853; }
-    .proj-title { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:700; color:var(--text); line-height:1.3; margin-bottom:7px; letter-spacing:-0.01em; }
+    .proj-title { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; font-weight:700; color:var(--text); line-height:1.3; margin-bottom:7px; letter-spacing:-0.01em; }
     .proj-desc { font-size:0.85rem; color:var(--text-muted); line-height:1.6; flex:1; margin-bottom:12px; }
-    .proj-badge { display:inline-block; font-family:'Roboto Mono',monospace; font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#8A5F1E; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px; padding:2px 9px; margin-bottom:10px; align-self:flex-start; }
-    .proj-link { font-family:'Roboto Mono',monospace; font-size:0.76rem; font-weight:600; color:var(--blue); text-decoration:none; display:inline-flex; align-items:center; gap:5px; transition:gap 0.15s; align-self:flex-start; }
+    .proj-badge { display:inline-block; font-family:Carlito, Calibri, sans-serif; font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#8A5F1E; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px; padding:2px 9px; margin-bottom:10px; align-self:flex-start; }
+    .proj-link { font-family:Carlito, Calibri, sans-serif; font-size:0.76rem; font-weight:600; color:var(--blue); text-decoration:none; display:inline-flex; align-items:center; gap:5px; transition:gap 0.15s; align-self:flex-start; }
     .proj-link:hover { gap:8px; }
     .proj-link.pending { color:var(--text-faint); cursor:default; }
 
@@ -127,7 +127,7 @@
     .post-info { flex:1; min-width:200px; }
     .post-title { font-size:0.92rem; font-weight:600; color:var(--text); margin-bottom:2px; }
     .post-sub { font-size:0.78rem; color:var(--text-muted); }
-    .post-link { font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:600; text-decoration:none; padding:5px 13px; border-radius:6px; white-space:nowrap; border:1px solid; color:#8A5F1E; border-color:#DFCEA1; background:#F5EDDA; transition:all 0.15s; }
+    .post-link { font-family:Carlito, Calibri, sans-serif; font-size:0.75rem; font-weight:600; text-decoration:none; padding:5px 13px; border-radius:6px; white-space:nowrap; border:1px solid; color:#8A5F1E; border-color:#DFCEA1; background:#F5EDDA; transition:all 0.15s; }
     .post-link:hover { background:#8A5F1E; color:#fff; border-color:#8A5F1E; }
     .post-link.pending { color:var(--text-faint); border-color:var(--border); background:var(--bg); cursor:default; }
 
@@ -135,7 +135,7 @@
     .text-panel { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--orange); border-radius:8px; padding:18px 22px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
     .text-panel p { font-size:0.9rem; color:var(--text-mid); line-height:1.65; margin:0; }
     .text-panel strong { color:var(--text); font-weight:600; }
-    .arch-btn { display:inline-flex; align-items:center; gap:8px; font-family:'Roboto Mono',monospace; font-size:0.8rem; font-weight:700; color:#fff; background:var(--orange); border:none; border-radius:8px; padding:10px 18px; text-decoration:none; box-shadow:0 3px 12px rgba(212,168,83,0.32); transition:transform 0.15s, box-shadow 0.15s; flex-shrink:0; white-space:nowrap; }
+    .arch-btn { display:inline-flex; align-items:center; gap:8px; font-family:Carlito, Calibri, sans-serif; font-size:0.8rem; font-weight:700; color:#fff; background:var(--orange); border:none; border-radius:8px; padding:10px 18px; text-decoration:none; box-shadow:0 3px 12px rgba(212,168,83,0.32); transition:transform 0.15s, box-shadow 0.15s; flex-shrink:0; white-space:nowrap; }
     .arch-btn:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(212,168,83,0.42); }
 
     footer { background:var(--surface); border-top:1px solid var(--border); padding:18px clamp(16px,4vw,48px); }
@@ -147,181 +147,49 @@
 
     @media (max-width: 640px) { .brand-slash, .brand-section { display:none; } }
   </style>
-<style id="ribbon-css">
-.ribbon{background:var(--surface);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);position:relative;z-index:80;}
-.ribbon-inner{max-width:1300px;margin:0 auto;display:flex;align-items:stretch;}
-.ribbon-item{position:relative;flex-shrink:0;}
-.ribbon-link{display:flex;align-items:center;gap:6px;padding:13px 14px 11px;font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;color:var(--text-mid);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;}
-.ribbon-item:hover .ribbon-link,.ribbon-link:focus{color:var(--blue);}
-.ribbon-link.active{color:var(--orange);border-bottom-color:var(--orange);}
-.ribbon-caret{font-size:0.55rem;color:var(--text-faint);transform:translateY(1px);}
-.ribbon-drop{display:none;position:absolute;top:100%;left:0;min-width:235px;background:var(--surface);border:1px solid var(--border-mid);border-radius:0 0 8px 8px;box-shadow:0 14px 34px rgba(26,25,24,0.16);z-index:90;padding:6px 0;}
-.ribbon-item:hover .ribbon-drop,.ribbon-item:focus-within .ribbon-drop{display:block;}
-.ribbon-drop a{display:block;padding:8px 16px;font-size:0.82rem;color:var(--text-mid);text-decoration:none;transition:background .1s,color .1s;}
-.ribbon-drop a:hover{background:var(--blue-light);color:var(--blue);}
-@media (max-width:720px){.ribbon-inner{flex-wrap:wrap;}.ribbon-link{padding:11px 7px 9px;font-size:0.7rem;}.ribbon-actions{flex-basis:100%;margin-left:0;padding:0 0 8px 7px;flex-wrap:wrap;gap:6px;}.ribbon-btn{padding:6px 10px;font-size:0.7rem;}.ribbon-drop{display:none !important;}}
-.ribbon-actions{margin-left:auto;display:flex;align-items:center;gap:8px;padding:7px 0 7px 14px;flex-shrink:0;}
-.ribbon-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.74rem;font-weight:700;text-decoration:none;padding:7px 13px;border-radius:7px;white-space:nowrap;border:1px solid #DFCEA1;background:#F5EDDA;color:#8A5F1E;transition:background .15s,color .15s;}
-.ribbon-btn:hover{background:#8A5F1E;color:#fff;}
-.ribbon-btn.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
-.ribbon-btn.primary:hover{background:#B08430;border-color:#B08430;color:#fff;}
-.sce-footer{background:#1A1918;color:#F4EFE4;padding:26px clamp(16px,4vw,48px);margin-top:auto;}
-.sce-footer-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
-.sce-footer-brand{display:flex;align-items:center;gap:10px;font-family:'Roboto Mono',monospace;font-size:0.84rem;font-weight:700;color:#D4A853;text-decoration:none;}
-.sce-footer-brand img{width:22px;height:22px;object-fit:contain;}
-.sce-footer-brand small{font-weight:400;color:#9C968A;font-size:0.72rem;margin-left:4px;}
-.sce-footer-actions{display:flex;gap:10px;flex-wrap:wrap;}
-.sce-footer-actions a{font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;text-decoration:none;padding:8px 14px;border-radius:7px;border:1px solid rgba(244,239,228,0.3);color:#F4EFE4;transition:border-color .15s,background .15s;}
-.sce-footer-actions a:hover{border-color:#D4A853;background:rgba(212,168,83,0.12);}
-.sce-footer-actions a.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
-.sce-footer-actions a.primary:hover{background:#E3C170;}
-/* gold header row (Oct 2026) */
-.ribbon{background:#D4A853;border-bottom:1px solid #B88E3D;}
-.ribbon-link{color:#1A1918;}
-.ribbon-item:hover .ribbon-link,.ribbon-link:focus{color:#1A1918;border-bottom-color:#1A1918;}
-.ribbon-link.active{color:#1A1918;border-bottom-color:#1A1918;}
-.ribbon-caret{color:#5C4310;}
-.ribbon-btn{background:#F4EFE4;border-color:#F4EFE4;color:#1A1918;}
-.ribbon-btn:hover{background:#FFFFFF;color:#1A1918;}
-.ribbon-btn.primary{background:#1A1918;border-color:#1A1918;color:#F4EFE4;}
-.ribbon-btn.primary:hover{background:#3E3931;color:#F4EFE4;}
-.ribbon-link img{filter:brightness(0.2);}
-</style>
-<style id="event-banner-css">
-.evt-banner{background:#D4A853;color:#1A1918;padding:0 clamp(16px,4vw,48px);position:relative;z-index:100;}
-.evt-banner-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:9px 0;font-family:'Roboto Mono',monospace;font-size:0.8rem;font-weight:600;}
-.evt-banner strong{font-weight:700;}
-.evt-banner .evt-when{color:#6E4A15;}
-.evt-banner a{display:inline-flex;align-items:center;gap:6px;background:#1A1918;color:#F4EFE4;text-decoration:none;padding:6px 14px;border-radius:6px;font-size:0.76rem;font-weight:700;white-space:nowrap;transition:background .15s;}
-.evt-banner a:hover{background:#3E3931;}
-@media (max-width:620px){.evt-banner-inner{font-size:0.74rem;gap:9px;}.evt-banner .evt-when{width:100%;text-align:center;}}
-@media print{.evt-banner{display:none !important;}}
-</style>
-<style id="link-ux-css">
-/* Links as buttons (Oct 2026): every standalone text link and every call to action inside a card is a 40px-tall button. */
-a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { display:inline-flex !important; align-items:center; gap:6px; align-self:flex-start; width:auto; min-height:40px; box-sizing:border-box; padding:9px 16px !important; font-family:'Roboto Mono',monospace !important; font-size:0.8rem !important; font-weight:700 !important; line-height:1.25; text-decoration:none !important; color:#6E4A15 !important; background:#F5EDDA !important; border:1px solid #DFCEA1 !important; border-radius:8px !important; transition:background .15s,color .15s,border-color .15s; cursor:pointer; }
-a.row-link:hover, a.info-link:hover, a.proj-link:hover, a.post-link:hover, a.download-link:hover, a.sce-btn:hover,
-a:hover > .card-cta, a:hover .card-cta, a:hover .tool-cta, a:hover .act-cta, a:hover .bubble-cta, a:hover .mo-cta { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
-a.row-link:focus-visible, a.info-link:focus-visible, a.proj-link:focus-visible, a.post-link:focus-visible, a.download-link:focus-visible, a.sce-btn:focus-visible, a.scroll-cue:focus-visible { outline:2px solid #1A1918; outline-offset:2px; }
-a.row-link, a.sce-btn, a.proj-link { margin:4px 8px 4px 0; }
-.sce-btn-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
-a.scroll-cue { min-height:40px; padding:9px 16px; border:1px solid rgba(212,168,83,.55); border-radius:8px; font-size:0.8rem !important; font-weight:700 !important; }
-a.scroll-cue:hover { background:rgba(212,168,83,.14); }
-/* Section headers (kickers) sized to be read, not squinted at. */
-.kicker, .section-label { font-size:0.92rem !important; letter-spacing:0.1em !important; }
-/* Whole-row and whole-card links. */
-.lw-post, .wr-row { position:relative; }
-.lw-post a.t::after, .wr-row a::after { content:""; position:absolute; inset:0; }
-.lw-post:hover, .wr-row:hover { background:rgba(212,168,83,.10); }
-.lw-post a.t { font-size:1rem !important; }
-.wr-row { padding:14px 10px !important; border-radius:6px; }
-a.sit-btn { min-height:40px; display:inline-flex; align-items:center; padding:8px 14px !important; font-size:0.8rem !important; }
-/* Search results and project cards: links are buttons; a card with exactly one link is clickable as a whole. */
-.se-card-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
-.se-card-links a, a.sg-link { display:inline-flex !important; align-items:center; gap:6px; min-height:40px; box-sizing:border-box; padding:9px 16px !important; font-family:'Roboto Mono',monospace !important; font-size:0.8rem !important; font-weight:700 !important; text-decoration:none !important; color:#6E4A15 !important; background:#F5EDDA !important; border:1px solid #DFCEA1 !important; border-radius:8px !important; }
-.se-card-links a:hover, a.sg-link:hover { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
-.se-card, .proj-card { position:relative; }
-.se-card:not(:has(a ~ a)) .se-card-links a::after, .proj-card:not(:has(a ~ a)) a.proj-link::after { content:""; position:absolute; inset:0; border-radius:inherit; }
-.se-card:not(:has(a ~ a)), .proj-card:not(:has(a ~ a)) { cursor:pointer; transition:box-shadow .15s, transform .15s, border-color .15s; }
-.se-card:not(:has(a ~ a)):hover, .proj-card:not(:has(a ~ a)):hover { box-shadow:0 6px 18px rgba(26,25,24,.12); transform:translateY(-1px); border-color:#8A5F1E; }
-.se-card:not(:has(a ~ a)):hover .se-card-links a, .proj-card:not(:has(a ~ a)):hover a.proj-link { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
-/* Tighter page headers (Oct 2026): less air above the title and between the lede and the first section. */
-.hero { padding-top:18px !important; }
-.hero-inner { padding-bottom:4px !important; }
-.main { padding-top:6px !important; }
-.main-inner > :first-child, .main-inner > .section-label:first-of-type { margin-top:10px !important; }
-/* Cards that are one big link: the whole card responds. */
-a.card, a.tool-card, a.act-card, a.explore-bubble, a.mo-item, a.row-visual { cursor:pointer; }
-a.mo-item { padding-top:14px; padding-bottom:14px; }
-a.mo-item:hover { background:rgba(212,168,83,.10); }
-a.mo-item:hover .mo-title { text-decoration:underline; }
-@media (max-width:620px){ a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { font-size:0.78rem !important; } }
-@media print { a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { border:none !important; background:none !important; padding:0 !important; min-height:0; } }
-/* Project card banner: a 16:9 screenshot that bleeds to the card edges above the padded body. */
-.proj-banner { display:block; width:calc(100% + 40px); height:auto; margin:-18px -20px 14px; aspect-ratio:16/9; object-fit:cover; object-position:top; border-bottom:1px solid var(--border); border-radius:var(--radius) var(--radius) 0 0; }
-/* Project cards whose public link is not posted yet: not clickable. */
-.proj-card.no-link, .proj-card.no-link:hover { cursor:default; box-shadow:none; transform:none; border-color:var(--border); }
-.proj-card.no-link .proj-link { color:var(--text-faint); background:var(--bg); border-color:var(--border); }
-</style>
+<link rel="stylesheet" href="/assets/sce.css">
+<script src="/assets/sce-nav.js" defer></script>
 </head>
 <body>
 
 <!-- PILLAR RIBBON -->
 <!-- EVENT BANNER: none scheduled. For the next event, paste a div.evt-banner block here (styles are in the head). -->
-
-<style id="ribbon-sub-css">
-.ribbon-drop-desc{min-width:270px;}
-.ribbon-drop-desc a{white-space:normal;}
-.ribbon-sub{display:block;font-family:Inter,sans-serif;font-size:0.7rem;font-weight:400;color:#9C968A;line-height:1.4;margin-top:2px;}
-@media (max-width:720px){
-  .ribbon-item.open .ribbon-drop{display:block !important;position:fixed;left:10px;right:10px;min-width:0;border-radius:10px;border:1px solid var(--border-mid,#C9C1AF);box-shadow:0 18px 40px rgba(26,25,24,0.25);max-height:60vh;overflow-y:auto;z-index:120;}
-  .ribbon-item.open .ribbon-link{color:#8A5F1E;}
-}
-.sce-footer-inner{align-items:flex-start;row-gap:18px;}
-.sce-footer-inner > div:first-child{flex:1 1 340px;min-width:240px;}
-.sce-footer-actions{align-items:center;}
-.sce-footer-tag{font-family:Inter,sans-serif;font-size:0.78rem;color:#9C968A;margin:9px 0 0;max-width:460px;line-height:1.55;}
-@media (max-width:640px){.sce-footer-inner{flex-direction:column;}.sce-footer-actions{width:100%;}}
-</style>
-<nav class="ribbon" aria-label="State Capacity Ecosystem sections">
-  <div class="ribbon-inner">
-    <div class="ribbon-item"><a class="ribbon-link" href="/"><img src="/assets/sce_logo.png" alt="" style="width:16px;height:16px;object-fit:contain;">Home</a></div>
-    <div class="ribbon-item">
-      <a class="ribbon-link" href="/ecosystem/">Ecosystem <span class="ribbon-caret">▾</span></a>
-      <div class="ribbon-drop ribbon-drop-desc">
-        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Type a problem, a place, or a name.</span></a>
-        <a href="/ecosystem/organizations/">Organization Directory<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
-        <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
-        <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="/"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="#1A1918" stroke-width="1.6"><circle cx="6" cy="8" r="3"></circle><circle cx="22" cy="6" r="3"></circle><circle cx="14" cy="21" r="3.5" fill="#D4A853" stroke="#1A1918"></circle><path d="M8.5 9.5l3.6 8.6M19.6 8.2l-4 9.6M9 7.6l10-1.2"></path></svg><span>State Capacity Ecosystem</span></a>
+    <nav class="site-nav" aria-label="Main">
+    <div class="nav-item">
+      <a class="nav-link" href="/ecosystem/">Ecosystem <span class="nav-caret" aria-hidden="true">▾</span></a>
+      <div class="nav-drop">
+        <a href="/ecosystem/search/">Search<small>Find who's working on your problem.</small></a>
+        <a href="/ecosystem/organizations/">Organization Directory<small>300+ organizations helping government deliver.</small></a>
+        <a href="/ecosystem/connect/">Connect<small>People and open opportunities. Add yourself.</small></a>
+        <a href="/ecosystem/affinity-map/">Affinity Map<small>What organizations have in common.</small></a>
       </div>
     </div>
-    <div class="ribbon-item">
-      <a class="ribbon-link active" href="/events/">Events <span class="ribbon-caret">▾</span></a>
-      <div class="ribbon-drop ribbon-drop-desc">
-        <a href="/events/hackathons/">Hackathons<span class="ribbon-sub">Build nights that end in working software.</span></a>
-        <a href="/events/demo-nights/">Demo Nights<span class="ribbon-sub">What got built, in front of who can adopt it.</span></a>
-        <a href="/events/salons/">Salons &amp; Meet-ups<span class="ribbon-sub">Speaker nights and monthly office hours.</span></a>
-        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<span class="ribbon-sub">What hosts and sponsors own, on one page.</span></a>
+    <div class="nav-item">
+      <a class="nav-link active" href="/events/">Events <span class="nav-caret" aria-hidden="true">▾</span></a>
+      <div class="nav-drop">
+        <a href="/events/hackathons/">Hackathons<small>Build nights that end in working software.</small></a>
+        <a href="/events/demo-nights/">Demo Nights<small>What got built, in front of the people who can adopt it.</small></a>
+        <a href="/events/salons/">Salons &amp; Meet-ups<small>Small evenings on what the field needs.</small></a>
+        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<small>What hosts and sponsors own, on one page.</small></a>
       </div>
     </div>
-    <div class="ribbon-item">
-      <a class="ribbon-link" href="/community/">Community <span class="ribbon-caret">▾</span></a>
-      <div class="ribbon-drop ribbon-drop-desc">
-        <a href="/community/slack/">Slack<span class="ribbon-sub">The conversation between events.</span></a>
-        <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗<span class="ribbon-sub">The team's writing on state capacity.</span></a>
-        <a href="/community/playbooks/">Playbooks<span class="ribbon-sub">Run our formats without us in the room.</span></a>
-        <a href="/community/proof-points/">Proof Points<span class="ribbon-sub">Every tool built through SCE.</span></a>
+    <div class="nav-item">
+      <a class="nav-link" href="/community/">Community <span class="nav-caret" aria-hidden="true">▾</span></a>
+      <div class="nav-drop">
+        <a href="/community/slack/">Slack<small>Meet people between events.</small></a>
+        <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗<small>Essays from people doing the work.</small></a>
+        <a href="/community/playbooks/">Playbooks<small>Run our formats in your own city.</small></a>
+        <a href="/community/proof-points/">Proof Points<small>Every tool built through SCE.</small></a>
       </div>
     </div>
-    <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
-    <div class="ribbon-actions"><a class="ribbon-btn primary" href="/ecosystem/search/">Search</a><a class="ribbon-btn" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Subscribe ↗</a><a class="ribbon-btn" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack ↗</a>
-    </div>
+    <div class="nav-item"><a class="nav-link" href="/about/">About</a></div>
+    <a class="nav-cta" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack</a>
+    </nav>
   </div>
-</nav>
-<script id="ribbon-touch-js">
-(function () {
-  var mq = window.matchMedia("(max-width:720px)");
-  document.querySelectorAll(".ribbon-item").forEach(function (item) {
-    var link = item.querySelector(".ribbon-link");
-    var drop = item.querySelector(".ribbon-drop");
-    if (!link || !drop) return;
-    link.addEventListener("click", function (e) {
-      if (!mq.matches) return;
-      if (!item.classList.contains("open")) {
-        e.preventDefault();
-        document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
-        item.classList.add("open");
-        drop.style.top = (link.getBoundingClientRect().bottom + 6) + "px";
-      }
-    });
-  });
-  document.addEventListener("click", function (e) {
-    if (!e.target.closest(".ribbon-item")) {
-      document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
-    }
-  });
-})();
-</script>
+</header>
 
 <div class="breadcrumb">
   <div class="breadcrumb-inner">
@@ -362,7 +230,7 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
       <div class="post-row">
         <div class="post-info">
           <div class="post-title">Public Engagement Hackathon: September 30</div>
-          <div class="post-sub">The announcement: the problem streams, the judges and how the evening ran.</div>
+          <div class="post-sub">The announcement: the themes, the judges and how the evening ran.</div>
         </div>
         <a class="post-link" href="https://substack.statecapacityecosystem.com/p/public-engagement-hackathon-september" target="_blank" rel="noopener">Read the announcement ↗</a>
       </div>
@@ -459,23 +327,23 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
     <!-- ============================ TRACKS ============================ -->
     <div class="section-label">Themes</div>
     <div class="panel" style="margin-bottom:14px;padding-bottom:18px;">
-      <p style="margin-bottom:0;">Two defined problem areas and a third that opened once the judges spoke. Teams gathered by problem area. A team taking a Judge Special agreed the scope with that judge before build time started.</p>
+      <p style="margin-bottom:0;">The night had two defined themes. A third opened when each judge named one build they wanted. Teams gathered by problem area. A team taking a Judge Special agreed the scope with that judge before build time started.</p>
     </div>
     <div class="track-grid">
       <div class="track-card">
         <div class="track-name">Community board operations</div>
-        <div class="track-judge" style="color:var(--text-muted);font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:8px;">Judges: Raj Korpan, Sara Lind</div>
+        <div class="track-judge" style="color:var(--text-muted);font-family:Carlito, Calibri, sans-serif;font-size:0.78rem;margin-bottom:8px;">Judges: Raj Korpan, Sara Lind</div>
         <div class="track-desc">New York's 59 community boards run on volunteer members and a staff of two or three. The theme offered three build paths: a meeting assistant for parliamentary procedure and resolution writing, a knowledge-base chatbot that speeds up onboarding before the 2027 term-limit turnover and a tracker that links each resolution to the right agency and follows the outcome.</div>
       </div>
       <div class="track-card">
         <div class="track-name">Public voice at scale</div>
-        <div class="track-judge" style="color:var(--text-muted);font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:8px;">Judges: Jeremy Ney, Amaury Dujardin, Abbey Kos</div>
+        <div class="track-judge" style="color:var(--text-muted);font-family:Carlito, Calibri, sans-serif;font-size:0.78rem;margin-bottom:8px;">Judges: Jeremy Ney, Amaury Dujardin, Abbey Kos</div>
         <div class="track-desc">New Yorkers filed 3,655,040 requests through 311 in 2025. The theme asked three questions. What 311 complaint patterns can you find and whose voices are missing from the data? What could social media and other unstructured channels solve? How can agencies seek out and digest input from constituents they do not reach today?</div>
       </div>
       <div class="track-card">
         <div class="track-name">Judge specials</div>
-        <div class="track-judge" style="color:var(--text-muted);font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:8px;">One build each judge asked for</div>
-        <div class="track-desc">Each judge named one tool they wanted to see built. The asks are on the judge cards below. They ranged from upzoning candidates around Bronx transit hubs to stories told in people's own faces and voices.</div>
+        <div class="track-judge" style="color:var(--text-muted);font-family:Carlito, Calibri, sans-serif;font-size:0.78rem;margin-bottom:8px;">One build each judge asked for</div>
+        <div class="track-desc">Each judge named one tool they wanted to see built. The asks are on the judge cards below. They ranged from upzoning candidates around Bronx transit hubs to stories told through people's faces and voices.</div>
       </div>
     </div>
 
@@ -488,32 +356,32 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
     <div class="track-grid">
       <div class="track-card" style="border-left-color:var(--orange);">
         <div class="track-name">Raj Korpan</div>
-        <div class="track-judge" style="color:var(--text-muted);font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:8px;">Assistant Professor of Computer Science, Hunter College, CUNY; Associate Director for Research &amp; Community Engagement, CUNY PIT Lab · Community board operations</div>
+        <div class="track-judge" style="color:var(--text-muted);font-family:Carlito, Calibri, sans-serif;font-size:0.78rem;margin-bottom:8px;">Assistant Professor of Computer Science, Hunter College, CUNY; Associate Director for Research &amp; Community Engagement, CUNY PIT Lab · Community board operations</div>
         <div class="track-desc">Raj directs Hunter's Trustworthy, Intelligent, and Explainable Robotics (TIER) Lab. He works on explainable AI, human-robot interaction and inclusive technology design. He pushed teams on who their AI is designed for and whose perspectives are missing.</div>
         <div class="track-desc" style="margin-top:10px;"><strong>Asked teams to build:</strong> a tool that helps communities organize around local issues, use data to strengthen their case and engage their community board effectively.</div>
       </div>
       <div class="track-card" style="border-left-color:var(--orange);">
         <div class="track-name">Jeremy Ney</div>
-        <div class="track-judge" style="color:var(--text-muted);font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:8px;">Author, American Inequality and The Opportunity Map · Public voice at scale</div>
+        <div class="track-judge" style="color:var(--text-muted);font-family:Carlito, Calibri, sans-serif;font-size:0.78rem;margin-bottom:8px;">Author, American Inequality and The Opportunity Map · Public voice at scale</div>
         <div class="track-desc">Jeremy maps America's regional divides county by county for more than 25,000 readers. TIME, The New York Times and NPR have covered the work. He works on tech policy at Google and teaches at Columbia. He pushed teams on what the data reveals that conventional wisdom misses and whether the insight improves lives for the least advantaged.</div>
         <div class="track-desc" style="margin-top:10px;"><strong>Asked teams to build:</strong> a map of the areas around transit hubs that could be upzoned for transit-oriented housing (C8, M1 or R3-5 zones), with a focus on the Bronx.</div>
       </div>
       <div class="track-card" style="border-left-color:var(--orange);">
         <div class="track-name">Sara Lind</div>
-        <div class="track-judge" style="color:var(--text-muted);font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:8px;">Co-Executive Director, Open Plans · Community board operations</div>
+        <div class="track-judge" style="color:var(--text-muted);font-family:Carlito, Calibri, sans-serif;font-size:0.78rem;margin-bottom:8px;">Co-Executive Director, Open Plans · Community board operations</div>
         <div class="track-desc">Sara leads Open Plans, a nonprofit changing how New Yorkers experience streets and public space. She has driven policy agendas in City Hall and Albany and shaped the public case for livable streets. She pushed teams on whether the tool gives New Yorkers a real role in shaping the spaces they share.</div>
         <div class="track-desc" style="margin-top:10px;"><strong>Asked teams to build:</strong> a tool that makes community boards accessible and accountable to the public between meetings and online as well as in the room.</div>
       </div>
       <div class="track-card" style="border-left-color:var(--orange);">
         <div class="track-name">Amaury Dujardin</div>
-        <div class="track-judge" style="color:var(--text-muted);font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:8px;">Public Policy Manager, Citizens Union · Public voice at scale</div>
+        <div class="track-judge" style="color:var(--text-muted);font-family:Carlito, Calibri, sans-serif;font-size:0.78rem;margin-bottom:8px;">Public Policy Manager, Citizens Union · Public voice at scale</div>
         <div class="track-desc">Amaury leads Citizens Union's legislative advocacy on corruption, democracy and effective government in Albany and City Hall and manages its candidate endorsements. He spent nearly a decade in politics before moving to policy. He pushed teams on whether the tool closes the gap between constituents and the officials who represent them.</div>
         <div class="track-desc" style="margin-top:10px;"><strong>Asked teams to build:</strong> a tracker of the issues that come up most in public engagement, drawn from a sample that reflects a district's or the city's population.</div>
       </div>
       <div class="track-card" style="border-left-color:var(--orange);">
         <div class="track-name">Abbey Kos</div>
-        <div class="track-judge" style="color:var(--text-muted);font-family:'Inter',sans-serif;font-size:0.78rem;margin-bottom:8px;">Director of Customer Experience, State of New York · Public voice at scale</div>
-        <div class="track-desc">Governor Hochul appointed Abbey in March 2025. She has led digital transformations for federal, state and local government in the US and UK for more than 15 years, including three years at 18F and three at AWS. She is a user researcher and content designer by background. She pushed teams on operationalization: what would make officials want to work with you, how they would act on the information and how the design survives.</div>
+        <div class="track-judge" style="color:var(--text-muted);font-family:Carlito, Calibri, sans-serif;font-size:0.78rem;margin-bottom:8px;">Director of Customer Experience, State of New York · Public voice at scale</div>
+        <div class="track-desc">Governor Hochul appointed Abbey in March 2025. She has led digital transformations for federal, state and local government in the US and UK for more than 15 years, including three years at 18F and three at AWS. She is a user researcher and content designer by background. She pushed teams on how a tool gets used: what would make officials want to work with you, how they would act on the information and how the design survives.</div>
         <div class="track-desc" style="margin-top:10px;"><strong>Asked teams to build:</strong> something that goes beyond text to include people's faces, voices and stories.</div>
       </div>
     </div>
@@ -522,7 +390,7 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
     <div class="section-label">What came next</div>
     <div class="panel">
       <p><strong>The top three teams take their tools to the Oculus.</strong> Budget Requests, Hearts &amp; Minds and In the Zone were invited to the CUNY PIT Lab pop-up there.</p>
-      <p style="margin-bottom:0;"><strong>Then a demo night.</strong> Teams that commit to keep building return to show their tools to the practitioners who can adopt them. SCE volunteers, experts and judges support them in between. The date goes out on the Slack and the Substack first. <a href="/events/demo-nights/" style="color:var(--blue);">What to expect from a demo night →</a></p>
+      <p style="margin-bottom:0;"><strong>A demo night comes next.</strong> Teams that commit to keep building return to show their tools to the practitioners who can adopt them. SCE volunteers, experts and judges support them in between. The date goes out on the Slack and the Substack first. <a href="/events/demo-nights/" style="color:var(--blue);">What to expect from a demo night →</a></p>
     </div>
 
     <!-- ============================ LUMA ARCHIVE ============================ -->
@@ -536,7 +404,7 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
     </div>
 
     <div class="text-panel-x" style="margin-top:28px;background:#fff;border:1px solid #DDD8CC;border-left:3px solid #D4A853;border-radius:8px;padding:20px 24px;">
-      <div style="font-family:'Roboto Mono',monospace;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#8A5F1E;margin-bottom:12px;">Want one of these for your agency?</div>
+      <div style="font-family:Carlito, Calibri, sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#8A5F1E;margin-bottom:12px;">Want one of these for your agency?</div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;"><a href="/community/playbooks/#partner" class="sce-btn">See the partner materials →</a><a href="/community/playbooks/" class="sce-btn">Run it yourself: the Hackathon Playbook →</a></div>
     </div>
 
@@ -548,18 +416,20 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
 </div>
 
 <!-- FOOTER -->
-<footer class="sce-footer">
-  <div class="sce-footer-inner">
+<footer class="site-footer">
+  <div class="site-footer-inner">
     <div>
-      <a class="sce-footer-brand" href="/"><img src="/assets/sce_logo.png" alt="">State Capacity Ecosystem<small>· statecapacityecosystem.com</small></a>
-      <p class="sce-footer-tag">Where the people making government deliver find each other and build.</p>
+      <div class="site-footer-name">State Capacity Ecosystem</div>
+      <div class="site-footer-tag">Connecting the people making government work better.</div>
     </div>
-    <div class="sce-footer-actions">
+    <nav aria-label="Footer">
+      <a href="/ecosystem/">Ecosystem</a>
+      <a href="/events/">Events</a>
+      <a href="/community/">Community</a>
+      <a href="/about/">About</a>
       <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗</a>
-      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Slack ↗</a>
-      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in Touch ↗</a>
-      <a href="/about/">About →</a>
-    </div>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in touch ↗</a>
+    </nav>
   </div>
 </footer>
 

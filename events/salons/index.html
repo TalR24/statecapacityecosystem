@@ -15,7 +15,7 @@
   <meta property="og:image"       content="https://statecapacityecosystem.com/assets/sce_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     :root {
@@ -27,19 +27,19 @@
       --shadow-md:0 4px 16px rgba(138,95,30,0.10);
       --radius:10px;
     }
-    body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+    body { font-family:Carlito, Calibri, sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
 
     header { background:#1A1918; border-bottom:1px solid #2E2B27; padding:0 clamp(16px,4vw,48px); }
     .header-inner { max-width:1300px; margin:0 auto; height:60px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
     .brand { display:flex; align-items:center; gap:9px; text-decoration:none; }
-    .brand-name { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:700; color:#D4A853; letter-spacing:-0.02em; }
-    .brand-slash { font-family:'Roboto Mono',monospace; font-size:0.95rem; color:#4b5563; }
-    .brand-section { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:600; color:#DDD8CC; }
+    .brand-name { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; font-weight:700; color:#D4A853; letter-spacing:-0.02em; }
+    .brand-slash { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; color:#4b5563; }
+    .brand-section { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; font-weight:600; color:#DDD8CC; }
     .header-link { font-size:0.78rem; font-weight:500; color:#9C968A; text-decoration:none; display:flex; align-items:center; gap:5px; transition:color 0.15s; }
     .header-link:hover { color:#D4A853; }
 
     .breadcrumb { padding:14px clamp(16px,4vw,48px) 0; }
-    .breadcrumb-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; gap:6px; font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:500; color:var(--text-faint); }
+    .breadcrumb-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; gap:6px; font-family:Carlito, Calibri, sans-serif; font-size:0.72rem; font-weight:500; color:var(--text-faint); }
     .breadcrumb a { color:var(--text-faint); text-decoration:none; transition:color 0.15s; }
     .breadcrumb a:hover { color:var(--blue); }
     .breadcrumb .current { color:var(--orange); }
@@ -47,7 +47,7 @@
 
     .hero { padding:14px clamp(16px,4vw,48px) 0; }
     .hero-inner { max-width:1300px; margin:0 auto; padding-bottom:14px; }
-    .hero h1 { font-family:'Roboto Mono',monospace; font-size:clamp(1.2rem,3vw,1.7rem); font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.2; margin-bottom:6px; }
+    .hero h1 { font-family:Carlito, Calibri, sans-serif; font-size:clamp(1.2rem,3vw,1.7rem); font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.2; margin-bottom:6px; }
     .hero h1 span { color:var(--blue); }
     .hero p { font-size:0.92rem; color:var(--text-muted); max-width:780px; line-height:1.7; }
     .hero p a { color:var(--blue); text-decoration:none; border-bottom:1px solid var(--blue-mid); }
@@ -58,7 +58,7 @@
     .main-inner { max-width:1300px; margin:0 auto; }
 
     .section-label {
-      font-family:'Roboto Mono',monospace;
+      font-family:Carlito, Calibri, sans-serif;
       font-size:0.72rem; font-weight:700; text-transform:uppercase;
       letter-spacing:0.1em; color:var(--orange);
       margin:0 0 16px;
@@ -81,20 +81,20 @@
     .card-preview svg { width:100%; height:100%; display:block; }
     .card-body { padding:18px 22px 22px; flex:1; display:flex; flex-direction:column; }
     .card-cat {
-      font-family:'Roboto Mono',monospace;
+      font-family:Carlito, Calibri, sans-serif;
       font-size:0.65rem; font-weight:700; text-transform:uppercase;
       letter-spacing:0.08em; color:var(--blue);
       margin-bottom:8px;
     }
     .card-title {
-      font-family:'Roboto Mono',monospace;
+      font-family:Carlito, Calibri, sans-serif;
       font-size:1.05rem; font-weight:700; color:var(--text);
       line-height:1.3; margin-bottom:8px; letter-spacing:-0.02em;
     }
     .card-desc { font-size:0.86rem; color:var(--text-muted); line-height:1.6; flex:1; margin-bottom:14px; }
     .card-meta { display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .card-stat { font-family:'Roboto Mono',monospace; font-size:0.72rem; color:var(--orange); font-weight:500; }
-    .card-cta { font-family:'Roboto Mono',monospace; font-size:0.75rem; font-weight:600; color:var(--blue); display:flex; align-items:center; gap:4px; transition:gap 0.15s; }
+    .card-stat { font-family:Carlito, Calibri, sans-serif; font-size:0.72rem; color:var(--orange); font-weight:500; }
+    .card-cta { font-family:Carlito, Calibri, sans-serif; font-size:0.75rem; font-weight:600; color:var(--blue); display:flex; align-items:center; gap:4px; transition:gap 0.15s; }
     .card:hover .card-cta { gap:7px; }
 
     /* INFO PANEL */
@@ -108,7 +108,7 @@
     .text-panel strong { color:var(--text); font-weight:600; }
     .info-link {
       display:inline-flex; align-items:center; gap:6px;
-      font-family:'Roboto Mono',monospace; font-size:0.78rem; font-weight:600;
+      font-family:Carlito, Calibri, sans-serif; font-size:0.78rem; font-weight:600;
       color:var(--blue); text-decoration:none;
       padding:6px 12px; border:1px solid var(--blue-mid); border-radius:6px;
       background:var(--blue-light); transition:all 0.15s; flex-shrink:0; white-space:nowrap;
@@ -119,9 +119,9 @@
     .kinds-intro { font-size:0.9rem; color:var(--text-muted); line-height:1.7; max-width:780px; margin-bottom:16px; }
     .kinds { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
     .kind { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--blue); border-radius:8px; padding:16px 18px; }
-    .kind h4 { font-family:'Roboto Mono',monospace; font-size:0.88rem; font-weight:700; color:var(--text); letter-spacing:-0.01em; margin-bottom:6px; }
+    .kind h4 { font-family:Carlito, Calibri, sans-serif; font-size:0.88rem; font-weight:700; color:var(--text); letter-spacing:-0.01em; margin-bottom:6px; }
     .kind p { font-size:0.84rem; color:var(--text-muted); line-height:1.6; }
-    .kind .tag { display:inline-block; font-family:'Roboto Mono',monospace; font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-faint); border:1px solid var(--border); border-radius:10px; padding:2px 8px; margin-top:10px; }
+    .kind .tag { display:inline-block; font-family:Carlito, Calibri, sans-serif; font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-faint); border:1px solid var(--border); border-radius:10px; padding:2px 8px; margin-top:10px; }
 
     footer { background:var(--surface); border-top:1px solid var(--border); padding:18px clamp(16px,4vw,48px); }
     .footer-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
@@ -132,176 +132,49 @@
 
     @media (max-width: 640px) { .brand-slash, .brand-section { display:none; } }
   </style>
-<style id="ribbon-css">
-.ribbon{background:var(--surface);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);position:relative;z-index:80;}
-.ribbon-inner{max-width:1300px;margin:0 auto;display:flex;align-items:stretch;}
-.ribbon-item{position:relative;flex-shrink:0;}
-.ribbon-link{display:flex;align-items:center;gap:6px;padding:13px 14px 11px;font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;color:var(--text-mid);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;}
-.ribbon-item:hover .ribbon-link,.ribbon-link:focus{color:var(--blue);}
-.ribbon-link.active{color:var(--orange);border-bottom-color:var(--orange);}
-.ribbon-caret{font-size:0.55rem;color:var(--text-faint);transform:translateY(1px);}
-.ribbon-drop{display:none;position:absolute;top:100%;left:0;min-width:235px;background:var(--surface);border:1px solid var(--border-mid);border-radius:0 0 8px 8px;box-shadow:0 14px 34px rgba(26,25,24,0.16);z-index:90;padding:6px 0;}
-.ribbon-item:hover .ribbon-drop,.ribbon-item:focus-within .ribbon-drop{display:block;}
-.ribbon-drop a{display:block;padding:8px 16px;font-size:0.82rem;color:var(--text-mid);text-decoration:none;transition:background .1s,color .1s;}
-.ribbon-drop a:hover{background:var(--blue-light);color:var(--blue);}
-@media (max-width:720px){.ribbon-inner{flex-wrap:wrap;}.ribbon-link{padding:11px 7px 9px;font-size:0.7rem;}.ribbon-actions{flex-basis:100%;margin-left:0;padding:0 0 8px 7px;flex-wrap:wrap;gap:6px;}.ribbon-btn{padding:6px 10px;font-size:0.7rem;}.ribbon-drop{display:none !important;}}
-.ribbon-actions{margin-left:auto;display:flex;align-items:center;gap:8px;padding:7px 0 7px 14px;flex-shrink:0;}
-.ribbon-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.74rem;font-weight:700;text-decoration:none;padding:7px 13px;border-radius:7px;white-space:nowrap;border:1px solid #DFCEA1;background:#F5EDDA;color:#8A5F1E;transition:background .15s,color .15s;}
-.ribbon-btn:hover{background:#8A5F1E;color:#fff;}
-.ribbon-btn.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
-.ribbon-btn.primary:hover{background:#B08430;border-color:#B08430;color:#fff;}
-.sce-footer{background:#1A1918;color:#F4EFE4;padding:26px clamp(16px,4vw,48px);margin-top:auto;}
-.sce-footer-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
-.sce-footer-brand{display:flex;align-items:center;gap:10px;font-family:'Roboto Mono',monospace;font-size:0.84rem;font-weight:700;color:#D4A853;text-decoration:none;}
-.sce-footer-brand img{width:22px;height:22px;object-fit:contain;}
-.sce-footer-brand small{font-weight:400;color:#9C968A;font-size:0.72rem;margin-left:4px;}
-.sce-footer-actions{display:flex;gap:10px;flex-wrap:wrap;}
-.sce-footer-actions a{font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;text-decoration:none;padding:8px 14px;border-radius:7px;border:1px solid rgba(244,239,228,0.3);color:#F4EFE4;transition:border-color .15s,background .15s;}
-.sce-footer-actions a:hover{border-color:#D4A853;background:rgba(212,168,83,0.12);}
-.sce-footer-actions a.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
-.sce-footer-actions a.primary:hover{background:#E3C170;}
-/* gold header row (Oct 2026) */
-.ribbon{background:#D4A853;border-bottom:1px solid #B88E3D;}
-.ribbon-link{color:#1A1918;}
-.ribbon-item:hover .ribbon-link,.ribbon-link:focus{color:#1A1918;border-bottom-color:#1A1918;}
-.ribbon-link.active{color:#1A1918;border-bottom-color:#1A1918;}
-.ribbon-caret{color:#5C4310;}
-.ribbon-btn{background:#F4EFE4;border-color:#F4EFE4;color:#1A1918;}
-.ribbon-btn:hover{background:#FFFFFF;color:#1A1918;}
-.ribbon-btn.primary{background:#1A1918;border-color:#1A1918;color:#F4EFE4;}
-.ribbon-btn.primary:hover{background:#3E3931;color:#F4EFE4;}
-.ribbon-link img{filter:brightness(0.2);}
-</style>
-<style id="event-banner-css">
-.evt-banner{background:#D4A853;color:#1A1918;padding:0 clamp(16px,4vw,48px);position:relative;z-index:100;}
-.evt-banner-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:9px 0;font-family:'Roboto Mono',monospace;font-size:0.8rem;font-weight:600;}
-.evt-banner strong{font-weight:700;}
-.evt-banner .evt-when{color:#6E4A15;}
-.evt-banner a{display:inline-flex;align-items:center;gap:6px;background:#1A1918;color:#F4EFE4;text-decoration:none;padding:6px 14px;border-radius:6px;font-size:0.76rem;font-weight:700;white-space:nowrap;transition:background .15s;}
-.evt-banner a:hover{background:#3E3931;}
-@media (max-width:620px){.evt-banner-inner{font-size:0.74rem;gap:9px;}.evt-banner .evt-when{width:100%;text-align:center;}}
-@media print{.evt-banner{display:none !important;}}
-</style>
-<style id="link-ux-css">
-/* Links as buttons (Oct 2026): every standalone text link and every call to action inside a card is a 40px-tall button. */
-a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { display:inline-flex !important; align-items:center; gap:6px; align-self:flex-start; width:auto; min-height:40px; box-sizing:border-box; padding:9px 16px !important; font-family:'Roboto Mono',monospace !important; font-size:0.8rem !important; font-weight:700 !important; line-height:1.25; text-decoration:none !important; color:#6E4A15 !important; background:#F5EDDA !important; border:1px solid #DFCEA1 !important; border-radius:8px !important; transition:background .15s,color .15s,border-color .15s; cursor:pointer; }
-a.row-link:hover, a.info-link:hover, a.proj-link:hover, a.post-link:hover, a.download-link:hover, a.sce-btn:hover,
-a:hover > .card-cta, a:hover .card-cta, a:hover .tool-cta, a:hover .act-cta, a:hover .bubble-cta, a:hover .mo-cta { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
-a.row-link:focus-visible, a.info-link:focus-visible, a.proj-link:focus-visible, a.post-link:focus-visible, a.download-link:focus-visible, a.sce-btn:focus-visible, a.scroll-cue:focus-visible { outline:2px solid #1A1918; outline-offset:2px; }
-a.row-link, a.sce-btn, a.proj-link { margin:4px 8px 4px 0; }
-.sce-btn-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
-a.scroll-cue { min-height:40px; padding:9px 16px; border:1px solid rgba(212,168,83,.55); border-radius:8px; font-size:0.8rem !important; font-weight:700 !important; }
-a.scroll-cue:hover { background:rgba(212,168,83,.14); }
-/* Section headers (kickers) sized to be read, not squinted at. */
-.kicker, .section-label { font-size:0.92rem !important; letter-spacing:0.1em !important; }
-/* Whole-row and whole-card links. */
-.lw-post, .wr-row { position:relative; }
-.lw-post a.t::after, .wr-row a::after { content:""; position:absolute; inset:0; }
-.lw-post:hover, .wr-row:hover { background:rgba(212,168,83,.10); }
-.lw-post a.t { font-size:1rem !important; }
-.wr-row { padding:14px 10px !important; border-radius:6px; }
-a.sit-btn { min-height:40px; display:inline-flex; align-items:center; padding:8px 14px !important; font-size:0.8rem !important; }
-/* Search results and project cards: links are buttons; a card with exactly one link is clickable as a whole. */
-.se-card-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
-.se-card-links a, a.sg-link { display:inline-flex !important; align-items:center; gap:6px; min-height:40px; box-sizing:border-box; padding:9px 16px !important; font-family:'Roboto Mono',monospace !important; font-size:0.8rem !important; font-weight:700 !important; text-decoration:none !important; color:#6E4A15 !important; background:#F5EDDA !important; border:1px solid #DFCEA1 !important; border-radius:8px !important; }
-.se-card-links a:hover, a.sg-link:hover { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
-.se-card, .proj-card { position:relative; }
-.se-card:not(:has(a ~ a)) .se-card-links a::after, .proj-card:not(:has(a ~ a)) a.proj-link::after { content:""; position:absolute; inset:0; border-radius:inherit; }
-.se-card:not(:has(a ~ a)), .proj-card:not(:has(a ~ a)) { cursor:pointer; transition:box-shadow .15s, transform .15s, border-color .15s; }
-.se-card:not(:has(a ~ a)):hover, .proj-card:not(:has(a ~ a)):hover { box-shadow:0 6px 18px rgba(26,25,24,.12); transform:translateY(-1px); border-color:#8A5F1E; }
-.se-card:not(:has(a ~ a)):hover .se-card-links a, .proj-card:not(:has(a ~ a)):hover a.proj-link { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
-/* Tighter page headers (Oct 2026): less air above the title and between the lede and the first section. */
-.hero { padding-top:18px !important; }
-.hero-inner { padding-bottom:4px !important; }
-.main { padding-top:6px !important; }
-.main-inner > :first-child, .main-inner > .section-label:first-of-type { margin-top:10px !important; }
-/* Cards that are one big link: the whole card responds. */
-a.card, a.tool-card, a.act-card, a.explore-bubble, a.mo-item, a.row-visual { cursor:pointer; }
-a.mo-item { padding-top:14px; padding-bottom:14px; }
-a.mo-item:hover { background:rgba(212,168,83,.10); }
-a.mo-item:hover .mo-title { text-decoration:underline; }
-@media (max-width:620px){ a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { font-size:0.78rem !important; } }
-@media print { a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { border:none !important; background:none !important; padding:0 !important; min-height:0; } }
-</style>
+<link rel="stylesheet" href="/assets/sce.css">
+<script src="/assets/sce-nav.js" defer></script>
 </head>
 <body>
 
 <!-- PILLAR RIBBON -->
 <!-- EVENT BANNER: none scheduled. For the next event, paste a div.evt-banner block here (styles are in the head). -->
-
-<style id="ribbon-sub-css">
-.ribbon-drop-desc{min-width:270px;}
-.ribbon-drop-desc a{white-space:normal;}
-.ribbon-sub{display:block;font-family:Inter,sans-serif;font-size:0.7rem;font-weight:400;color:#9C968A;line-height:1.4;margin-top:2px;}
-@media (max-width:720px){
-  .ribbon-item.open .ribbon-drop{display:block !important;position:fixed;left:10px;right:10px;min-width:0;border-radius:10px;border:1px solid var(--border-mid,#C9C1AF);box-shadow:0 18px 40px rgba(26,25,24,0.25);max-height:60vh;overflow-y:auto;z-index:120;}
-  .ribbon-item.open .ribbon-link{color:#8A5F1E;}
-}
-.sce-footer-inner{align-items:flex-start;row-gap:18px;}
-.sce-footer-inner > div:first-child{flex:1 1 340px;min-width:240px;}
-.sce-footer-actions{align-items:center;}
-.sce-footer-tag{font-family:Inter,sans-serif;font-size:0.78rem;color:#9C968A;margin:9px 0 0;max-width:460px;line-height:1.55;}
-@media (max-width:640px){.sce-footer-inner{flex-direction:column;}.sce-footer-actions{width:100%;}}
-</style>
-<nav class="ribbon" aria-label="State Capacity Ecosystem sections">
-  <div class="ribbon-inner">
-    <div class="ribbon-item"><a class="ribbon-link" href="/"><img src="/assets/sce_logo.png" alt="" style="width:16px;height:16px;object-fit:contain;">Home</a></div>
-    <div class="ribbon-item">
-      <a class="ribbon-link" href="/ecosystem/">Ecosystem <span class="ribbon-caret">▾</span></a>
-      <div class="ribbon-drop ribbon-drop-desc">
-        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Type a problem, a place, or a name.</span></a>
-        <a href="/ecosystem/organizations/">Organization Directory<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
-        <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
-        <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="/"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="#1A1918" stroke-width="1.6"><circle cx="6" cy="8" r="3"></circle><circle cx="22" cy="6" r="3"></circle><circle cx="14" cy="21" r="3.5" fill="#D4A853" stroke="#1A1918"></circle><path d="M8.5 9.5l3.6 8.6M19.6 8.2l-4 9.6M9 7.6l10-1.2"></path></svg><span>State Capacity Ecosystem</span></a>
+    <nav class="site-nav" aria-label="Main">
+    <div class="nav-item">
+      <a class="nav-link" href="/ecosystem/">Ecosystem <span class="nav-caret" aria-hidden="true">▾</span></a>
+      <div class="nav-drop">
+        <a href="/ecosystem/search/">Search<small>Find who's working on your problem.</small></a>
+        <a href="/ecosystem/organizations/">Organization Directory<small>300+ organizations helping government deliver.</small></a>
+        <a href="/ecosystem/connect/">Connect<small>People and open opportunities. Add yourself.</small></a>
+        <a href="/ecosystem/affinity-map/">Affinity Map<small>What organizations have in common.</small></a>
       </div>
     </div>
-    <div class="ribbon-item">
-      <a class="ribbon-link active" href="/events/">Events <span class="ribbon-caret">▾</span></a>
-      <div class="ribbon-drop ribbon-drop-desc">
-        <a href="/events/hackathons/">Hackathons<span class="ribbon-sub">Build nights that end in working software.</span></a>
-        <a href="/events/demo-nights/">Demo Nights<span class="ribbon-sub">What got built, in front of who can adopt it.</span></a>
-        <a href="/events/salons/">Salons &amp; Meet-ups<span class="ribbon-sub">Speaker nights and monthly office hours.</span></a>
-        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<span class="ribbon-sub">What hosts and sponsors own, on one page.</span></a>
+    <div class="nav-item">
+      <a class="nav-link active" href="/events/">Events <span class="nav-caret" aria-hidden="true">▾</span></a>
+      <div class="nav-drop">
+        <a href="/events/hackathons/">Hackathons<small>Build nights that end in working software.</small></a>
+        <a href="/events/demo-nights/">Demo Nights<small>What got built, in front of the people who can adopt it.</small></a>
+        <a href="/events/salons/">Salons &amp; Meet-ups<small>Small evenings on what the field needs.</small></a>
+        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<small>What hosts and sponsors own, on one page.</small></a>
       </div>
     </div>
-    <div class="ribbon-item">
-      <a class="ribbon-link" href="/community/">Community <span class="ribbon-caret">▾</span></a>
-      <div class="ribbon-drop ribbon-drop-desc">
-        <a href="/community/slack/">Slack<span class="ribbon-sub">The conversation between events.</span></a>
-        <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗<span class="ribbon-sub">The team's writing on state capacity.</span></a>
-        <a href="/community/playbooks/">Playbooks<span class="ribbon-sub">Run our formats without us in the room.</span></a>
-        <a href="/community/proof-points/">Proof Points<span class="ribbon-sub">Every tool built through SCE.</span></a>
+    <div class="nav-item">
+      <a class="nav-link" href="/community/">Community <span class="nav-caret" aria-hidden="true">▾</span></a>
+      <div class="nav-drop">
+        <a href="/community/slack/">Slack<small>Meet people between events.</small></a>
+        <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗<small>Essays from people doing the work.</small></a>
+        <a href="/community/playbooks/">Playbooks<small>Run our formats in your own city.</small></a>
+        <a href="/community/proof-points/">Proof Points<small>Every tool built through SCE.</small></a>
       </div>
     </div>
-    <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
-    <div class="ribbon-actions"><a class="ribbon-btn primary" href="/ecosystem/search/">Search</a><a class="ribbon-btn" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Subscribe ↗</a><a class="ribbon-btn" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack ↗</a>
-    </div>
+    <div class="nav-item"><a class="nav-link" href="/about/">About</a></div>
+    <a class="nav-cta" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack</a>
+    </nav>
   </div>
-</nav>
-<script id="ribbon-touch-js">
-(function () {
-  var mq = window.matchMedia("(max-width:720px)");
-  document.querySelectorAll(".ribbon-item").forEach(function (item) {
-    var link = item.querySelector(".ribbon-link");
-    var drop = item.querySelector(".ribbon-drop");
-    if (!link || !drop) return;
-    link.addEventListener("click", function (e) {
-      if (!mq.matches) return;
-      if (!item.classList.contains("open")) {
-        e.preventDefault();
-        document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
-        item.classList.add("open");
-        drop.style.top = (link.getBoundingClientRect().bottom + 6) + "px";
-      }
-    });
-  });
-  document.addEventListener("click", function (e) {
-    if (!e.target.closest(".ribbon-item")) {
-      document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
-    }
-  });
-})();
-</script>
+</header>
 
 <div class="breadcrumb">
   <div class="breadcrumb-inner">
@@ -315,7 +188,8 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
 
 <div class="hero">
   <div class="hero-inner">
-    <h1>Salons &amp; <span>Meet-ups</span></h1>
+    <div class="kicker">Salons &amp; Meet-ups</div>
+    <h1>Small evenings where the community meets between build nights.</h1>
     <p>Not every useful evening is a build night. Salons, speaker nights, and monthly office hours are where part of this community finds each other. The more people and events, the better.</p>
   </div>
 </div>
@@ -332,17 +206,17 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
     <div class="kinds">
       <div class="kind">
         <h4>Speakers worth the trip</h4>
-        <p>Practitioners and researchers who have moved something inside government, talking about how it actually went.</p>
+        <p>Practitioners and researchers who changed something inside government talk about how it went.</p>
         <span class="tag">Discuss</span>
       </div>
       <div class="kind">
         <h4>Small rooms, real talk</h4>
-        <p>Salon-style conversation sized so everyone in the room can speak.</p>
+        <p>Each salon is sized so every person in the room gets a turn.</p>
         <span class="tag">Connect</span>
       </div>
       <div class="kind">
         <h4>Monthly office hours</h4>
-        <p>Recurring, low-commitment meetups for anyone working on state capacity who wants to think out loud with peers.</p>
+        <p>Recurring, low-commitment meet-ups for anyone working on state capacity who wants to think out loud with peers.</p>
         <span class="tag">Recurring</span>
       </div>
     </div>
@@ -355,18 +229,20 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
 </div>
 
 <!-- FOOTER -->
-<footer class="sce-footer">
-  <div class="sce-footer-inner">
+<footer class="site-footer">
+  <div class="site-footer-inner">
     <div>
-      <a class="sce-footer-brand" href="/"><img src="/assets/sce_logo.png" alt="">State Capacity Ecosystem<small>· statecapacityecosystem.com</small></a>
-      <p class="sce-footer-tag">Where the people making government deliver find each other and build.</p>
+      <div class="site-footer-name">State Capacity Ecosystem</div>
+      <div class="site-footer-tag">Connecting the people making government work better.</div>
     </div>
-    <div class="sce-footer-actions">
+    <nav aria-label="Footer">
+      <a href="/ecosystem/">Ecosystem</a>
+      <a href="/events/">Events</a>
+      <a href="/community/">Community</a>
+      <a href="/about/">About</a>
       <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗</a>
-      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Slack ↗</a>
-      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in Touch ↗</a>
-      <a href="/about/">About →</a>
-    </div>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in touch ↗</a>
+    </nav>
   </div>
 </footer>
 

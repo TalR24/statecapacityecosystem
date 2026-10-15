@@ -15,7 +15,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     :root {
@@ -26,19 +26,19 @@
       --shadow-sm:0 1px 3px rgba(26,25,24,0.08); --shadow-md:0 4px 16px rgba(37,99,235,0.10);
       --radius:10px;
     }
-    body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+    body { font-family:Carlito, Calibri, sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
 
     header { background:#1A1918; border-bottom:1px solid #2E2B27; padding:0 clamp(16px,4vw,48px); }
     .header-inner { max-width:1300px; margin:0 auto; height:60px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
     .brand { display:flex; align-items:center; gap:9px; text-decoration:none; }
-    .brand-name { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:700; color:#D4A853; letter-spacing:-0.02em; }
-    .brand-slash { font-family:'Roboto Mono',monospace; font-size:0.95rem; color:#4b5563; }
-    .brand-section { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:600; color:#DDD8CC; }
+    .brand-name { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; font-weight:700; color:#D4A853; letter-spacing:-0.02em; }
+    .brand-slash { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; color:#4b5563; }
+    .brand-section { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; font-weight:600; color:#DDD8CC; }
     .header-link { font-size:0.78rem; font-weight:500; color:#9C968A; text-decoration:none; display:flex; align-items:center; gap:5px; transition:color 0.15s; }
     .header-link:hover { color:#60a5fa; }
 
     .breadcrumb { padding:14px clamp(16px,4vw,48px) 0; }
-    .breadcrumb-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; gap:6px; font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:500; color:var(--text-faint); }
+    .breadcrumb-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; gap:6px; font-family:Carlito, Calibri, sans-serif; font-size:0.72rem; font-weight:500; color:var(--text-faint); }
     .breadcrumb a { color:var(--text-faint); text-decoration:none; transition:color 0.15s; }
     .breadcrumb a:hover { color:var(--blue); }
     .breadcrumb .current { color:var(--orange); }
@@ -46,13 +46,13 @@
 
     .hero { padding:14px clamp(16px,4vw,48px) 0; }
     .hero-inner { max-width:1300px; margin:0 auto; padding-bottom:14px; }
-    .hero h1 { font-family:'Roboto Mono',monospace; font-size:clamp(1.2rem,3vw,1.7rem); font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.2; margin-bottom:6px; }
+    .hero h1 { font-family:Carlito, Calibri, sans-serif; font-size:clamp(1.2rem,3vw,1.7rem); font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.2; margin-bottom:6px; }
     .hero h1 span { color:var(--blue); }
     .hero p { font-size:0.88rem; color:var(--text-muted); max-width:820px; line-height:1.6; }
     .submit-row { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-top:12px; }
     .submit-pill {
       display:inline-flex; align-items:center; gap:7px;
-      font-family:'Roboto Mono',monospace;
+      font-family:Carlito, Calibri, sans-serif;
       font-size:0.78rem; font-weight:600;
       color:#fff; text-decoration:none;
       padding:8px 16px;
@@ -79,13 +79,13 @@
     .filter-group { display:flex; flex-direction:column; gap:5px; min-width:150px; }
     .filter-group.search { flex:1; min-width:240px; }
     .filter-label {
-      font-family:'Roboto Mono',monospace;
+      font-family:Carlito, Calibri, sans-serif;
       font-size:0.62rem; font-weight:700; text-transform:uppercase;
       letter-spacing:0.08em; color:var(--text-muted);
     }
     .filter-input {
       height:34px; border:1px solid var(--border-mid); border-radius:6px;
-      padding:0 10px; font-size:0.82rem; font-family:'Inter',sans-serif;
+      padding:0 10px; font-size:0.82rem; font-family:Carlito, Calibri, sans-serif;
       color:var(--text); background:var(--bg);
       outline:none; transition:border-color 0.15s; width:100%;
     }
@@ -93,7 +93,7 @@
     .btn-reset {
       height:34px; padding:0 14px;
       background:transparent; border:1px solid var(--border-mid); border-radius:6px;
-      font-size:0.78rem; font-family:'Roboto Mono',monospace;
+      font-size:0.78rem; font-family:Carlito, Calibri, sans-serif;
       color:var(--text-muted); cursor:pointer;
       transition:all 0.15s; white-space:nowrap;
     }
@@ -101,7 +101,7 @@
 
     /* MULTI-SELECT */
     .ms-wrap { position:relative; }
-    .ms-btn { width:100%; display:flex; align-items:center; justify-content:space-between; gap:6px; font-family:'Inter',sans-serif; font-size:0.82rem; color:var(--text); background:var(--bg); border:1px solid var(--border-mid); border-radius:6px; padding:0 10px; height:34px; cursor:pointer; transition:border-color 0.15s; text-align:left; }
+    .ms-btn { width:100%; display:flex; align-items:center; justify-content:space-between; gap:6px; font-family:Carlito, Calibri, sans-serif; font-size:0.82rem; color:var(--text); background:var(--bg); border:1px solid var(--border-mid); border-radius:6px; padding:0 10px; height:34px; cursor:pointer; transition:border-color 0.15s; text-align:left; }
     .ms-btn:hover, .ms-btn.open { border-color:var(--blue); }
     .ms-btn-text { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .ms-caret { font-size:0.55rem; color:var(--text-faint); flex-shrink:0; transition:transform 0.15s; }
@@ -109,7 +109,7 @@
     .ms-drop { position:absolute; top:calc(100% + 4px); left:0; min-width:100%; max-width:300px; background:var(--surface); border:1px solid var(--border-mid); border-radius:8px; box-shadow:0 4px 20px rgba(0,0,0,0.13); z-index:500; display:none; }
     .ms-drop.open { display:block; }
     .ms-acts { display:flex; gap:6px; padding:8px 10px 6px; border-bottom:1px solid var(--border); }
-    .ms-act { font-family:'Roboto Mono',monospace; font-size:0.65rem; font-weight:600; background:none; border:1px solid var(--border); border-radius:4px; padding:3px 8px; cursor:pointer; color:var(--text-muted); transition:all 0.1s; }
+    .ms-act { font-family:Carlito, Calibri, sans-serif; font-size:0.65rem; font-weight:600; background:none; border:1px solid var(--border); border-radius:4px; padding:3px 8px; cursor:pointer; color:var(--text-muted); transition:all 0.1s; }
     .ms-act:hover { border-color:var(--blue); color:var(--blue); background:var(--blue-light); }
     .ms-list { max-height:260px; overflow-y:auto; padding:4px 0; }
     .ms-item { display:flex; align-items:center; gap:8px; padding:5px 12px; cursor:pointer; user-select:none; }
@@ -118,9 +118,9 @@
     .ms-item span { font-size:0.82rem; color:var(--text-mid); line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
     .results-bar { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:12px; padding:0 2px; }
-    .results-count { font-family:'Roboto Mono',monospace; font-size:0.78rem; color:var(--text-muted); }
+    .results-count { font-family:Carlito, Calibri, sans-serif; font-size:0.78rem; color:var(--text-muted); }
     .results-count strong { color:var(--text); }
-    .download-link { font-family:'Roboto Mono',monospace; font-size:0.74rem; color:var(--blue); text-decoration:none; padding:4px 10px; border:1px solid var(--blue-mid); border-radius:6px; background:var(--blue-light); }
+    .download-link { font-family:Carlito, Calibri, sans-serif; font-size:0.74rem; color:var(--blue); text-decoration:none; padding:4px 10px; border:1px solid var(--blue-mid); border-radius:6px; background:var(--blue-light); }
     .download-link:hover { background:var(--blue); color:#fff; }
 
     .table-wrap { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow-sm); overflow:hidden; }
@@ -129,7 +129,7 @@
     thead th {
       background:#f9fafb; border-bottom:1.5px solid var(--border-mid);
       padding:10px 12px; text-align:left;
-      font-family:'Roboto Mono',monospace;
+      font-family:Carlito, Calibri, sans-serif;
       font-size:0.66rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;
       color:var(--text-muted); white-space:nowrap;
       cursor:pointer; user-select:none; transition:color 0.15s;
@@ -149,7 +149,7 @@
     td.name-cell .entry-org { font-weight:400; font-size:0.78rem; color:var(--text-muted); line-height:1.4; margin-top:2px; }
 
     .role-tag {
-      display:inline-block; font-family:'Roboto Mono',monospace;
+      display:inline-block; font-family:Carlito, Calibri, sans-serif;
       font-size:0.66rem; font-weight:700; padding:2px 8px; border-radius:4px;
       background:#f3f4f6; color:var(--text-mid); white-space:nowrap;
     }
@@ -164,36 +164,36 @@
     .role-tag.other            { background:#f3f4f6; color:#4b5563; }
 
     .juris-tag {
-      display:inline-block; font-family:'Roboto Mono',monospace;
+      display:inline-block; font-family:Carlito, Calibri, sans-serif;
       font-size:0.62rem; font-weight:700; padding:1px 6px; border-radius:3px;
       background:#F5EDDA; color:#8A5F1E; border:1px solid #DFCEA1;
       margin-right:3px; margin-bottom:2px;
     }
     .area-tag {
-      display:inline-block; font-family:'Inter',sans-serif;
+      display:inline-block; font-family:Carlito, Calibri, sans-serif;
       font-size:0.72rem; font-weight:500; padding:2px 8px; border-radius:12px;
       background:#F5EDDA; color:#8A5F1E; border:1px solid #DFCEA1;
       line-height:1.4; margin-right:3px; margin-bottom:2px;
     }
     .topic-tag {
-      display:inline-block; font-family:'Inter',sans-serif;
+      display:inline-block; font-family:Carlito, Calibri, sans-serif;
       font-size:0.72rem; font-weight:500; padding:2px 8px; border-radius:12px;
       background:var(--blue-light); color:var(--blue); border:1px solid var(--blue-mid);
       line-height:1.4; margin-right:3px; margin-bottom:2px;
     }
     .help-tag {
-      display:inline-block; font-family:'Inter',sans-serif;
+      display:inline-block; font-family:Carlito, Calibri, sans-serif;
       font-size:0.72rem; font-weight:500; padding:2px 8px; border-radius:12px;
       background:#f0fdf4; color:#166534; border:1px solid #bbf7d0; line-height:1.4;
       margin-right:3px; margin-bottom:2px;
     }
     .time-tag {
-      display:inline-block; font-family:'Roboto Mono',monospace;
+      display:inline-block; font-family:Carlito, Calibri, sans-serif;
       font-size:0.66rem; font-weight:700; padding:2px 7px; border-radius:4px;
       background:#f5f3ff; color:#6d28d9; border:1px solid #ddd6fe; white-space:nowrap;
     }
     .pref-tag {
-      display:inline-block; font-family:'Roboto Mono',monospace;
+      display:inline-block; font-family:Carlito, Calibri, sans-serif;
       font-size:0.62rem; font-weight:700; padding:1px 7px; border-radius:4px; white-space:nowrap;
     }
     .pref-direct      { background:var(--blue-light); color:var(--blue); border:1px solid var(--blue-mid); }
@@ -202,12 +202,12 @@
     .contact-cell { max-width:150px; word-break:break-all; overflow-wrap:break-word; }
     .contact-cell a {
       color:var(--blue); text-decoration:none; font-size:0.78rem;
-      font-family:'Roboto Mono',monospace;
+      font-family:Carlito, Calibri, sans-serif;
     }
     .contact-cell a:hover { text-decoration:underline; }
     .contact-ir {
       color:var(--orange); text-decoration:none; font-size:0.78rem;
-      font-family:'Roboto Mono',monospace; font-weight:600; white-space:nowrap;
+      font-family:Carlito, Calibri, sans-serif; font-weight:600; white-space:nowrap;
     }
     .contact-ir:hover { text-decoration:underline; }
     .empty-cell { color:var(--text-faint); font-size:0.78rem; }
@@ -220,7 +220,7 @@
     .detail-panel { padding:18px 24px 22px; border-top:1px solid var(--blue-mid); }
     .detail-section { margin-bottom:14px; }
     .detail-section h4 {
-      font-family:'Roboto Mono',monospace;
+      font-family:Carlito, Calibri, sans-serif;
       font-size:0.7rem; font-weight:700; text-transform:uppercase;
       letter-spacing:0.08em; color:var(--orange);
       margin-bottom:6px;
@@ -228,13 +228,13 @@
     .detail-narrative { font-size:0.92rem; line-height:1.65; color:var(--text-mid); }
 
     .pagination { display:flex; align-items:center; justify-content:center; gap:6px; padding:16px; border-top:1px solid var(--border); }
-    .page-btn { height:30px; min-width:30px; padding:0 10px; border:1px solid var(--border-mid); border-radius:6px; font-size:0.8rem; font-family:'Roboto Mono',monospace; background:var(--surface); color:var(--text-mid); cursor:pointer; transition:all 0.15s; }
+    .page-btn { height:30px; min-width:30px; padding:0 10px; border:1px solid var(--border-mid); border-radius:6px; font-size:0.8rem; font-family:Carlito, Calibri, sans-serif; background:var(--surface); color:var(--text-mid); cursor:pointer; transition:all 0.15s; }
     .page-btn:hover { border-color:var(--blue); color:var(--blue); }
     .page-btn.active { background:var(--blue); border-color:var(--blue); color:#fff; }
     .page-btn:disabled { opacity:0.4; cursor:default; }
 
     .state-msg { text-align:center; padding:48px 24px; color:var(--text-faint); }
-    .state-msg h3 { font-family:'Roboto Mono',monospace; font-size:1rem; margin-bottom:6px; color:var(--text-muted); }
+    .state-msg h3 { font-family:Carlito, Calibri, sans-serif; font-size:1rem; margin-bottom:6px; color:var(--text-muted); }
     .state-msg p { font-size:0.85rem; }
 
     footer { background:var(--surface); border-top:1px solid var(--border); padding:18px clamp(16px,4vw,48px); }
@@ -270,21 +270,21 @@
       display:flex; align-items:center; justify-content:space-between;
       flex-shrink:0;
     }
-    .sf-hdr-title { font-family:'Roboto Mono',monospace; font-size:0.95rem; font-weight:700; color:#DDD8CC; letter-spacing:-0.02em; }
+    .sf-hdr-title { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; font-weight:700; color:#DDD8CC; letter-spacing:-0.02em; }
     .sf-close { background:none; border:none; color:#9C968A; font-size:1.4rem; cursor:pointer; padding:0 4px; line-height:1; transition:color 0.15s; }
     .sf-close:hover { color:#fff; }
     .sf-body { padding:28px 32px; overflow-y:auto; flex:1; min-height:0; }
     .sf-intro { font-size:0.84rem; color:var(--text-muted); line-height:1.6; margin-bottom:24px; }
     .sf-section { margin-bottom:20px; }
     .sf-prompt {
-      font-family:'Roboto Mono',monospace; font-size:0.82rem; font-weight:700;
+      font-family:Carlito, Calibri, sans-serif; font-size:0.82rem; font-weight:700;
       color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:5px;
     }
     .sf-req { color:var(--orange); }
     .sf-prompt-sub { font-size:0.72rem; color:var(--text-muted); font-weight:400; }
     .sf-text-input {
       width:100%; height:38px; border:1px solid var(--border-mid); border-radius:6px;
-      padding:0 12px; font-size:0.88rem; font-family:'Inter',sans-serif;
+      padding:0 12px; font-size:0.88rem; font-family:Carlito, Calibri, sans-serif;
       color:var(--text); background:var(--bg);
       outline:none; transition:border-color 0.15s;
     }
@@ -292,7 +292,7 @@
     .sf-chips { display:flex; flex-wrap:wrap; gap:7px; }
     .sf-chip {
       padding:5px 13px; border:1.5px solid var(--border-mid); border-radius:999px;
-      font-size:0.81rem; font-family:'Inter',sans-serif; font-weight:500;
+      font-size:0.81rem; font-family:Carlito, Calibri, sans-serif; font-weight:500;
       color:var(--text-mid); background:var(--bg);
       cursor:pointer; user-select:none;
       transition:border-color 0.15s, background 0.15s, color 0.15s;
@@ -303,7 +303,7 @@
     .sf-chip.on:hover { background:var(--blue-hover); }
     .sf-schip {
       padding:5px 16px; border:1.5px solid var(--border-mid); border-radius:6px;
-      font-size:0.81rem; font-family:'Inter',sans-serif; font-weight:500;
+      font-size:0.81rem; font-family:Carlito, Calibri, sans-serif; font-weight:500;
       color:var(--text-mid); background:var(--bg);
       cursor:pointer; user-select:none;
       transition:border-color 0.15s, background 0.15s, color 0.15s;
@@ -314,16 +314,16 @@
     .sf-single-chips { display:flex; flex-wrap:wrap; gap:7px; }
     .sf-textarea {
       width:100%; border:1px solid var(--border-mid); border-radius:6px;
-      padding:10px 12px; font-size:0.88rem; font-family:'Inter',sans-serif;
+      padding:10px 12px; font-size:0.88rem; font-family:Carlito, Calibri, sans-serif;
       color:var(--text); background:var(--bg); resize:vertical; min-height:76px;
       outline:none; transition:border-color 0.15s; line-height:1.5;
     }
     .sf-textarea:focus { border-color:var(--blue); }
     .sf-char-row { display:flex; justify-content:flex-end; margin-top:4px; }
-    .sf-char-count { font-family:'Roboto Mono',monospace; font-size:0.68rem; color:var(--text-faint); }
+    .sf-char-count { font-family:Carlito, Calibri, sans-serif; font-size:0.68rem; color:var(--text-faint); }
     .sf-char-count.warn { color:#d97706; }
     .sf-char-count.over { color:#dc2626; }
-    .sf-error-msg { font-size:0.74rem; color:#dc2626; font-family:'Roboto Mono',monospace; margin-top:7px; display:none; }
+    .sf-error-msg { font-size:0.74rem; color:#dc2626; font-family:Carlito, Calibri, sans-serif; margin-top:7px; display:none; }
     .sf-error-msg.show { display:block; }
     .sf-conditional { display:none; }
     .sf-conditional.show { display:block; }
@@ -335,7 +335,7 @@
     }
     .sf-submit-btn {
       display:inline-flex; align-items:center; gap:8px;
-      font-family:'Roboto Mono',monospace; font-size:0.88rem; font-weight:700;
+      font-family:Carlito, Calibri, sans-serif; font-size:0.88rem; font-weight:700;
       color:#fff; background:var(--orange); border:none; border-radius:8px;
       padding:12px 24px; cursor:pointer;
       box-shadow:0 4px 12px rgba(212,168,83,0.30);
@@ -346,11 +346,11 @@
     .sf-footer-note { font-size:0.75rem; color:var(--text-muted); line-height:1.5; flex:1; }
     .sf-success { text-align:center; padding:52px 32px 48px; }
     .sf-success-check { font-size:2.6rem; color:#16a34a; margin-bottom:14px; line-height:1; }
-    .sf-success-title { font-family:'Roboto Mono',monospace; font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:10px; }
+    .sf-success-title { font-family:Carlito, Calibri, sans-serif; font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:10px; }
     .sf-success-text { font-size:0.88rem; color:var(--text-muted); line-height:1.65; margin-bottom:24px; max-width:440px; margin-left:auto; margin-right:auto; }
     .sf-copy-btn {
       display:inline-flex; align-items:center; gap:7px;
-      font-family:'Roboto Mono',monospace; font-size:0.8rem; font-weight:600;
+      font-family:Carlito, Calibri, sans-serif; font-size:0.8rem; font-weight:600;
       color:var(--blue); background:var(--blue-light);
       border:1px solid var(--blue-mid); border-radius:6px;
       padding:8px 16px; cursor:pointer; transition:all 0.15s; margin-right:8px;
@@ -358,7 +358,7 @@
     .sf-copy-btn:hover { background:var(--blue); color:#fff; }
     .sf-done-btn {
       display:inline-flex; align-items:center; gap:7px;
-      font-family:'Roboto Mono',monospace; font-size:0.8rem; font-weight:600;
+      font-family:Carlito, Calibri, sans-serif; font-size:0.8rem; font-weight:600;
       color:var(--text-muted); background:var(--bg);
       border:1px solid var(--border-mid); border-radius:6px;
       padding:8px 16px; cursor:pointer; transition:all 0.15s;
@@ -370,98 +370,7 @@
       .sf-name-org-row { grid-template-columns:1fr !important; }
     }
   </style>
-<style id="ribbon-css">
-.ribbon{background:var(--surface);border-bottom:1px solid var(--border);padding:0 clamp(16px,4vw,48px);position:relative;z-index:80;}
-.ribbon-inner{max-width:1300px;margin:0 auto;display:flex;align-items:stretch;}
-.ribbon-item{position:relative;flex-shrink:0;}
-.ribbon-link{display:flex;align-items:center;gap:6px;padding:13px 14px 11px;font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;color:var(--text-mid);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;}
-.ribbon-item:hover .ribbon-link,.ribbon-link:focus{color:#8A5F1E;}
-.ribbon-link.active{color:var(--orange);border-bottom-color:var(--orange);}
-.ribbon-caret{font-size:0.55rem;color:var(--text-faint);transform:translateY(1px);}
-.ribbon-drop{display:none;position:absolute;top:100%;left:0;min-width:235px;background:var(--surface);border:1px solid var(--border-mid);border-radius:0 0 8px 8px;box-shadow:0 14px 34px rgba(26,25,24,0.16);z-index:90;padding:6px 0;}
-.ribbon-item:hover .ribbon-drop,.ribbon-item:focus-within .ribbon-drop{display:block;}
-.ribbon-drop a{display:block;padding:8px 16px;font-size:0.82rem;color:var(--text-mid);text-decoration:none;transition:background .1s,color .1s;}
-.ribbon-drop a:hover{background:#F5EDDA;color:#8A5F1E;}
-@media (max-width:720px){.ribbon-inner{flex-wrap:wrap;}.ribbon-link{padding:11px 7px 9px;font-size:0.7rem;}.ribbon-actions{flex-basis:100%;margin-left:0;padding:0 0 8px 7px;flex-wrap:wrap;gap:6px;}.ribbon-btn{padding:6px 10px;font-size:0.7rem;}.ribbon-drop{display:none !important;}}
-.ribbon-actions{margin-left:auto;display:flex;align-items:center;gap:8px;padding:7px 0 7px 14px;flex-shrink:0;}
-.ribbon-btn{display:inline-flex;align-items:center;gap:6px;font-family:'Roboto Mono',monospace;font-size:0.74rem;font-weight:700;text-decoration:none;padding:7px 13px;border-radius:7px;white-space:nowrap;border:1px solid #DFCEA1;background:#F5EDDA;color:#8A5F1E;transition:background .15s,color .15s;}
-.ribbon-btn:hover{background:#8A5F1E;color:#fff;}
-.ribbon-btn.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
-.ribbon-btn.primary:hover{background:#B08430;border-color:#B08430;color:#fff;}
-.sce-footer{background:#1A1918;color:#F4EFE4;padding:26px clamp(16px,4vw,48px);margin-top:auto;}
-.sce-footer-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
-.sce-footer-brand{display:flex;align-items:center;gap:10px;font-family:'Roboto Mono',monospace;font-size:0.84rem;font-weight:700;color:#D4A853;text-decoration:none;}
-.sce-footer-brand img{width:22px;height:22px;object-fit:contain;}
-.sce-footer-brand small{font-weight:400;color:#9C968A;font-size:0.72rem;margin-left:4px;}
-.sce-footer-actions{display:flex;gap:10px;flex-wrap:wrap;}
-.sce-footer-actions a{font-family:'Roboto Mono',monospace;font-size:0.78rem;font-weight:600;text-decoration:none;padding:8px 14px;border-radius:7px;border:1px solid rgba(244,239,228,0.3);color:#F4EFE4;transition:border-color .15s,background .15s;}
-.sce-footer-actions a:hover{border-color:#D4A853;background:rgba(212,168,83,0.12);}
-.sce-footer-actions a.primary{background:#D4A853;border-color:#D4A853;color:#1A1918;}
-.sce-footer-actions a.primary:hover{background:#E3C170;}
-/* gold header row (Oct 2026) */
-.ribbon{background:#D4A853;border-bottom:1px solid #B88E3D;}
-.ribbon-link{color:#1A1918;}
-.ribbon-item:hover .ribbon-link,.ribbon-link:focus{color:#1A1918;border-bottom-color:#1A1918;}
-.ribbon-link.active{color:#1A1918;border-bottom-color:#1A1918;}
-.ribbon-caret{color:#5C4310;}
-.ribbon-btn{background:#F4EFE4;border-color:#F4EFE4;color:#1A1918;}
-.ribbon-btn:hover{background:#FFFFFF;color:#1A1918;}
-.ribbon-btn.primary{background:#1A1918;border-color:#1A1918;color:#F4EFE4;}
-.ribbon-btn.primary:hover{background:#3E3931;color:#F4EFE4;}
-.ribbon-link img{filter:brightness(0.2);}
-</style>
 <style id="sce-brand-overrides">.hero h1{color:#1A1918;}.hero h1 span{color:#8A5F1E;}</style>
-<style id="event-banner-css">
-.evt-banner{background:#D4A853;color:#1A1918;padding:0 clamp(16px,4vw,48px);position:relative;z-index:100;}
-.evt-banner-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:9px 0;font-family:'Roboto Mono',monospace;font-size:0.8rem;font-weight:600;}
-.evt-banner strong{font-weight:700;}
-.evt-banner .evt-when{color:#6E4A15;}
-.evt-banner a{display:inline-flex;align-items:center;gap:6px;background:#1A1918;color:#F4EFE4;text-decoration:none;padding:6px 14px;border-radius:6px;font-size:0.76rem;font-weight:700;white-space:nowrap;transition:background .15s;}
-.evt-banner a:hover{background:#3E3931;}
-@media (max-width:620px){.evt-banner-inner{font-size:0.74rem;gap:9px;}.evt-banner .evt-when{width:100%;text-align:center;}}
-@media print{.evt-banner{display:none !important;}}
-</style>
-<style id="link-ux-css">
-/* Links as buttons (Oct 2026): every standalone text link and every call to action inside a card is a 40px-tall button. */
-a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { display:inline-flex !important; align-items:center; gap:6px; align-self:flex-start; width:auto; min-height:40px; box-sizing:border-box; padding:9px 16px !important; font-family:'Roboto Mono',monospace !important; font-size:0.8rem !important; font-weight:700 !important; line-height:1.25; text-decoration:none !important; color:#6E4A15 !important; background:#F5EDDA !important; border:1px solid #DFCEA1 !important; border-radius:8px !important; transition:background .15s,color .15s,border-color .15s; cursor:pointer; }
-a.row-link:hover, a.info-link:hover, a.proj-link:hover, a.post-link:hover, a.download-link:hover, a.sce-btn:hover,
-a:hover > .card-cta, a:hover .card-cta, a:hover .tool-cta, a:hover .act-cta, a:hover .bubble-cta, a:hover .mo-cta { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
-a.row-link:focus-visible, a.info-link:focus-visible, a.proj-link:focus-visible, a.post-link:focus-visible, a.download-link:focus-visible, a.sce-btn:focus-visible, a.scroll-cue:focus-visible { outline:2px solid #1A1918; outline-offset:2px; }
-a.row-link, a.sce-btn, a.proj-link { margin:4px 8px 4px 0; }
-.sce-btn-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
-a.scroll-cue { min-height:40px; padding:9px 16px; border:1px solid rgba(212,168,83,.55); border-radius:8px; font-size:0.8rem !important; font-weight:700 !important; }
-a.scroll-cue:hover { background:rgba(212,168,83,.14); }
-/* Section headers (kickers) sized to be read, not squinted at. */
-.kicker, .section-label { font-size:0.92rem !important; letter-spacing:0.1em !important; }
-/* Whole-row and whole-card links. */
-.lw-post, .wr-row { position:relative; }
-.lw-post a.t::after, .wr-row a::after { content:""; position:absolute; inset:0; }
-.lw-post:hover, .wr-row:hover { background:rgba(212,168,83,.10); }
-.lw-post a.t { font-size:1rem !important; }
-.wr-row { padding:14px 10px !important; border-radius:6px; }
-a.sit-btn { min-height:40px; display:inline-flex; align-items:center; padding:8px 14px !important; font-size:0.8rem !important; }
-/* Search results and project cards: links are buttons; a card with exactly one link is clickable as a whole. */
-.se-card-links { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
-.se-card-links a, a.sg-link { display:inline-flex !important; align-items:center; gap:6px; min-height:40px; box-sizing:border-box; padding:9px 16px !important; font-family:'Roboto Mono',monospace !important; font-size:0.8rem !important; font-weight:700 !important; text-decoration:none !important; color:#6E4A15 !important; background:#F5EDDA !important; border:1px solid #DFCEA1 !important; border-radius:8px !important; }
-.se-card-links a:hover, a.sg-link:hover { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
-.se-card, .proj-card { position:relative; }
-.se-card:not(:has(a ~ a)) .se-card-links a::after, .proj-card:not(:has(a ~ a)) a.proj-link::after { content:""; position:absolute; inset:0; border-radius:inherit; }
-.se-card:not(:has(a ~ a)), .proj-card:not(:has(a ~ a)) { cursor:pointer; transition:box-shadow .15s, transform .15s, border-color .15s; }
-.se-card:not(:has(a ~ a)):hover, .proj-card:not(:has(a ~ a)):hover { box-shadow:0 6px 18px rgba(26,25,24,.12); transform:translateY(-1px); border-color:#8A5F1E; }
-.se-card:not(:has(a ~ a)):hover .se-card-links a, .proj-card:not(:has(a ~ a)):hover a.proj-link { background:#8A5F1E !important; border-color:#8A5F1E !important; color:#fff !important; }
-/* Tighter page headers (Oct 2026): less air above the title and between the lede and the first section. */
-.hero { padding-top:18px !important; }
-.hero-inner { padding-bottom:4px !important; }
-.main { padding-top:6px !important; }
-.main-inner > :first-child, .main-inner > .section-label:first-of-type { margin-top:10px !important; }
-/* Cards that are one big link: the whole card responds. */
-a.card, a.tool-card, a.act-card, a.explore-bubble, a.mo-item, a.row-visual { cursor:pointer; }
-a.mo-item { padding-top:14px; padding-bottom:14px; }
-a.mo-item:hover { background:rgba(212,168,83,.10); }
-a.mo-item:hover .mo-title { text-decoration:underline; }
-@media (max-width:620px){ a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { font-size:0.78rem !important; } }
-@media print { a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { border:none !important; background:none !important; padding:0 !important; min-height:0; } }
-</style>
 <!-- jsonld:start -->
 <script type="application/ld+json">
 {
@@ -480,85 +389,49 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
 }
 </script>
 <!-- jsonld:end -->
+<link rel="stylesheet" href="/assets/sce.css">
+<script src="/assets/sce-nav.js" defer></script>
 </head>
 <body>
 
 <!-- PILLAR RIBBON -->
 <!-- EVENT BANNER: none scheduled. For the next event, paste a div.evt-banner block here (styles are in the head). -->
-
-<style id="ribbon-sub-css">
-.ribbon-drop-desc{min-width:270px;}
-.ribbon-drop-desc a{white-space:normal;}
-.ribbon-sub{display:block;font-family:Inter,sans-serif;font-size:0.7rem;font-weight:400;color:#9C968A;line-height:1.4;margin-top:2px;}
-@media (max-width:720px){
-  .ribbon-item.open .ribbon-drop{display:block !important;position:fixed;left:10px;right:10px;min-width:0;border-radius:10px;border:1px solid var(--border-mid,#C9C1AF);box-shadow:0 18px 40px rgba(26,25,24,0.25);max-height:60vh;overflow-y:auto;z-index:120;}
-  .ribbon-item.open .ribbon-link{color:#8A5F1E;}
-}
-.sce-footer-inner{align-items:flex-start;row-gap:18px;}
-.sce-footer-inner > div:first-child{flex:1 1 340px;min-width:240px;}
-.sce-footer-actions{align-items:center;}
-.sce-footer-tag{font-family:Inter,sans-serif;font-size:0.78rem;color:#9C968A;margin:9px 0 0;max-width:460px;line-height:1.55;}
-@media (max-width:640px){.sce-footer-inner{flex-direction:column;}.sce-footer-actions{width:100%;}}
-</style>
-<nav class="ribbon" aria-label="State Capacity Ecosystem sections">
-  <div class="ribbon-inner">
-    <div class="ribbon-item"><a class="ribbon-link" href="/"><img src="/assets/sce_logo.png" alt="" style="width:16px;height:16px;object-fit:contain;">Home</a></div>
-    <div class="ribbon-item">
-      <a class="ribbon-link active" href="/ecosystem/">Ecosystem <span class="ribbon-caret">▾</span></a>
-      <div class="ribbon-drop ribbon-drop-desc">
-        <a href="/ecosystem/search/">Search<span class="ribbon-sub">Type a problem, a place, or a name.</span></a>
-        <a href="/ecosystem/organizations/">Organization Directory<span class="ribbon-sub">300+ organizations working on state capacity and how.</span></a>
-        <a href="/ecosystem/connect/">Connect<span class="ribbon-sub">People and opportunities. Add yourself.</span></a>
-        <a href="/ecosystem/affinity-map/">Affinity Map<span class="ribbon-sub">What organizations have in common.</span></a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="/"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="#1A1918" stroke-width="1.6"><circle cx="6" cy="8" r="3"></circle><circle cx="22" cy="6" r="3"></circle><circle cx="14" cy="21" r="3.5" fill="#D4A853" stroke="#1A1918"></circle><path d="M8.5 9.5l3.6 8.6M19.6 8.2l-4 9.6M9 7.6l10-1.2"></path></svg><span>State Capacity Ecosystem</span></a>
+    <nav class="site-nav" aria-label="Main">
+    <div class="nav-item">
+      <a class="nav-link active" href="/ecosystem/">Ecosystem <span class="nav-caret" aria-hidden="true">▾</span></a>
+      <div class="nav-drop">
+        <a href="/ecosystem/search/">Search<small>Find who's working on your problem.</small></a>
+        <a href="/ecosystem/organizations/">Organization Directory<small>300+ organizations helping government deliver.</small></a>
+        <a href="/ecosystem/connect/">Connect<small>People and open opportunities. Add yourself.</small></a>
+        <a href="/ecosystem/affinity-map/">Affinity Map<small>What organizations have in common.</small></a>
       </div>
     </div>
-    <div class="ribbon-item">
-      <a class="ribbon-link" href="/events/">Events <span class="ribbon-caret">▾</span></a>
-      <div class="ribbon-drop ribbon-drop-desc">
-        <a href="/events/hackathons/">Hackathons<span class="ribbon-sub">Build nights that end in working software.</span></a>
-        <a href="/events/demo-nights/">Demo Nights<span class="ribbon-sub">What got built, in front of who can adopt it.</span></a>
-        <a href="/events/salons/">Salons &amp; Meet-ups<span class="ribbon-sub">Speaker nights and monthly office hours.</span></a>
-        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<span class="ribbon-sub">What hosts and sponsors own, on one page.</span></a>
+    <div class="nav-item">
+      <a class="nav-link" href="/events/">Events <span class="nav-caret" aria-hidden="true">▾</span></a>
+      <div class="nav-drop">
+        <a href="/events/hackathons/">Hackathons<small>Build nights that end in working software.</small></a>
+        <a href="/events/demo-nights/">Demo Nights<small>What got built, in front of the people who can adopt it.</small></a>
+        <a href="/events/salons/">Salons &amp; Meet-ups<small>Small evenings on what the field needs.</small></a>
+        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<small>What hosts and sponsors own, on one page.</small></a>
       </div>
     </div>
-    <div class="ribbon-item">
-      <a class="ribbon-link" href="/community/">Community <span class="ribbon-caret">▾</span></a>
-      <div class="ribbon-drop ribbon-drop-desc">
-        <a href="/community/slack/">Slack<span class="ribbon-sub">The conversation between events.</span></a>
-        <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗<span class="ribbon-sub">The team's writing on state capacity.</span></a>
-        <a href="/community/playbooks/">Playbooks<span class="ribbon-sub">Run our formats without us in the room.</span></a>
-        <a href="/community/proof-points/">Proof Points<span class="ribbon-sub">Every tool built through SCE.</span></a>
+    <div class="nav-item">
+      <a class="nav-link" href="/community/">Community <span class="nav-caret" aria-hidden="true">▾</span></a>
+      <div class="nav-drop">
+        <a href="/community/slack/">Slack<small>Meet people between events.</small></a>
+        <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗<small>Essays from people doing the work.</small></a>
+        <a href="/community/playbooks/">Playbooks<small>Run our formats in your own city.</small></a>
+        <a href="/community/proof-points/">Proof Points<small>Every tool built through SCE.</small></a>
       </div>
     </div>
-    <div class="ribbon-item"><a class="ribbon-link" href="/about/">About</a></div>
-    <div class="ribbon-actions"><a class="ribbon-btn primary" href="/ecosystem/search/">Search</a><a class="ribbon-btn" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Subscribe ↗</a><a class="ribbon-btn" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack ↗</a>
-    </div>
+    <div class="nav-item"><a class="nav-link" href="/about/">About</a></div>
+    <a class="nav-cta" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack</a>
+    </nav>
   </div>
-</nav>
-<script id="ribbon-touch-js">
-(function () {
-  var mq = window.matchMedia("(max-width:720px)");
-  document.querySelectorAll(".ribbon-item").forEach(function (item) {
-    var link = item.querySelector(".ribbon-link");
-    var drop = item.querySelector(".ribbon-drop");
-    if (!link || !drop) return;
-    link.addEventListener("click", function (e) {
-      if (!mq.matches) return;
-      if (!item.classList.contains("open")) {
-        e.preventDefault();
-        document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
-        item.classList.add("open");
-        drop.style.top = (link.getBoundingClientRect().bottom + 6) + "px";
-      }
-    });
-  });
-  document.addEventListener("click", function (e) {
-    if (!e.target.closest(".ribbon-item")) {
-      document.querySelectorAll(".ribbon-item.open").forEach(function (o) { o.classList.remove("open"); });
-    }
-  });
-})();
-</script>
+</header>
 
 <div class="breadcrumb">
   <div class="breadcrumb-inner">
@@ -572,8 +445,9 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
 
 <div class="hero">
   <div class="hero-inner">
-    <h1><span>Connect</span></h1>
-    <p>People, problems and opportunities in state capacity, indexed by role and problem so you can find a match or add yourself.</p>
+    <div class="kicker">Connect</div>
+    <h1>Find people and open opportunities, or add your own.</h1>
+    <p class="hero-lede">Practitioners post problems to solve. Organizations post jobs, fellowships and calls for collaborators. Filter by role and problem to find a match.</p>
     <div class="submit-row">
       <button class="submit-pill" type="button" onclick="openSF()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -582,7 +456,7 @@ a.mo-item:hover .mo-title { text-decoration:underline; }
     </div>
   </div>
 </div>
-<div style="padding:10px clamp(16px,4vw,48px) 0;"><div style="max-width:1300px;margin:0 auto;font-family:'Roboto Mono',monospace;font-size:0.74rem;color:#6B6760;display:flex;gap:10px;flex-wrap:wrap;">Also explore: <a href="/ecosystem/organizations/" class="sce-btn">Organization Directory →</a> · <a href="/ecosystem/affinity-map/" class="sce-btn">Affinity Map →</a> · <a href="/ecosystem/search/" class="sce-btn">Guided search →</a></div></div>
+<div style="padding:12px 24px 0;"><div style="max-width:1200px;margin:0 auto;font-family:Carlito, Calibri, sans-serif;font-size:16px;color:#4A4740;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">Also explore: <a href="/ecosystem/organizations/" class="sce-btn">Organization Directory →</a> <a href="/ecosystem/affinity-map/" class="sce-btn">Affinity Map →</a> <a href="/ecosystem/search/" class="sce-btn">Search →</a></div></div>
 
 
 <div class="main">
@@ -768,18 +642,20 @@ Showing <strong>10</strong> of <strong>56</strong> entries
 </div>
 
 <!-- FOOTER -->
-<footer class="sce-footer">
-  <div class="sce-footer-inner">
+<footer class="site-footer">
+  <div class="site-footer-inner">
     <div>
-      <a class="sce-footer-brand" href="/"><img src="/assets/sce_logo.png" alt="">State Capacity Ecosystem<small>· statecapacityecosystem.com</small></a>
-      <p class="sce-footer-tag">Where the people making government deliver find each other and build.</p>
+      <div class="site-footer-name">State Capacity Ecosystem</div>
+      <div class="site-footer-tag">Connecting the people making government work better.</div>
     </div>
-    <div class="sce-footer-actions">
+    <nav aria-label="Footer">
+      <a href="/ecosystem/">Ecosystem</a>
+      <a href="/events/">Events</a>
+      <a href="/community/">Community</a>
+      <a href="/about/">About</a>
       <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗</a>
-      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Slack ↗</a>
-      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in Touch ↗</a>
-      <a href="/about/">About →</a>
-    </div>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in touch ↗</a>
+    </nav>
   </div>
 </footer>
 
@@ -794,7 +670,7 @@ Showing <strong>10</strong> of <strong>56</strong> entries
     <!-- Form body -->
     <div class="sf-body" id="sf-form-body">
       <p class="sf-intro">
-        Add yourself as a practitioner or post an opportunity (grant, open call, job, or request for collaboration) so others in the ecosystem can find you.
+        Add yourself or post an opportunity (a grant, open call, job or request for collaborators) so others in the ecosystem can find you.
         Submissions are reviewed before going live. Fields marked <span style="color:var(--orange)">*</span> are required.
       </p>
 
@@ -802,13 +678,13 @@ Showing <strong>10</strong> of <strong>56</strong> entries
       <div class="sf-section sf-name-org-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
         <div>
           <div class="sf-prompt">Name <span class="sf-req">*</span></div>
-          <input id="sf-name" type="text" class="sf-text-input" maxlength="80" placeholder="Your name or name of offering" oninput="sfCharCount('sf-name','sf-name-ct',80)">
+          <input id="sf-name" type="text" class="sf-text-input" maxlength="80" placeholder="Your name, or the opportunity's name" oninput="sfCharCount('sf-name','sf-name-ct',80)">
           <div class="sf-char-row"><span id="sf-name-ct" class="sf-char-count">80 left</span></div>
           <div id="sf-name-err" class="sf-error-msg">Please enter your name.</div>
         </div>
         <div>
           <div class="sf-prompt">Organization <span class="sf-prompt-sub">(optional)</span></div>
-          <input id="sf-org" type="text" class="sf-text-input" maxlength="80" placeholder="Org affiliated with offering" oninput="sfCharCount('sf-org','sf-org-ct',80)">
+          <input id="sf-org" type="text" class="sf-text-input" maxlength="80" placeholder="Your organization, or the one offering the opportunity" oninput="sfCharCount('sf-org','sf-org-ct',80)">
           <div class="sf-char-row"><span id="sf-org-ct" class="sf-char-count">80 left</span></div>
         </div>
       </div>
@@ -817,14 +693,14 @@ Showing <strong>10</strong> of <strong>56</strong> entries
 
       <!-- Role (single) -->
       <div class="sf-section">
-        <div class="sf-prompt">I am a… <span class="sf-req">*</span></div>
+        <div class="sf-prompt">Your role <span class="sf-req">*</span></div>
         <div class="sf-single-chips" id="sf-role-chips"></div>
         <div id="sf-role-err" class="sf-error-msg">Please select a role.</div>
       </div>
 
       <!-- Offering (multi) -->
       <div class="sf-section">
-        <div class="sf-prompt">My offering is… <span class="sf-req">*</span> <span class="sf-prompt-sub">select all that apply</span></div>
+        <div class="sf-prompt">What you offer <span class="sf-req">*</span> <span class="sf-prompt-sub">select all that apply</span></div>
         <div class="sf-chips" id="sf-offering-chips"></div>
         <div id="sf-offering-err" class="sf-error-msg">Please select at least one option.</div>
       </div>
@@ -840,7 +716,7 @@ Showing <strong>10</strong> of <strong>56</strong> entries
 
       <!-- Problem Topic (multi, conditional — shown only when a mappable area is selected) -->
       <div class="sf-section sf-conditional" id="sf-topic-cond">
-        <div class="sf-prompt">Specifically… <span class="sf-prompt-sub">optional — select all that apply</span></div>
+        <div class="sf-prompt">Problem topic <span class="sf-prompt-sub">optional — select all that apply</span></div>
         <div class="sf-chips" id="sf-topic-chips"></div>
       </div>
 
@@ -863,7 +739,7 @@ Showing <strong>10</strong> of <strong>56</strong> entries
 
       <!-- Details -->
       <div class="sf-section">
-        <div class="sf-prompt">Details <span class="sf-prompt-sub">optional — 280 chars</span></div>
+        <div class="sf-prompt">Details <span class="sf-prompt-sub">(optional, 280 characters)</span></div>
         <textarea id="sf-details" class="sf-textarea" maxlength="280" rows="3" placeholder="Describe the specific problem you're working on and what kind of help would be most useful." oninput="sfCharCount('sf-details','sf-det-ct',280)"></textarea>
         <div class="sf-char-row"><span id="sf-det-ct" class="sf-char-count">280 left</span></div>
       </div>
@@ -883,7 +759,7 @@ Showing <strong>10</strong> of <strong>56</strong> entries
         <input id="sf-email" type="text" class="sf-text-input" maxlength="200" placeholder="you@example.com or https://apply.example.com" oninput="sfCharCount('sf-email','sf-email-ct',200)">
         <div class="sf-char-row"><span id="sf-email-ct" class="sf-char-count">200 left</span></div>
         <div id="sf-email-note" style="display:none;font-size:0.78rem;color:var(--text-muted);margin-top:6px;line-height:1.5;">
-          Your contact info is kept private and will not be shown publicly. We will facilitate introductions on your behalf.
+          Your contact info is kept private and will not be shown publicly. We will make introductions for you.
         </div>
         <div id="sf-email-direct-note" style="display:none;font-size:0.78rem;color:var(--text-muted);margin-top:6px;line-height:1.5;">
           Your contact info will be publicly displayed on the Connect board.
@@ -894,7 +770,7 @@ Showing <strong>10</strong> of <strong>56</strong> entries
       <!-- Connection Parameters — Facilitated only -->
       <div class="sf-conditional" id="sf-params-cond">
         <div class="sf-section">
-          <div class="sf-prompt">Preferences for introduction <span class="sf-prompt-sub">optional — 280 chars</span></div>
+          <div class="sf-prompt">Preferences for introduction <span class="sf-prompt-sub">(optional, 280 characters)</span></div>
           <textarea id="sf-params" class="sf-textarea" maxlength="280" rows="2" placeholder="Any preferences for who we should connect you with, or context for the intro." oninput="sfCharCount('sf-params','sf-params-ct',280)"></textarea>
           <div class="sf-char-row"><span id="sf-params-ct" class="sf-char-count">280 left</span></div>
         </div>
@@ -904,13 +780,13 @@ Showing <strong>10</strong> of <strong>56</strong> entries
     <!-- Success state -->
     <div class="sf-success" id="sf-success" style="display:none">
       <div class="sf-success-check">✓</div>
-      <div class="sf-success-title">Submitted!</div>
+      <div class="sf-success-title">Submitted.</div>
       <div class="sf-success-text">
         Your submission has been recorded for review. Once approved, your entry will appear on the Connect board.
         You can copy your responses below for your records.
       </div>
       <div style="max-width:440px; margin:0 auto 24px; padding:16px 18px; background:var(--bg); border:1px solid var(--border); border-radius:10px;">
-        <div style="font-family:'Roboto Mono',monospace; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange); margin-bottom:10px;">While you're here</div>
+        <div style="font-family:Carlito, Calibri, sans-serif; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange); margin-bottom:10px;">While you're here</div>
         <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
           <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener" class="sce-btn">Subscribe to our Substack ↗</a>
           <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener" class="sce-btn">Join the Slack →</a>
@@ -1556,7 +1432,7 @@ function sfBuildText() {
     details ? `Details: ${details}` : "",
     `Contact: ${contact}`,
     `Contact: ${email}`,
-    params  ? `Connection Parameters: ${params}` : "",
+    params  ? `Intro preferences: ${params}` : "",
   ].filter(Boolean).join("\n");
 }
 
@@ -1623,7 +1499,7 @@ async function sfCopy() {
   try {
     await navigator.clipboard.writeText(_sfLastText);
     const orig = btn.innerHTML;
-    btn.textContent = "Copied!";
+    btn.textContent = "Copied.";
     setTimeout(() => { btn.innerHTML = orig; }, 1800);
   } catch (e) {
     prompt("Copy the text below:", _sfLastText);
@@ -1729,7 +1605,7 @@ function irSubmit() {
   const target = p ? (p.organization ? `${p.name} (${p.organization})` : p.name) : "this entry";
   const sub    = encodeURIComponent(`Intro Request: ${p ? p.name : "unknown"}`);
   const body   = encodeURIComponent(
-    `Hi,\n\nI'd like to be connected with ${target} via the State Capacity Ecosystem Connect directory.\n\nWhy I'd like to connect:\n${why}\n\n— ${yourName}\n${yourEmail}`
+    `Hi,\n\nI'd like to be connected with ${target} through Connect on the State Capacity Ecosystem site.\n\nWhy I'd like to connect:\n${why}\n\n— ${yourName}\n${yourEmail}`
   );
   window.location.href = `mailto:statecapacityecosystem@gmail.com?subject=${sub}&body=${body}`;
   closeIR();
