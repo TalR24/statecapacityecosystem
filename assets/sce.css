@@ -268,3 +268,71 @@ a.sce-btn.primary:hover, .hero-cta-btn:hover { background: #C49A45 !important; b
 .sit-btn { display: inline-flex !important; align-items: center; min-height: 40px; padding: 6px 14px !important; border: 2px solid var(--ink) !important; border-radius: 6px !important; background: transparent !important; color: var(--ink) !important; font: 700 15px var(--font) !important; text-decoration: none !important; }
 .sit-btn:hover { background: var(--ink) !important; color: var(--cream) !important; }
 .sit-name { font-size: 18px !important; font-weight: 700 !important; font-family: var(--font) !important; }
+
+/* ── Oct 16 2026 audit fixes ───────────────────────────────────────────── */
+/* Content lines up with the header and footer edge (1152px of content). */
+.breadcrumb-inner, .hero-inner, .main-inner { max-width: calc(var(--wrap) - 48px) !important; }
+.breadcrumb-inner { flex-wrap: wrap; row-gap: 2px; }
+.main-inner .section-label:not(:first-child), .main-inner .kicker:not(:first-child) { margin-top: 48px !important; }
+
+/* Project cards: 16:9 banner bleeding to the card edges; cards without a public link are not clickable. */
+.proj-card { overflow: hidden; }
+.proj-banner { display: block; width: calc(100% + 40px); max-width: none; height: auto; margin: -18px -20px 14px; aspect-ratio: 16/9; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); }
+.proj-card.no-link, .proj-card.no-link:hover { cursor: default; box-shadow: none !important; }
+.sce-btn-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+a.row-link, a.sce-btn, a.proj-link { margin: 4px 8px 4px 0; }
+a.card, a.tool-card, a.act-card, a.explore-bubble, a.mo-item, a.row-visual { cursor: pointer; }
+.lw-post { position: relative; }
+.lw-post a.t::after { content: ""; position: absolute; inset: 0; }
+.lw-post:hover { background: rgba(212,168,83,.10); }
+a.mo-item:hover .mo-title { text-decoration: underline; }
+@media print { a.row-link, a.info-link, a.proj-link, a.post-link, a.download-link, a.sce-btn, .card-cta, .tool-cta, .act-cta, .bubble-cta, .mo-cta { border: none !important; background: none !important; padding: 0 !important; min-height: 0; } }
+
+/* No colored left rails on content cards (methodology weight cards keep theirs: they encode the four signals). */
+.kind, .track-card, .post-row, .benefit-card, .text-panel-x, .judge-card, .expert-card, .callout {
+  border: 1px solid var(--line) !important; border-left: 1px solid var(--line) !important; border-radius: 10px !important; background: var(--paper) !important;
+}
+.callout, .callout p, .callout strong { color: var(--ink) !important; }
+
+/* Active and selected states are ink, not the old bronze pill. */
+.pp-chip.active, .view-toggle-btn.active, .page-btn.active, .seg-toggle.active, .chip.active, .tab.active {
+  background: var(--ink) !important; border-color: var(--ink) !important; color: var(--cream) !important;
+}
+.arch-btn { background: transparent !important; color: var(--ink) !important; border: 2px solid var(--ink) !important; border-radius: 6px !important; min-height: 48px; padding: 10px 20px !important; font: 700 17px var(--font) !important; box-shadow: none !important; transform: none !important; }
+.arch-btn:hover { background: var(--ink) !important; color: var(--cream) !important; }
+
+/* Filter and control bars on the data pages: readable labels, 44px controls. */
+.filter-label, .control-label { font-family: var(--font) !important; font-size: 13px !important; letter-spacing: 0.08em !important; text-transform: uppercase; font-weight: 700 !important; color: var(--bronze) !important; }
+.filter-bar select, .filter-card select, .controls select, .control-panel select, .filters select,
+.filter-bar input[type="text"], .filter-bar input[type="search"], .controls input[type="text"], .controls input[type="search"] {
+  min-height: 44px; font-size: 16px !important; font-family: var(--font) !important; border: 1px solid var(--border-mid); border-radius: 6px; background-color: var(--paper);
+}
+.btn-reset, .btn-copy, .detail-link, .find-btn {
+  min-height: 44px !important; padding: 8px 16px !important; border: 2px solid var(--ink) !important; border-radius: 6px !important; background: transparent !important;
+  color: var(--ink) !important; font: 700 15px var(--font) !important; cursor: pointer; display: inline-flex; align-items: center; text-decoration: none !important;
+}
+.btn-reset:hover, .btn-copy:hover, .detail-link:hover, .find-btn:hover { background: var(--ink) !important; color: var(--cream) !important; }
+.threshold-readout { font-size: 14px !important; gap: 12px; flex-wrap: wrap; }
+
+/* Small text floor: tags and kickers at least 13px. */
+.tag, .card-cat, .tool-kicker, .tool-format, .pp-chip, .pp-tag, .seg-tag, .area-tag, .geo-tag, .role-tag, .topic-tag, .offering-tag, .kind-tag, .card-stat, .mo-date, .lw-date { font-size: max(13px, 1em) !important; }
+.hero-sub { font-size: 20px !important; line-height: 1.4 !important; font-weight: 700; color: var(--ink) !important; max-width: 760px; margin-bottom: 14px; }
+.connect-strip .go { white-space: nowrap; }
+.hero p.hero-note { font-size: 17px !important; color: var(--muted) !important; }
+
+/* Directory and Connect tables stack into cards on phones. */
+@media (max-width: 640px) {
+  .table-scroll { overflow-x: visible !important; }
+  #main-table { min-width: 0 !important; width: 100% !important; border: 0 !important; }
+  #main-table thead { display: none; }
+  #main-table, #main-table tbody, #main-table tr, #main-table td { display: block; width: auto !important; max-width: none !important; }
+  #main-table tr.data-row { position: relative; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; margin: 0 0 10px; padding: 14px 44px 12px 14px; }
+  #main-table tr.data-row td { padding: 3px 0 !important; border: 0 !important; text-align: left !important; }
+  #main-table tr.data-row td:empty { display: none; }
+  #main-table tr.data-row td:last-child { position: absolute; top: 12px; right: 12px; padding: 0 !important; }
+  #main-table tr.data-row .desc-text { -webkit-line-clamp: 3; }
+  #main-table tr.detail-row { margin: -6px 0 12px; }
+  #main-table tr.detail-row > td { padding: 12px 14px !important; }
+}
+.proj-grid { align-items: start; }
+.ms-btn, .filter-input, .search-input, #f-search { min-height: 44px !important; font-size: 16px !important; font-family: var(--font) !important; border-radius: 6px !important; }

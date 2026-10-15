@@ -86,7 +86,7 @@
   {
     "name": "A game that teaches 311",
     "handle": "311 Learning Game",
-    "blurb": "A video game that teaches New Yorkers how to use 311, turning the city's main service request line into something residents can actually navigate.",
+    "blurb": "A video game that teaches New Yorkers how to use 311, turning the city's main service request line into something residents can navigate.",
     "url": "https://mamdanistan-rpg.vercel.app/",
     "source": "civic-tech-build-night",
     "hosted": false,
@@ -110,7 +110,7 @@
   {
     "name": "Live transit data for AI tools",
     "handle": "Transit Reliability MCP · npm",
-    "blurb": "A Model Context Protocol (MCP) server enabling live investigation of transit reliability. Already past 1,000 downloads since the event.",
+    "blurb": "A Model Context Protocol (MCP) server that lets AI tools check live transit reliability data. It has passed 1,000 downloads since the event.",
     "url": "https://www.npmjs.com/package/clearlane-mcp",
     "source": "civic-tech-build-night",
     "hosted": false,

@@ -761,8 +761,10 @@ def check_copy_rules():
         # em dashes: allowed only inside glossary lines of the form
         # <li><strong>Term</strong> — definition</li>
         clean_no_comments = strip_comments_keep_lines(raw)
-        clean_no_script = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", clean_no_comments, flags=re.DOTALL | re.IGNORECASE)
-        clean_no_titlemeta = re.sub(r"<title>.*?</title>", " ", clean_no_script, flags=re.DOTALL | re.IGNORECASE)
+        # Blank out blocks but keep their newlines so reported line numbers stay right.
+        keep_lines = lambda m: "\n" * m.group(0).count("\n") or " "
+        clean_no_script = re.sub(r"<(script|style)[^>]*>.*?</\1>", keep_lines, clean_no_comments, flags=re.DOTALL | re.IGNORECASE)
+        clean_no_titlemeta = re.sub(r"<title>.*?</title>", keep_lines, clean_no_script, flags=re.DOTALL | re.IGNORECASE)
         clean_no_titlemeta = re.sub(r"<meta\b[^>]*>", " ", clean_no_titlemeta, flags=re.IGNORECASE)
         li_glossary_spans = [
             (gm.start(), gm.end())

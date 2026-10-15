@@ -525,8 +525,8 @@ Showing <strong>10</strong> of <strong>334</strong> organizations
               <th data-col="name">Organization <i class="sort-icon">↕</i></th>
               <th data-col="primary_segment" style="width:80px">Segment <i class="sort-icon">↕</i></th>
               <th style="min-width:320px">Description</th>
-              <th style="width:130px">Problem Area</th>
-              <th>Problem Statement</th>
+              <th style="width:130px">Problem area</th>
+              <th>Problem topic</th>
               <th style="width:28px"></th>
             </tr>
           </thead>
@@ -739,7 +739,8 @@ function maybeLoadConnectFor(id) {
 }
 
 let scSearchReady = false;
-SCESearch.load().then(() => { scSearchReady = true; if (allOrgs.length) applyFilters(); });
+// Re-filter only when a query is typed (the search index changes ranking only then); otherwise it would reset a deep-linked page or expanded row.
+SCESearch.load().then(() => { scSearchReady = true; if (allOrgs.length && document.getElementById("f-search").value.trim()) applyFilters(); });
 
 fetch("/data/directory.json")
   .then(r => r.json())
@@ -938,7 +939,7 @@ function renderPeersBlock(o) {
   const peers = o.peers || [];
   if (!peers.length) return "";
   return `<div class="detail-section" style="margin-top:14px">
-    <h4>Closest peers</h4>
+    <h4>Most similar organizations</h4>
     ${peers.slice(0,3).map(p => `<a href="#" class="detail-field-value" style="display:block;color:var(--blue);text-decoration:none;margin-bottom:4px" onclick="event.stopPropagation();expandOrgById(${p.id});return false;">${esc(p.name)}</a>`).join("")}
   </div>`;
 }
@@ -974,7 +975,7 @@ function renderConnectBlock(o) {
   }
   return matches.map(c => {
     const offerings = Array.isArray(c.offering) ? c.offering.join(", ") : (c.offering || "");
-    return `<div class="detail-field" style="margin-bottom:8px">
+    return `<div class="detail-field" style="margin-bottom:8px;display:block">
       <a href="/ecosystem/connect/?entry=${c.id}" style="color:var(--blue);text-decoration:none;font-weight:600;font-size:0.85rem" onclick="event.stopPropagation()">${esc(c.name)}</a><span class="detail-field-value" style="color:var(--text-muted)">, ${esc(c.role || "")}${offerings ? ", " + esc(offerings) : ""}</span>
     </div>`;
   }).join("");
@@ -988,7 +989,7 @@ function renderDetailRow(o) {
          ${esc(o.website)}
        </a>`
     : "";
-  const networkLink = `<a href="../affinity-map/?id=${o.id}" class="detail-link" onclick="event.stopPropagation()" style="background:var(--orange);color:#fff;border-color:var(--orange)">
+  const networkLink = `<a href="../affinity-map/?id=${o.id}" class="detail-link" onclick="event.stopPropagation()">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><line x1="9" y1="6" x2="15" y2="6"/><line x1="6" y1="9" x2="6" y2="15"/><line x1="18" y1="9" x2="18" y2="15"/></svg>
     See in network
   </a>`;
@@ -1083,7 +1084,7 @@ document.getElementById("main-table").addEventListener("click", e => {
   const th = e.target.closest("th[data-col]");
   if (!th) return;
   const col = th.dataset.col;
-  if (sortCol === col) sortDir = -sortDir;
+  if (sortCol === col && th.classList.contains("sorted")) sortDir = -sortDir;
   else { sortCol = col; sortDir = 1; }
   document.querySelectorAll("thead th").forEach(t => t.classList.remove("sorted"));
   th.classList.add("sorted");
@@ -1153,7 +1154,7 @@ document.getElementById("btn-copy-link").addEventListener("click", async () => {
 
       <!-- Organization Name -->
       <div class="sf-section">
-        <div class="sf-prompt">Organization Name <span class="sf-req">*</span></div>
+        <div class="sf-prompt">Organization name <span class="sf-req">*</span></div>
         <input id="of-name" type="text" class="sf-text-input" maxlength="120" placeholder="Name of the organization">
         <div id="of-name-err" class="sf-error-msg">Please enter the organization name.</div>
       </div>
@@ -1162,20 +1163,20 @@ document.getElementById("btn-copy-link").addEventListener("click", async () => {
 
       <!-- Primary Segment (single) -->
       <div class="sf-section">
-        <div class="sf-prompt">Primary Segment <span class="sf-req">*</span></div>
+        <div class="sf-prompt">Primary segment <span class="sf-req">*</span></div>
         <div class="sf-single-chips" id="of-primary-chips"></div>
         <div class="sf-conditional" id="of-primary-other-cond">
-          <input id="of-primary-other" type="text" class="sf-text-input" maxlength="80" placeholder="Other primary segment…">
+          <input id="of-primary-other" type="text" class="sf-text-input" maxlength="80" placeholder="Other primary segment">
         </div>
         <div id="of-primary-err" class="sf-error-msg">Please select a primary segment.</div>
       </div>
 
-      <!-- Secondary Segment(s) (multi) -->
+      <!-- Secondary segments (multi) -->
       <div class="sf-section">
-        <div class="sf-prompt">Secondary Segment(s) <span class="sf-prompt-sub">(optional, select all that apply)</span></div>
+        <div class="sf-prompt">Secondary segments <span class="sf-prompt-sub">(optional, select all that apply)</span></div>
         <div class="sf-chips" id="of-secondary-chips"></div>
         <div class="sf-conditional" id="of-secondary-other-cond">
-          <input id="of-secondary-other" type="text" class="sf-text-input" maxlength="80" placeholder="Other secondary segment…">
+          <input id="of-secondary-other" type="text" class="sf-text-input" maxlength="80" placeholder="Other secondary segment">
         </div>
       </div>
 
@@ -1183,7 +1184,7 @@ document.getElementById("btn-copy-link").addEventListener("click", async () => {
 
       <!-- Focus(es) (multi) -->
       <div class="sf-section">
-        <div class="sf-prompt">Geography <span class="sf-req">*</span> <span class="sf-prompt-sub">select all that apply</span></div>
+        <div class="sf-prompt">Geography <span class="sf-req">*</span> <span class="sf-prompt-sub">(select all that apply)</span></div>
         <div class="sf-chips" id="of-focus-chips"></div>
         <div id="of-focus-err" class="sf-error-msg">Please select at least one government level.</div>
       </div>
@@ -1202,14 +1203,14 @@ document.getElementById("btn-copy-link").addEventListener("click", async () => {
 
       <!-- Funding Model (multi) -->
       <div class="sf-section">
-        <div class="sf-prompt">Funding Model <span class="sf-req">*</span> <span class="sf-prompt-sub">select all that apply</span></div>
+        <div class="sf-prompt">Funding model <span class="sf-req">*</span> <span class="sf-prompt-sub">(select all that apply)</span></div>
         <div class="sf-chips" id="of-funding-chips"></div>
         <div id="of-funding-err" class="sf-error-msg">Please select at least one funding model.</div>
       </div>
 
       <!-- Funding Detail -->
       <div class="sf-section">
-        <div class="sf-prompt">Funding Detail <span class="sf-req">*</span></div>
+        <div class="sf-prompt">Funding detail <span class="sf-req">*</span></div>
         <input id="of-funding-detail" type="text" class="sf-text-input" maxlength="200" placeholder="e.g. key funders, fund size, or backing details">
         <div id="of-funding-detail-err" class="sf-error-msg">Please enter a funding detail.</div>
       </div>
@@ -1359,8 +1360,8 @@ function ofBuildText() {
   return [
     `Organization Name: ${document.getElementById("of-name").value.trim()}`,
     `Primary Segment: ${primaryVal}`,
-    sec.length ? `Secondary Segment(s): ${sec.join(", ")}` : "",
-    `Focus(es): ${ofGetChips("of-focus-chips").join(", ")}`,
+    sec.length ? `Secondary segments: ${sec.join(", ")}` : "",
+    `Geography: ${ofGetChips("of-focus-chips").join(", ")}`,
     `Description: ${document.getElementById("of-desc").value.trim()}`,
     `Funding Model: ${ofGetChips("of-funding-chips").join(", ")}`,
     `Funding Detail: ${document.getElementById("of-funding-detail").value.trim()}`,
@@ -1381,7 +1382,7 @@ function ofBuildFormData() {
     fd.append(OF_ENTRY.primary, primary);
   }
 
-  // Secondary Segment(s) (checkbox, with Other)
+  // Secondary segments (checkbox, with Other)
   ofGetChips("of-secondary-chips").forEach(v => {
     if (v === "Other") {
       fd.append(OF_ENTRY.secondary, "__other_option__");

@@ -93,7 +93,7 @@ def community_latest_writing():
 
 
 SOURCE_LABELS = {
-    "civic-tech-build-night": "State Capacity Hackathon: A Civic Tech Build Night · June 2026",
+    "civic-tech-build-night": "A Civic Tech Build Night · June 2026",
     "sce-team": "SCE team",
     "public-engagement": "State Capacity Hackathon: Public Engagement · Sept 2026",
 }

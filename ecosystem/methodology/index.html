@@ -278,7 +278,7 @@
         <li><strong>Website</strong>: the organization's homepage.</li>
         <li><strong>Problem Area</strong>: problem topics classified into 7 buckets: Participatory Democracy, Procurement &amp; Operations, Service Delivery, Talent &amp; Hiring, Technology &amp; Data, Test &amp; Learn, Domains.</li>
         <li><strong>Problem Topic</strong>: 36 specific issues nested under the Problem Areas.</li>
-        <li><strong>Status</strong>: active, or sunset when the description says the organization has closed. For now we infer it from the description text.</li>
+        <li><strong>Status</strong>: active, or closed when the description says the organization has closed. For now we infer it from the description text.</li>
       </ul>
 
       <h2>Segment taxonomy</h2>
@@ -350,13 +350,13 @@
       <ul>
         <li><strong>Search</strong> accepts an organization name or a natural-language phrase ("procurement reform in NYC", "AI in benefits delivery") and ranks the table by relevance using the same engine as the Search page (see Search below).</li>
         <li><strong>Primary segment</strong>, <strong>Geography</strong>, <strong>Problem area</strong> and <strong>Problem topic</strong> are multi-selects; an organization matches if it carries any of the selected values.</li>
-        <li><strong>Hide sunset organizations</strong> removes organizations whose description says they have closed. They stay in the directory as history, marked with a Sunset chip.</li>
-        <li>The <strong>detail row</strong> shows the full record, the organization's three closest peers from the affinity score, the people and opportunities on Connect from the same organization (or, failing that, on the same problem topics), and a <strong>Suggest an edit</strong> button that opens the submission form prefilled with the current values.</li>
+        <li><strong>Hide closed organizations</strong> removes organizations whose description says they have closed. They stay in the directory as history, marked with a Closed chip.</li>
+        <li>The <strong>detail row</strong> shows the full record, the three most similar organizations from the affinity score, the people and opportunities on Connect from the same organization (or, failing that, on the same problem topics), and a <strong>Suggest an edit</strong> button that opens the submission form prefilled with the current values.</li>
         <li>Every filter, the search text, the page and the open row live in the URL, so <strong>Copy link</strong> gives you a view you can send to someone else.</li>
       </ul>
 
       <h2>Connect</h2>
-      <p>The Connect page is a directory of individuals and open opportunities: practitioners, researchers, funders, and others who have opted in to be findable, alongside open calls (grants, fellowships, jobs, collaborative projects) indexed by problem and offering type. It is separate from the organization Directory: organizations belong in the Directory; people and opportunities belong in Connect.</p>
+      <p>The Connect page is a directory of individuals and open opportunities: practitioners, researchers, funders, and others who have opted in to be findable, alongside open calls (grants, fellowships, jobs, collaborative projects) indexed by problem and offering type. It is separate from the Organization Directory: organizations belong in the Directory; people and opportunities belong in Connect.</p>
       <p>Each entry carries: name, organization affiliation, role, offering, problem area(s), problem topic(s), geography, due-by date, details, and a contact. When a person asks to keep their contact private, the entry shows <strong>Request intro</strong> instead and the SCE team forwards the request. Entries are submitted through the on-page form and reviewed before going live. An organization name that matches one in the Organization Directory links to that organization's row, and filters, page and the open entry live in the URL for sharing.</p>
 
 
@@ -365,7 +365,7 @@
 
       <h2>Search</h2>
       <p>One search box ranks organizations and the people and opportunities on Connect together. It lives on the <a href="/ecosystem/search/">Search page</a>, in the Ecosystem page's search panel and behind the directory's search box. Type a problem, a place, or a name; filter by what to show, segment, problem area or topic, and geography; every state lives in the URL so a result set can be shared.</p>
-      <p>Search opens on a guided sentence: "I am a [role] looking for [goal] working on [problem] at the [level] level." Any one choice is enough. The goal sets a visible filter (funding shows Philanthropy and Investor organizations and Connect entries offering funding or grants; tools and vendors shows GovTech and Digital Services organizations; and so on for nine goals), the problem and level narrow it, and the role only suggests a goal. The result is a starting point: links that open the Organization Directory, the Affinity Map and Connect with those filters applied, plus the top organizations and people, ordered by how many of the chosen topics they carry. Closed organizations are left out. The second tab is the keyword search described next.</p>
+      <p>Search opens on a guided sentence: "I am a/an [role] looking for [anything] working on [any problem] at [any] level." Any one choice is enough. The goal sets a visible filter (funding shows Philanthropy and Investor organizations and Connect entries offering funding or grants; tools and vendors shows GovTech and Digital Services organizations; and so on for nine goals), the problem and level narrow it, and the role only suggests a goal. The result is a starting point: links that open the Organization Directory, the Affinity Map and Connect with those filters applied, plus the top organizations and people, ordered by how many of the chosen topics they carry. Closed organizations are left out. The second tab is the keyword search described next.</p>
       <p>How keyword search ranks. At build time, every organization's description, problem-topic tags, segments, and funding-detail text are tokenized into one bag and a TF-IDF vector is stored in a static file of about 190 KB; the people index is built the same way in the browser from Connect entries. At query time the browser tokenizes the query, builds an IDF-weighted vector, and takes the cosine similarity against every organization and person. Then four adjustments: an exact substring match on a name adds 0.5; a query that contains a full topic or area name multiplies tagged organizations and people by 1.75; a place name that appears in an organization's name or description (a state, a major city, NYC) multiplies by 1.5, and a level word (state, federal, local) multiplies by 1.25 for organizations at that level; a query about money (fund, funder, foundation, philanthropy, investor) multiplies Philanthropy and Investor organizations by 1.5. Multiplying rather than adding keeps an irrelevant org from outranking a relevant one on geography alone. Each result says why it matched.</p>
       <p>Search is keyword-based: it cannot know that "permits" and "licensing" are the same concept unless the words co-occur in the corpus. The affinity score below uses sentence embeddings for exactly that reason; search stays on TF-IDF because the index has to run in the browser with nothing to download. Two-letter terms that matter here (AI, ML, UX, HR, DC, EV) are kept; other tokens under three letters are dropped.</p>
 
@@ -420,7 +420,7 @@
       <p>Plain Jaccard over the union of each organization's primary and secondary segment tags, with no boost for a matching primary segment. The weight is small on purpose: segment overlap is the obvious thing (research shops look like research shops), and the map exists to surface the cross-segment connections.</p>
 
       <h3>Which edges are kept</h3>
-      <p>Every organization keeps its six strongest pairs, and the map's edge set is the union of those lists. An edge is <strong>mutual</strong> when each organization is in the other's top six; the map draws mutual edges solid and one-way edges faint. There is no minimum score and no cap on how many lists an organization can appear in, so a fellowship program that many organizations resemble can hold twenty edges while a niche vendor holds six. Organizations whose description says they have closed are marked sunset, drawn hollow, and can be hidden.</p>
+      <p>Every organization keeps its six strongest pairs, and the map's edge set is the union of those lists. An edge is <strong>mutual</strong> when each organization is in the other's top six; the map draws mutual edges solid and one-way edges faint. There is no minimum score and no cap on how many lists an organization can appear in, so a fellowship program that many organizations resemble can hold twenty edges while a niche vendor holds six. Organizations whose description says they have closed are marked closed, drawn hollow, and can be hidden.</p>
       <p>The published dataset has <strong>334 nodes and 1,376 edges</strong>, with a maximum edge score of 0.97 and a median of 0.74. <span data-stat-line>Of those edges, <span data-stat="mutual_count"><!-- static:stat-mutual:start -->
 628
 <!-- static:stat-mutual:end --></span> are mutual and <span data-stat="cross_pct"><!-- static:stat-cross:start -->
@@ -445,11 +445,11 @@
 
       <h2>The map's tools</h2>
       <ul>
-        <li><strong>Why connected.</strong> Click an edge, or a peer in an organization's panel, to see the shared topics, shared funders, and shared terms behind it, with the four component scores.</li>
-        <li><strong>Cross-segment only.</strong> Hides every edge whose two ends share a primary segment, leaving the connections the score was built to find.</li>
-        <li><strong>Neighborhood and two hops.</strong> Restricts the map to one organization and the organizations around it.</li>
+        <li><strong>Why connected.</strong> Click a line, or an organization listed in another organization's panel, to see the shared topics, shared funders, and shared terms behind it, with the four component scores.</li>
+        <li><strong>Only links between different segments.</strong> Hides every link whose two ends share a primary segment, leaving the connections the score was built to find.</li>
+        <li><strong>Show direct connections and Show connections two steps out.</strong> These restrict the map to one organization and the organizations around it.</li>
         <li><strong>Find a path.</strong> Names two organizations and shows the shortest chain between them, with each hop explained. This is how an introduction route gets found.</li>
-        <li><strong>Funders view.</strong> Redraws the graph with funders as nodes joined to the organizations they back, showing funders that back two or more organizations. It is only as complete as the funder detection above.</li>
+        <li><strong>Funders view.</strong> Redraws the map with funders as squares joined to the organizations they back, showing funders that back two or more organizations. It is only as complete as the funder detection above.</li>
         <li><strong>Copy link.</strong> Every filter, the threshold, the view and the selected organization live in the URL.</li>
       </ul>
 
@@ -458,7 +458,7 @@
       <p><strong>It does not show</strong> documented relationships. The data does not encode partnerships, joint programs, alumni flows, board interlocks, or co-investments. An edge is an inference from public descriptions and tags. It does not mean two organizations work together.</p>
 
       <h2>Color palette</h2>
-      <p>Primary segments are color-coded consistently across the directory's segment tag column and the network's nodes. The mapping:</p>
+      <p>Primary segments are color-coded consistently across the directory's segment column and the Affinity Map's circles. The mapping:</p>
       <ul style="list-style:none; padding-left:0; columns:2; column-gap:24px;">
         <li style="break-inside:avoid"><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#2563eb;margin-right:6px;vertical-align:middle"></span>Research</li>
         <li style="break-inside:avoid"><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#0891b2;margin-right:6px;vertical-align:middle"></span>Government</li>

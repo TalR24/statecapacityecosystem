@@ -5,12 +5,12 @@
   <link rel="icon" type="image/png" href="/assets/sce_logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connect — State Capacity Ecosystem</title>
-  <meta name="description" content="People and challenges (grants, open calls) working towards growing State Capacity, indexed by the specific problem they're tackling and the kind of help they're looking for.">
+  <meta name="description" content="Connect lists people and open opportunities in state capacity: grants, jobs, fellowships and calls for collaborators. Filter by role and problem to find a match.">
   <link rel="canonical" href="https://statecapacityecosystem.com/ecosystem/connect/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://statecapacityecosystem.com/ecosystem/connect/">
   <meta property="og:title" content="Connect — State Capacity Ecosystem">
-  <meta property="og:description" content="People and challenges (grants, open calls) working towards growing State Capacity, indexed by the specific problem they&#x27;re tackling and the kind of help they&#x27;re looking for.">
+  <meta property="og:description" content="Connect lists people and open opportunities in state capacity: grants, jobs, fellowships and calls for collaborators. Filter by role and problem to find a match.">
   <meta property="og:image" content="https://statecapacityecosystem.com/assets/sce_logo.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -199,7 +199,7 @@
     .pref-direct      { background:var(--blue-light); color:var(--blue); border:1px solid var(--blue-mid); }
     .pref-facilitated { background:var(--orange-light); color:var(--orange); border:1px solid #DFCEA1; }
     .contact-sub { margin-top:3px; }
-    .contact-cell { max-width:150px; word-break:break-all; overflow-wrap:break-word; }
+    .contact-cell { max-width:220px; word-break:normal; overflow-wrap:anywhere; }
     .contact-cell a {
       color:var(--blue); text-decoration:none; font-size:0.78rem;
       font-family:Carlito, Calibri, sans-serif;
@@ -377,7 +377,7 @@
  "@context": "https://schema.org",
  "@type": "Dataset",
  "name": "Connect",
- "description": "People and challenges (grants, open calls) working towards growing State Capacity, indexed by the specific problem they're tackling and the kind of help they're looking for.",
+ "description": "Connect lists people and open opportunities in state capacity: grants, jobs, fellowships and calls for collaborators. Filter by role and problem to find a match.",
  "url": "https://statecapacityecosystem.com/ecosystem/connect/",
  "creator": {
   "@type": "Organization",
@@ -469,8 +469,8 @@
           <input id="f-search" type="text" class="filter-input" placeholder='e.g. "permitting", "Code for America", "Federal benefits"…'>
         </div>
         <div class="filter-group"><label class="filter-label">Role</label><div id="ms-role"></div></div>
-        <div class="filter-group"><label class="filter-label">Problem Area</label><div id="ms-area"></div></div>
-        <div class="filter-group"><label class="filter-label">Problem Topic</label><div id="ms-topic"></div></div>
+        <div class="filter-group"><label class="filter-label">Problem area</label><div id="ms-area"></div></div>
+        <div class="filter-group"><label class="filter-label">Problem topic</label><div id="ms-topic"></div></div>
         <div class="filter-group"><label class="filter-label">Offering</label><div id="ms-offering"></div></div>
         <button class="btn-reset" id="btn-reset">Reset</button>
         <button class="btn-reset" id="btn-copy-link">Copy link</button>
@@ -492,9 +492,9 @@ Showing <strong>10</strong> of <strong>56</strong> entries
               <th data-col="name">Name <i class="sort-icon">↕</i></th>
               <th data-col="role">Role <i class="sort-icon">↕</i></th>
               <th data-col="offering">Offering <i class="sort-icon">↕</i></th>
-              <th data-col="problem_area">Problem Area <i class="sort-icon">↕</i></th>
-              <th data-col="problem_topic">Problem Topic <i class="sort-icon">↕</i></th>
-              <th data-col="due_by">Due By <i class="sort-icon">↕</i></th>
+              <th data-col="problem_area">Problem area <i class="sort-icon">↕</i></th>
+              <th data-col="problem_topic">Problem topic <i class="sort-icon">↕</i></th>
+              <th data-col="due_by">Due by <i class="sort-icon">↕</i></th>
               <th>Contact</th>
               <th style="width:28px"></th>
             </tr>
@@ -700,7 +700,7 @@ Showing <strong>10</strong> of <strong>56</strong> entries
 
       <!-- Offering (multi) -->
       <div class="sf-section">
-        <div class="sf-prompt">What you offer <span class="sf-req">*</span> <span class="sf-prompt-sub">select all that apply</span></div>
+        <div class="sf-prompt">What you offer <span class="sf-req">*</span> <span class="sf-prompt-sub">(select all that apply)</span></div>
         <div class="sf-chips" id="sf-offering-chips"></div>
         <div id="sf-offering-err" class="sf-error-msg">Please select at least one option.</div>
       </div>
@@ -709,14 +709,14 @@ Showing <strong>10</strong> of <strong>56</strong> entries
 
       <!-- Problem Area (multi) -->
       <div class="sf-section">
-        <div class="sf-prompt">Problem area <span class="sf-req">*</span> <span class="sf-prompt-sub">select all that apply</span></div>
+        <div class="sf-prompt">Problem area <span class="sf-req">*</span> <span class="sf-prompt-sub">(select all that apply)</span></div>
         <div class="sf-chips" id="sf-area-chips"></div>
         <div id="sf-area-err" class="sf-error-msg">Please select at least one problem area.</div>
       </div>
 
       <!-- Problem Topic (multi, conditional — shown only when a mappable area is selected) -->
       <div class="sf-section sf-conditional" id="sf-topic-cond">
-        <div class="sf-prompt">Problem topic <span class="sf-prompt-sub">optional — select all that apply</span></div>
+        <div class="sf-prompt">Problem topic <span class="sf-prompt-sub">(optional, select all that apply)</span></div>
         <div class="sf-chips" id="sf-topic-chips"></div>
       </div>
 
@@ -724,7 +724,7 @@ Showing <strong>10</strong> of <strong>56</strong> entries
 
       <!-- Geography (multi) -->
       <div class="sf-section">
-        <div class="sf-prompt">Geography <span class="sf-req">*</span> <span class="sf-prompt-sub">select all that apply</span></div>
+        <div class="sf-prompt">Geography <span class="sf-req">*</span> <span class="sf-prompt-sub">(select all that apply)</span></div>
         <div class="sf-chips" id="sf-geo-chips"></div>
         <div id="sf-geo-err" class="sf-error-msg">Please select at least one geography.</div>
       </div>
@@ -789,7 +789,7 @@ Showing <strong>10</strong> of <strong>56</strong> entries
         <div style="font-family:Carlito, Calibri, sans-serif; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange); margin-bottom:10px;">While you're here</div>
         <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
           <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener" class="sce-btn">Subscribe to our Substack ↗</a>
-          <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener" class="sce-btn">Join the Slack →</a>
+          <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener" class="sce-btn">Join the Slack ↗</a>
           <a href="/ecosystem/" class="sce-btn">Explore the Ecosystem →</a>
         </div>
       </div>
@@ -832,7 +832,7 @@ Showing <strong>10</strong> of <strong>56</strong> entries
         <div id="ir-email-err" class="sf-error-msg">Please enter a valid email address.</div>
       </div>
       <div class="sf-section">
-        <div class="sf-prompt">Why you'd like to connect <span class="sf-req">*</span> <span class="sf-prompt-sub">280 chars</span></div>
+        <div class="sf-prompt">Why you'd like to connect <span class="sf-req">*</span> <span class="sf-prompt-sub">(280 characters)</span></div>
         <textarea id="ir-why" class="sf-textarea" maxlength="280" rows="3" placeholder="What you're working on and why connecting would be useful." oninput="sfCharCount('ir-why','ir-why-ct',280)"></textarea>
         <div class="sf-char-row"><span id="ir-why-ct" class="sf-char-count">280 left</span></div>
         <div id="ir-why-err" class="sf-error-msg">Please describe why you'd like to connect.</div>
@@ -1240,7 +1240,7 @@ document.getElementById("main-table").addEventListener("click", e => {
   const th = e.target.closest("th[data-col]");
   if (!th) return;
   const col = th.dataset.col;
-  if (sortCol === col) sortDir = -sortDir;
+  if (sortCol === col && th.classList.contains("sorted")) sortDir = -sortDir;
   else { sortCol = col; sortDir = 1; }
   document.querySelectorAll("thead th").forEach(t => t.classList.remove("sorted"));
   th.classList.add("sorted");
@@ -1605,7 +1605,7 @@ function irSubmit() {
   const target = p ? (p.organization ? `${p.name} (${p.organization})` : p.name) : "this entry";
   const sub    = encodeURIComponent(`Intro Request: ${p ? p.name : "unknown"}`);
   const body   = encodeURIComponent(
-    `Hi,\n\nI'd like to be connected with ${target} through Connect on the State Capacity Ecosystem site.\n\nWhy I'd like to connect:\n${why}\n\n— ${yourName}\n${yourEmail}`
+    `Hi,\n\nI'd like to be connected with ${target} through Connect on the State Capacity Ecosystem site.\n\nWhy I'd like to connect:\n${why}\n\n${yourName}\n${yourEmail}`
   );
   window.location.href = `mailto:statecapacityecosystem@gmail.com?subject=${sub}&body=${body}`;
   closeIR();

@@ -263,7 +263,7 @@
     <h1>What we're building through March 2027.</h1>
     <p class="hero-lede">This is what the SCE team plans to do from October 2026 through March 2027. Milestones are the events and publications partners can join, attend or share. Tasks are the work that gets us there.</p>
     <p class="hero-lede">Pick a milestone you want to be part of and tell us.</p>
-    <a class="sce-btn" href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in Touch ↗</a>
+    <a class="sce-btn" href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in touch ↗</a>
   </div>
 </div>
 
@@ -485,6 +485,7 @@ document.addEventListener('click', e => {
 });
 function rmClose() { const b = document.getElementById('rm-detail'); if (b.hidden) return; b.hidden = true; history.replaceState(null, '', location.pathname + location.search); }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') rmClose(); });
+window.addEventListener('hashchange', () => { if (location.hash.length > 1 && rmState.items.length) rmOpen(decodeURIComponent(location.hash.slice(1))); });
 
 (async function rmInit() {
   if (window.matchMedia('(max-width: 760px)').matches) rmState.view = 'list';

@@ -450,8 +450,8 @@
         </div>
         <div class="control-group threshold-group">
           <label class="control-label" for="ctl-threshold">Show links scoring at least</label>
-          <input id="ctl-threshold" type="range" min="0.10" max="0.40" step="0.01" value="0.18">
-          <div class="threshold-readout"><span>more links (weaker matches)</span><span><strong id="threshold-val">0.18</strong></span><span>fewer links (stronger matches)</span></div>
+          <input id="ctl-threshold" type="range" min="0.43" max="0.98" step="0.01" value="0.68">
+          <div class="threshold-readout"><span>more links (weaker matches)</span><span><strong id="threshold-val">0.68</strong></span><span>fewer links (stronger matches)</span></div>
         </div>
         <div class="control-group" style="flex:1; min-width:240px;">
           <label class="control-label">Segment filter</label>
@@ -520,7 +520,7 @@
     <div class="graph-wrap">
       <svg id="graph"></svg>
       <div class="graph-overlay" id="graph-overlay">
-        Showing <strong id="ovr-nodes">—</strong> organizations · <strong id="ovr-edges">—</strong> edges<span id="ovr-funders-wrap" style="display:none;"> · <strong id="ovr-funders">—</strong> funders</span><br>
+        Showing <strong id="ovr-nodes">—</strong> organizations · <strong id="ovr-edges">—</strong> links<span id="ovr-funders-wrap" style="display:none;"> · <strong id="ovr-funders">—</strong> funders</span><br>
         <span style="color:var(--text-faint)">Drag an organization · scroll to zoom · click for details</span>
       </div>
       <div class="graph-zoom">
@@ -1294,8 +1294,9 @@ function renderNodeDetail(panel) {
   for (const e of visibleEdges) {
     const s = typeof e.source === "object" ? e.source.id : e.source;
     const t = typeof e.target === "object" ? e.target.id : e.target;
-    if (s === o.id) nbrs.push({other: nodeById.get(t), w: e.weight, edge: e});
-    else if (t === o.id) nbrs.push({other: nodeById.get(s), w: e.weight, edge: e});
+    // In the Funders view some edges end at a funder, which is not in nodeById: skip those.
+    if (s === o.id && nodeById.get(t)) nbrs.push({other: nodeById.get(t), w: e.weight, edge: e});
+    else if (t === o.id && nodeById.get(s)) nbrs.push({other: nodeById.get(s), w: e.weight, edge: e});
   }
   nbrs.sort((a,b) => b.w - a.w);
 
@@ -1483,7 +1484,7 @@ function runFindPath() {
   const idA = findOrgIdByName(nameA), idB = findOrgIdByName(nameB);
   const panel = document.getElementById("detail-panel");
   if (idA == null || idB == null) {
-    pathResult = { ids: [], edges: [], empty: true };
+    pathResult = { ids: [], edges: [], empty: true, notFound: (idA == null ? nameA : nameB) };
     selected = null; selectedFunder = null; selectedEdge = null;
     renderDetail(); updateHover();
     return;
@@ -1501,6 +1502,10 @@ function runFindPath() {
 }
 
 function renderPathDetail(panel) {
+  if (pathResult.notFound != null) {
+    panel.innerHTML = `<div class="detail-empty">We couldn't find "${esc(pathResult.notFound)}". Pick a name from the suggestions.</div>`;
+    return;
+  }
   if (pathResult.empty || !pathResult.ids.length) {
     panel.innerHTML = `<div class="detail-empty">These two organizations are not connected on the current map.</div>`;
     return;
@@ -1596,7 +1601,7 @@ function renderPeopleSidebar() {
   const more = matches.length - show.length;
   el.innerHTML = `
     <div class="people-results-header">
-      <span>${matches.length} ${matches.length === 1 ? "entry is" : "entries are"} working on these problem filters</span>
+      <span>${matches.length} ${matches.length === 1 ? "person or opportunity on Connect matches" : "people or opportunities on Connect match"} these problems</span>
       <a href="../connect/" target="_blank" rel="noopener">Open Connect ↗</a>
     </div>
     <div class="people-card-row">
