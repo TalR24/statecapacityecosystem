@@ -150,7 +150,7 @@ a.sce-btn.primary:hover, .hero-cta-btn:hover { background: #C49A45 !important; b
 .post-link.pending, .proj-card.no-link .proj-link { color: var(--muted) !important; border-color: var(--line) !important; background: transparent !important; cursor: default; }
 
 /* A card with exactly one link is clickable as a whole. */
-.se-card, .proj-card, .lw-post, .wr-row { position: relative; }
+.se-card, .proj-card, .lw-post { position: relative; }
 .se-card:not(:has(a ~ a)) .se-card-links a::after, .proj-card:not(:has(a ~ a)) a.proj-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
 .se-card:not(:has(a ~ a)), .proj-card:not(:has(a ~ a)) { cursor: pointer; }
 .se-card:not(:has(a ~ a)):hover a, .proj-card:not(:has(a ~ a)):hover a.proj-link { background: var(--ink) !important; color: var(--cream) !important; }
@@ -168,7 +168,7 @@ a.sce-btn.primary:hover, .hero-cta-btn:hover { background: #C49A45 !important; b
 .main { padding: 24px 24px 88px !important; }
 
 /* ── Cards and panels: white, hairline border, no colored rails ─────────── */
-.card, .se-card, .proj-card, .act-card, .tool-card, .text-panel, .info-panel, .mv-block, .lw-post, .wr-row, .bubble, .detail-panel, .event-card, .evt-card {
+.card, .se-card, .proj-card, .act-card, .tool-card, .text-panel, .info-panel, .mv-block, .lw-post, .bubble, .detail-panel, .event-card, .evt-card {
   background: var(--paper); border: 1px solid var(--line) !important; border-radius: 12px; box-shadow: none;
 }
 .card:hover, .se-card:hover, .proj-card:hover, .act-card:hover, .tool-card:hover, .bubble:hover { box-shadow: var(--lift) !important; border-color: var(--line) !important; transform: none !important; }
@@ -258,3 +258,13 @@ a.sce-btn.primary:hover, .hero-cta-btn:hover { background: #C49A45 !important; b
 
 .submit-pill { display: inline-flex !important; align-items: center; gap: 8px; min-height: 52px; padding: 12px 24px !important; border-radius: 6px !important; background: var(--gold) !important; border: 2px solid var(--gold) !important; color: var(--ink) !important; font: 700 18px var(--font) !important; box-shadow: none !important; transform: none !important; }
 .submit-pill:hover { background: #C49A45 !important; border-color: #C49A45 !important; }
+
+/* Pillar cards (About "What we run"; same look as the homepage flywheel cards) */
+.pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 16px; }
+.pillar-card { display: flex; flex-direction: column; gap: 10px; padding: 28px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; text-decoration: none; color: var(--ink); transition: box-shadow .15s; }
+.pillar-card:hover { box-shadow: var(--lift); color: var(--ink); }
+.pillar-card .pc-t { font-size: 24px; line-height: 1.2; font-weight: 700; }
+.pillar-card .pc-go { margin-top: auto; padding-top: 12px; font-weight: 700; }
+.sit-btn { display: inline-flex !important; align-items: center; min-height: 40px; padding: 6px 14px !important; border: 2px solid var(--ink) !important; border-radius: 6px !important; background: transparent !important; color: var(--ink) !important; font: 700 15px var(--font) !important; text-decoration: none !important; }
+.sit-btn:hover { background: var(--ink) !important; color: var(--cream) !important; }
+.sit-name { font-size: 18px !important; font-weight: 700 !important; font-family: var(--font) !important; }
