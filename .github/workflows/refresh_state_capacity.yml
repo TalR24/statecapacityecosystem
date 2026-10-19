@@ -27,7 +27,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.14"  # "3.x" jumped to 3.15 on Oct 19 2026; torch had no 3.15 wheels yet
 
       - name: Cache embedding model
         uses: actions/cache@v4
