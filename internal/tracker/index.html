@@ -44,15 +44,17 @@
     .month { font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--brown); margin:22px 0 8px; }
     .row { background:var(--surface); border:1px solid var(--border); border-radius:8px; margin-bottom:6px; }
     .row.ms { background:var(--sand); border-color:var(--border-mid); font-weight:700; }
-    .row.task { margin-left:28px; }
     .row.muted { opacity:0.55; }
-    .row-main { display:flex; align-items:center; gap:10px; padding:10px 12px; cursor:pointer; min-width:0; }
+    .row-line { display:flex; align-items:center; padding-left:8px; min-width:0; }
+    .row-main { display:flex; align-items:center; gap:10px; padding:10px 12px 10px 4px; cursor:pointer; min-width:0; flex:1; background:none; border:0; text-align:left; font:inherit; color:inherit; border-radius:8px; }
+    .row-main:focus-visible, .chev:focus-visible, .chip:focus-visible, .btn:focus-visible, .seg button:focus-visible { outline:3px solid var(--gold); outline-offset:1px; }
+    .row.task .r-title { padding-left:28px; }
     .chev { width:24px; height:24px; flex-shrink:0; background:none; border:0; cursor:pointer; font-size:0.8rem; line-height:1; border-radius:4px; }
     .chev:hover { background:rgba(26,25,24,0.1); }
-    .chev-pad { width:24px; flex-shrink:0; }
+    .chev-pad { width:24px; flex-shrink:0; display:inline-block; }
     .chev span { display:inline-block; transition:transform .15s; }
     .chev[aria-expanded="true"] span { transform:rotate(90deg); }
-    .r-title { flex:1 1 220px; min-width:0; font-size:0.98rem; line-height:1.3; overflow-wrap:anywhere; }
+    .r-title { flex:1 1 0; min-width:0; font-size:0.98rem; line-height:1.3; overflow-wrap:anywhere; }
     .row.task .r-title, .row.sa .r-title { font-weight:600; }
     .r-owner { width:70px; flex-shrink:0; font-size:0.86rem; font-weight:600; color:var(--text-mid); }
     .r-when { width:76px; flex-shrink:0; font-size:0.86rem; font-weight:600; color:var(--text-muted); }
@@ -64,19 +66,20 @@
     .pill.blocked { background:#F2B134; color:#3D2700; }
     .pill.done { background:#D8E6D6; color:#2A5A36; }
     .pill.other { background:transparent; border-color:var(--border-mid); color:var(--text-muted); }
-    .r-note { flex:1 1 200px; min-width:0; font-size:0.86rem; font-weight:400; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .r-note { flex:0 0 36%; min-width:0; font-size:0.86rem; font-weight:400; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .overdue { display:inline-flex; align-items:center; gap:4px; font-size:0.74rem; font-weight:700; color:var(--red); margin-left:6px; white-space:nowrap; }
     .overdue i { width:8px; height:8px; border-radius:50%; background:var(--red); display:inline-block; }
     .detail { padding:0 12px 12px 46px; font-size:0.9rem; font-weight:400; line-height:1.55; color:var(--text-mid); white-space:pre-wrap; overflow-wrap:anywhere; }
     .detail .meta { display:block; font-size:0.8rem; color:var(--text-muted); margin-bottom:4px; white-space:normal; }
+    .err { padding:24px 0; font-size:1rem; color:var(--text-mid); }
     .empty { padding:30px 0; color:var(--text-muted); font-size:0.95rem; }
 
     @media (max-width: 760px) {
       .row-main { flex-wrap:wrap; row-gap:4px; }
       .r-title { flex:1 1 calc(100% - 40px); }
       .r-owner, .r-when, .r-status { width:auto; }
-      .r-note { flex:1 1 100%; padding-left:34px; }
-      .row.task { margin-left:14px; }
+      .r-note { flex:1 1 100%; padding-left:0; }
+      .row.task .r-title { padding-left:14px; }
       .detail { padding-left:12px; }
     }
 
@@ -130,11 +133,11 @@
 
 <script>
 /* Internal tracker. Read-only.
-   Data: set TRACKER_CSV_URL to the Tracker tab's published CSV URL; /data/tracker.csv is the fallback if the sheet cannot be reached.
+   Data: TRACKER_CSV_URL is the Tracker tab's published CSV URL; /data/tracker.csv is the fallback if the sheet cannot be reached.
    Columns: group, kind, title, owner, when, status, workstream, partner, note.
    kind: milestone | task. A task with a group belongs to the milestone whose title equals it; blank group = standalone task.
    when: YYYY-MM, YYYY-MM-DD or "later". Testing: ?today=YYYY-MM-DD overrides today for the overdue marker; ?share=1&partner=NAME opens the share view. */
-const TRACKER_CSV_URL = '';
+const TRACKER_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSvtRUXcen8KTG2MjAJD5bCDkj3L7ddT2-YWDg1WPrcPbZyRLAGgpY7I0bL6zBsA4SE_QoY-Q_y-1x7/pub?gid=836269501&single=true&output=csv';
 const TRACKER_FALLBACK = '/data/tracker.csv';
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/18MCZxPMyXQRzpzgjPF1OB6CvfkOd-fC3iyKrQ_5X4_U/edit';
 
@@ -171,8 +174,9 @@ function parseCSV(text) {
 /* Month key (year*12 + month index). Accepts 2026-11, 2026-11-01, 11/1/2026, 11/2026, "Nov 2026". Anything else (including "later" and blank) = LATER. */
 function monthKey(v) {
   v = String(v || '').trim(); let m;
-  if ((m = v.match(/^(\d{4})-(\d{1,2})/))) return +m[1] * 12 + (+m[2] - 1);
-  if ((m = v.match(/^(\d{1,2})\/(?:\d{1,2}\/)?(\d{4})$/))) return +m[2] * 12 + (+m[1] - 1);
+  const okM = n => n >= 1 && n <= 12, okD = n => n >= 1 && n <= 31;
+  if ((m = v.match(/^(\d{4})-(\d{1,2})(?:-(\d{1,2}))?$/))) return okM(+m[2]) && (m[3] == null || okD(+m[3])) ? +m[1] * 12 + (+m[2] - 1) : LATER;
+  if ((m = v.match(/^(\d{1,2})\/(?:(\d{1,2})\/)?(\d{4})$/))) return okM(+m[1]) && (m[2] == null || okD(+m[2])) ? +m[3] * 12 + (+m[1] - 1) : LATER;
   if ((m = v.match(/^([A-Za-z]{3})[a-z]*\.?\s+(\d{4})$/))) { const i = MON.indexOf(m[1][0].toUpperCase() + m[1].slice(1, 3).toLowerCase()); if (i >= 0) return +m[2] * 12 + i; }
   return LATER;
 }
@@ -197,7 +201,7 @@ const isOverdue = it => { const c = statusClass(it.status); return c !== 'done' 
 function normalize(rows) {
   const items = rows.filter(r => r.title).map((r, i) => ({
     idx: i, group: r.group || '', ms: /^milestone/i.test(r.kind || ''), title: r.title, owner: r.owner || '',
-    when: r.when || '', key: monthKey(r.when), status: r.status || '', partners: splitPartners(r.partner), note: r.note || ''
+    when: r.when || '', key: monthKey(r.when), badWhen: !!(r.when && !/^later$/i.test(r.when.trim()) && monthKey(r.when) === LATER), status: r.status || '', partners: splitPartners(r.partner), note: r.note || ''
   }));
   const msTitles = new Set(items.filter(x => x.ms).map(x => x.title));
   items.forEach(it => { it.parent = (!it.ms && it.group && msTitles.has(it.group)) ? it.group : ''; });
@@ -221,7 +225,12 @@ function build(opts) {
   state.items.filter(x => x.ms || !x.parent).sort(byWhen).forEach(it => {
     if (!doneOk(it) || !partnerOk(it)) return;
     if (!it.ms) { if (!msOnly && ownerOk(it)) out.push({ it, tasks: [], muted: false }); return; }
-    if (msOnly) { out.push({ it, tasks: [], muted: false }); return; }
+    if (msOnly) {
+      if (o.forShare) { out.push({ it, tasks: [], muted: false }); return; }
+      const own = ownerOk(it);
+      if (own || (tasksOf[it.title] || []).some(t => doneOk(t) && ownerOk(t))) out.push({ it, tasks: [], muted: !own });
+      return;
+    }
     const tasks = (tasksOf[it.title] || []).filter(t => doneOk(t) && ownerOk(t)).sort(byWhen);
     const own = ownerOk(it);
     if (own || tasks.length) out.push({ it, tasks, muted: !own });
@@ -246,18 +255,19 @@ function rowHtml(it, kind, hasTasks, muted) {
   const od = isOverdue(it) ? '<span class="overdue"><i></i>Overdue</span>' : '';
   const open = state.open.has(it.idx);
   const meta = [it.owner && 'Owner: ' + it.owner, it.when && 'When: ' + it.when, it.partners.length && 'Partner: ' + it.partners.join(', ')].filter(Boolean).join('  |  ');
-  return '<div class="' + cls + '" id="' + id + '"><div class="row-main" data-row="' + it.idx + '">' + chev +
+  return '<div class="' + cls + '" id="' + id + '"><div class="row-line">' + chev + '<button type="button" class="row-main" data-row="' + it.idx + '" aria-expanded="' + open + '">' +
     '<span class="r-title">' + esc(it.title) + od + '</span>' +
     '<span class="r-owner">' + esc(it.owner) + '</span>' +
-    '<span class="r-when">' + esc(it.key === LATER ? 'Later' : monthShort(it.key)) + '</span>' +
+    '<span class="r-when">' + esc(it.badWhen ? it.when : monthShort(it.key)) + '</span>' +
     '<span class="r-status"><span class="pill ' + statusClass(it.status) + '">' + esc(it.status || 'No status') + '</span></span>' +
-    '<span class="r-note">' + esc(it.note) + '</span></div>' +
+    '<span class="r-note">' + esc(it.note) + '</span></button></div>' +
     (open ? '<div class="detail"><span class="meta">' + esc(meta) + '</span>' + (it.note ? linkify(it.note) : 'No note.') + '</div>' : '') + '</div>';
 }
 
 function renderList() {
   const entries = build();
   const box = document.getElementById('list');
+  if (!state.items.length) { box.innerHTML = '<p class="err">Couldn\'t load the tracker data. Edit in <a href="' + SHEET_URL + '" target="_blank" rel="noopener">the sheet</a>.</p>'; return; }
   if (!entries.length) { box.innerHTML = '<p class="empty">No rows match these filters.</p>'; return; }
   let html = '', cur = null;
   entries.forEach(e => {
@@ -330,11 +340,20 @@ function wire() {
     const ch = e.target.closest('[data-chev]');
     if (ch) {
       const t = ch.dataset.chev; state.collapsed.has(t) ? state.collapsed.delete(t) : state.collapsed.add(t);
-      const total = state.items.filter(i => i.ms).length; state.allCollapsed = state.collapsed.size === total; render(); return;
+      const total = state.items.filter(i => i.ms).length; state.allCollapsed = state.collapsed.size === total; render(); const nc = [...document.querySelectorAll('[data-chev]')].find(x => x.dataset.chev === t); if (nc) nc.focus(); return;
     }
     const r = e.target.closest('[data-row]');
-    if (r) { const n = +r.dataset.row; state.open.has(n) ? state.open.delete(n) : state.open.add(n); render(); }
+    if (r) { const n = +r.dataset.row; state.open.has(n) ? state.open.delete(n) : state.open.add(n); render(); const nb = document.querySelector('[data-row="' + n + '"]'); if (nb) nb.focus(); }
   });
+}
+
+const HEADER_RE = /^\uFEFF?\s*["']?group["']?\s*,\s*["']?kind["']?\s*,\s*["']?title/i;
+async function loadText(url, noStore) {
+  const res = await fetch(url, noStore ? { cache: 'no-store' } : undefined);
+  if (!res.ok) throw new Error('bad status');
+  const text = await res.text();
+  if (!HEADER_RE.test(text)) throw new Error('unexpected content');
+  return text;
 }
 
 (async function main() {
@@ -342,11 +361,9 @@ function wire() {
   let text = '';
   try {
     if (!TRACKER_CSV_URL) throw new Error('no sheet url');
-    const res = await fetch(TRACKER_CSV_URL, { cache: 'no-store' });
-    if (!res.ok) throw new Error('bad status');
-    text = await res.text();
+    text = await loadText(TRACKER_CSV_URL, true);
   } catch (err) {
-    try { text = await (await fetch(TRACKER_FALLBACK)).text(); } catch (e2) { text = ''; }
+    try { text = await loadText(TRACKER_FALLBACK); } catch (e2) { text = ''; }
   }
   let items = [];
   try { items = normalize(parseCSV(text)); } catch (e) { items = []; }
