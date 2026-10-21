@@ -31,6 +31,15 @@ Other folders:
 - `data/`: the pipeline, described next.
 - `.github/`: workflows and the site-health docs.
 
+## Internal tracker
+
+`/internal/tracker/` (`internal/tracker/index.html`) is the team's read-only tracker. It is `noindex, nofollow`, excluded from `sitemap.xml`, and linked from no page, nav or footer; it carries no site chrome.
+
+- **Data:** the Tracker tab of the team Google Sheet. Columns: group, kind, title, owner, when, status, workstream, partner, note.
+- **CSV URL:** `TRACKER_CSV_URL` at the top of the page script holds the tab's published CSV URL (empty means the fallback is used). If the fetch fails the page falls back to `/data/tracker.csv`.
+- **Refresh the fallback:** export the Tracker tab as CSV over `data/tracker.csv` and commit it. The file is public in the repo.
+- **Testing:** `?today=YYYY-MM-DD` overrides today for the overdue marker; `?share=1&partner=NAME` opens the share view.
+
 ## Data and build pipeline
 
 Two source files, edited by people, never by scripts:

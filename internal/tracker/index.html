@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>SCE tracker</title>
+  <link rel="icon" type="image/png" href="/assets/sce_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --text:#1A1918; --text-mid:#444039; --text-muted:#6B6760; --text-faint:#9C968A;
+      --bg:#F4EFE4; --surface:#fff; --sand:#DDD8CC; --border:#DDD8CC; --border-mid:#C9C1AF;
+      --gold:#D4A853; --brown:#8A5F1E; --red:#B3261E;
+    }
+    html { -webkit-text-size-adjust:100%; }
+    body { font-family:Carlito, Calibri, sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; }
+    button, select { font-family:inherit; color:inherit; }
+    a { color:var(--brown); }
+
+    .wrap { max-width:1100px; margin:0 auto; padding:20px 16px 56px; }
+    .top { display:flex; align-items:center; gap:12px; margin-bottom:4px; }
+    .top img { width:36px; height:36px; border-radius:6px; flex-shrink:0; }
+    h1 { font-size:1.7rem; font-weight:700; letter-spacing:-0.02em; line-height:1.2; }
+    .sub { font-size:0.95rem; color:var(--text-mid); margin:2px 0 16px; }
+
+    .controls { display:flex; flex-wrap:wrap; gap:10px 14px; align-items:center; margin-bottom:18px; }
+    .seg { display:inline-flex; border:1px solid var(--border-mid); border-radius:8px; overflow:hidden; }
+    .seg button { font-size:0.85rem; font-weight:700; padding:8px 12px; background:var(--surface); border:0; cursor:pointer; }
+    .seg button[aria-pressed="true"] { background:#1A1918; color:#F4EFE4; }
+    .ctl-group { display:inline-flex; align-items:center; gap:6px; flex-wrap:wrap; }
+    .ctl-label { font-size:0.78rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em; }
+    .chip { font-size:0.85rem; font-weight:600; padding:6px 11px; border-radius:999px; border:1px solid var(--border-mid); background:var(--surface); cursor:pointer; }
+    .chip[aria-pressed="true"] { background:var(--brown); border-color:var(--brown); color:#fff; }
+    .btn { font-size:0.85rem; font-weight:700; padding:8px 12px; border-radius:8px; border:1px solid var(--border-mid); background:var(--surface); cursor:pointer; }
+    .btn:hover { border-color:var(--brown); }
+    select { font-size:0.88rem; padding:7px 8px; border:1px solid var(--border-mid); border-radius:8px; background:var(--surface); max-width:100%; }
+    .check { display:inline-flex; align-items:center; gap:6px; font-size:0.88rem; font-weight:600; cursor:pointer; }
+    .check input { width:16px; height:16px; accent-color:var(--brown); }
+
+    .month { font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--brown); margin:22px 0 8px; }
+    .row { background:var(--surface); border:1px solid var(--border); border-radius:8px; margin-bottom:6px; }
+    .row.ms { background:var(--sand); border-color:var(--border-mid); font-weight:700; }
+    .row.task { margin-left:28px; }
+    .row.muted { opacity:0.55; }
+    .row-main { display:flex; align-items:center; gap:10px; padding:10px 12px; cursor:pointer; min-width:0; }
+    .chev { width:24px; height:24px; flex-shrink:0; background:none; border:0; cursor:pointer; font-size:0.8rem; line-height:1; border-radius:4px; }
+    .chev:hover { background:rgba(26,25,24,0.1); }
+    .chev-pad { width:24px; flex-shrink:0; }
+    .chev span { display:inline-block; transition:transform .15s; }
+    .chev[aria-expanded="true"] span { transform:rotate(90deg); }
+    .r-title { flex:1 1 220px; min-width:0; font-size:0.98rem; line-height:1.3; overflow-wrap:anywhere; }
+    .row.task .r-title, .row.sa .r-title { font-weight:600; }
+    .r-owner { width:70px; flex-shrink:0; font-size:0.86rem; font-weight:600; color:var(--text-mid); }
+    .r-when { width:76px; flex-shrink:0; font-size:0.86rem; font-weight:600; color:var(--text-muted); }
+    .r-status { width:88px; flex-shrink:0; }
+    .pill { display:inline-block; font-size:0.74rem; font-weight:700; padding:2px 9px; border-radius:999px; background:#EDE8DC; color:#444039; border:1px solid transparent; white-space:nowrap; }
+    .pill.idea { background:#EFEBE1; color:#6B6760; }
+    .pill.todo { background:#E4DDCB; color:#444039; }
+    .pill.doing { background:#F5E3B5; color:#6E4A15; }
+    .pill.blocked { background:#F2B134; color:#3D2700; }
+    .pill.done { background:#D8E6D6; color:#2A5A36; }
+    .pill.other { background:transparent; border-color:var(--border-mid); color:var(--text-muted); }
+    .r-note { flex:1 1 200px; min-width:0; font-size:0.86rem; font-weight:400; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .overdue { display:inline-flex; align-items:center; gap:4px; font-size:0.74rem; font-weight:700; color:var(--red); margin-left:6px; white-space:nowrap; }
+    .overdue i { width:8px; height:8px; border-radius:50%; background:var(--red); display:inline-block; }
+    .detail { padding:0 12px 12px 46px; font-size:0.9rem; font-weight:400; line-height:1.55; color:var(--text-mid); white-space:pre-wrap; overflow-wrap:anywhere; }
+    .detail .meta { display:block; font-size:0.8rem; color:var(--text-muted); margin-bottom:4px; white-space:normal; }
+    .empty { padding:30px 0; color:var(--text-muted); font-size:0.95rem; }
+
+    @media (max-width: 760px) {
+      .row-main { flex-wrap:wrap; row-gap:4px; }
+      .r-title { flex:1 1 calc(100% - 40px); }
+      .r-owner, .r-when, .r-status { width:auto; }
+      .r-note { flex:1 1 100%; padding-left:34px; }
+      .row.task { margin-left:14px; }
+      .detail { padding-left:12px; }
+    }
+
+    /* SHARE VIEW */
+    body.share { background:#F4EFE4; }
+    body.share .controls, body.share .sub, body.share .month, body.share #list { display:none; }
+    #share { display:none; }
+    body.share #share { display:block; }
+    .sh-bar { display:flex; align-items:center; gap:18px; border-top:8px solid var(--gold); padding-top:22px; margin-bottom:22px; }
+    .sh-bar img { width:60px; height:60px; border-radius:8px; }
+    .sh-bar h2 { font-size:2.3rem; font-weight:700; letter-spacing:-0.02em; line-height:1.1; flex:1; }
+    .sh-exit { font-size:0.8rem; font-weight:700; padding:7px 12px; border-radius:8px; border:1px solid var(--border-mid); background:transparent; cursor:pointer; }
+    .sh-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; }
+    .sh-card { background:#fff; border-left:8px solid var(--gold); border-radius:6px; padding:12px 18px; min-width:0; }
+    .sh-t { font-size:1.55rem; font-weight:700; line-height:1.2; letter-spacing:-0.01em; overflow-wrap:anywhere; }
+    .sh-m { font-size:1.1rem; color:var(--text-mid); margin-top:4px; }
+    .sh-m b { color:var(--brown); }
+    body.share .wrap { max-width:1280px; padding:0 40px 24px; }
+    body.share .top { display:none; }
+    @media (max-width: 760px) {
+      body.share .wrap { padding:0 16px 24px; }
+      .sh-grid { grid-template-columns:1fr; }
+      .sh-bar h2 { font-size:1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><img src="/assets/sce_logo.png" alt="SCE"><h1>SCE tracker</h1></div>
+  <p class="sub">Internal. Edit in <a id="sheet-link" href="#" target="_blank" rel="noopener">the sheet</a>.</p>
+
+  <div class="controls" id="controls">
+    <div class="seg" role="group" aria-label="Rows">
+      <button type="button" id="b-all" aria-pressed="true">All</button>
+      <button type="button" id="b-ms" aria-pressed="false">Milestones only</button>
+    </div>
+    <div class="ctl-group" id="owners" role="group" aria-label="Owner"><span class="ctl-label">Owner</span></div>
+    <label class="check"><input type="checkbox" id="c-done"> Show done</label>
+    <div class="ctl-group"><label class="ctl-label" for="s-partner">Partner</label><select id="s-partner"><option value="">All</option></select></div>
+    <button type="button" class="btn" id="b-collapse">Collapse all</button>
+    <button type="button" class="btn" id="b-share">Share view</button>
+  </div>
+
+  <div id="list" aria-live="polite"></div>
+
+  <section id="share" aria-label="Share view">
+    <div class="sh-bar"><img src="/assets/sce_logo.png" alt="SCE"><h2>State Capacity Ecosystem milestones</h2><button type="button" class="sh-exit" id="b-exit">Exit share view</button></div>
+    <div class="sh-grid" id="sh-grid"></div>
+  </section>
+</div>
+
+<script>
+/* Internal tracker. Read-only.
+   Data: set TRACKER_CSV_URL to the Tracker tab's published CSV URL; /data/tracker.csv is the fallback if the sheet cannot be reached.
+   Columns: group, kind, title, owner, when, status, workstream, partner, note.
+   kind: milestone | task. A task with a group belongs to the milestone whose title equals it; blank group = standalone task.
+   when: YYYY-MM, YYYY-MM-DD or "later". Testing: ?today=YYYY-MM-DD overrides today for the overdue marker; ?share=1&partner=NAME opens the share view. */
+const TRACKER_CSV_URL = '';
+const TRACKER_FALLBACK = '/data/tracker.csv';
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/18MCZxPMyXQRzpzgjPF1OB6CvfkOd-fC3iyKrQ_5X4_U/edit';
+
+const OWNERS = ['Henry', 'Tal', 'Sourabh', 'Jeremie'];
+const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const MON_FULL = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const LATER = 1e9;
+const qs = new URLSearchParams(location.search);
+const state = { items: [], owners: new Set(), msOnly: false, showDone: false, partner: qs.get('partner') || '', collapsed: new Set(), allCollapsed: false, share: qs.get('share') === '1', open: new Set() };
+
+function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function parseCSV(text) {
+  const rows = []; let row = [], f = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) {
+      if (c === '"' && text[i + 1] === '"') { f += '"'; i++; }
+      else if (c === '"') q = false;
+      else f += c;
+    } else if (c === '"') q = true;
+    else if (c === ',') { row.push(f); f = ''; }
+    else if (c === '\n' || c === '\r') {
+      if (c === '\r' && text[i + 1] === '\n') i++;
+      row.push(f); f = ''; if (row.some(x => x.trim())) rows.push(row); row = [];
+    } else f += c;
+  }
+  row.push(f); if (row.some(x => x.trim())) rows.push(row);
+  if (!rows.length) return [];
+  const head = rows.shift().map(h => h.trim().toLowerCase());
+  return rows.map(r => Object.fromEntries(head.map((h, i) => [h, (r[i] || '').trim()])));
+}
+
+/* Month key (year*12 + month index). Accepts 2026-11, 2026-11-01, 11/1/2026, 11/2026, "Nov 2026". Anything else (including "later" and blank) = LATER. */
+function monthKey(v) {
+  v = String(v || '').trim(); let m;
+  if ((m = v.match(/^(\d{4})-(\d{1,2})/))) return +m[1] * 12 + (+m[2] - 1);
+  if ((m = v.match(/^(\d{1,2})\/(?:\d{1,2}\/)?(\d{4})$/))) return +m[2] * 12 + (+m[1] - 1);
+  if ((m = v.match(/^([A-Za-z]{3})[a-z]*\.?\s+(\d{4})$/))) { const i = MON.indexOf(m[1][0].toUpperCase() + m[1].slice(1, 3).toLowerCase()); if (i >= 0) return +m[2] * 12 + i; }
+  return LATER;
+}
+const monthShort = k => k === LATER ? 'Later' : MON[k % 12] + ' ' + Math.floor(k / 12);
+const monthLong = k => k === LATER ? 'Later' : MON_FULL[k % 12] + ' ' + Math.floor(k / 12);
+const splitPartners = s => (s || '').split(';').map(x => x.trim()).filter(Boolean);
+
+function todayKey() {
+  const t = qs.get('today'); let m;
+  if (t && (m = t.match(/^(\d{4})-(\d{1,2})/))) return +m[1] * 12 + (+m[2] - 1);
+  const d = new Date(); return d.getFullYear() * 12 + d.getMonth();
+}
+const TODAY = todayKey();
+
+function statusClass(s) {
+  const k = String(s || '').toLowerCase().replace(/\s+/g, '');
+  return { idea: 'idea', todo: 'todo', doing: 'doing', blocked: 'blocked', done: 'done' }[k] || 'other';
+}
+const isDone = it => statusClass(it.status) === 'done';
+const isOverdue = it => { const c = statusClass(it.status); return c !== 'done' && c !== 'idea' && it.key !== LATER && it.key < TODAY; };
+
+function normalize(rows) {
+  const items = rows.filter(r => r.title).map((r, i) => ({
+    idx: i, group: r.group || '', ms: /^milestone/i.test(r.kind || ''), title: r.title, owner: r.owner || '',
+    when: r.when || '', key: monthKey(r.when), status: r.status || '', partners: splitPartners(r.partner), note: r.note || ''
+  }));
+  const msTitles = new Set(items.filter(x => x.ms).map(x => x.title));
+  items.forEach(it => { it.parent = (!it.ms && it.group && msTitles.has(it.group)) ? it.group : ''; });
+  return items;
+}
+const byWhen = (a, b) => (a.key - b.key) || (a.idx - b.idx);
+
+/* Returns top-level entries [{ it, tasks, muted }] after filters, sorted by month. */
+function build(opts) {
+  const o = Object.assign({ forShare: false }, opts);
+  const owners = o.forShare ? new Set() : state.owners;
+  const msOnly = o.forShare ? true : state.msOnly;
+  const showDone = o.forShare ? true : state.showDone;
+  const partner = state.partner;
+  const ownerOk = it => !owners.size || owners.has(it.owner);
+  const doneOk = it => showDone || !isDone(it);
+  const partnerOk = it => !partner || it.partners.includes(partner);
+  const tasksOf = {};
+  state.items.filter(x => x.parent).forEach(t => (tasksOf[t.parent] = tasksOf[t.parent] || []).push(t));
+  const out = [];
+  state.items.filter(x => x.ms || !x.parent).sort(byWhen).forEach(it => {
+    if (!doneOk(it) || !partnerOk(it)) return;
+    if (!it.ms) { if (!msOnly && ownerOk(it)) out.push({ it, tasks: [], muted: false }); return; }
+    if (msOnly) { out.push({ it, tasks: [], muted: false }); return; }
+    const tasks = (tasksOf[it.title] || []).filter(t => doneOk(t) && ownerOk(t)).sort(byWhen);
+    const own = ownerOk(it);
+    if (own || tasks.length) out.push({ it, tasks, muted: !own });
+  });
+  return out;
+}
+
+function linkify(s) {
+  return esc(s).replace(/https?:\/\/[^\s<]+/g, u => {
+    let tail = ''; const m = u.match(/(?:[.,;:!?)]|&quot;|&gt;)+$/);
+    if (m) { tail = m[0]; u = u.slice(0, -tail.length); }
+    return '<a data-h="' + u + '" target="_blank" rel="noopener">' + u + '</a>' + tail;
+  });
+}
+
+function rowHtml(it, kind, hasTasks, muted) {
+  const id = 'r' + it.idx;
+  const cls = ['row', kind, muted ? 'muted' : ''].join(' ');
+  const chev = kind === 'ms'
+    ? '<button type="button" class="chev" data-chev="' + esc(it.title) + '" aria-expanded="' + (state.collapsed.has(it.title) ? 'false' : 'true') + '" aria-label="Collapse or expand tasks"><span>&#9656;</span></button>'
+    : '<span class="chev-pad"></span>';
+  const od = isOverdue(it) ? '<span class="overdue"><i></i>Overdue</span>' : '';
+  const open = state.open.has(it.idx);
+  const meta = [it.owner && 'Owner: ' + it.owner, it.when && 'When: ' + it.when, it.partners.length && 'Partner: ' + it.partners.join(', ')].filter(Boolean).join('  |  ');
+  return '<div class="' + cls + '" id="' + id + '"><div class="row-main" data-row="' + it.idx + '">' + chev +
+    '<span class="r-title">' + esc(it.title) + od + '</span>' +
+    '<span class="r-owner">' + esc(it.owner) + '</span>' +
+    '<span class="r-when">' + esc(it.key === LATER ? 'Later' : monthShort(it.key)) + '</span>' +
+    '<span class="r-status"><span class="pill ' + statusClass(it.status) + '">' + esc(it.status || 'No status') + '</span></span>' +
+    '<span class="r-note">' + esc(it.note) + '</span></div>' +
+    (open ? '<div class="detail"><span class="meta">' + esc(meta) + '</span>' + (it.note ? linkify(it.note) : 'No note.') + '</div>' : '') + '</div>';
+}
+
+function renderList() {
+  const entries = build();
+  const box = document.getElementById('list');
+  if (!entries.length) { box.innerHTML = '<p class="empty">No rows match these filters.</p>'; return; }
+  let html = '', cur = null;
+  entries.forEach(e => {
+    if (e.it.key !== cur) { cur = e.it.key; html += '<div class="month">' + esc(monthLong(cur)) + '</div>'; }
+    html += rowHtml(e.it, e.it.ms ? 'ms' : 'sa', e.tasks.length > 0, e.muted);
+    if (e.it.ms && !state.collapsed.has(e.it.title)) e.tasks.forEach(t => { html += rowHtml(t, 'task', false, false); });
+  });
+  box.innerHTML = html;
+  box.querySelectorAll('a[data-h]').forEach(a => { a.href = a.dataset.h; });
+}
+
+function renderShare() {
+  const entries = build({ forShare: true });
+  document.getElementById('sh-grid').innerHTML = entries.map(e => {
+    const it = e.it;
+    return '<div class="sh-card"><div class="sh-t">' + esc(it.title) + '</div><div class="sh-m"><b>' + esc(it.key === LATER ? 'Later' : monthShort(it.key)) + '</b>' +
+      (it.partners.length ? ' &middot; ' + esc(it.partners.join(', ')) : '') + '</div></div>';
+  }).join('') || '<p class="empty">No milestones match this partner.</p>';
+}
+
+function render() {
+  document.body.classList.toggle('share', state.share);
+  if (state.share) renderShare(); else renderList();
+  document.getElementById('b-all').setAttribute('aria-pressed', String(!state.msOnly));
+  document.getElementById('b-ms').setAttribute('aria-pressed', String(state.msOnly));
+  document.getElementById('b-collapse').textContent = state.allCollapsed ? 'Expand all' : 'Collapse all';
+  document.getElementById('b-collapse').disabled = state.msOnly;
+  document.querySelectorAll('#owners .chip').forEach(b => b.setAttribute('aria-pressed', String(state.owners.has(b.dataset.owner))));
+}
+
+function setShareUrl() {
+  const p = new URLSearchParams(location.search);
+  if (state.share) p.set('share', '1'); else p.delete('share');
+  if (state.share && state.partner) p.set('partner', state.partner); else p.delete('partner');
+  const s = p.toString();
+  history.replaceState(null, '', location.pathname + (s ? '?' + s : ''));
+}
+
+function init(items) {
+  state.items = items;
+  const sel = document.getElementById('s-partner');
+  const partners = [...new Set(items.flatMap(i => i.partners))].sort((a, b) => a.localeCompare(b));
+  if (state.partner && !partners.includes(state.partner)) partners.push(state.partner);
+  partners.forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = p; sel.appendChild(o); });
+  sel.value = state.partner;
+  render();
+}
+
+function wire() {
+  document.getElementById('sheet-link').href = SHEET_URL;
+  const ow = document.getElementById('owners');
+  OWNERS.forEach(n => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = n; b.dataset.owner = n; b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', () => { state.owners.has(n) ? state.owners.delete(n) : state.owners.add(n); render(); });
+    ow.appendChild(b);
+  });
+  document.getElementById('b-all').addEventListener('click', () => { state.msOnly = false; render(); });
+  document.getElementById('b-ms').addEventListener('click', () => { state.msOnly = true; render(); });
+  document.getElementById('c-done').addEventListener('change', e => { state.showDone = e.target.checked; render(); });
+  document.getElementById('s-partner').addEventListener('change', e => { state.partner = e.target.value; render(); });
+  document.getElementById('b-collapse').addEventListener('click', () => {
+    state.allCollapsed = !state.allCollapsed;
+    state.collapsed = state.allCollapsed ? new Set(state.items.filter(i => i.ms).map(i => i.title)) : new Set();
+    render();
+  });
+  document.getElementById('b-share').addEventListener('click', () => { state.share = true; setShareUrl(); render(); });
+  document.getElementById('b-exit').addEventListener('click', () => { state.share = false; setShareUrl(); render(); });
+  document.getElementById('list').addEventListener('click', e => {
+    if (e.target.closest('a')) return;
+    const ch = e.target.closest('[data-chev]');
+    if (ch) {
+      const t = ch.dataset.chev; state.collapsed.has(t) ? state.collapsed.delete(t) : state.collapsed.add(t);
+      const total = state.items.filter(i => i.ms).length; state.allCollapsed = state.collapsed.size === total; render(); return;
+    }
+    const r = e.target.closest('[data-row]');
+    if (r) { const n = +r.dataset.row; state.open.has(n) ? state.open.delete(n) : state.open.add(n); render(); }
+  });
+}
+
+(async function main() {
+  wire();
+  let text = '';
+  try {
+    if (!TRACKER_CSV_URL) throw new Error('no sheet url');
+    const res = await fetch(TRACKER_CSV_URL, { cache: 'no-store' });
+    if (!res.ok) throw new Error('bad status');
+    text = await res.text();
+  } catch (err) {
+    try { text = await (await fetch(TRACKER_FALLBACK)).text(); } catch (e2) { text = ''; }
+  }
+  let items = [];
+  try { items = normalize(parseCSV(text)); } catch (e) { items = []; }
+  init(items);
+})();
+</script>
+</body>
+</html>
