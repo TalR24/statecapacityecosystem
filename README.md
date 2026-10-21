@@ -84,7 +84,7 @@ score = 0.40 x P(description embedding cosine)
 - **Status:** `sunset` when the description matches the regex in `SUNSET_RE`, or the name is in `STATUS_OVERRIDES`.
 
 Current dataset stats (refreshed by `data/update_stats.py`; do not reword these four lines, the script matches them):
-- 334 orgs, 1,376 kept edges
+- 334 orgs, 1,374 kept edges
 - Funder coverage: 77/334 orgs
 - Max edge: 0.97, median: 0.74 (kept edges; the map opens at the 25th percentile)
 
