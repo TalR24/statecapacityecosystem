@@ -146,6 +146,7 @@ for f in HTML_FILES:
     }
 STUB_PATHS = set(STUBS.keys())
 NOINDEX_RE = re.compile(r'<meta\s+name="robots"\s+content="[^"]*noindex', re.I)
+NOFOLLOW_RE = re.compile(r'<meta\s+name="robots"\s+content="[^"]*nofollow', re.I)
 NON_STUB_PAGES = sorted(
     repo_rel(f) for f in HTML_FILES
     if repo_rel(f) not in STUB_PATHS and repo_rel(f) != "404.html"
@@ -234,7 +235,7 @@ def check_seo_head():
         if rel_f in STUB_PATHS or rel_f == "404.html":
             continue
         content = FILE_CLEAN[f]
-        if NOINDEX_RE.search(content) and "nofollow" in content.lower():
+        if NOINDEX_RE.search(content) and NOFOLLOW_RE.search(content):
             continue  # internal unlisted pages (e.g. /internal/tracker/) carry no SEO head
         missing = []
         title_m = TITLE_RE.search(content)
