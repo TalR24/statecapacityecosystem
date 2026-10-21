@@ -234,6 +234,8 @@ def check_seo_head():
         if rel_f in STUB_PATHS or rel_f == "404.html":
             continue
         content = FILE_CLEAN[f]
+        if NOINDEX_RE.search(content) and "nofollow" in content.lower():
+            continue  # internal unlisted pages (e.g. /internal/tracker/) carry no SEO head
         missing = []
         title_m = TITLE_RE.search(content)
         if not title_m or not title_m.group(1).strip():
@@ -282,7 +284,7 @@ def check_sitemap():
         sitemap_paths.add(rel)
 
     for p in NON_STUB_PAGES:
-        # Unlisted pages (robots noindex, e.g. /roadmap/) stay out of the sitemap on purpose.
+        # Unlisted pages (robots noindex, e.g. /internal/tracker/) stay out of the sitemap on purpose.
         if NOINDEX_RE.search(FILE_CLEAN[os.path.join(ROOT, p)]):
             continue
         if p not in sitemap_paths:
