@@ -75,8 +75,10 @@
     .empty { padding:30px 0; color:var(--text-muted); font-size:0.95rem; }
 
     @media (max-width: 760px) {
-      .row-main { flex-wrap:wrap; row-gap:4px; }
-      .r-title { flex:1 1 calc(100% - 40px); }
+      .row-line { align-items:flex-start; }
+      .chev, .chev-pad { margin-top:9px; }
+      .row-main { flex-wrap:wrap; row-gap:4px; column-gap:12px; }
+      .r-title { flex:1 1 100%; }
       .r-owner, .r-when, .r-status { width:auto; }
       .r-note { flex:1 1 100%; padding-left:0; }
       .row.task .r-title { padding-left:14px; }
@@ -146,6 +148,7 @@ const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','
 const MON_FULL = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const LATER = 1e9;
 const qs = new URLSearchParams(location.search);
+let LOADED = false;
 const state = { items: [], owners: new Set(), msOnly: false, showDone: false, partner: qs.get('partner') || '', collapsed: new Set(), allCollapsed: false, share: qs.get('share') === '1', open: new Set() };
 
 function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
@@ -267,6 +270,7 @@ function rowHtml(it, kind, hasTasks, muted) {
 function renderList() {
   const entries = build();
   const box = document.getElementById('list');
+  if (!LOADED) { box.innerHTML = '<p class="empty">Loading the tracker from the sheet.</p>'; return; }
   if (!state.items.length) { box.innerHTML = '<p class="err">Couldn\'t load the tracker data. Edit in <a href="' + SHEET_URL + '" target="_blank" rel="noopener">the sheet</a>.</p>'; return; }
   if (!entries.length) { box.innerHTML = '<p class="empty">No rows match these filters.</p>'; return; }
   let html = '', cur = null;
@@ -285,7 +289,7 @@ function renderShare() {
     const it = e.it;
     return '<div class="sh-card"><div class="sh-t">' + esc(it.title) + '</div><div class="sh-m"><b>' + esc(it.key === LATER ? 'Later' : monthShort(it.key)) + '</b>' +
       (it.partners.length ? ' &middot; ' + esc(it.partners.join(', ')) : '') + '</div></div>';
-  }).join('') || '<p class="empty">No milestones match this partner.</p>';
+  }).join('') || (LOADED ? '<p class="empty">No milestones match this partner.</p>' : '<p class="empty">Loading the tracker from the sheet.</p>');
 }
 
 function render() {
@@ -349,7 +353,8 @@ function wire() {
 
 const HEADER_RE = /^\uFEFF?\s*["']?group["']?\s*,\s*["']?kind["']?\s*,\s*["']?title/i;
 async function loadText(url, noStore) {
-  const res = await fetch(url, noStore ? { cache: 'no-store' } : undefined);
+  const ctl = new AbortController(); const timer = setTimeout(() => ctl.abort(), 8000);
+  const res = await fetch(url, Object.assign({ signal: ctl.signal }, noStore ? { cache: 'no-store' } : {})).finally(() => clearTimeout(timer));
   if (!res.ok) throw new Error('bad status');
   const text = await res.text();
   if (!HEADER_RE.test(text)) throw new Error('unexpected content');
@@ -358,6 +363,7 @@ async function loadText(url, noStore) {
 
 (async function main() {
   wire();
+  render();
   let text = '';
   try {
     if (!TRACKER_CSV_URL) throw new Error('no sheet url');
@@ -367,6 +373,7 @@ async function loadText(url, noStore) {
   }
   let items = [];
   try { items = normalize(parseCSV(text)); } catch (e) { items = []; }
+  LOADED = true;
   init(items);
 })();
 </script>
