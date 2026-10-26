@@ -419,7 +419,7 @@
       <div class="nav-drop">
         <a href="/ecosystem/search/">Search<small>Find who's working on your problem.</small></a>
         <a href="/ecosystem/organizations/">Organization Directory<small>300+ organizations helping government deliver.</small></a>
-        <a href="/ecosystem/connect/">Connect<small>People and open opportunities. Add yourself.</small></a>
+        <a href="/ecosystem/connect/">Connect<small>Find people and open opportunities and add your own.</small></a>
         <a href="/ecosystem/affinity-map/">Affinity Map<small>What organizations have in common.</small></a>
       </div>
     </div>
@@ -427,9 +427,9 @@
       <a class="nav-link" href="/events/">Events <span class="nav-caret" aria-hidden="true">▾</span></a>
       <div class="nav-drop">
         <a href="/events/hackathons/">Hackathons<small>Build nights that end in working software.</small></a>
-        <a href="/events/demo-nights/">Demo Nights<small>What got built, in front of the people who can adopt it.</small></a>
+        <a href="/events/demo-nights/">Demo Nights<small>Teams show their tools to the people who can adopt them.</small></a>
         <a href="/events/salons/">Salons &amp; Meet-ups<small>Small evenings on what the field needs.</small></a>
-        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<small>What hosts and sponsors own, on one page.</small></a>
+        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<small>One page lists what hosts and sponsors own.</small></a>
       </div>
     </div>
     <div class="nav-item">
@@ -460,17 +460,14 @@
 <div class="hero">
   <div class="hero-inner">
     <div class="kicker">Organization Directory</div>
-    <h1>300+ organizations helping government grow its capacity to deliver.</h1>
+    <h1>We map the 300+ organizations helping government grow its own capacity.</h1>
     <p class="hero-lede">Search by name or filter by segment, government level or problem, and click any row for the full description.</p>
-    <div class="hero-cta">
-      <button class="hero-cta-btn" type="button" onclick="openOF()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Suggest an organization →
-      </button>
+    <div class="sce-btn-row hero-ctas">
+      <button class="hero-cta-btn" type="button" onclick="openOF()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Suggest an organization</button>
+      <a href="/ecosystem/connect/" class="sce-btn">Connect →</a><a href="/ecosystem/affinity-map/" class="sce-btn">Affinity Map →</a><a href="/ecosystem/search/" class="sce-btn">Search →</a>
     </div>
   </div>
 </div>
-<div style="padding:12px 24px 0;"><div style="max-width:1200px;margin:0 auto;font-family:Carlito, Calibri, sans-serif;font-size:16px;color:#4A4740;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">Also explore: <a href="/ecosystem/connect/" class="sce-btn">Connect →</a> <a href="/ecosystem/affinity-map/" class="sce-btn">Affinity Map →</a> <a href="/ecosystem/search/" class="sce-btn">Search →</a></div></div>
 
 
 <div class="main">
@@ -1230,7 +1227,7 @@ document.getElementById("btn-copy-link").addEventListener("click", async () => {
       <div class="sf-success-check">✓</div>
       <div class="sf-success-title">Submitted.</div>
       <div class="sf-success-text">
-        Thanks, your suggestion has been recorded for review. Once approved, the organization will appear in the directory.
+        Thanks, we'll review your suggestion and add the organization to the directory once it's approved.
         You can copy your responses below for your records.
       </div>
       <div>
@@ -1243,7 +1240,7 @@ document.getElementById("btn-copy-link").addEventListener("click", async () => {
     </div>
 
     <div class="sf-footer" id="of-form-footer">
-      <div class="sf-footer-note">Reviewed before going live, with no account needed.</div>
+      <div class="sf-footer-note">We review every submission before it goes live, and you don't need an account.</div>
       <button class="sf-submit-btn" type="button" id="of-submit-btn" onclick="ofSubmit()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         Submit

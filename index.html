@@ -33,13 +33,13 @@
 *, *::before, *::after { box-sizing: border-box; }
 body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
 main { flex: 1; }
-.home-hero { padding-top: 64px; padding-bottom: 64px; }
+.home-hero { padding-top: 48px; padding-bottom: 48px; }
 .home-hero .h-display { font-size: clamp(30px, 3.4vw, 46px); max-width: none; }
 .home-hero .lede { margin: 24px 0 0; font-size: clamp(17px, 1.5vw, 19px); max-width: none; }
 .does { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; max-width: none; }
 .does > div { display: flex; align-items: flex-start; gap: 16px; }
 .does p { margin: 0; font-size: clamp(16px, 1.4vw, 18px); padding-top: 10px; }
-.home-hero .btn-row { margin-top: 40px; }
+.home-hero .btn-row { margin-top: 28px; }
 
 .pmv { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 64px; }
 .pmv p { margin: 16px 0 0; }
@@ -158,7 +158,7 @@ main { flex: 1; }
       <div class="nav-drop">
         <a href="/ecosystem/search/">Search<small>Find who's working on your problem.</small></a>
         <a href="/ecosystem/organizations/">Organization Directory<small>300+ organizations helping government deliver.</small></a>
-        <a href="/ecosystem/connect/">Connect<small>People and open opportunities. Add yourself.</small></a>
+        <a href="/ecosystem/connect/">Connect<small>Find people and open opportunities and add your own.</small></a>
         <a href="/ecosystem/affinity-map/">Affinity Map<small>What organizations have in common.</small></a>
       </div>
     </div>
@@ -166,9 +166,9 @@ main { flex: 1; }
       <a class="nav-link" href="/events/">Events <span class="nav-caret" aria-hidden="true">▾</span></a>
       <div class="nav-drop">
         <a href="/events/hackathons/">Hackathons<small>Build nights that end in working software.</small></a>
-        <a href="/events/demo-nights/">Demo Nights<small>What got built, in front of the people who can adopt it.</small></a>
+        <a href="/events/demo-nights/">Demo Nights<small>Teams show their tools to the people who can adopt them.</small></a>
         <a href="/events/salons/">Salons &amp; Meet-ups<small>Small evenings on what the field needs.</small></a>
-        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<small>What hosts and sponsors own, on one page.</small></a>
+        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<small>One page lists what hosts and sponsors own.</small></a>
       </div>
     </div>
     <div class="nav-item">
@@ -190,21 +190,21 @@ main { flex: 1; }
 
 <!-- HERO -->
 <section class="wrap home-hero">
-  <div class="kicker">A community for better government</div>
+  <div class="kicker">Building State Capacity</div>
   <h1 class="h-display">We connect the people making government work better.</h1>
-  <p class="lede">We're a community of government practitioners, technologists, researchers, funders and everyone else working to help government deliver.</p>
+  <p class="lede">We're a community of government practitioners, technologists, and everyone else who is helping government improve its own ability to accomplish policy goals.</p>
   <div class="does">
     <div>
       <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"></path></svg></div>
-      <p><strong>We map the ecosystem</strong> of 300+ organizations helping government grow its capacity to deliver.</p>
+      <p><strong>We map the ecosystem</strong> of 300+ organizations helping government grow its own capacity.</p>
     </div>
     <div>
       <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"></path></svg></div>
-      <p><strong>We host events</strong> such as build nights, demo nights, salons and meet-ups, where government practitioners and technologists <a href="/community/proof-points/">build tools for government together</a>.</p>
+      <p><strong>We host events</strong> including build nights, demo nights, and meet-ups where government practitioners and technologists <a href="/community/proof-points/">build tools together</a>.</p>
     </div>
     <div>
       <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM14 3v6h6M8 13h8M8 17h5"></path></svg></div>
-      <p><strong>We're building a community</strong> that makes this work more visible and keeps the conversation going, through essays, free playbooks and a Slack for people doing the work.</p>
+      <p><strong>We're building a community</strong> that keeps the conversation going, through essays, free playbooks and a Slack for people doing the work.</p>
     </div>
   </div>
   <div class="btn-row">
@@ -220,9 +220,9 @@ main { flex: 1; }
     <div>
       <div class="kicker">The problem</div>
       <h2 class="h-section">Good policy fails when the people fixing government work in silos.</h2>
-      <p>State capacity is government's ability to do what it sets out to do: issue the permit, deliver the benefit, keep the trains running.</p>
+      <p><a href="https://en.wikipedia.org/wiki/State_capacity" target="_blank" rel="noopener">State capacity</a> is government's ability to do what it sets out to do: issue the permit, deliver the benefit, keep the trains running.</p>
       <p>Plenty of people want to contribute to a government that delivers, but few know who else is out there or how to help. When the work is visible, people find each other and it moves faster.</p>
-      <p class="credit">Inspired by Jennifer Pahlka, <em>Recoding America</em>.</p>
+      <p class="credit">Inspired by Jennifer Pahlka, <a href="https://www.recodingamerica.us/" target="_blank" rel="noopener"><em>Recoding America</em></a>.</p>
     </div>
     <div class="mv">
       <div>
@@ -240,13 +240,13 @@ main { flex: 1; }
 <!-- WHAT WE DO: FLYWHEEL -->
 <section class="wrap band" id="what">
   <div class="kicker">What we do</div>
-  <h2 class="h-section" style="max-width:820px">We're building a more visible, connected state capacity ecosystem.</h2>
+  <h2 class="h-section">We're building a more visible, connected state capacity ecosystem.</h2>
   <div class="fly">
     <div class="fly-row">
       <a class="fly-card" href="/ecosystem/">
         <div class="fc-top"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#6E4E1E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"></path></svg><span class="caps">01 · Ecosystem</span></div>
         <h3>We map who's helping government grow its capacity.</h3>
-        <p>A searchable directory of agencies, nonprofits, researchers, funders and companies, plus a board of people and open opportunities.</p>
+        <p>We keep a searchable directory of agencies, nonprofits, researchers, funders and companies, and a board of people and open opportunities.</p>
         <div class="fc-stats"><div><b>300+</b><span>organizations</span></div><div><b>50+</b><span>people and opportunities</span></div></div>
       </a>
       <div class="fly-arrow" aria-hidden="true">→</div>
@@ -260,7 +260,7 @@ main { flex: 1; }
       <a class="fly-card" href="/community/">
         <div class="fc-top"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#6E4E1E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM14 3v6h6M8 13h8M8 17h5"></path></svg><span class="caps">03 · Community</span></div>
         <h3>We share what we learn so others can build on it.</h3>
-        <p>A Slack for people doing the work, a Substack on what's working, and free playbooks so anyone can run these events in their own city.</p>
+        <p>We run a Slack for people doing the work, write a Substack on what's working and publish free playbooks so anyone can run our events in their own city.</p>
         <div class="fc-stats"><div><b>14</b><span>tools</span></div><div><b>4</b><span>playbooks</span></div><div><b>12</b><span>posts</span></div></div>
       </a>
     </div>
@@ -275,7 +275,7 @@ main { flex: 1; }
   <div class="wrap">
     <div class="kicker">What we've built</div>
     <div class="latest-head">
-      <h2 class="h-section">Working tools from our build nights and our own prototyping.</h2>
+      <h2 class="h-section">We built these tools at our build nights and in our own prototyping.</h2>
       <a href="/community/proof-points/">See all of them →</a>
     </div>
     <div class="tool-strip">
@@ -368,7 +368,7 @@ main { flex: 1; }
       <a class="recent-shot" href="https://nyc-cb-budget-requests.vercel.app/" target="_blank" rel="noopener"><img src="/assets/proof-points/budget-requests.jpg" alt="The Budget Requests app: a map of New York City's community districts" width="640" height="360" loading="lazy"></a>
       <div class="caps">Most recent · September 2026</div>
       <h3>State Capacity Hackathon: Public Engagement</h3>
-      <p>Mixed teams of practitioners and technologists built working prototypes for two scoped themes, judged against real problems.</p>
+      <p>Mixed teams of practitioners and technologists built working prototypes for two scoped themes, and judges scored them against real problems.</p>
       <div class="stats3">
         <div class="stat"><b>125+</b><span>sign-ups</span></div>
         <div class="stat"><b>~80</b><span>builders</span></div>
@@ -385,7 +385,7 @@ main { flex: 1; }
     <div>
       <div class="kicker">For agencies and sponsors</div>
       <h2 class="h-feature">Bring us a problem. We'll bring the builders.</h2>
-      <p class="feature-lede">Agencies bring a real problem and we run a build night on it at no cost. Sponsors provide a venue or a judge and help shape what we take on.</p>
+      <p class="feature-lede">Agencies bring a real problem and we run a free build night on it. Sponsors provide a venue or a judge and help shape what we take on.</p>
       <div class="btn-row">
         <a class="btn-primary" href="/community/playbooks/#partner">Get the partner materials →</a>
         <a class="btn-outline" href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Talk to us</a>
@@ -399,7 +399,7 @@ main { flex: 1; }
   <div>
     <div class="kicker">For people who follow the ideas</div>
     <h2 class="h-feature">We write about what government needs to deliver.</h2>
-    <p class="feature-lede">We publish essays on technology, talent and AI in government from people doing the work. Join the Slack to discuss and debate them with us, and be the first to hear about new events.</p>
+    <p class="feature-lede">Our essays on technology, talent and AI in government come from people doing the work. Join the Slack to discuss and debate them with us, and be the first to hear about new events.</p>
     <div class="btn-row">
       <a class="btn-primary" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack →</a>
       <a class="btn-outline" href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Subscribe ↗</a>
@@ -425,7 +425,7 @@ main { flex: 1; }
 <section class="band band-white" id="who">
   <div class="wrap">
     <div class="kicker">Who's here</div>
-    <h2 class="h-section" style="max-width:820px">Working to make government deliver? You're already part of this.</h2>
+    <h2 class="h-section">Working to make government deliver? You're already part of this.</h2>
     <div class="who">
       <div>
         <div class="ico ico-lg"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10M19 21V10M9.5 21V10M14.5 21V10M2 10l10-6 10 6z"></path></svg></div>
@@ -509,17 +509,17 @@ main { flex: 1; }
     </a>
     <a href="/events/hackathons/civic-tech-build-night/">
       <span class="rl-date">Jun 2026</span><span class="rl-kind">Event</span>
-      <span><strong>A Civic Tech Build Night</strong><br><span class="rl-sub">80+ builders and 20 tools in one evening, judged against real agency problems.</span></span>
+      <span><strong>A Civic Tech Build Night</strong><br><span class="rl-sub">80+ builders took on real agency problems and made 20 tools in one evening.</span></span>
     </a>
   </div>
 </section>
 
 <!-- FINAL CTA -->
 <section class="band-gold">
-  <div class="wrap final" style="padding-top:80px;padding-bottom:80px">
+  <div class="wrap final" style="padding-top:56px;padding-bottom:56px">
     <div style="max-width:640px">
       <h2 class="h-section">Get involved.</h2>
-      <p>Meet people between events in the Slack. Get new writing in your inbox.</p>
+      <p>Meet people between events in the Slack and get new writing in your inbox.</p>
     </div>
     <div class="btn-row" style="margin-top:0">
       <a class="btn-dark" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack →</a>

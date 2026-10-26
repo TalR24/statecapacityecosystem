@@ -33,14 +33,14 @@ SECTIONS = [
     ("ecosystem", "Ecosystem", "/ecosystem/", [
         ("/ecosystem/search/", "Search", "Find who's working on your problem."),
         ("/ecosystem/organizations/", "Organization Directory", "300+ organizations helping government deliver."),
-        ("/ecosystem/connect/", "Connect", "People and open opportunities. Add yourself."),
+        ("/ecosystem/connect/", "Connect", "Find people and open opportunities and add your own."),
         ("/ecosystem/affinity-map/", "Affinity Map", "What organizations have in common."),
     ]),
     ("events", "Events", "/events/", [
         ("/events/hackathons/", "Hackathons", "Build nights that end in working software."),
-        ("/events/demo-nights/", "Demo Nights", "What got built, in front of the people who can adopt it."),
+        ("/events/demo-nights/", "Demo Nights", "Teams show their tools to the people who can adopt them."),
         ("/events/salons/", "Salons &amp; Meet-ups", "Small evenings on what the field needs."),
-        ("/events/sponsors-checklist/", "Host or Sponsor an Event", "What hosts and sponsors own, on one page."),
+        ("/events/sponsors-checklist/", "Host or Sponsor an Event", "One page lists what hosts and sponsors own."),
     ]),
     ("community", "Community", "/community/", [
         ("/community/slack/", "Slack", "Meet people between events."),

@@ -340,3 +340,23 @@ a.mo-item:hover .mo-title { text-decoration: underline; }
 .sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .rm-ms .section-label { color: var(--gold) !important; }
 .rm-tbl td:last-child { white-space: nowrap; }
+
+/* ── Oct 27 2026: wider text, less whitespace on every page (Tal) ─────────── */
+/* Text runs the full content column, as on the homepage hero; form and modal widths keep their caps. */
+.h-display, .lede, .hero h1, .hero p, .hero-lede, .hero-explainer, .hero-sub, .kinds-intro, .section-note, .eco-h2,
+h2.h-section, p[style*="max-width:720px"] { max-width: none !important; }
+.hero h1 { font-size: clamp(30px, 3.6vw, 48px) !important; margin-bottom: 14px !important; }
+.hero-lede, .hero-explainer, .hero p { font-size: clamp(17px, 1.5vw, 19px) !important; }
+.hero { padding: 24px 24px 4px !important; }
+.breadcrumb { padding-top: 14px !important; }
+.main { padding: 16px 24px 56px !important; }
+.band { padding-top: 64px; padding-bottom: 56px; }
+@media (max-width: 720px) { .band { padding-top: 48px; padding-bottom: 40px; } }
+.split, .pmv { gap: 40px; }
+.btn-row { margin-top: 24px; }
+.main-inner .section-label:not(:first-child), .main-inner .kicker:not(:first-child) { margin-top: 32px !important; }
+.kicker, .section-label, .hero-eyebrow, .eyebrow { margin-bottom: 14px; }
+/* Ecosystem data pages: one row, gold primary action first, then the sibling pages. */
+.hero-ctas { margin-top: 16px; }
+.hero-ctas .hero-cta-btn { min-height: 48px; padding: 10px 20px; border: 2px solid var(--gold); border-radius: 6px; font: 700 17px var(--font); display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+.hero-ctas a.sce-btn { margin: 0; }
