@@ -88,7 +88,7 @@ Current dataset stats (refreshed by `data/update_stats.py`; do not reword these 
 - Funder coverage: 77/334 orgs
 - Max edge: 0.97, median: 0.74 (kept edges; the map opens at the 25th percentile)
 
-Other facts from `affinity.json`: 7 Problem Areas, 36 Problem Topics, 11 segments, 628 mutual edges, 2 sunset organizations.
+Other facts from `affinity.json`: 7 Problem Areas, 36 Problem Topics, 11 segments, 630 mutual edges, 2 sunset organizations.
 
 ### Search
 
@@ -115,7 +115,7 @@ Outside this repo:
 
 ### SEO files
 
-`sitemap.xml` (23 URLs), `llms.txt` and the JSON-LD blocks are generated from the data site: run `python3 seo/build_sitemap.py --site sce` there after adding or renaming a page. Never hand-edit `sitemap.xml` or `llms.txt`. Every page needs the head contract (title, description, canonical, og tags); `data/site_health.py` checks it.
+`sitemap.xml` (25 URLs), `llms.txt` and the JSON-LD blocks are generated from the data site: run `python3 seo/build_sitemap.py --site sce` there after adding or renaming a page. Never hand-edit `sitemap.xml` or `llms.txt`. Every page needs the head contract (title, description, canonical, og tags); `data/site_health.py` checks it.
 
 ## Common tasks
 
