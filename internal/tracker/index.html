@@ -271,7 +271,7 @@ function renderList() {
   const entries = build();
   const box = document.getElementById('list');
   if (!LOADED) { box.innerHTML = '<p class="empty">Loading the tracker from the sheet.</p>'; return; }
-  if (!state.items.length) { box.innerHTML = '<p class="err">Couldn\'t load the tracker data. Edit in <a href="' + SHEET_URL + '" target="_blank" rel="noopener">the sheet</a>.</p>'; return; }
+  if (!state.items.length) { box.innerHTML = '<p class="err">Couldn\'t load the tracker data. Edit in <a class="sheet-a" target="_blank" rel="noopener">the sheet</a>.</p>'; box.querySelector('.sheet-a').href = SHEET_URL; return; }
   if (!entries.length) { box.innerHTML = '<p class="empty">No rows match these filters.</p>'; return; }
   let html = '', cur = null;
   entries.forEach(e => {
