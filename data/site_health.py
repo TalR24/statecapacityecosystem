@@ -776,6 +776,10 @@ def check_copy_rules():
         for m in re.finditer(r"—", clean_no_titlemeta):
             if any(s <= m.start() < e for s, e in li_glossary_spans):
                 continue
+            # A dash that is an element's whole content (">—<") is a UI placeholder
+            # (an empty table cell, a count before JS fills it), not prose.
+            if clean_no_titlemeta[:m.start()].rstrip().endswith(">") and clean_no_titlemeta[m.end():].lstrip().startswith("<"):
+                continue
             ln = line_of(clean_no_titlemeta, m.start())
             snippet = clean_no_titlemeta[max(0, m.start() - 40):m.start() + 40]
             snippet = re.sub(r"<[^>]+>", " ", snippet).strip()
@@ -871,7 +875,9 @@ def check_external_links():
     findings = []
     ext_urls = set()
     for f in HTML_FILES:
-        content = FILE_CLEAN[f]
+        # Connection hints (<link rel="preconnect"/"dns-prefetch" href="https://fonts.googleapis.com">)
+        # name a bare host that returns 404 by design; they are not links a reader follows.
+        content = re.sub(r"<link\b[^>]*\brel=[\"'](?:preconnect|dns-prefetch)[\"'][^>]*>", " ", FILE_CLEAN[f], flags=re.IGNORECASE)
         for m in ATTR_RE.finditer(content):
             target = m.group(2)
             if not target or "${" in target:
