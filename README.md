@@ -84,8 +84,8 @@ score = 0.40 x P(description embedding cosine)
 - **Status:** `sunset` when the description matches the regex in `SUNSET_RE`, or the name is in `STATUS_OVERRIDES`.
 
 Current dataset stats (refreshed by `data/update_stats.py`; do not reword these four lines, the script matches them):
-- 334 orgs, 1,374 kept edges
-- Funder coverage: 77/334 orgs
+- 335 orgs, 1,382 kept edges
+- Funder coverage: 77/335 orgs
 - Max edge: 0.97, median: 0.74 (kept edges; the map opens at the 25th percentile)
 
 Other facts from `affinity.json`: 7 Problem Areas, 36 Problem Topics, 11 segments, 630 mutual edges, 2 sunset organizations.
@@ -93,7 +93,7 @@ Other facts from `affinity.json`: 7 Problem Areas, 36 Problem Topics, 11 segment
 ### Search
 
 `assets/sce-search.js` is the only search engine. It serves the Ecosystem landing modal, `/ecosystem/search/` and the directory search box, fetching `directory.json`, `affinity_search.json` and `connect.json` lazily. Ranking is TF-IDF cosine in the browser plus a name-substring bonus and multiplicative boosts (topic or area named in the query, place match, level match, funding intent). The default tab is a guided sentence builder (`SCESearch.mountGuide()`, goals in `SCESearch.GOALS`); the keyword tab carries `mode=search` in its URL.
-For 334 orgs with rich curator-assigned tags, TF-IDF in the browser is the right split: the affinity score uses embeddings at build time, and the query has to be scored with nothing to download.
+For 335 orgs with rich curator-assigned tags, TF-IDF in the browser is the right split: the affinity score uses embeddings at build time, and the query has to be scored with nothing to download.
 Keep the tokenizer (minimum 3 letters except `ai ml ux hr dc ev`, same stopword list) identical in `build_affinity.py`, the Affinity Map page and `sce-search.js`; `site_health.py` checks this.
 
 ### Static snapshots

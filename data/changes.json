@@ -16,13 +16,13 @@
     "Partnership for Public Service": "fe41e9f4deb9d138295689b86d60b8d8c4af302e",
     "POPVOX Foundation": "b154e7346b1ab6714851e7fffc5373b810e395bd",
     "Public Interest Technology University Network (PIT-UN)": "869a008b8820eb2ade6690faafa01471761a9a3b",
-    "Recoding America Fund": "47c05678fd1014513955b1782a9e18679b5e0929",
+    "Recoding America (fmr. Recoding America Fund)": "0e93d7ad1d07da46fb6fdee554a61e86024edb54",
     "Results for America": "68ef4d891fa8d49b95227d4a05bb3c8b126f65df",
     "Tech Talent Project": "e9e7cf72d649d870207e7f8c4ced9d5543d92dde",
     "Work for America": "40c2aa30f7154eaf6f06b4dea74c0172f2cf8508",
     "Apolitical": "5b1394d5162d45a848e4aaf88989d29a5a090052",
     "Aspen Policy Academy (fmr. Aspen Tech Policy Hub)": "e185e96c04fe90c866ec8563e103d483c4c4558a",
-    "Center for Civic Futures (CCF) / AI Readiness Project": "a0acecfc887676a195c2a6d1b3bff8c1b0ad0c4c",
+    "Center for Civic Futures (CCF) / AI Readiness Project": "0502f92d0fe404d70d136ea9f8955b28e42de33a",
     "Civic Tech Institute (Equitech Futures)": "7979370d49d8e0f15f5a1b7570832e3d17309b7b",
     "Decoded Futures (Tech:NYC Foundation)": "c7f0abea79f8dc0a4855e1420df81ba50d8402c0",
     "InnovateUS": "d143aaef6e8202e1333b64e9c44da828efa0e2a1",
@@ -80,7 +80,7 @@
     "Bloomberg Cities Network": "f1db498c868a5a5acb37d370d30af95eaa0c1815",
     "Bloomberg Philanthropies City Data Alliance": "e8f4dd40a9d2ffc22b3b159381a83abcaaee4dd6",
     "City Innovate": "c68c64c3015965cca26c12c6058b2827f32446f6",
-    "CivStart": "7acde3c3c06b83aef888ab9afeebee1ce2b91bc7",
+    "CivStart": "35e3e4acf71ee9efc7cb61ba1454e63772bdca81",
     "Colorado Smart Cities Alliance": "96d84e87d3ffebbd5ef87b9bb3b7675397e3aa0f",
     "GovAI Coalition": "ef86e84c04545e6ed2b6a2cd9988594d0ead8555",
     "HSITAG (Human Services IT Advisory Group)": "5b94966f25c100bb0bf3c01d19e5d69c15c5cecc",
@@ -136,7 +136,7 @@
     "Colorado Digital Service": "282e9f4a1f94f9f99cc8895be63ab8e976c50496",
     "Connecticut Digital Government Team": "28e8b8aed873eb9336cb6b92fe6d0b5198f74732",
     "Delaware Government Information Center": "31ece76133d09c380a1cd543d6ff0765d7613207",
-    "Federal Student Aid Digital Services": "23db44380b17a2e60b3a77f53c85c7f7de417d91",
+    "Federal Student Aid Digital Services": "7bda2aef3ec2b75d419890d563dc2418e567074f",
     "Franklin County GX Foundry": "4ef1b5e3776c119e39262a43827de45708d6d40b",
     "Georgia Digital Services and Solutions": "90a3d6aa9381791bf54f69b7f72932ac7ef4cb68",
     "Georgia Office of Artificial Intelligence": "abe5466015f96bdef83bc0e6ad9133739670f334",
@@ -170,7 +170,7 @@
     "The Lab at OPM": "835dca994d4e3ab15853d48c41d12e82bf4e98a5",
     "U.S. Digital Corps": "a9f7516cb4c82e01d46b0d7516a13dedeb961a5f",
     "U.S. DOGE Service (fmr. USDS)": "6072320d686b4126ea17781d2efdc26ceee3bbaf",
-    "U.S. Tech Force (OPM)": "666c727fbd75315ffcb88d54e51d61926f3f9351",
+    "U.S. Tech Force (OPM)": "b54c1b10d636ae1d21320b4cb13149bc9df07410",
     "Utah Digital Government": "2cf117f65526859f79ea7c6c27b0841cf0506ce0",
     "Vermont Agency of Digital Services": "b16b021dceb575e071fb882f858b8c2a0c2ccfb3",
     "Washington Technology Solutions (WaTech)": "0867f1ae0ccdb2e054701eeef03d5ac1696befef",
@@ -203,14 +203,14 @@
     "Zencity": "1872c516e877e5e13671e389dd17ad7b326baaca",
     "8VC (Joe Lonsdale)": "ba46b523ac24848c442a920cdc279eeb96a8d79f",
     "Advantage Capital / InState Partners": "2f3ca57b44171a25ffff1ffda8e672b10b79c9c8",
-    "America's Frontier Fund": "23ea3e3a3531c8d92e432629f015d9615d848f73",
+    "America's Frontier Fund": "7d4d6c528e863e6ff1d3ccfe69d392958e181391",
     "Andreessen Horowitz": "1eac8623d43ec688de525079cf8aabf6ccbb0864",
     "BarronKent Ventures": "68a6c2beca30c7fe2b7660e17afa080f612024b6",
     "Blue Ridge Labs (Robin Hood Foundation)": "d9863e8e6cf9a77965c8720a0abf6acfeb6fe28b",
     "BV Investment Partners": "c962446dc976530bca9e5b3419d71f4de45f4382",
     "Commonweal Ventures": "7338284b8a6b470849771dc3d3874ad15d3db746",
     "Govtech Fund (Ron Bouganim)": "e2655058c8c91735591164a4854d6346ce0aec7a",
-    "Govtech Ventures (Rachel Stern)": "00a9355927d5dbedf54c372454790c3ce9b94e91",
+    "Govtech Ventures (Rachel Stern)": "317faff14a9a68d4b30b9cdde95945e3e3cc93de",
     "Great Hill Partners": "f08282e163fbaa36cccb88674a67bb0577731ab0",
     "IQT (In-Q-Tel)": "86c7cb186fa90506f6384687e056a785096a6e77",
     "J2 Ventures": "3fb48c9b85e87c81f4ce9b36b9ae52f4a4a857d3",
@@ -247,22 +247,22 @@
     "NextLadder Ventures": "2c4bf680c58c8fc82e356dade77b3a24b5f34caa",
     "Coefficient Giving (fmr. Open Philanthropy)": "6fc81e7a34724d619b6e1cc63a353e35b9a40176",
     "Patrick J. McGovern Foundation": "b5c337e4beb010eb7d36e0b63bbe07b47951fbe3",
-    "Pivotal Ventures (Melinda French Gates)": "8083ee30a24fb9b7f9c1a9c4e39f67b80289246d",
-    "Public Benefit Innovation Fund": "3d6cc23ed5d8528770faf8225988a3c8e962abc0",
+    "Pivotal Ventures (Melinda French Gates)": "6e91fe317b9698378bb46ae654996c91a4c6dc52",
+    "Public Benefit Innovation Fund": "cf4111013143a863dc727b63d73a9605f7f3c27c",
     "Public Interest Technology Infrastructure Fund (PIT Fund)": "0c470d06dd894bb925f2f6bbc987d3067a17d8a3",
     "Raikes Foundation": "aebe955b5b73b28429c2b79d6764fe4ba008f7e8",
     "Robin Hood Foundation": "dfbb1963a3b6a51953a24a6a1fe077b5a5d67f3e",
-    "Rockefeller Foundation": "c7bc67d8938057853155deca8216bd8bd977ef6e",
-    "Schmidt Futures": "10b05227c479b6025cf3d9cc2412b3aebf3956f2",
+    "Rockefeller Foundation": "3b6bed6d07b8c0263b8f00f83de5b2a6f9ecc733",
+    "Schmidt Futures": "957f6ee1a26acdddf7154c7672fe3ffb2a8864a1",
     "Siegel Family Endowment": "ba34fc561e895bffaf0000b3a2d023d6dfa7df8b",
     "Thierer Family Foundation": "5fe7e508f5bdeb23ca8cf105207a0e55c7e8ed3b",
-    "Valhalla Foundation": "7d7a11a8c28f66d0c6cad7f9cb26116a4abe21d0",
+    "Valhalla Foundation": "902872a7a8ec79d0a9ffc5152f0df7cf91bb1d27",
     "AI Now Institute of Technology": "c2578abcf89c44df56b01d136621da90a17da490",
     "Aspen Institute": "b822818eab19611037d132e7fd84ac2548c99f1c",
     "Bipartisan Policy Center (BPC)": "cdad415d530294ea55c04d9c88a1cfc97a515bb2",
     "Brookings: Center for Technology Innovation": "9e60fc651c660b97420f15a39d89673507f395f6",
     "Building State Capability (BSC) - Harvard Kennedy School": "32f4fd3f8b9a267a332b7c8187de60f25e59896c",
-    "Center for a New American Security (CNAS)": "6e3ff953dbf769007c3058c76263feaca3a40516",
+    "Center for a New American Security (CNAS)": "6787161c9cf0dff98cef48acaac9fb1ddcdfa72b",
     "Center for Democracy and Technology (CDT)": "71a6fde2af77ac76d096c4872119e11574eb9c5c",
     "Center for Information Technology Policy (CITP, Princeton)": "e70882fc710da0be7807b452dc04d463891f85b8",
     "Center for Security and Emerging Technology (CSET)": "0ec3cd7dd3cf7b4ac0b3e2c32893d2e4ef58ac0a",
@@ -308,9 +308,9 @@
     "Yale Tobin Center for Economic Policy": "473afa8ef212d9a04879c51fdff9ce4448d767e3",
     "We the Doers": "40929b8679d8438f44f5f11b8349536ad76e96c2",
     "ClearGov": "ee37e335a6aadc18a402c6994c2a830f5b9243cb",
-    "DebtBook": "2707102995dca084de9d609baed5a78be524241b",
+    "Monetary (fmr. DebtBook)": "46c6332bbe480d5b26c1289ddb3d702110a16767",
     "BondLink": "75a76f05f6298ac704010bd555dc32dd29e206dd",
-    "Hazel": "ea187c89b26513840a9f32817f27d645f8bd7b1c",
+    "Hazel": "8b38de9222bef25a23bdff06af4d5f850c7ebc3b",
     "Cardinality.ai": "b11daa005198780a52100a6e6ae5a9d1bdf7929a",
     "Govstream.ai": "9f4147a5192178e525a44d0b6ea4037c8f055378",
     "Just Appraised": "88d35af9382d018f49aff1f10c383f28602cdcd3",
@@ -333,9 +333,81 @@
     "Renaissance Philanthropy": "3323d2dd5c58c8a24703f9cca1a2d3a9b09a79a7",
     "Packard Foundation (David and Lucile Packard Foundation)": "f775dce257846e110e8dcd349e7d83b8d358ed38",
     "Virginia Digital Service": "10ba83f6abcaa20f8dabecdd842600f25097b778",
-    "CITP Technology Fellows Program (Princeton)": "aff5899c8787b6869c241eb76a64d5af4690dc04"
+    "CITP Technology Fellows Program (Princeton)": "aff5899c8787b6869c241eb76a64d5af4690dc04",
+    "GroundVue": "f533c0b62a758c3609db8f46fc2c920abb6fe033"
   },
   "entries": [
+    {
+      "date": "2026-11-25",
+      "added": [
+        "GroundVue",
+        "Monetary (fmr. DebtBook)",
+        "Recoding America (fmr. Recoding America Fund)"
+      ],
+      "removed": [
+        "DebtBook",
+        "Recoding America Fund"
+      ],
+      "edited": [
+        {
+          "name": "America's Frontier Fund",
+          "fields": []
+        },
+        {
+          "name": "Center for Civic Futures (CCF) / AI Readiness Project",
+          "fields": []
+        },
+        {
+          "name": "Center for a New American Security (CNAS)",
+          "fields": []
+        },
+        {
+          "name": "CivStart",
+          "fields": []
+        },
+        {
+          "name": "Federal Student Aid Digital Services",
+          "fields": []
+        },
+        {
+          "name": "Govtech Ventures (Rachel Stern)",
+          "fields": []
+        },
+        {
+          "name": "Hazel",
+          "fields": []
+        },
+        {
+          "name": "Pivotal Ventures (Melinda French Gates)",
+          "fields": []
+        },
+        {
+          "name": "Public Benefit Innovation Fund",
+          "fields": []
+        },
+        {
+          "name": "Rockefeller Foundation",
+          "fields": []
+        },
+        {
+          "name": "Schmidt Futures",
+          "fields": []
+        },
+        {
+          "name": "U.S. Tech Force (OPM)",
+          "fields": []
+        },
+        {
+          "name": "Valhalla Foundation",
+          "fields": []
+        }
+      ],
+      "counts": {
+        "added": 3,
+        "removed": 2,
+        "edited": 13
+      }
+    },
     {
       "date": "2026-10-21",
       "added": [],
