@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/assets/sce_logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State Capacity Demo Night, December 10, 2026 — State Capacity Ecosystem</title>
+  <meta name="description" content="Three winning teams from our June and September hackathons demo the tools they kept building. Thursday, December 10, 2026 at the CUNY Graduate Center.">
+  <link rel="canonical" href="https://statecapacityecosystem.com/events/demo-nights/december-2026/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://statecapacityecosystem.com/events/demo-nights/december-2026/">
+  <meta property="og:title"       content="State Capacity Demo Night, December 10, 2026 — State Capacity Ecosystem">
+  <meta property="og:description" content="Three winning teams from our June and September hackathons demo the tools they kept building. Thursday, December 10, 2026 at the CUNY Graduate Center.">
+  <meta property="og:image"       content="https://statecapacityecosystem.com/assets/sce_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    :root {
+      --blue:#8A5F1E; --blue-hover:#6E4A15; --blue-light:#F5EDDA; --blue-mid:#DFCEA1;
+      --orange:#8A5F1E; --orange-light:#F5EDDA;
+      --text:#1A1918; --text-mid:#444039; --text-muted:#6B6760; --text-faint:#9C968A;
+      --bg:#F4EFE4; --surface:#ffffff; --border:#DDD8CC; --border-mid:#C9C1AF;
+      --shadow-sm:0 1px 3px rgba(26,25,24,0.08);
+      --shadow-md:0 4px 16px rgba(138,95,30,0.10);
+      --radius:10px;
+    }
+    body { font-family:Carlito, Calibri, sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+
+    header { background:#1A1918; border-bottom:1px solid #2E2B27; padding:0 clamp(16px,4vw,48px); }
+    .header-inner { max-width:1300px; margin:0 auto; height:60px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { display:flex; align-items:center; gap:9px; text-decoration:none; }
+    .brand-name { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; font-weight:700; color:#D4A853; letter-spacing:-0.02em; }
+    .brand-slash { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; color:#4b5563; }
+    .brand-section { font-family:Carlito, Calibri, sans-serif; font-size:0.95rem; font-weight:600; color:#DDD8CC; }
+    .header-link { font-size:0.78rem; font-weight:500; color:#9C968A; text-decoration:none; display:flex; align-items:center; gap:5px; transition:color 0.15s; }
+    .header-link:hover { color:#D4A853; }
+
+    .breadcrumb { padding:14px clamp(16px,4vw,48px) 0; }
+    .breadcrumb-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; gap:6px; font-family:Carlito, Calibri, sans-serif; font-size:0.72rem; font-weight:500; color:var(--text-faint); }
+    .breadcrumb a { color:var(--text-faint); text-decoration:none; transition:color 0.15s; }
+    .breadcrumb a:hover { color:var(--blue); }
+    .breadcrumb .current { color:var(--orange); }
+    .breadcrumb-sep { color:var(--border-mid); }
+
+    .hero { padding:14px clamp(16px,4vw,48px) 0; }
+    .hero-inner { max-width:1300px; margin:0 auto; padding-bottom:14px; }
+    .hero h1 { font-family:Carlito, Calibri, sans-serif; font-size:clamp(1.2rem,3vw,1.7rem); font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.2; margin-bottom:6px; }
+    .hero h1 span { color:var(--blue); }
+    .hero p { font-size:0.92rem; color:var(--text-muted); max-width:780px; line-height:1.7; }
+    .hero p a { color:var(--blue); text-decoration:none; border-bottom:1px solid var(--blue-mid); }
+    .hero p a:hover { background:var(--blue-light); }
+
+
+    .main { flex:1; padding:clamp(20px,3vw,32px) clamp(16px,4vw,48px) clamp(40px,6vw,64px); }
+    .main-inner { max-width:1300px; margin:0 auto; }
+
+    .section-label {
+      font-family:Carlito, Calibri, sans-serif;
+      font-size:0.72rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.1em; color:var(--orange);
+      margin:0 0 16px;
+    }
+
+    /* CARD GRID */
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:20px; }
+    .card {
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-sm);
+      display:flex; flex-direction:column;
+      text-decoration:none; color:inherit;
+      overflow:hidden;
+      transition:border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .card:hover { border-color:var(--blue); box-shadow:var(--shadow-md); transform:translateY(-2px); }
+    .card-preview { height:170px; background:#1A1918; position:relative; overflow:hidden; }
+    .card-preview svg { width:100%; height:100%; display:block; }
+    .card-body { padding:18px 22px 22px; flex:1; display:flex; flex-direction:column; }
+    .card-cat {
+      font-family:Carlito, Calibri, sans-serif;
+      font-size:0.65rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.08em; color:var(--blue);
+      margin-bottom:8px;
+    }
+    .card-title {
+      font-family:Carlito, Calibri, sans-serif;
+      font-size:1.05rem; font-weight:700; color:var(--text);
+      line-height:1.3; margin-bottom:8px; letter-spacing:-0.02em;
+    }
+    .card-desc { font-size:0.86rem; color:var(--text-muted); line-height:1.6; flex:1; margin-bottom:14px; }
+    .card-meta { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .card-stat { font-family:Carlito, Calibri, sans-serif; font-size:0.72rem; color:var(--orange); font-weight:500; }
+    .card-cta { font-family:Carlito, Calibri, sans-serif; font-size:0.75rem; font-weight:600; color:var(--blue); display:flex; align-items:center; gap:4px; transition:gap 0.15s; }
+    .card:hover .card-cta { gap:7px; }
+
+    /* INFO PANEL */
+    .text-panel {
+      background:var(--surface); border:1px solid var(--border);
+      border-left:3px solid var(--orange);
+      border-radius:8px; padding:20px 24px; margin-top:24px;
+      display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+    }
+    .text-panel p { font-size:0.9rem; color:var(--text-mid); line-height:1.7; margin-bottom:0; }
+    .text-panel strong { color:var(--text); font-weight:600; }
+    .info-link {
+      display:inline-flex; align-items:center; gap:6px;
+      font-family:Carlito, Calibri, sans-serif; font-size:0.78rem; font-weight:600;
+      color:var(--blue); text-decoration:none;
+      padding:6px 12px; border:1px solid var(--blue-mid); border-radius:6px;
+      background:var(--blue-light); transition:all 0.15s; flex-shrink:0; white-space:nowrap;
+    }
+    .info-link:hover { background:var(--blue); color:#fff; }
+
+    /* KINDS OF EVENTS */
+    .kinds-intro { font-size:0.9rem; color:var(--text-muted); line-height:1.7; max-width:780px; margin-bottom:16px; }
+    .kinds { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+    .kind { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--blue); border-radius:8px; padding:16px 18px; }
+    .kind h4 { font-family:Carlito, Calibri, sans-serif; font-size:0.88rem; font-weight:700; color:var(--text); letter-spacing:-0.01em; margin-bottom:6px; }
+    .kind h4 a { color:inherit; text-decoration:underline; text-underline-offset:2px; }
+    .kind p { font-size:0.84rem; color:var(--text-muted); line-height:1.6; }
+    .kind .tag { display:inline-block; font-family:Carlito, Calibri, sans-serif; font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-faint); border:1px solid var(--border); border-radius:10px; padding:2px 8px; margin-top:10px; }
+
+    footer { background:var(--surface); border-top:1px solid var(--border); padding:18px clamp(16px,4vw,48px); }
+    .footer-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+    .footer-copy { font-size:0.78rem; color:var(--text-faint); }
+    .footer-links { display:flex; gap:18px; }
+    .footer-links a { font-size:0.78rem; color:var(--text-muted); text-decoration:none; transition:color 0.15s; }
+    .footer-links a:hover { color:var(--blue); }
+
+    @media (max-width: 640px) { .brand-slash, .brand-section { display:none; } }
+  </style>
+<link rel="stylesheet" href="/assets/sce.css">
+<script src="/assets/sce-nav.js" defer></script>
+</head>
+<body>
+
+<!-- PILLAR RIBBON -->
+<!-- EVENT BANNER: none scheduled. For the next event, paste a div.evt-banner block here (styles are in the head). -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="/"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="#1A1918" stroke-width="1.6"><circle cx="6" cy="8" r="3"></circle><circle cx="22" cy="6" r="3"></circle><circle cx="14" cy="21" r="3.5" fill="#D4A853" stroke="#1A1918"></circle><path d="M8.5 9.5l3.6 8.6M19.6 8.2l-4 9.6M9 7.6l10-1.2"></path></svg><span>State Capacity Ecosystem</span></a>
+    <nav class="site-nav" aria-label="Main">
+    <div class="nav-item">
+      <a class="nav-link" href="/ecosystem/">Ecosystem <span class="nav-caret" aria-hidden="true">▾</span></a>
+      <div class="nav-drop">
+        <a href="/ecosystem/search/">Search<small>Find who's working on your problem.</small></a>
+        <a href="/ecosystem/organizations/">Organization Directory<small>300+ organizations helping government deliver.</small></a>
+        <a href="/ecosystem/connect/">Connect<small>Find people and open opportunities and add your own.</small></a>
+        <a href="/ecosystem/affinity-map/">Affinity Map<small>What organizations have in common.</small></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a class="nav-link active" href="/events/">Events <span class="nav-caret" aria-hidden="true">▾</span></a>
+      <div class="nav-drop">
+        <a href="/events/hackathons/">Hackathons<small>Build nights that end in working software.</small></a>
+        <a href="/events/demo-nights/">Demo Nights<small>Teams show their tools to the people who can adopt them.</small></a>
+        <a href="/events/salons/">Salons &amp; Meet-ups<small>Small evenings on what the field needs.</small></a>
+        <a href="/events/sponsors-checklist/">Host or Sponsor an Event<small>One page lists what hosts and sponsors own.</small></a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a class="nav-link" href="/community/">Community <span class="nav-caret" aria-hidden="true">▾</span></a>
+      <div class="nav-drop">
+        <a href="/community/slack/">Slack<small>Meet people between events.</small></a>
+        <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗<small>Essays from people doing the work.</small></a>
+        <a href="/community/playbooks/">Playbooks<small>Run our formats in your own city.</small></a>
+        <a href="/community/proof-points/">Proof Points<small>Every tool built through SCE.</small></a>
+      </div>
+    </div>
+    <div class="nav-item"><a class="nav-link" href="/about/">About</a></div>
+    <a class="nav-cta" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="/">State Capacity Ecosystem</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/events/">Events</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/events/demo-nights/">Demo Nights</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="current">December 10, 2026</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Demo Night · December 10, 2026</div>
+    <h1>Three winning teams show the tools they kept building.</h1>
+    <p class="hero-lede">Come see how AI can help government deliver. Teams of technologists and government practitioners built prototypes at our hackathons in June and September, and three winning teams that continued their work will demo what they've built on Thursday, December 10.</p>
+    <div class="hero-ctas">
+      <a href="https://luma.com/d018188p" target="_blank" rel="noopener" class="hero-cta-btn">Register on Luma ↗</a>
+      <a href="/events/demo-nights/" class="sce-btn">How demo nights work →</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="main">
+  <div class="main-inner">
+    <div class="section-label" style="margin-top:4px;">The details</div>
+    <div class="kinds">
+      <div class="kind">
+        <h4>Thursday, December 10, 2026</h4>
+        <p>The evening runs from 5:45 to 8:00 PM and registration is free.</p>
+        <span class="tag">When</span>
+      </div>
+      <div class="kind">
+        <h4>CUNY Graduate Center</h4>
+        <p>We're in Room 6304.01 on the 6th floor of 365 5th Ave in Manhattan.</p>
+        <span class="tag">Where</span>
+      </div>
+      <div class="kind">
+        <h4>SCE and the CUNY PIT Lab</h4>
+        <p>The State Capacity Ecosystem team hosts the night with the CUNY Public Interest Technology Lab.</p>
+        <span class="tag">Hosts</span>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:32px;">The projects</div>
+    <div class="kinds">
+      <div class="kind">
+        <h4>CityScroll</h4>
+        <p>CityScroll helps small businesses and nonprofits make sense of city procurement information and know their next step when they don't know where to start.</p>
+        <span class="tag">Procurement</span>
+      </div>
+      <div class="kind">
+        <h4><a href="/events/hackathons/public-engagement/hearts-and-minds/">Hearts &amp; Minds</a></h4>
+        <p>Hearts &amp; Minds uses behavioral data to show agencies which communities are at risk of specific, solvable issues, and it pairs each issue with local social media posts that describe it in residents' own words.</p>
+        <span class="tag">Runner-up, September 30</span>
+      </div>
+      <div class="kind">
+        <h4><a href="https://nyc-cb-budget-requests.vercel.app/" target="_blank" rel="noopener">Budget Requests</a></h4>
+        <p>Budget Requests puts Community Board budget requests and agency responses in one place by combining information that was scattered across NYC Open Data and Register PDF documents.</p>
+        <span class="tag">Winner, September 30</span>
+      </div>
+    </div>
+
+    <div class="text-panel" style="margin-top:28px;">
+      <p><strong>Each team gets a few minutes to demo.</strong> Then the practitioners who run the systems being demoed ask questions, and the teams meet the people who can adopt their tools.</p>
+      <a href="https://luma.com/d018188p" target="_blank" rel="noopener" class="info-link">Register on Luma ↗</a>
+    </div>
+
+    <div class="text-panel" style="margin-top:16px;">
+      <p><strong>Can't make it?</strong> Join the Slack and we'll tell you about the next event first.</p>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener" class="info-link">Join the Slack ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div>
+      <div class="site-footer-name">State Capacity Ecosystem</div>
+      <div class="site-footer-tag">Connecting the people making government work better.</div>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/ecosystem/">Ecosystem</a>
+      <a href="/events/">Events</a>
+      <a href="/community/">Community</a>
+      <a href="/about/">About</a>
+      <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗</a>
+      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in touch ↗</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
