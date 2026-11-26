@@ -45,7 +45,7 @@ Other folders:
 Two source files, edited by people, never by scripts:
 
 - `data/directory.csv`: the organization sheet (Henry's export). Ten columns read by name: Org Name, Primary Segment, Secondary Segments, Focus, Description, Funding Model, Funding Detail, Website, Problem Area, Problem Topic.
-- `data/connect_submissions.csv`: the Connect directory of people and opportunities, fed by the in-page form that posts to Airtable.
+- `data/connect_submissions.csv`: the Connect directory of people and opportunities, published from Henry's curated CSV. The in-page form sends new submissions to the CRM for review (see Connect under decisions).
 
 Scripts (run from the repo root; `data/requirements-build.txt` lists numpy and sentence-transformers):
 
@@ -139,7 +139,7 @@ const fs=require('fs');const html=fs.readFileSync('PATH/index.html','utf8');
 ## Page behavior worth knowing
 
 - **Organization Directory:** columns are Organization, Segment, Secondary Segments, Description (180 characters), Problem Area, Problem Topic; everything else is in the row detail (closest peers, Connect people, Suggest an edit, "See in network"). Filters: segment, geography, area, topic, Hide sunset organizations. URL state: `q, seg, geo, area, topic, hidesunset, page, org, add`. Suggest-an-organization posts to a Google Form.
-- **Connect:** a separate dataset from the organizations. The form posts to Airtable (base `appFIPqXkeQMQ3n94`, table `tbl2ArzY6c0CdNVsh`) with a write-only token scoped to that table, in client JS on purpose. A blank Contact cell means Facilitated: the row shows a "Request intro" link (mailto plus clipboard). Contact cells must be a bare email or URL. URL state: `q, role, area, topic, offering, page, entry, add`.
+- **Connect:** a separate dataset from the organizations. The form never holds an Airtable token (one sat in the page until Nov 26 2026 and was removed; anything in page source is public). `CONNECT_SUBMIT_URL` in `ecosystem/connect/index.html` points at the `sce-connect` Cloudflare Worker, which validates the fields and writes one row to the CRM's Connect Submissions table (Status = New) for Henry to review; while that constant is empty the form opens an email to the SCE inbox with the responses filled in. Approved entries reach the site only through `data/connect_submissions.csv`, which Henry uploads. A blank Contact cell means Facilitated: the row shows a "Request intro" link (mailto plus clipboard). Contact cells must be a bare email or URL. URL state: `q, role, area, topic, offering, page, entry, add`.
 - **Affinity Map:** D3 force graph. Mutual edges solid, one-way edges at 45% opacity, sunset nodes hollow. Controls: search, weight slider (default 25th percentile), segment chips, geography, area, topic, cross-segment only, hide sunset, Organizations or Funders view, path finder, neighborhood and 2-hop views. Clicking an edge explains the four component scores. URL state: `q, w, seg, geo, area, topic, cross, hidesunset, view, ego, hops, sel`.
 - **Methodology:** describes only the current method. Any change to the score, weights, edge selection or map goes into this page in the same commit. `update_stats.py` patches two sentences here ("Approximately N of M organizations ..." and "N nodes and M edges, with a maximum edge score of X and a median of Y"); keep their shape. No links to Claude conversations.
 - **Proof Points:** gallery from `data/proof_points.json`, filters via `?source=` and `?area=`.
