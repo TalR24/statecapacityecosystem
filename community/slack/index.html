@@ -98,6 +98,23 @@
       border-left:3px solid var(--orange);
       border-radius:8px; padding:20px 24px; margin-bottom:8px;
     }
+    .gi-form { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:22px 24px; }
+    .gi-intro { font-size:0.95rem; color:var(--text-mid); line-height:1.6; margin-bottom:18px; }
+    .gi-intro strong { color:var(--text); }
+    .gi-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px 18px; }
+    .gi-field { display:flex; flex-direction:column; gap:6px; font-size:0.85rem; font-weight:700; color:var(--text); }
+    .gi-field.gi-wide { grid-column:1 / -1; }
+    .gi-field input, .gi-field select, .gi-field textarea { font:inherit; font-weight:400; font-size:0.95rem; color:var(--text); background:#fff; border:1px solid var(--border-mid, #C9C1AF); border-radius:6px; padding:11px 12px; min-height:46px; width:100%; }
+    .gi-field input:focus, .gi-field select:focus, .gi-field textarea:focus { outline:2px solid #D4A853; outline-offset:1px; }
+    .gi-req { color:#8A5F1E; }
+    .gi-check { display:flex; align-items:center; gap:10px; margin-top:16px; font-size:0.95rem; color:var(--text); }
+    .gi-check input { width:20px; height:20px; accent-color:#8A5F1E; }
+    .gi-hp { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+    .gi-error { margin-top:14px; font-size:0.9rem; color:#9B2C1C; }
+    .gi-submit { margin-top:18px; min-height:48px; padding:0 26px; font:inherit; font-size:1rem; font-weight:700; color:#1A1918; background:#D4A853; border:0; border-radius:6px; cursor:pointer; }
+    .gi-submit:hover { background:#C4983F; }
+    .gi-submit:disabled { opacity:0.6; cursor:default; }
+    @media (max-width:640px) { .gi-grid { grid-template-columns:1fr; } }
     .text-panel p { font-size:0.9rem; color:var(--text-mid); line-height:1.7; margin-bottom:12px; }
     .text-panel p:last-child { margin-bottom:0; }
     .text-panel strong { color:var(--text); font-weight:600; }
@@ -164,7 +181,7 @@
       </div>
     </div>
     <div class="nav-item"><a class="nav-link" href="/about/">About</a></div>
-    <a class="nav-cta" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack</a>
+    <a class="nav-cta" href="/community/slack/">Join the Slack</a>
     </nav>
   </div>
 </header>
@@ -190,10 +207,53 @@
 <div class="main">
   <div class="main-inner">
 
-    <div class="section-label" style="margin-top:4px;">Slack</div>
-    <div class="text-panel" style="border-left-color:#8A5F1E;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
-      <p style="margin-bottom:0;max-width:720px;"><strong>The community Slack is live.</strong> Sign up below and we will get you in.</p>
-      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener" class="info-link" style="flex-shrink:0;white-space:nowrap;">Join the Slack ↗</a>
+    <div class="section-label" style="margin-top:4px;" id="get-involved">Get involved</div>
+    <form class="gi-form" id="gi-form" novalidate>
+      <p class="gi-intro" id="gi-intro"><strong>The community Slack is live.</strong> Tell us a little about yourself and we'll email your invite.</p>
+      <div class="gi-grid">
+        <label class="gi-field"><span>First name <span class="gi-req">*</span></span>
+          <input id="gi-first" type="text" maxlength="60" autocomplete="given-name" required>
+        </label>
+        <label class="gi-field"><span>Last name <span class="gi-req">*</span></span>
+          <input id="gi-last" type="text" maxlength="60" autocomplete="family-name" required>
+        </label>
+        <label class="gi-field"><span>Email <span class="gi-req">*</span></span>
+          <input id="gi-email" type="email" maxlength="200" autocomplete="email" placeholder="you@example.com" required>
+        </label>
+        <label class="gi-field">LinkedIn profile
+          <input id="gi-linkedin" type="text" maxlength="200" placeholder="linkedin.com/in/your-name">
+        </label>
+        <label class="gi-field">Organization
+          <input id="gi-org" type="text" maxlength="80" autocomplete="organization">
+        </label>
+        <label class="gi-field">I am a
+          <select id="gi-self">
+            <option value="">Choose one</option>
+            <option>Government Practitioner</option>
+            <option>Technologist</option>
+            <option>Researcher</option>
+            <option>Advocate</option>
+            <option>Capacity Builder</option>
+            <option value="Philanthropy">Funder</option>
+            <option>Investor</option>
+            <option>Media</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label class="gi-field">City or metro area
+          <input id="gi-metro" type="text" maxlength="80" placeholder="New York, NY">
+        </label>
+        <label class="gi-field gi-wide">What are you working on?
+          <textarea id="gi-note" maxlength="600" rows="3"></textarea>
+        </label>
+      </div>
+      <label class="gi-check"><input id="gi-slack" type="checkbox" checked> Add me to the community Slack</label>
+      <div class="gi-hp" aria-hidden="true"><label>Website <input id="gi-website" type="text" tabindex="-1" autocomplete="off"></label></div>
+      <p class="gi-error" id="gi-error" role="alert" hidden></p>
+      <button class="gi-submit" id="gi-submit" type="submit">Send →</button>
+    </form>
+    <div class="text-panel" id="gi-success" style="border-left-color:#8A5F1E;" hidden>
+      <p><strong>Thanks, we've got it.</strong> <span id="gi-success-text">We'll email your Slack invite soon.</span></p>
     </div>
 
     <div class="section-label" style="margin-top:24px;">More ways to plug in</div>
@@ -229,10 +289,58 @@
       <a href="/community/">Community</a>
       <a href="/about/">About</a>
       <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗</a>
-      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in touch ↗</a>
+      <a href="/community/slack/?contact=1">Get in touch →</a>
     </nav>
   </div>
 </footer>
 
+<script>
+// Get involved form. Posts to the SCE intake Worker, which holds the Airtable
+// token; nothing secret lives in this page. ?contact=1 opens it as a general
+// inquiry with the Slack box unchecked.
+(function () {
+  const ENDPOINT = "https://connect-api.statecapacityecosystem.com/get-involved";
+  const $ = (id) => document.getElementById(id);
+  const form = $("gi-form"), err = $("gi-error"), btn = $("gi-submit");
+  const contact = new URLSearchParams(location.search).has("contact");
+  if (contact) {
+    $("gi-slack").checked = false;
+    $("gi-intro").innerHTML = "<strong>Get in touch with the team.</strong> Tell us what you're working on and we'll reply by email.";
+    $("get-involved").scrollIntoView({ block: "start" });
+  }
+  const MESSAGES = {
+    bad_email: "Please enter a valid email address.",
+    bad_linkedin: "Please enter a LinkedIn profile link, like linkedin.com/in/your-name.",
+    rate_limited: "That was a lot of tries in a row. Please wait a minute and send again.",
+  };
+  function fail(msg) { err.textContent = msg; err.hidden = false; btn.disabled = false; btn.textContent = "Send →"; }
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    err.hidden = true;
+    const v = (id) => $(id).value.trim();
+    if (!v("gi-first") || !v("gi-last")) return fail("Please enter your first and last name.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v("gi-email"))) return fail(MESSAGES.bad_email);
+    const slack = $("gi-slack").checked;
+    const fields = { "First Name": v("gi-first"), "Last Name": v("gi-last"), "Email": v("gi-email"), "Add me to Slack": slack };
+    [["LinkedIn", "gi-linkedin"], ["Organization", "gi-org"], ["Self-Description", "gi-self"],
+     ["Location / Metro", "gi-metro"], ["Interest / Comment", "gi-note"]].forEach(([k, id]) => { if (v(id)) fields[k] = v(id); });
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+    try {
+      const resp = await fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fields, website: v("gi-website") }) });
+      if (!resp.ok) {
+        const body = await resp.json().catch(() => ({}));
+        return fail(MESSAGES[body.error] || "Something went wrong and your form was not sent. Please try again, or email us at statecapacityecosystem@gmail.com.");
+      }
+      form.hidden = true;
+      $("gi-success-text").textContent = slack ? "We'll email your Slack invite soon." : "We'll reply by email.";
+      $("gi-success").hidden = false;
+    } catch (e2) {
+      fail("Something went wrong and your form was not sent. Please try again, or email us at statecapacityecosystem@gmail.com.");
+    }
+  });
+})();
+</script>
 </body>
 </html>

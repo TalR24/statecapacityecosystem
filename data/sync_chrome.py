@@ -20,8 +20,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-SLACK = "https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form"
-CONTACT = "https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form"
+SLACK = "/community/slack/"  # the Get involved form on the Slack page (posts to the intake Worker)
+CONTACT = "/community/slack/?contact=1"
 SUBSTACK = "https://substack.statecapacityecosystem.com/"
 
 LOGO = ('<svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="#1A1918" stroke-width="1.6">'
@@ -68,7 +68,7 @@ def header(active):
     return ('<header class="site-header">\n  <div class="site-header-inner">\n'
             f'    <a class="site-brand" href="/">{LOGO}<span>State Capacity Ecosystem</span></a>\n'
             '    <nav class="site-nav" aria-label="Main">\n' + "\n".join(items) + "\n"
-            f'    <a class="nav-cta" href="{SLACK}" target="_blank" rel="noopener">Join the Slack</a>\n'
+            f'    <a class="nav-cta" href="{SLACK}">Join the Slack</a>\n'
             '    </nav>\n  </div>\n</header>')
 
 
@@ -79,7 +79,7 @@ FOOTER = ('<footer class="site-footer">\n  <div class="site-footer-inner">\n    
           '      <a href="/ecosystem/">Ecosystem</a>\n      <a href="/events/">Events</a>\n'
           '      <a href="/community/">Community</a>\n      <a href="/about/">About</a>\n'
           f'      <a href="{SUBSTACK}" target="_blank" rel="noopener">Substack ↗</a>\n'
-          f'      <a href="{CONTACT}" target="_blank" rel="noopener">Get in touch ↗</a>\n'
+          f'      <a href="{CONTACT}">Get in touch →</a>\n'
           '    </nav>\n  </div>\n</footer>')
 
 FONT_LINK = ('<link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">')

@@ -442,7 +442,7 @@
       </div>
     </div>
     <div class="nav-item"><a class="nav-link" href="/about/">About</a></div>
-    <a class="nav-cta" href="https://airtable.com/app4aVWTmY27Uxcd2/pagYnmFXPMLRIeAiq/form" target="_blank" rel="noopener">Join the Slack</a>
+    <a class="nav-cta" href="/community/slack/">Join the Slack</a>
     </nav>
   </div>
 </header>
@@ -632,7 +632,7 @@ Showing <strong>10</strong> of <strong>335</strong> organizations
       <a href="/community/">Community</a>
       <a href="/about/">About</a>
       <a href="https://substack.statecapacityecosystem.com/" target="_blank" rel="noopener">Substack ↗</a>
-      <a href="https://airtable.com/app4aVWTmY27Uxcd2/pagKzB4dnNljmrliZ/form" target="_blank" rel="noopener">Get in touch ↗</a>
+      <a href="/community/slack/?contact=1">Get in touch →</a>
     </nav>
   </div>
 </footer>
@@ -1220,6 +1220,19 @@ document.getElementById("btn-copy-link").addEventListener("click", async () => {
         <input id="of-url" type="text" class="sf-text-input" maxlength="200" placeholder="https://example.org">
         <div id="of-url-err" class="sf-error-msg">Please enter a valid URL.</div>
       </div>
+
+      <hr class="sf-divider">
+
+      <!-- Submitter -->
+      <div class="sf-section">
+        <div class="sf-prompt">Your email <span class="sf-req">*</span> <span class="sf-prompt-sub">(we use it only to follow up)</span></div>
+        <input id="of-email" type="email" class="sf-text-input" maxlength="200" placeholder="you@example.com" autocomplete="email">
+        <div id="of-email-err" class="sf-error-msg">Please enter a valid email address.</div>
+      </div>
+      <div class="sf-section">
+        <div class="sf-prompt">Your name</div>
+        <input id="of-submitter" type="text" class="sf-text-input" maxlength="80" autocomplete="name">
+      </div>
     </div><!-- /of-form-body -->
 
     <!-- Success state -->
@@ -1251,18 +1264,9 @@ document.getElementById("btn-copy-link").addEventListener("click", async () => {
 
 <script>
 // ─── SUGGEST-AN-ORG FORM ─────────────────────────────────────────────────────
-// Submits directly to the existing Google Form's response endpoint (no backend).
-const OF_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSfNEvdYrdQERvaFxzGLS6B7AWxobKKNB0pZ84B_PTSx8C12ng/formResponse";
-const OF_ENTRY = {
-  name:          "entry.25692851",
-  primary:       "entry.152334999",
-  secondary:     "entry.514677553",
-  focus:         "entry.2004892464",
-  description:   "entry.1914941085",
-  fundingModel:  "entry.1136140786",
-  fundingDetail: "entry.1055362927",
-  url:           "entry.1077186634",
-};
+// Submits to the SCE intake Worker, which writes a row to the CRM's Directory
+// Submissions table for the team to review. No token lives in this page.
+const OF_ACTION = "https://connect-api.statecapacityecosystem.com/directory";
 const OF_SEGMENTS = ["Research","Government","Philanthropy","Fellowships","Community","Advocacy","GovTech","Digital Services & Consulting","Investor","Training","Other"];
 const OF_FOCUS    = ["Federal","State","Local"];
 const OF_FUNDING  = ["Philanthropy","Volunteer","Government","University","Private","Corporate Philanthropy","VC-backed; Seed stage","VC-backed; Early stage","VC-backed; Growth stage","VC-backed; Mature stage"];
@@ -1347,6 +1351,7 @@ function ofValidate() {
   show("of-funding-err", ofGetChips("of-funding-chips").length > 0);
   show("of-funding-detail-err", document.getElementById("of-funding-detail").value.trim().length > 0);
   show("of-url-err", document.getElementById("of-url").value.trim().length > 0);
+  show("of-email-err", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("of-email").value.trim()));
   return ok;
 }
 
@@ -1366,39 +1371,19 @@ function ofBuildText() {
   ].filter(Boolean).join("\n");
 }
 
-function ofBuildFormData() {
-  const fd = new FormData();
-  fd.append(OF_ENTRY.name, document.getElementById("of-name").value.trim());
-
-  // Primary Segment (radio, with Other)
+function ofBuildRecord() {
   const primary = ofGetSingle("of-primary-chips");
-  if (primary === "Other") {
-    fd.append(OF_ENTRY.primary, "__other_option__");
-    fd.append(OF_ENTRY.primary + ".other_option_response", document.getElementById("of-primary-other").value.trim());
-  } else if (primary) {
-    fd.append(OF_ENTRY.primary, primary);
-  }
-
-  // Secondary segments (checkbox, with Other)
-  ofGetChips("of-secondary-chips").forEach(v => {
-    if (v === "Other") {
-      fd.append(OF_ENTRY.secondary, "__other_option__");
-      fd.append(OF_ENTRY.secondary + ".other_option_response", document.getElementById("of-secondary-other").value.trim());
-    } else {
-      fd.append(OF_ENTRY.secondary, v);
-    }
-  });
-
-  // Focus(es) (checkbox)
-  ofGetChips("of-focus-chips").forEach(v => fd.append(OF_ENTRY.focus, v));
-  fd.append(OF_ENTRY.description, document.getElementById("of-desc").value.trim());
-  ofGetChips("of-funding-chips").forEach(v => fd.append(OF_ENTRY.fundingModel, v));
-  fd.append(OF_ENTRY.fundingDetail, document.getElementById("of-funding-detail").value.trim());
-  fd.append(OF_ENTRY.url, document.getElementById("of-url").value.trim());
-  // Google Forms housekeeping fields — improve acceptance of programmatic submissions.
-  fd.append("fvv", "1");
-  fd.append("pageHistory", "0");
-  return fd;
+  const r = {
+    "Org Name": document.getElementById("of-name").value.trim(),
+    "Org Website": document.getElementById("of-url").value.trim(),
+    "Org Description": document.getElementById("of-desc").value.trim(),
+    "Submitter Email": document.getElementById("of-email").value.trim(),
+    "Proposed Segment": primary,
+    "Submission Details": ofBuildText(),
+  };
+  const who = document.getElementById("of-submitter").value.trim();
+  if (who) r["Submitter Name"] = who;
+  return r;
 }
 
 async function ofSubmit() {
@@ -1412,9 +1397,9 @@ async function ofSubmit() {
   btn.textContent = "Submitting…";
   _ofLastText = ofBuildText();
   try {
-    // Google Forms does not send CORS headers; no-cors fires the request and
-    // returns an opaque response, so we optimistically show success.
-    await fetch(OF_ACTION, { method: "POST", mode: "no-cors", body: ofBuildFormData() });
+    const resp = await fetch(OF_ACTION, { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fields: ofBuildRecord() }) });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${await resp.text().catch(() => "")}`);
     ofShowSuccess();
   } catch (e) {
     console.error("Suggest-an-org submit error:", e);
@@ -1448,7 +1433,7 @@ function openOF(org) {
   document.getElementById("of-success").style.display = "none";
   document.querySelectorAll("#of-overlay .sf-error-msg").forEach(e => e.classList.remove("show"));
   document.querySelectorAll("#of-overlay .sf-chip.on, #of-overlay .sf-schip.on").forEach(c => c.classList.remove("on"));
-  ["of-name","of-primary-other","of-secondary-other","of-desc","of-funding-detail","of-url"].forEach(id => {
+  ["of-name","of-primary-other","of-secondary-other","of-desc","of-funding-detail","of-url","of-email","of-submitter"].forEach(id => {
     const el = document.getElementById(id); if (el) el.value = "";
   });
   document.getElementById("of-primary-other-cond").classList.remove("show");
