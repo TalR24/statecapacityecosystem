@@ -778,8 +778,8 @@ Showing <strong>10</strong> of <strong>68</strong> entries
     <!-- Success state -->
     <div class="sf-success" id="sf-success" style="display:none">
       <div class="sf-success-check">✓</div>
-      <div class="sf-success-title">Submitted.</div>
-      <div class="sf-success-text">
+      <div class="sf-success-title" id="sf-success-title">Submitted.</div>
+      <div class="sf-success-text" id="sf-success-text">
         We'll review your submission and post it on the Connect board once it's approved.
         You can copy your responses below for your records.
       </div>
@@ -847,16 +847,13 @@ Showing <strong>10</strong> of <strong>68</strong> entries
 </div>
 
 <script>
-// ─── AIRTABLE CONFIG ─────────────────────────────────────────────────────────
-// 1. Create a new table in your Airtable base with these "Single line text" columns:
-//    Name, Organization, Role, Offering, Problem Areas, Problem Topics,
-//    Geography, Due By, Details, Contact Type, Email, Connection Parameters
-// 2. Go to https://airtable.com/create/tokens → create a Personal Access Token
-//    with scope: data.records:write on your base only.
-// 3. Paste the Base ID (from the Airtable URL: airtable.com/BASE_ID/...) and
-//    the table name below.
-const AIRTABLE_ENDPOINT = "https://api.airtable.com/v0/appFIPqXkeQMQ3n94/tbl2ArzY6c0CdNVsh";
-const AIRTABLE_TOKEN    = "patvfjuYONKaZBtFQ.3e87ad18fdfdff0dce5902466a59bc8e8c2582ca8dd0c3aaa7f4f53c73e264ff";
+// ─── CONNECT SUBMIT CONFIG ───────────────────────────────────────────────────
+// Never put an Airtable token in this page: anything here is public.
+// CONNECT_SUBMIT_URL is a server endpoint (a Cloudflare Worker) that holds the
+// token and writes to the CRM's Connect Submissions table. While it is empty,
+// the form opens an email to the SCE inbox with the responses filled in.
+const CONNECT_SUBMIT_URL = "";
+const CONNECT_INBOX      = "statecapacityecosystem@gmail.com";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const ROLE_CLASS = {
@@ -1464,29 +1461,36 @@ async function sfSubmit() {
   btn.disabled = true;
   btn.textContent = "Submitting…";
   _sfLastText = sfBuildText();
+  if (!CONNECT_SUBMIT_URL) {
+    const subject = encodeURIComponent("Connect submission: " + document.getElementById("sf-name").value.trim());
+    window.location.href = `mailto:${CONNECT_INBOX}?subject=${subject}&body=${encodeURIComponent(_sfLastText)}`;
+    showSuccess(true);
+    return;
+  }
   try {
-    const resp = await fetch(AIRTABLE_ENDPOINT, {
+    const resp = await fetch(CONNECT_SUBMIT_URL, {
       method: "POST",
-      headers: {
-        "Authorization": `Bearer ${AIRTABLE_TOKEN}`,
-        "Content-Type":  "application/json",
-      },
-      body: JSON.stringify({ records: [{ fields: sfBuildRecord() }] }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fields: sfBuildRecord() }),
     });
     if (!resp.ok) {
       const body = await resp.text().catch(() => "");
-      throw new Error(`HTTP ${resp.status} — ${body}`);
+      throw new Error(`HTTP ${resp.status}: ${body}`);
     }
-    showSuccess();
+    showSuccess(false);
   } catch (e) {
-    console.error("Airtable submit error:", e);
+    console.error("Connect submit error:", e);
     btn.disabled = false;
     btn.innerHTML = origHtml;
     alert("Submission failed. Please try again, or copy your responses and send them directly.");
   }
 }
 
-function showSuccess() {
+function showSuccess(byEmail) {
+  document.getElementById("sf-success-title").textContent = byEmail ? "One more step." : "Submitted.";
+  document.getElementById("sf-success-text").textContent = byEmail
+    ? `Your email app opened with your responses filled in. Send that email and we'll review it and post it on the Connect board once it's approved. If no email opened, copy your responses below and send them to ${CONNECT_INBOX}.`
+    : "We'll review your submission and post it on the Connect board once it's approved. You can copy your responses below for your records.";
   document.getElementById("sf-form-body").style.display   = "none";
   document.getElementById("sf-form-footer").style.display  = "none";
   document.getElementById("sf-success").style.display     = "block";
